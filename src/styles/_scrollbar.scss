@@ -1,0 +1,40 @@
+@mixin scroll-base {
+  width: 10px;
+  border-radius: 10px;
+  
+}
+
+@mixin scroll-track {
+  width: 5px;
+  border-radius: 10px;
+  background-color: white;
+  cursor: pointer;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+@mixin scroll-thumb {
+  height: 5px;
+  border-radius: 10px;
+  background-color: grey;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (min-width: 922px) {
+  
+  ::-webkit-scrollbar {
+  @include scroll-base();
+  
+  ::-webkit-scrollbar-track {
+    @include scroll-track();
+  }
+}
+::-webkit-scrollbar-thumb {
+  @include scroll-thumb();
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(144, 104, 177, 0.74);
+  }
+}
+
+}

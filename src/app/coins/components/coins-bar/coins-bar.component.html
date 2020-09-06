@@ -1,0 +1,45 @@
+<mat-sidenav-container class="sidenav-container">
+
+
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="'navigation'" [mode]="'over'" [opened]="false">
+    <mat-toolbar>
+      <span>Menu</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="drawer.toggle(false)">
+        <mat-icon aria-label="Side nav toggle icon">keyboard_arrow_left</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-list>
+      <mat-list-item>Selected Coins:</mat-list-item>
+      <mat-list-item *ngFor="let coin of selectedCoins">{{coin |uppercase}}</mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+
+  <mat-sidenav #searchDrawer class="sidenav" fixedInViewport [attr.role]="'navigation'" [mode]="'over'" [opened]="false"
+    [position]="'end'">
+    <mat-toolbar>
+      <span>Search</span>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="searchDrawer.toggle(false)">
+        <mat-icon aria-label="Side nav toggle icon">keyboard_arrow_left</mat-icon>
+      </button>
+    </mat-toolbar>
+    <app-coins-nav-search></app-coins-nav-search>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button class="menu" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+        *ngIf="isMobile | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <mat-list class="select-coins" *ngIf="!(isMobile | async)">
+        <mat-list-item>Selected Coins:</mat-list-item>
+        <mat-list-item *ngFor="let coin of selectedCoins">{{coin |uppercase}}</mat-list-item>
+      </mat-list>
+      <span class="spacer"></span>
+      <app-coins-search [drawer]="searchDrawer"></app-coins-search>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

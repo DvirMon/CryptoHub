@@ -1,0 +1,16 @@
+<div [ngSwitch]="data.type">
+    
+    <mat-grid-list *ngSwitchCase="'error'" cols="1" rowHeight="5vh">
+        <mat-grid-tile>
+            Message: {{data.payload.message}}
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="data.payload.status && !development">
+            Status: {{data.payload.status}}
+        </mat-grid-tile>
+        <mat-grid-tile mat-dialog-actions>
+            <button mat-dialog-close mat-button cdkFocusInitial>Ok</button>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-spinner *ngSwitchCase="'spinner'"></mat-spinner>
+</div>

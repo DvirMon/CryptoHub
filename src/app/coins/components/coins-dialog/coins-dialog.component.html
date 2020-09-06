@@ -1,0 +1,11 @@
+<h1 class="mat-display-2" mat-dialog-title>You can only choose up to 5 coins</h1>
+<mat-divider></mat-divider>
+<h2 mat-dialog-title>To add {{payload.lastSelect}} you must unselect one of the following:</h2>
+<mat-grid-list cols="5" rowHeight="6vh" mat-dialog-content>
+  <mat-grid-tile *ngFor="let coin of payload.coins">
+    <app-coins-toggle [coin]="coin" [lastSelect]="payload.lastSelect"></app-coins-toggle>
+  </mat-grid-tile> 
+</mat-grid-list>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close cdkFocusInitial>Close</button>
+</div>

@@ -1,0 +1,24 @@
+@mixin dialog {
+  outline: transparent;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.dialog-spinner .mat-dialog-container {
+  @include dialog();
+  color: transparent;
+  background-color: transparent;
+  padding: initial;
+}
+
+.dialog-error .mat-dialog-container {
+  @include dialog();
+  width: 320px;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+
+
+

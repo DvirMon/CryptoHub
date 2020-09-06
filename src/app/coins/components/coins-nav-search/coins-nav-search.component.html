@@ -1,0 +1,18 @@
+<div>
+  <mat-toolbar color="primary">
+    <mat-form-field class="search-input">
+      <mat-label>Please Enter Query</mat-label>
+      <input type="text" placeholder="Search Coins..." matInput #searchInput autocomplete="off"
+        [formControl]="searchControl">
+      <span *ngIf="searchEntries.length > 0" class="matsuffix" matSuffix> Found {{searchEntries.length}} results</span>
+    </mat-form-field>
+  </mat-toolbar>
+  <mat-list>
+    <mat-list-item *ngIf="results">
+      No search result was found...
+    </mat-list-item>
+    <mat-list-item *ngFor="let option of searchEntries" (click)="onSelect(option)">
+      <app-coins-search-item [coin]="option"></app-coins-search-item>
+    </mat-list-item>
+  </mat-list>
+</div>

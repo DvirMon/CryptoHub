@@ -1,0 +1,66 @@
+@import "~src/styles/styles";
+
+.sidenav-container {
+  height: 100%;
+  background-color: transparent;
+}
+
+.mat-drawer.mat-sidenav.sidenav {
+  height: inherit;
+  z-index: 50;
+
+  mat-icon {
+    color: black;
+    font-size: 30px;
+    margin-right: 5px;
+  }
+
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 5;
+  height: 10vh;
+}
+
+.sidenav {
+  width: 100%;
+}
+
+mat-icon {
+  color: white;
+  font-size: 30px;
+}
+
+app-coins-search, app-coins-nav-search  {
+  width: 50vh;
+}
+
+@media (min-width: size(md)) {
+  mat-toolbar {
+    mat-list.select-coins {
+      display: flex;
+      color: white;
+
+      mat-list-item {
+        color: white;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+// from 560px down
+@media (max-width: size(sm)) {
+  mat-list {
+    display: initial;
+    color: black;
+
+    mat-list-item {
+      color: black;
+      font-size: 20px;
+    }
+  }
+}

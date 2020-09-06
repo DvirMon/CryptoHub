@@ -1,0 +1,10 @@
+<mat-grid-list cols="2" rowHeight="2vh">
+  <mat-grid-tile colspan="2">
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="3" class="text-coin-header">{{coin.symbol | uppercase }}</mat-grid-tile>
+  <mat-grid-tile rowspan="3">
+    <mat-slide-toggle [checked]="checked" (change)="handleToggle($event)" color="primary"></mat-slide-toggle>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="3" colspan="2"class="text-coin">{{coin.id}}</mat-grid-tile>
+  <mat-grid-tile colspan="2"></mat-grid-tile>
+</mat-grid-list>

@@ -1,0 +1,17 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="getCoinData()" (closed)="handleCoinData()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        More Info
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-grid-list cols="2" [rowHeight]="(isMobile | async) ?  '5vh' : '3vh'">
+      <mat-grid-tile>USD: {{currency.usd | currency}}</mat-grid-tile>
+      <mat-grid-tile rowspan="3">
+        <img src={{coin.url}} [width]="(isMobile | async) ?  100 : 80">
+      </mat-grid-tile>
+      <mat-grid-tile>EUR: {{currency.eur | currency:"EUR"}}</mat-grid-tile>
+      <mat-grid-tile>ILS: {{currency.ils | currency:"ILS"}}</mat-grid-tile>
+    </mat-grid-list>
+  </mat-expansion-panel>
+</mat-accordion>

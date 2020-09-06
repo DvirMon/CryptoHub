@@ -1,0 +1,21 @@
+<div>
+  <mat-form-field [ngClass]="{'search-input' : true, 'show' : toggleSearch}">
+    <mat-label>Please Enter Query</mat-label>
+    <input type="text" placeholder="Search Coins..." matInput #searchInput [matAutocomplete]="auto"
+      [formControl]="searchControl">
+  </mat-form-field>
+  <button mat-icon-button (click)="handleToggleSearch()">
+    <mat-icon>search</mat-icon>
+  </button>
+  <mat-autocomplete class="d-none d-lg-block single-autocomplete" autoActiveFirstOption #panel #auto="matAutocomplete">
+    <mat-option *ngIf="results">
+      No search result was found...
+    </mat-option>
+    <mat-option *ngIf="(searchEntries | async).length > 0">
+      found {{(searchEntries | async).length}} results
+    </mat-option>
+    <mat-option *ngFor="let option of searchEntries | async" (click)="onSelect(option)">
+      {{option | uppercase}}
+    </mat-option>
+  </mat-autocomplete>
+</div>

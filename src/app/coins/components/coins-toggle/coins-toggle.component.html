@@ -1,0 +1,6 @@
+<mat-grid-list cols="1" rowHeight="3vh">
+  <mat-grid-tile>{{coin |uppercase}}</mat-grid-tile>
+  <mat-grid-tile>
+    <mat-slide-toggle color="primary" (change)="handleToggle()" [checked]="true"></mat-slide-toggle>
+  </mat-grid-tile>
+</mat-grid-list> 
