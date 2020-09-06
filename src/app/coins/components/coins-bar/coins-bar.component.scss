@@ -34,9 +34,14 @@ mat-icon {
   font-size: 30px;
 }
 
-app-coins-search, app-coins-nav-search  {
-  width: 70vh;
+app-coins-search {
+  width: 40vh;
   margin-top: 15px;
+}
+
+app-coins-nav-search  {
+  height: 100%;
+  width: 100%;
 }
 
 @media (min-width: size(md)) {

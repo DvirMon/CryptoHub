@@ -1,11 +1,7 @@
-<mat-grid-list cols="4" rowHeight="8vh">
+<mat-grid-list cols="2" rowHeight="8vh">
   <mat-grid-tile>{{coin.symbol | uppercase}}</mat-grid-tile>
-  <mat-grid-tile class="text-name">{{coin.name | titlecase}}</mat-grid-tile>
   <mat-grid-tile>
-    <img src="{{coin.url}}" alt="" width="40px">
-  </mat-grid-tile>
-  <mat-grid-tile>
-    <mat-slide-toggle></mat-slide-toggle>
+    <button mat-raised-button color="primary">Show</button>
   </mat-grid-tile>
 </mat-grid-list>
 <mat-divider></mat-divider>

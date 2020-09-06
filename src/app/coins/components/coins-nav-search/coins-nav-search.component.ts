@@ -1,15 +1,12 @@
 import { Component, OnInit, ElementRef, ViewChild, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-
-import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MatSidenav } from '@angular/material/sidenav';
 
-
-import { Observable } from 'rxjs';
 import { FormService } from 'src/app/services/form.service';
 import { SearchService } from 'src/app/services/search.service';
 import { CoinModel } from 'src/app/utilities/models/coin-model';
-import { store } from 'src/app/utilities/redux/store';
+
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-coins-nav-search',
@@ -18,18 +15,14 @@ import { store } from 'src/app/utilities/redux/store';
 })
 export class CoinsNavSearchComponent implements OnInit {
 
-
+  @Input() drawer: MatSidenav
   @ViewChild('searchInput') searchInput: ElementRef;
-  @ViewChild(MatAutocompleteTrigger) panel: MatAutocompleteTrigger;
-
 
   public searchControl = new FormControl();
-  public searchEntries: CoinModel[];
+  public searchEntries: Observable<CoinModel[]>;
   public searchResults: Observable<number>;
   public isMobile: Observable<boolean> = this.formService.isMobile()
-
   public results: boolean;
-
   public toggleSearch: boolean = false
 
 
@@ -59,13 +52,13 @@ export class CoinsNavSearchComponent implements OnInit {
   private subscribeToSearchEntries() {
     this.searchService.searchEntries.subscribe(
       (searchEntries) => {
+        this.searchEntries = searchEntries
 
-        searchEntries.subscribe(
-          (coins) => {
-            this.searchEntries = this.searchEntries
+        // searchEntries.subscribe(
+        //   (coins) => {
 
-          }
-        )
+        //   }
+        // )
       }
     )
   }

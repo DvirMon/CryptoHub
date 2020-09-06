@@ -36,6 +36,11 @@ export class SearchService {
         map((coins: CoinModel[]) => {
           return this.filter(coins, option)
         })
+        , map((coins: CoinModel[]) => {
+          return coins.sort((a, b) => {
+            return this.sortLength(a.symbol, b.symbol)
+          })
+        })
         , tap(coins => {
 
           if (coins.length === 0) {
@@ -75,5 +80,11 @@ export class SearchService {
   private filter(options: CoinModel[], value: string): CoinModel[] {
     const filterValue = value.toLowerCase();
     return options.filter(option => option.symbol.toLowerCase().includes(filterValue));
+  }
+
+  // sort by length
+  private sortLength(a: string, b: string) {
+    return a.length - b.length;
+
   }
 }

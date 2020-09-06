@@ -10,7 +10,7 @@ export class SortService {
   constructor() { }
 
   public sort: MatSort;
- 
+
 
   // sort
   public getSortedData(data: CoinModel[]) {
@@ -23,4 +23,6 @@ export class SortService {
   private compare(a: string | number, b: string | number, isAsc: boolean) {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
+
+ 
 }

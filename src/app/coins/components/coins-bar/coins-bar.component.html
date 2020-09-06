@@ -17,14 +17,7 @@
 
   <mat-sidenav #searchDrawer class="sidenav" fixedInViewport [attr.role]="'navigation'" [mode]="'over'" [opened]="false"
     [position]="'end'">
-    <mat-toolbar>
-      <span>Search</span>
-      <span class="spacer"></span>
-      <button mat-icon-button (click)="searchDrawer.toggle(false)">
-        <mat-icon aria-label="Side nav toggle icon">keyboard_arrow_left</mat-icon>
-      </button>
-    </mat-toolbar>
-    <app-coins-nav-search></app-coins-nav-search>
+    <app-coins-nav-search [drawer]="searchDrawer"></app-coins-nav-search>
   </mat-sidenav>
 
   <mat-sidenav-content>
