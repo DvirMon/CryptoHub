@@ -62,7 +62,7 @@ export class CoinsNavSearchComponent implements OnInit {
 
         searchEntries.subscribe(
           (coins) => {
-            this.searchEntries = store.getState().coins.coins
+            this.searchEntries = this.searchEntries
 
           }
         )

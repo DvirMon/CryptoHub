@@ -64,30 +64,15 @@ export class CoinsService {
   }
 
   // GET request - get coins by search
-  public searchCoins(): Observable<string[]> {
+  public searchCoins(): Observable<CoinModel[]> {
     return this.http.get<CoinModel[]>(`https://api.coingecko.com/api/v3/coins/list`)
       .pipe(
-        map((response: CoinModel[]) => {
-          return response.map((coin) => {
-            return coin.symbol
-          }) 
-        }),
-        map((coins: string[]) => {
+        map((coins: CoinModel[]) => {
           return this.sortService.getSortedData(coins)
         })
       )
   }
 
-  // GET request - get coins by search
-  public searchCoinsNav(): Observable<CoinModel[]> {
-    return this.http.get<CoinModel[]>(`https://api.coingecko.com/api/v3/coins/list`)
-      .pipe(
-        map((coins: CoinModel[]) => {
-          return coins
-          // return this.sortService.getSortedData(coins)
-        })
-      )
-  }
 
 
   // STORE SECTION

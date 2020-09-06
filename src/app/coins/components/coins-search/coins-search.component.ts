@@ -8,6 +8,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
 import { FormService } from 'src/app/services/form.service';
 import { SearchService } from 'src/app/services/search.service';
+import { CoinModel } from 'src/app/utilities/models/coin-model';
 
 @Component({
   selector: 'app-coins-search',
@@ -22,7 +23,7 @@ export class CoinsSearchComponent implements OnInit {
 
 
   public searchControl = new FormControl();
-  public searchEntries: Observable<string[]>;
+  public searchEntries: Observable<CoinModel[]>;
   public searchResults: Observable<number>;
   public isMobile: Observable<boolean> = this.formService.isMobile()
 

@@ -9,7 +9,7 @@ import { CoinsService } from './coins.service';
 })
 export class SearchService {
 
-  public searchEntries: BehaviorSubject<Observable<string[]>> = new BehaviorSubject(of([]))
+  public searchEntries: BehaviorSubject<Observable<CoinModel[]>> = new BehaviorSubject(of([]))
   public results: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public searchResults: string[] = []
 
@@ -18,7 +18,7 @@ export class SearchService {
   ) { }
 
 
-  public handleSearch(searchControl): Observable<string[]> {
+  public handleSearch(searchControl): Observable<CoinModel[]> {
     return searchControl.valueChanges.pipe(
       debounceTime(600),
       distinctUntilChanged(),
@@ -30,10 +30,10 @@ export class SearchService {
       }))
   }
 
-  public search(option: string): Observable<string[]> {
+  public search(option: string): Observable<CoinModel[]> {
     return this.coinsService.searchCoins()
       .pipe(
-        map((coins: string[]) => {
+        map((coins: CoinModel[]) => {
           return this.filter(coins, option)
         })
         , tap(coins => {
@@ -46,24 +46,6 @@ export class SearchService {
 
       )
   }
-
-  // public searchNav(option: string): Observable<CoinModel[]> {
-  //   return this.coinsService.searchCoinsNav()
-  //     .pipe(
-  //       map((coins: CoinModel[]) => {
-  //         return this.filter(coins, option)
-  //       })
-  //       , tap(coins => {
-
-  //         if (coins.length === 0) {
-  //           return this.handleError()
-  //         }
-  //         return this.handleSuccess(coins)
-  //       })
-
-  //     )
-  // }
-
 
 
   public onSelect(option: string) {
@@ -83,15 +65,15 @@ export class SearchService {
   }
 
   // handle search success
-  private handleSuccess(response: string[]): Observable<string[]> {
+  private handleSuccess(response: CoinModel[]): Observable<CoinModel[]> {
     this.results.next(false)
     this.searchEntries.next(of(response))
     return of(response)
   }
 
   // handle search filter
-  private filter(options: string[], value: string): string[] {
+  private filter(options: CoinModel[], value: string): CoinModel[] {
     const filterValue = value.toLowerCase();
-    return options.filter(option => option.toLowerCase().includes(filterValue));
+    return options.filter(option => option.symbol.toLowerCase().includes(filterValue));
   }
 }
