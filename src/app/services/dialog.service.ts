@@ -104,9 +104,8 @@ export class DialogService {
   private handleErrorDialogData(error: HttpErrorResponse | ErrorDialogData): ErrorDialogData {
 
     let message = ''
-    const status = error.status ? error.status : null
 
-    switch (status) {
+    switch (error.status) {
       case 0:
         message = "You are not connected to database"
         break
@@ -119,7 +118,7 @@ export class DialogService {
       default:
         message = error?.error ? error.error : this.errorData.message
     }
-    return { message, status }
+    return { message, status : error.status }
   }
 
 }

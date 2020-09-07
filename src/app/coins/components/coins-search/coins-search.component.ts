@@ -57,6 +57,7 @@ export class CoinsSearchComponent implements OnInit {
       }
     )
   }
+  
   private subscribeToSearchEntries() {
     this.searchService.searchEntries.subscribe(
       (searchEntries) => {
