@@ -26,10 +26,26 @@
         *ngIf="isMobile | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <mat-list class="select-coins" *ngIf="!(isMobile | async)">
-        <mat-list-item>Selected Coins:</mat-list-item>
-        <mat-list-item *ngFor="let coin of selectedCoins">{{coin |uppercase}}</mat-list-item>
-      </mat-list>
+      <mat-nav-list *ngIf="(isMobile | async); else elseBlock">
+        <button mat-icon-button type="button" cdkFocusInitial routerLink="{{route.route}}"
+          *ngFor="let route of routers">
+          <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
+        </button>
+      </mat-nav-list>
+      <ng-template #elseBlock>
+        <mat-nav-list class="select-coins">
+          <button mat-button type="button" routerLink="{{route.route}}" *ngFor="let route of routers">
+            <mat-list-item>
+              <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
+              <div mat-line>{{route.label}}</div>
+            </mat-list-item>
+          </button>
+          <mat-list-item>Selected Coins:</mat-list-item>
+          <mat-list-item *ngFor="let coin of selectedCoins">{{coin |uppercase}}</mat-list-item>
+        </mat-nav-list>
+      </ng-template>
+
+
       <span class="spacer"></span>
       <app-coins-search [drawer]="searchDrawer"></app-coins-search>
     </mat-toolbar>

@@ -44,9 +44,16 @@ app-coins-nav-search  {
   width: 100%;
 }
 
+.mat-list-base .mat-list-item .mat-line,
+mat-icon {
+  color: white;
+  font-size: 30px;
+}
+
+
 @media (min-width: size(md)) {
   mat-toolbar {
-    mat-list.select-coins {
+    mat-nav-list.select-coins {
       display: flex;
       color: white;
 
@@ -60,7 +67,7 @@ app-coins-nav-search  {
 
 // from 560px down
 @media (max-width: size(sm)) {
-  mat-list {
+  mat-nav-list {
     display: initial;
     color: black;
 

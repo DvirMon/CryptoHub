@@ -15,6 +15,13 @@ export class CoinsBarComponent implements OnInit {
   public selectedCoins: string[] = []
   public isMobile: Observable<boolean> = this.formService.isMobile()
 
+  public routers = [
+    { label: "Home", route: "/coins/list", icon: "home" },
+    { label: "Real-Time Charts", route: "/coins/charts", icon: "insert_chart" },
+    { label: "About Me", route: "/coins/info", icon: "info" },
+
+  ]
+
   constructor(
     private formService: FormService,
   ) { }

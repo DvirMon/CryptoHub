@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CoinsListComponent } from './components/coins-list/coins-list.component';
+import { AboutComponent } from '../components/about/about.component';
+import { CoinsListComponent } from './components/coins-card/coins-list/coins-list.component';
 import { CoinsRootComponent } from './components/coins-root/coins-root.component';
 
-
+ 
 const routes: Routes = [
   {
-    path: "", component: CoinsRootComponent
+    path: "", component: CoinsRootComponent, children: [
+      { path: "list", component: CoinsListComponent },
+      { path: "charts", loadChildren: () => import('../charts/charts.module').then(m => m.ChartsModule) },
+      { path: "info", component: AboutComponent },
+    ]
   },
 ];
 
