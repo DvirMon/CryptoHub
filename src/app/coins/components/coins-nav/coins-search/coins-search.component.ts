@@ -20,7 +20,6 @@ import { ActionType } from 'src/app/utilities/redux/action-type';
 })
 export class CoinsSearchComponent implements OnInit {
 
-  @Input() drawer: MatSidenav
   @ViewChild('searchInput') searchInput: ElementRef;
   @ViewChild(MatAutocompleteTrigger) panel: MatAutocompleteTrigger;
 
@@ -45,7 +44,6 @@ export class CoinsSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.search();
-    this.subscribeToMobile()
     this.subscribeToResults()
     this.subscribeToSearchEntries()
   }
@@ -67,21 +65,6 @@ export class CoinsSearchComponent implements OnInit {
         this.searchEntries = searchEntries
       }
     )
-  }
-
-  private subscribeToMobile() {
-    this.isMobile.subscribe(
-      (isMobile: boolean) => {
-
-        this.toggleSearch = false
-        this.mobile = isMobile
-
-        if (!isMobile) {
-          this.drawer.toggle(false)
-        }
-      }
-    )
-
   }
 
   // LOGIC SECTION
@@ -106,9 +89,7 @@ export class CoinsSearchComponent implements OnInit {
 
   public handleToggleSearch() {
 
-    this.mobile
-      ? this.drawer.toggle()
-      : this.toggleSearch = !this.toggleSearch
+    this.toggleSearch = !this.toggleSearch
 
   }
 

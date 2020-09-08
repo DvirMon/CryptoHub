@@ -92,7 +92,7 @@ export class CoinsListComponent implements OnInit {
     this.isMobile.subscribe(
       (isMobile) => {
         isMobile
-          ? this.skeltonGrid.length = 3
+          ? this.skeltonGrid.length = 4
           : this.skeltonGrid.length = 12
       }
     )

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AboutComponent } from '../components/about/about.component';
-import { CoinsListComponent } from './components/coins-card/coins-list/coins-list.component';
 import { CoinsRootComponent } from './components/coins-root/coins-root.component';
+import { CoinsListComponent } from './components/coins-card/coins-list/coins-list.component';
+import { AboutComponent } from '../components/about/about.component';
 
  
 const routes: Routes = [

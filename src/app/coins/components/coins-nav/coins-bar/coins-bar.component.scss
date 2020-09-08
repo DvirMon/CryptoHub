@@ -12,9 +12,7 @@
   mat-icon {
     color: black;
     font-size: 30px;
-    margin-right: 5px;
   }
-
 }
 
 .mat-toolbar.mat-primary {
@@ -39,7 +37,7 @@ app-coins-search {
   margin-top: 18px;
 }
 
-app-coins-nav-search  {
+app-coins-nav-search {
   height: 100%;
   width: 100%;
 }
@@ -50,25 +48,31 @@ mat-icon {
   font-size: 30px;
 }
 
-
 @media (min-width: size(md)) {
+
   mat-toolbar {
-    mat-nav-list.select-coins {
+    mat-nav-list {
       display: flex;
       color: white;
 
       mat-list-item {
         color: white;
         font-size: 20px;
+
+        &:hover {
+          background-color: transparent;
+        }
       }
     }
   }
 }
 
 // from 560px down
+
 @media (max-width: size(sm)) {
+
   mat-nav-list {
-    display: initial;
+    display: flex;
     color: black;
 
     mat-list-item {

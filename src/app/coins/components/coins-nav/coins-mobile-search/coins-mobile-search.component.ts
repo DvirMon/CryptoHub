@@ -9,11 +9,11 @@ import { CoinModel } from 'src/app/utilities/models/coin-model';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-coins-nav-search',
-  templateUrl: './coins-nav-search.component.html',
-  styleUrls: ['./coins-nav-search.component.scss']
+  selector: 'app-coins-mobile-search',
+  templateUrl: './coins-mobile-search.component.html',
+  styleUrls: ['./coins-mobile-search.component.scss']
 })
-export class CoinsNavSearchComponent implements OnInit {
+export class CoinsMobileSearchComponent implements OnInit {
 
   @Input() drawer: MatSidenav
   @ViewChild('searchInput') searchInput: ElementRef;

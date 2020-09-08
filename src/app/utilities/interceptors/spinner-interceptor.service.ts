@@ -25,7 +25,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     currency: "https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=ils%2Cusd%2Ceur"
   }
 
-
+ 
   constructor(
     private dialogService: DialogService,
     private loaderService: LoaderService,
@@ -34,7 +34,10 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if (request.url === this.url.pagination) {
+    if (request.url === this.url.pagination || request.url === this.url.search) {
+
+      this.loaderService.loader.next(true)
+      console.log(1)
       return next.handle(request)
     }
 
@@ -44,8 +47,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
       spinnerRef = this.dialogService.openSpinner()
     });
 
-    this.loaderService.loader.next(true)
-    
+
     const modified = request.clone({});
 
     return this.handleSpinnerInterceptor(next, modified, spinnerRef)
@@ -61,10 +63,10 @@ export class SpinnerInterceptorService implements HttpInterceptor {
             this.loaderService.loader.next(false)
           }
         }),
-        catchError((error: HttpErrorResponse) => {
-          spinnerRef.close()
-          this.loaderService.loader.next(false)
-          return throwError(error);
+      catchError((error: HttpErrorResponse) => {
+        spinnerRef.close()
+        this.loaderService.loader.next(false)
+        return throwError(error);
       }))
   }
 

@@ -11,7 +11,6 @@ import { SharedModule } from './shared/shared.module';
 // IMPORT COMPONENTS
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/root/app.component';
-import { BarComponent } from './components/bar/bar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { AboutComponent } from './components/about/about.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -21,7 +20,6 @@ import { ErrorComponent } from './components/error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
-    BarComponent,
     HeaderComponent,
     AboutComponent,
     PageNotFoundComponent,
