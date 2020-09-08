@@ -13,7 +13,7 @@ export class SortService {
 
 
   // sort
-  public getSortedData(data: CoinModel[]) {
+  public getSortedData(data: CoinModel[]): CoinModel[] {
 
     return data.sort((a, b) => {
       return this.compare(a.symbol, b.symbol, true);
@@ -24,5 +24,5 @@ export class SortService {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
- 
+
 }

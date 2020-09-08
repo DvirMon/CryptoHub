@@ -15,7 +15,7 @@ export class ErrorsService {
   constructor(
     private dialogService: DialogService,
     private ngZone: NgZone,
-  ) {
+  ) { 
 
   }
 
@@ -23,14 +23,16 @@ export class ErrorsService {
 
 
     let spinnerRef;
-
+    
     this.ngZone.run(() => {
       spinnerRef = this.dialogService.openSpinner()
     });
-
-
-
+    
+    
+    
     if (error instanceof HttpErrorResponse) {
+
+      console.error(error);
 
       if (error.status == 401) {
         return

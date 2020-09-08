@@ -4,11 +4,14 @@ import { FormControl } from '@angular/forms';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { MatSidenav } from '@angular/material/sidenav';
 
+import { FormService } from 'src/app/services/form.service';
+import { LoaderService } from 'src/app/services/loader.service';
+import { SearchService } from 'src/app/services/search.service';
+
+import { CoinModel } from 'src/app/utilities/models/coin-model';
 
 import { Observable } from 'rxjs';
-import { FormService } from 'src/app/services/form.service';
-import { SearchService } from 'src/app/services/search.service';
-import { CoinModel } from 'src/app/utilities/models/coin-model';
+import { ActionType } from 'src/app/utilities/redux/action-type';
 
 @Component({
   selector: 'app-coins-search',
@@ -24,7 +27,7 @@ export class CoinsSearchComponent implements OnInit {
 
   public searchControl = new FormControl();
   public searchEntries: Observable<CoinModel[]>;
-  public searchResults: Observable<number>;
+  public entries: Observable<number>;
   public isMobile: Observable<boolean> = this.formService.isMobile()
 
   public results: boolean;
@@ -32,10 +35,10 @@ export class CoinsSearchComponent implements OnInit {
   public toggleSearch: boolean = false
   public mobile: boolean;
 
-
   constructor(
     private searchService: SearchService,
-    private formService: FormService
+    private formService: FormService,
+    private loaderService: LoaderService
 
   ) { }
 
@@ -57,7 +60,7 @@ export class CoinsSearchComponent implements OnInit {
       }
     )
   }
-  
+
   private subscribeToSearchEntries() {
     this.searchService.searchEntries.subscribe(
       (searchEntries) => {
@@ -86,13 +89,17 @@ export class CoinsSearchComponent implements OnInit {
   // main search function
 
   public search(): void {
+
+    this.formService.handleStore(ActionType.UpdateLoader)
+
     this.searchService.handleSearch(this.searchControl).subscribe(
       () => {
         this.searchInput.nativeElement.focus()
+        this.loaderService.loader.next(false)
       },
       (err) => {
-        console.log(err)
         this.searchInput.nativeElement.focus()
+        this.loaderService.loader.next(false)
       }
     )
   }
@@ -104,10 +111,6 @@ export class CoinsSearchComponent implements OnInit {
       : this.toggleSearch = !this.toggleSearch
 
   }
-
-  public onSelect(option: string) {
-  }
-
 
 
 }

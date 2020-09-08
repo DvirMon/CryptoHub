@@ -13,7 +13,8 @@ import { CoinsToggleComponent } from './components/coins-toggle/coins-toggle.com
 import { CoinsDialogComponent } from './components/coins-dialog/coins-dialog.component';
 import { CoinsNavSearchComponent } from './components/coins-nav-search/coins-nav-search.component';
 import { CoinsSearchItemComponent } from './components/coins-search-item/coins-search-item.component';
-
+import { CoinsItemSkeltonComponent } from './components/coins-item-skelton/coins-item-skelton.component';
+ 
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CoinsSearchItemComponent } from './components/coins-search-item/coins-s
     CoinsToggleComponent,
     CoinsNavSearchComponent,
     CoinsSearchItemComponent,
+    CoinsItemSkeltonComponent,
     
 
   ],

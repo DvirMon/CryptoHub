@@ -53,14 +53,12 @@ export class CoinsNavSearchComponent implements OnInit {
     this.searchService.searchEntries.subscribe(
       (searchEntries) => {
         this.searchEntries = searchEntries
-
-        // searchEntries.subscribe(
-        //   (coins) => {
-
-        //   }
-        // )
       }
     )
+  }
+
+  private subscribeToEntriesLength() {
+    
   }
 
 

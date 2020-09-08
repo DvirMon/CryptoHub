@@ -5,7 +5,7 @@
         [formControl]="searchControl">
       <span *ngIf="(searchEntries |async).length > 0 && toggleSearch" class="matsuffix" matSuffix>
         Found {{(searchEntries |async).length}} results</span>
-      <span *ngIf="results && toggleSearch" class="matsuffix" matSuffix> Found 0 results</span>
+      <span *ngIf="results && toggleSearch" class="matsuffix" matSuffix>Found 0 results</span>
     </mat-form-field>
     <button mat-icon-button (click)="handleToggleSearch()">
       <mat-icon>search</mat-icon>

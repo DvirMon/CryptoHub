@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { CoinModel } from '../utilities/models/coin-model';
-import { CoinsService } from './coins.service';
+import { CoinsService, SearchData } from './coins.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,7 @@ export class SearchService {
 
 
   public handleSearch(searchControl): Observable<CoinModel[]> {
+
     return searchControl.valueChanges.pipe(
       debounceTime(600),
       distinctUntilChanged(),
@@ -33,10 +34,13 @@ export class SearchService {
   public search(option: string): Observable<CoinModel[]> {
     return this.coinsService.searchCoins()
       .pipe(
+        map((data: SearchData) => {
+          return this.filter(data.coins, option)
+        }),
         map((coins: CoinModel[]) => {
-          return this.filter(coins, option)
-        })
-        , map((coins: CoinModel[]) => {
+          return coins.splice(0, 50)
+        }),
+        tap((coins: CoinModel[]) => {
           return coins.sort((a, b) => {
             return this.sortLength(a.symbol, b.symbol)
           })

@@ -1,13 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 import { Observable, Subject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
+
 import { CoinModel } from '../utilities/models/coin-model';
 import { CurrencyModel } from '../utilities/models/currency-model';
-import { ActionType } from '../utilities/redux/action-type';
 import { FormService } from './form.service';
 import { SortService } from './sort.service';
+
+import { ActionType } from '../utilities/redux/action-type';
+import { environment } from 'src/environments/environment';
+
+
+
+export interface SearchData {
+  coins: CoinModel[],
+  entries: number
+}
 
 @Injectable({
   providedIn: 'root'
@@ -21,32 +31,26 @@ export class CoinsService {
   constructor(
     private http: HttpClient,
     private formService: FormService,
-    private sortService : SortService
+    private sortService: SortService
   ) { }
 
   // HTTP SECTION
 
   // POST request - get coins data
-  public getCoins(page: number) {
+  public getCoins(page: number): Observable<CoinModel[]> {
 
     const params = {
       page,
       per_page: 30
     }
 
-
-    this.http.post(this.url, params)
+    return this.http.post<CoinModel[]>(this.url, params)
       .pipe(
         map((data: []) => {
           return data.map((coin) => {
             return this.handleCoinModel(coin)
           })
         })
-      )
-      .subscribe(
-        (coins: CoinModel[]) => {
-          this.formService.handleStore(ActionType.GetPageCoins, coins)
-        }
       )
   }
 
@@ -64,11 +68,16 @@ export class CoinsService {
   }
 
   // GET request - get coins by search
-  public searchCoins(): Observable<CoinModel[]> {
+  public searchCoins(): Observable<SearchData> {
     return this.http.get<CoinModel[]>(`https://api.coingecko.com/api/v3/coins/list`)
       .pipe(
-        map((coins: CoinModel[]) => {
-          return this.sortService.getSortedData(coins)
+      map((coins: CoinModel[]) => {
+
+          const data = {
+            coins: this.sortService.getSortedData(coins),
+            entries: coins.length
+          }
+          return data
         })
       )
   }

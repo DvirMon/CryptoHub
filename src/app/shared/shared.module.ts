@@ -22,15 +22,20 @@ import { ErrorsService } from '../utilities/interceptors/errors.service';
 import { CoinModel } from '../utilities/models/coin-model';
 import { CurrencyModel } from '../utilities/models/currency-model';
 
+// EXTERNAL MODULES
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
+
 
 @NgModule({
   declarations: [
     DialogComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [ 
     CommonModule,
     MaterialModule,
+    NgxSkeletonLoaderModule
   ],
   providers: [
     {
@@ -58,6 +63,7 @@ import { CurrencyModel } from '../utilities/models/currency-model';
     ReactiveFormsModule,
     MaterialModule,
     ReactiveFormsModule,
+    NgxSkeletonLoaderModule,
     DashboardComponent,
     DialogComponent,
   ]

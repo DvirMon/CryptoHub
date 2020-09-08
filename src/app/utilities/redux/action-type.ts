@@ -12,4 +12,6 @@ export enum ActionType {
   DeleteCoin,
   DeleteAllCoins,
 
+  UpdateLoader
+
 } 

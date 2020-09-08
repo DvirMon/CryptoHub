@@ -17,7 +17,7 @@ export class BarComponent {
     );
  
   public routers = [
-    { label: "Home", route: "welcome", icon: "home" },
+    { label: "Home", route: "coins", icon: "home" },
     { label: "Real-Time Charts", route: "charts", icon: "insert_chart" },
     { label: "About Me", route: "info", icon: "info" },
 

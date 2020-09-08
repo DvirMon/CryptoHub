@@ -1,18 +1,35 @@
-<div class="row" *ngIf="((searchEntries | async).length === 0); else searchBlock">
-  <div class="col-xl-3 col-lg-3 coin-card" *ngFor="let coin of coins">
+<!-- SEARCH RESULTS GRID -->
+<div class="row" *ngIf="((searchEntries | async).length > 0) && !loader; else searchBlock">
+  <div class="col-xl-3 col-lg-3 coin-card" *ngFor="let coin of searchEntries | async">
     <div class="coin-data">
       <app-coins-item [coin]="coin"></app-coins-item>
       <app-coins-expend-panel [coin]="coin"></app-coins-expend-panel>
     </div>
   </div>
 </div>
+
+<!-- MAIN COINS GRID -->
 <ng-template #searchBlock>
-  <div class="row">
-    <div class="col-xl-3 col-lg-3 coin-card" *ngFor="let coin of searchEntries | async">
-      <div class="coin-data">
+  <div class="row" *ngIf="!loader">
+    <div class="col-xl-3 col-lg-3 coin-card" *ngFor="let coin of coins">
+      <div class="coin-data mat-elevation-z2">
         <app-coins-item [coin]="coin"></app-coins-item>
         <app-coins-expend-panel [coin]="coin"></app-coins-expend-panel>
       </div>
     </div>
   </div>
 </ng-template>
+
+<!-- SKELETON GRID -->
+<div class="row" *ngIf="loader">
+  <div class="col-xl-3 col-lg-3 coin-card" *ngFor="let coin of skeltonGrid">
+    <div class="coin-data mat-elevation-z2">
+      <app-coins-item-skelton></app-coins-item-skelton>
+    </div>
+  </div>
+</div>
+
+
+<div class="row" *ngIf="coins.length === 0 && (searchEntries | async).length === 0">
+  No match fo this search
+</div>

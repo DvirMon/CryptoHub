@@ -1,0 +1,14 @@
+<mat-grid-list cols="2" rowHeight="2vh">
+  <mat-grid-tile colspan="2"></mat-grid-tile>
+  <mat-grid-tile rowspan="3" class="skeleton-header">
+    <ngx-skeleton-loader animation="progress" count="1" appearance="line"></ngx-skeleton-loader>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="3" class="text-skeleton-toggle">
+    <ngx-skeleton-loader class="skeleton-toggle" animation="progress" count="1" appearance="line">
+    </ngx-skeleton-loader>
+  </mat-grid-tile>
+  <mat-grid-tile rowspan="5" colspan="2" class="skeleton-text">
+    <ngx-skeleton-loader count="3" appearance="line"></ngx-skeleton-loader>
+  </mat-grid-tile>
+  <mat-grid-tile colspan="2"></mat-grid-tile>
+</mat-grid-list>
