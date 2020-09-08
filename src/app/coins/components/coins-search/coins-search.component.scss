@@ -13,12 +13,8 @@ div {
   transition: width 1s;
 }
 
-mat-option {
-  height: inherit;
-  color: black;
-}
-
 .mat-form-field {
+  padding-right: 15px;
   @include search-input(0);
 }
 
