@@ -23,7 +23,6 @@ export class CoinsSearchComponent implements OnInit {
   @ViewChild('searchInput') searchInput: ElementRef;
   @ViewChild(MatAutocompleteTrigger) panel: MatAutocompleteTrigger;
 
-
   public searchControl = new FormControl();
   public searchEntries: Observable<CoinModel[]>;
   public entries: Observable<number>;

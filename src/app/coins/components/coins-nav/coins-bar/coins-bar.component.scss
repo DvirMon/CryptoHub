@@ -9,10 +9,6 @@
   height: inherit;
   z-index: 50;
 
-  mat-icon {
-    color: black;
-    font-size: 30px;
-  }
 }
 
 .mat-toolbar.mat-primary {
@@ -27,11 +23,6 @@
   width: 100%;
 }
 
-mat-icon {
-  color: white;
-  font-size: 30px;
-}
-
 app-coins-search {
   width: 60vh;
   margin-top: 18px;
@@ -42,42 +33,5 @@ app-coins-nav-search {
   width: 100%;
 }
 
-.mat-list-base .mat-list-item .mat-line,
-mat-icon {
-  color: white;
-  font-size: 30px;
-}
 
-@media (min-width: size(md)) {
 
-  mat-toolbar {
-    mat-nav-list {
-      display: flex;
-      color: white;
-
-      mat-list-item {
-        color: white;
-        font-size: 20px;
-
-        &:hover {
-          background-color: transparent;
-        }
-      }
-    }
-  }
-}
-
-// from 560px down
-
-@media (max-width: size(sm)) {
-
-  mat-nav-list {
-    display: flex;
-    color: black;
-
-    mat-list-item {
-      color: black;
-      font-size: 20px;
-    }
-  }
-}

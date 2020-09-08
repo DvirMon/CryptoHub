@@ -1,0 +1,40 @@
+mat-nav-list {
+  display: flex;
+}
+
+.mat-list-base .mat-list-item .mat-line,
+mat-icon {
+  color: white;
+  font-size: 20px;
+}
+
+@media (min-width: size(md)) {
+  
+  mat-toolbar {
+    mat-nav-list {
+      color: white;
+
+      mat-list-item {
+        color: white;
+        font-size: 20px;
+
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}
+
+// from 560px down
+
+@media (max-width: size(sm)) {
+  mat-nav-list {
+    color: black;
+
+    mat-list-item {
+      color: black;
+      font-size: 20px;
+    }
+  }
+}
