@@ -1,3 +1,8 @@
+@mixin coin($color, $alpha) {
+  padding: 1%;
+  border-radius: 25px;
+  background-color: rgba($color, $alpha);
+}
 .row {
   padding: 3%;
   margin: 0;
@@ -9,13 +14,16 @@
   padding: 1%;
 }
 
-.coin-data {
-  padding: 1%;
-  border-radius: 25px;
-  background-color: rgba($color: #71c9db, $alpha: 0.4);
+.coin-data-start {
+  @include coin(grey, 0.6);
 }
 
-// app-coins-item-skelton {
-//   width: 100%;
-//   height: 100%;
-// }
+.coin-data-middle {
+  @include coin(#71c9db, 0.4);
+  transition: background-color 1000ms linear;
+}
+
+.coin-data-complete {
+  @include coin(#71c9db, 0.6);
+  transition: background-color 1000ms linear;
+}

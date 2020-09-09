@@ -36,11 +36,11 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    // if (request.reportProgress) {
+    if (request.reportProgress) {
 
-    //   this.loaderService.loader.next({ loader: false, progress: 0 })
-    //   return this.handleProgressInterceptor(next, request)
-    // }
+      this.loaderService.loader.next({ loader: false, progress: 0 })
+      return this.handleProgressInterceptor(next, request)
+    }
 
 
     let spinnerRef: MatDialogRef<DialogComponent, any>
@@ -61,18 +61,12 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     return next.handle(request).pipe(
       tap(
         (event: HttpEvent<any>) => {
-          if (event.type === HttpEventType.DownloadProgress) {
-            const progress = Math.round(event.loaded / event.total * 100)
-            this.loaderService.loader.next({ loader: true, progress })
-          }
-          else if (event.type === HttpEventType.Response) {
+           if (event.type === HttpEventType.Response) {
             spinnerRef.close()
-            this.loaderService.loader.next({ loader: false, progress: 100 })
           }
         }),
       catchError((error: HttpErrorResponse) => {
         spinnerRef.close()
-        this.loaderService.loader.next({ loader: false, progress: 100 })
         return throwError(error);
       }))
   }

@@ -26,6 +26,7 @@ export class CoinsListComponent implements OnInit {
   public skeltonGrid = []
   public loader: boolean = true
   public searchMode: boolean = false
+  public progress : number;
 
   public isMobile: Observable<boolean> = this.formService.isMobile()
 
@@ -38,10 +39,10 @@ export class CoinsListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.setSkeletonGrid()
     this.subscribeToStore()
     this.subscribeToLoader()
     this.subscribeToSearchEntries()
+    this.setSkeletonGrid()
     this.getCoinsData()
   }
 
@@ -68,6 +69,8 @@ export class CoinsListComponent implements OnInit {
     this.loaderService.loader.subscribe(
       (loader) => {
         this.loader = loader.loader
+        this.progress = loader.progress
+        console.log(this.progress)
       }
     )
   }
@@ -75,7 +78,7 @@ export class CoinsListComponent implements OnInit {
   // HTTP SECTION
 
   private getCoinsData() {
-    if (this.coins.length === 0) {
+    if (this.coins.length < 13) {
       this.coinService.getCoins(1).subscribe(
         (coins) => {
           this.coins = coins
@@ -94,8 +97,8 @@ export class CoinsListComponent implements OnInit {
     this.isMobile.subscribe(
       (isMobile) => {
         isMobile
-          ? this.skeltonGrid.length = 4
-          : this.skeltonGrid.length = 12
+          ? this.coins.length = 4
+          : this.coins.length = 12
       }
     )
   }

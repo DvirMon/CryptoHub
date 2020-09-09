@@ -59,15 +59,8 @@ export class CoinsService {
   // GET - get currencies of coin by id
   public getCoinData(id: string): Observable<CurrencyModel> {
 
+    return this.http.get<CurrencyModel>(this.url + "/currency/" + id)
 
-    return this.http.get<CurrencyModel>(this.url + "/currency/" + id, {
-      reportProgress: true
-    })
-      .pipe(
-        map((response: any) => {
-          return (response[id])
-        })
-      )
   }
 
   // GET request - get coins by search

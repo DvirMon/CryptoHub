@@ -17,6 +17,7 @@ import { store } from 'src/app/utilities/redux/store';
 export class CoinsItemComponent implements OnInit {
 
   @Input() coin: CoinModel
+  @Input() loader: boolean
 
   private selectedCoins: string[] = []
   public checked: boolean

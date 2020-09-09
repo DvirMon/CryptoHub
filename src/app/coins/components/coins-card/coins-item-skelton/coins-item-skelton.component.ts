@@ -7,6 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CoinsItemSkeltonComponent implements OnInit {
 
+  
+
   constructor() { }
 
   ngOnInit(): void {
