@@ -43,10 +43,11 @@ export class DialogService {
     @Inject(MAT_DIALOG_DEFAULT_OPTIONS) private dialogConfig: MatDialogConfig
   ) { }
 
-
+ 
   // open spinner dialog
   public openSpinner(): MatDialogRef<DialogComponent> {
     const data = this.handleDate("spinner")
+    console.log(1)
     return this.dialog.open(DialogComponent, this.handleConfig(data));
   }
 

@@ -36,7 +36,7 @@ export class CoinsService {
 
   // HTTP SECTION
 
-  // POST request - get coins data
+  // POST request - get coins pagination
   public getCoins(page: number): Observable<CoinModel[]> {
 
     const params = {
@@ -59,9 +59,8 @@ export class CoinsService {
   // GET - get currencies of coin by id
   public getCoinData(id: string): Observable<CurrencyModel> {
 
-    const currencyUrl: string = `https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=ils%2Cusd%2Ceur`
 
-    return this.http.get<CurrencyModel>(currencyUrl, {
+    return this.http.get<CurrencyModel>(this.url + "/currency/" + id, {
       reportProgress: true
     })
       .pipe(
@@ -73,7 +72,7 @@ export class CoinsService {
 
   // GET request - get coins by search
   public searchCoins(): Observable<SearchData> {
-    return this.http.get<CoinModel[]>(`https://api.coingecko.com/api/v3/coins/list`, {
+    return this.http.get<CoinModel[]>(this.url, {
       reportProgress: true
     })
       .pipe(

@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { store } from 'src/app/utilities/redux/store';
 import { SearchService } from 'src/app/services/search.service';
 import { map } from 'rxjs/operators';
+import { ActionType } from 'src/app/utilities/redux/action-type';
 
 @Component({
   selector: 'app-coins-list',
@@ -50,13 +51,13 @@ export class CoinsListComponent implements OnInit {
     store.subscribe(() => {
       this.coins = store.getState().coins.coins
     })
+    this.coins = store.getState().coins.coins
   }
 
   private subscribeToSearchEntries() {
     this.searchService.searchEntries.subscribe(
       (searchEntries) => {
         this.searchEntries = searchEntries
-        this.coins = []
 
       }
     )
@@ -66,7 +67,7 @@ export class CoinsListComponent implements OnInit {
 
     this.loaderService.loader.subscribe(
       (loader) => {
-        this.loader = loader
+        this.loader = loader.loader
       }
     )
   }
@@ -78,10 +79,11 @@ export class CoinsListComponent implements OnInit {
       this.coinService.getCoins(1).subscribe(
         (coins) => {
           this.coins = coins
-          this.loaderService.loader.next(false)
+          this.formService.handleStore(ActionType.GetPageCoins, coins)
+          this.loaderService.loader.next({loader : false, progress: 100})
         },
         () => {
-          this.loaderService.loader.next(false)
+          this.loaderService.loader.next({loader : false, progress: 100})
         }
       )
     }

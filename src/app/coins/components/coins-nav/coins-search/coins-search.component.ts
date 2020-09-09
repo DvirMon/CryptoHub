@@ -77,11 +77,11 @@ export class CoinsSearchComponent implements OnInit {
     this.searchService.handleSearch(this.searchControl).subscribe(
       () => {
         this.searchInput.nativeElement.focus()
-        this.loaderService.loader.next(false)
+        this.loaderService.loader.next({ loader: false, progress: 100 })
       },
       (err) => {
         this.searchInput.nativeElement.focus()
-        this.loaderService.loader.next(false)
+        this.loaderService.loader.next({ loader: false, progress: 100 })
       }
     )
   }

@@ -2,7 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse, HttpEventType } from '@angular/common/http';
-import {  Observable, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
 import { DialogService } from 'src/app/services/dialog.service';
@@ -36,12 +36,12 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    // if (request.url === this.url.pagination || request.url === this.url.search) {
-    if (request.reportProgress) {
+    // if (request.reportProgress) {
 
-      this.loaderService.loader.next(true)
-      return this.handleProgressInterceptor(next, request)
-    }
+    //   this.loaderService.loader.next({ loader: false, progress: 0 })
+    //   return this.handleProgressInterceptor(next, request)
+    // }
+
 
     let spinnerRef: MatDialogRef<DialogComponent, any>
 
@@ -61,14 +61,18 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     return next.handle(request).pipe(
       tap(
         (event: HttpEvent<any>) => {
-          if (event instanceof HttpResponse) {
+          if (event.type === HttpEventType.DownloadProgress) {
+            const progress = Math.round(event.loaded / event.total * 100)
+            this.loaderService.loader.next({ loader: true, progress })
+          }
+          else if (event.type === HttpEventType.Response) {
             spinnerRef.close()
-            this.loaderService.loader.next(false)
+            this.loaderService.loader.next({ loader: false, progress: 100 })
           }
         }),
       catchError((error: HttpErrorResponse) => {
         spinnerRef.close()
-        this.loaderService.loader.next(false)
+        this.loaderService.loader.next({ loader: false, progress: 100 })
         return throwError(error);
       }))
   }
@@ -78,9 +82,11 @@ export class SpinnerInterceptorService implements HttpInterceptor {
       .pipe(
         tap((event: HttpEvent<any>) => {
           if (event.type === HttpEventType.DownloadProgress) {
-            console.log(Math.round(event.loaded / event.total * 100))
+            const progress = Math.round(event.loaded / event.total * 100)
+            this.loaderService.loader.next({ loader: true, progress })
           }
           else if (event.type === HttpEventType.Response) {
+            this.loaderService.loader.next({ loader: false, progress: 100 })
           }
         }, error => {
         })

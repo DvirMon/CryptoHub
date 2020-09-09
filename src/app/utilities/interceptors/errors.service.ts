@@ -17,7 +17,7 @@ export class ErrorsService {
     private ngZone: NgZone,
   ) { 
 
-  }
+  } 
 
   public handleError(error) {
 
