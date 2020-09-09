@@ -37,7 +37,6 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     if (request.url === this.url.pagination || request.url === this.url.search) {
 
       this.loaderService.loader.next(true)
-      console.log(1)
       return next.handle(request)
     }
 

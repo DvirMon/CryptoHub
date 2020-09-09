@@ -6,7 +6,7 @@ import { FormService } from 'src/app/services/form.service';
 import { SearchService } from 'src/app/services/search.service';
 import { CoinModel } from 'src/app/utilities/models/coin-model';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-coins-mobile-search',
@@ -19,11 +19,13 @@ export class CoinsMobileSearchComponent implements OnInit {
   @ViewChild('searchInput') searchInput: ElementRef;
 
   public searchControl = new FormControl();
+
   public searchEntries: Observable<CoinModel[]>;
   public searchResults: Observable<number>;
+  public skeletonResults = []
+
   public isMobile: Observable<boolean> = this.formService.isMobile()
   public results: boolean;
-  public toggleSearch: boolean = false
 
 
   constructor(
@@ -57,10 +59,6 @@ export class CoinsMobileSearchComponent implements OnInit {
     )
   }
 
-  private subscribeToEntriesLength() {
-    
-  }
-
 
 
   // LOGIC SECTION
@@ -68,6 +66,10 @@ export class CoinsMobileSearchComponent implements OnInit {
   // main search function
 
   public search(): void {
+
+    this.setSkeletonResults()
+
+
     this.searchService.handleSearch(this.searchControl).subscribe(
       () => {
         this.searchInput.nativeElement.focus()
@@ -80,6 +82,12 @@ export class CoinsMobileSearchComponent implements OnInit {
   }
 
   public onSelect(option: string) {
+  }
+
+  private setSkeletonResults() {
+    this.skeletonResults.length = 12
+    this.searchEntries = of(this.skeletonResults)
+
   }
 
 

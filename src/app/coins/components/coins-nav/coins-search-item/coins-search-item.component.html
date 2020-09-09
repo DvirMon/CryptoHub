@@ -1,7 +1,13 @@
 <mat-grid-list cols="2" rowHeight="8vh">
-  <mat-grid-tile>{{coin.symbol | uppercase}}</mat-grid-tile>
   <mat-grid-tile>
-    <button mat-raised-button color="primary">Show</button>
+    {{coin.symbol | uppercase}}
+  </mat-grid-tile>
+  <!-- <ngx-skeleton-loader appearance="line"></ngx-skeleton-loader> -->
+  <mat-grid-tile>
+    <button mat-raised-button color="primary">
+      Show
+      <!-- <ngx-skeleton-loader appearance="line"></ngx-skeleton-loader> -->
+    </button>
   </mat-grid-tile>
 </mat-grid-list>
 <mat-divider></mat-divider>
