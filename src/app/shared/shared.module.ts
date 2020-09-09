@@ -12,7 +12,6 @@ import { MaterialModule } from '../material/material.module';
 
 // IMPORT COMPONENTS
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DialogComponent } from './components/dialog/dialog.component';
 
 // INTERCEPTORS
 import { SpinnerInterceptorService } from '../utilities/interceptors/spinner-interceptor.service';
@@ -24,16 +23,17 @@ import { CurrencyModel } from '../utilities/models/currency-model';
 
 // EXTERNAL MODULES
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { DialogModule } from '../dialog/dialog.module';
 
 
 
 @NgModule({
   declarations: [
-    DialogComponent,
     DashboardComponent,
   ],
   imports: [ 
     CommonModule,
+    DialogModule,
     MaterialModule,
     NgxSkeletonLoaderModule
   ],
@@ -60,12 +60,13 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
   ],  
   exports: [
     CommonModule,
+    DialogModule,
     ReactiveFormsModule,
     MaterialModule,
     ReactiveFormsModule,
     NgxSkeletonLoaderModule,
+    
     DashboardComponent,
-    DialogComponent,
   ]
 })
 export class SharedModule { }

@@ -2,10 +2,11 @@ import { Injectable, Inject } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { DialogComponent } from '../shared/components/dialog/dialog.component';
-import { CoinsDialogComponent } from '../coins/components/coins-dialog/coins-dialog.component';
-
 import { FormService } from './form.service';
+
+import { DialogComponent } from '../dialog/components/dialog/dialog.component';
+import { CoinsDialogComponent } from '../dialog/components/dialog-coins/coins-dialog.component';
+
 
 export interface DialogData {
   type: string
@@ -22,7 +23,7 @@ export interface ErrorDialogData {
   message: string,
   status: any
 }
-
+ 
 @Injectable({
   providedIn: 'root',
 })

@@ -30,6 +30,12 @@ export class CoinsDialogComponent implements OnInit {
 
   }
 
+  public handleToggle(coin : string) {
+    this.coinsService.deleteSelectedCoin(coin)
+    this.coinsService.toggleSubject.next({ coin, lastSelect: this.payload.lastSelect })
+
+  }
+
 
 
 

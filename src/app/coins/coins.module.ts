@@ -20,21 +20,22 @@ import { CoinsItemSkeltonComponent } from './components/coins-card/coins-item-sk
 import { CoinsToggleComponent } from './components/coins-card/coins-toggle/coins-toggle.component';
 import { CoinsExpendPanelComponent } from './components/coins-card/coins-expend-panel/coins-expend-panel.component';
 
-import { CoinsDialogComponent } from './components/coins-dialog/coins-dialog.component';
+
 @NgModule({
   declarations: [
     CoinsRootComponent,
+
     CoinsBarComponent,
+    CoinsNavComponent,
+    CoinsSearchComponent,
+    CoinsMobileSearchComponent,
+
     CoinsListComponent,
     CoinsItemComponent,
-    CoinsDialogComponent,
-    CoinsExpendPanelComponent,
-    CoinsSearchComponent,
-    CoinsToggleComponent,
-    CoinsMobileSearchComponent,
-    CoinsSearchItemComponent,
     CoinsItemSkeltonComponent,
-    CoinsNavComponent,
+    CoinsExpendPanelComponent,
+    CoinsToggleComponent,
+    CoinsSearchItemComponent,
     
 
   ],
