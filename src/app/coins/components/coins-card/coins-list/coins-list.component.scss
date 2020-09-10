@@ -15,15 +15,15 @@
 }
 
 .coin-data-start {
-  @include coin(grey, 0.6);
+  @include coin(grey, 0.4); 
 }
 
 .coin-data-middle {
   @include coin(#71c9db, 0.4);
-  transition: background-color 1000ms linear;
+  transition: background-color 3s;
 }
 
 .coin-data-complete {
-  @include coin(#71c9db, 0.6);
-  transition: background-color 1000ms linear;
+  @include coin(#71c9db, 0.5);
+  transition: background-color 3s;
 }

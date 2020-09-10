@@ -13,6 +13,9 @@ import { CurrencyModel } from 'src/app/utilities/models/currency-model';
 export class CoinsExpendPanelComponent implements OnInit {
 
   @Input() coin: CoinModel;
+  @Input() loader: boolean;
+
+
   public panelOpenState: boolean = false;
   private data: boolean = false
   public isMobile : Observable<boolean> = this.formService.isMobile()

@@ -1,6 +1,7 @@
 @import "variables";
 @import "dialog";
 @import "scrollbar";
+@import "grid";
 
 body,
 html,
@@ -23,30 +24,6 @@ mat-grid-tile {
   flex: 1;
 }
 
-
-.text-header > figure.mat-figure {
-  justify-content: flex-start;
-  padding: 5%;
-}
-
-.text-coin-header > figure.mat-figure {
-  justify-content: flex-start;
-  padding-left: 20%;
-  font-size: 30px;
-}
-.text-coin > figure.mat-figure {
-  justify-content: flex-start;
-  padding-left: 10%;
-  font-size: 25px;
-}
-
-.text-skeleton-toggle > figure.mat-figure {
-  justify-content: flex-end;
-}
-
-.text-name > figure.mat-figure {
-  font-size: 14px;
-}
 
 span.matsuffix.ng-star-inserted {
   font-size: 14px;

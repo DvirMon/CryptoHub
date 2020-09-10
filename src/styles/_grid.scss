@@ -1,0 +1,34 @@
+.text-header > figure.mat-figure {
+  justify-content: flex-start;
+  padding: 5%;
+}
+
+.text-coin-header > figure.mat-figure {
+  justify-content: flex-start;
+  padding-left: 20%;
+  font-size: 30px;
+}
+.text-coin > figure.mat-figure {
+  justify-content: flex-start;
+  padding-left: 10%;
+  font-size: 25px;
+}
+
+.coin-toggle > figure.mat-figure {
+  padding: 20px;
+  justify-content: flex-end;
+}
+
+// SKELETON
+
+.text-skeleton-toggle > figure.mat-figure {
+  justify-content: flex-end;
+}
+
+.skeleton-text > figure.mat-figure {
+  justify-content: flex-start;
+}
+
+.text-name > figure.mat-figure {
+  font-size: 14px;
+}

@@ -14,4 +14,7 @@
       <mat-grid-tile>ILS: {{currency.ils | currency:"ILS"}}</mat-grid-tile>
     </mat-grid-list>
   </mat-expansion-panel>
+  <mat-grid-tile *ngIf="loader" rowspan="3" colspan="2" class="skeleton-text">
+    <ngx-skeleton-loader count="3" appearance="line"></ngx-skeleton-loader>
+  </mat-grid-tile>
 </mat-accordion>
