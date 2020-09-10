@@ -9,7 +9,7 @@ import { CoinsService, SearchData } from './coins.service';
 })
 export class SearchService {
 
-  public searchEntries: BehaviorSubject<Observable<CoinModel[]>> = new BehaviorSubject(of([]))
+  public searchEntries: BehaviorSubject<CoinModel[]> = new BehaviorSubject([])
   public results: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public searchResults: string[] = []
 
@@ -69,14 +69,14 @@ export class SearchService {
   // handle search error
   public handleError(): Observable<[]> {
     this.results.next(true)
-    this.searchEntries.next(of([]));
+    this.searchEntries.next([]);
     return of([]);
   }
 
   // handle search success
   private handleSuccess(response: CoinModel[]): Observable<CoinModel[]> {
     this.results.next(false)
-    this.searchEntries.next(of(response))
+    this.searchEntries.next(response)
     return of(response)
   }
 

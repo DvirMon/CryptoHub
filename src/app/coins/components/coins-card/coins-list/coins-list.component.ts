@@ -6,7 +6,7 @@ import { LoaderService } from 'src/app/services/loader.service'
 
 import { CoinModel } from 'src/app/utilities/models/coin-model';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { store } from 'src/app/utilities/redux/store';
 import { SearchService } from 'src/app/services/search.service';
 import { map } from 'rxjs/operators';
@@ -58,7 +58,12 @@ export class CoinsListComponent implements OnInit {
   private subscribeToSearchEntries() {
     this.searchService.searchEntries.subscribe(
       (searchEntries) => {
-        this.searchEntries = searchEntries
+
+        this.searchEntries = of(searchEntries)
+
+        searchEntries.length > 0
+          ? this.searchMode = true
+          : this.searchMode = false
 
       }
     )
@@ -105,7 +110,7 @@ export class CoinsListComponent implements OnInit {
     )
   }
 
-  public onScroll () {
+  public onScroll() {
     console.log("scrolling")
   }
 

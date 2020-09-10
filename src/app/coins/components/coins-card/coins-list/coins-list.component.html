@@ -3,7 +3,7 @@
 
 
   <div [ngClass]="{'row' : true, 'row-viewport' : !(isMobile | async)}"
-    *ngIf="((searchEntries | async).length > 0) && !loader; else searchBlock">
+    *ngIf="searchMode && !loader; else searchBlock">
     <div class="col-xl-3 col-lg-3 coin-card" *ngFor="let coin of searchEntries | async">
       <div class="coin-data-complete">
         <app-coins-item [coin]="coin"></app-coins-item>
@@ -16,28 +16,24 @@
   <ng-template #searchBlock>
 
     <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
-      (wheel)="onScroll()">
+      (scrolled)="onScroll()">
 
-    <div [ngClass]="{'row' : true, 'row-viewport' : !(isMobile | async)}"
-    
-    >
+      <div [ngClass]="{'row' : true, 'row-viewport' : !(isMobile | async)}">
 
-
-        
         <div class="col-xl-3 col-lg-3 coin-card" *ngFor="let coin of coins">
-        <div [ngClass]="{
+          <div [ngClass]="{
           'coin-data-start' :(progress < 15), 
           'coin-data-middle' :(progress > 15), 
             'coin-data-complete' :(progress === 100), 
         'mat-elevation-z2' : true}">
-        <app-coins-item [loader]="loader" [coin]="coin"></app-coins-item>
-        <app-coins-expend-panel *ngIf="!loader" [coin]="coin"></app-coins-expend-panel>
+            <app-coins-item [loader]="loader" [coin]="coin"></app-coins-item>
+            <app-coins-expend-panel *ngIf="!loader" [coin]="coin"></app-coins-expend-panel>
+          </div>
+        </div>
       </div>
     </div>
-    </div>
-  </div>
   </ng-template>
-  
+
 </div>
 
 <!-- <div class="row" *ngIf="coins.length === 0 && (searchEntries | async).length === 0">

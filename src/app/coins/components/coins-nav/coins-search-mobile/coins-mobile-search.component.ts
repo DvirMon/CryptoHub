@@ -54,7 +54,7 @@ export class CoinsMobileSearchComponent implements OnInit {
   private subscribeToSearchEntries() {
     this.searchService.searchEntries.subscribe(
       (searchEntries) => {
-        this.searchEntries = searchEntries
+        this.searchEntries = of(searchEntries)
       }
     )
   }

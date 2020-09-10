@@ -10,7 +10,7 @@ import { SearchService } from 'src/app/services/search.service';
 
 import { CoinModel } from 'src/app/utilities/models/coin-model';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ActionType } from 'src/app/utilities/redux/action-type';
 
 @Component({
@@ -60,8 +60,8 @@ export class CoinsSearchComponent implements OnInit {
 
   private subscribeToSearchEntries() {
     this.searchService.searchEntries.subscribe(
-      (searchEntries) => {
-        this.searchEntries = searchEntries
+      (searchEntries) => { 
+        this.searchEntries = of(searchEntries)
       }
     )
   }
