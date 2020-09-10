@@ -23,10 +23,10 @@ export class CoinsListComponent implements OnInit {
   public searchEntries: Observable<CoinModel[]>;
 
   // LOADING PARAMS
-  public skeltonGrid = []
   public loader: boolean = true
   public searchMode: boolean = false
-  public progress : number;
+  public progress: number;
+  public page: number = 1
 
   public isMobile: Observable<boolean> = this.formService.isMobile()
 
@@ -70,7 +70,6 @@ export class CoinsListComponent implements OnInit {
       (loader) => {
         this.loader = loader.loader
         this.progress = loader.progress
-        console.log(this.progress)
       }
     )
   }
@@ -78,27 +77,30 @@ export class CoinsListComponent implements OnInit {
   // HTTP SECTION
 
   private getCoinsData() {
+
     if (this.coins.length < 13) {
-      this.coinService.getCoins(1).subscribe(
-        (coins) => {
-          this.coins = coins
-          this.formService.handleStore(ActionType.GetPageCoins, coins)
-          this.loaderService.loader.next({loader : false, progress: 100})
-        },
-        () => {
-          this.loaderService.loader.next({loader : false, progress: 100})
-        }
-      )
+
+      this.coinService.getCoins(this.page)
     }
 
   }
 
+  private getNextCoinsData() {
+
+  }
+
+  // LOGIC SECTION
+
   private setSkeletonGrid() {
+
+
     this.isMobile.subscribe(
       (isMobile) => {
-        isMobile
-          ? this.coins.length = 4
-          : this.coins.length = 12
+        if (store.getState().coins.coins.length === 0) {
+          isMobile
+            ? this.coins.length = 5
+            : this.coins.length = 12
+        }
       }
     )
   }

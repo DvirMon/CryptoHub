@@ -16,7 +16,6 @@ import { CoinsSearchItemComponent } from './components/coins-nav/coins-search-it
 // CARD COMPONENTS
 import { CoinsListComponent } from './components/coins-card/coins-list/coins-list.component';
 import { CoinsItemComponent } from './components/coins-card/coins-item/coins-item.component';
-import { CoinsItemSkeltonComponent } from './components/coins-card/coins-item-skelton/coins-item-skelton.component';
 import { CoinsToggleComponent } from './components/coins-card/coins-toggle/coins-toggle.component';
 import { CoinsExpendPanelComponent } from './components/coins-card/coins-expend-panel/coins-expend-panel.component';
 
@@ -32,7 +31,6 @@ import { CoinsExpendPanelComponent } from './components/coins-card/coins-expend-
 
     CoinsListComponent,
     CoinsItemComponent,
-    CoinsItemSkeltonComponent,
     CoinsExpendPanelComponent,
     CoinsToggleComponent,
     CoinsSearchItemComponent,

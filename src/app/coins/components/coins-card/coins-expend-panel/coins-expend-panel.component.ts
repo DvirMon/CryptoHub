@@ -37,7 +37,7 @@ export class CoinsExpendPanelComponent implements OnInit {
       return
     }
 
-    this.coinsService.getCoinData(this.coin.id).subscribe(
+    this.coinsService.getCoinCurrency(this.coin.id).subscribe(
       (currency) => {
         this.currency = currency
         this.data = true

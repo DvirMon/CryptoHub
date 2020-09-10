@@ -11,6 +11,7 @@ import { SortService } from './sort.service';
 
 import { ActionType } from '../utilities/redux/action-type';
 import { environment } from 'src/environments/environment';
+import { LoaderService } from './loader.service';
 
 
 
@@ -31,17 +32,19 @@ export class CoinsService {
   constructor(
     private http: HttpClient,
     private formService: FormService,
-    private sortService: SortService
+    private sortService: SortService,
+    private loaderService: LoaderService
+
   ) { }
 
   // HTTP SECTION
 
   // POST request - get coins pagination
-  public getCoins(page: number): Observable<CoinModel[]> {
+  public getCoins(page: number) {
 
     const params = {
       page,
-      per_page: 30
+      per_page: 48
     }
 
     return this.http.post<CoinModel[]>(this.url, params, {
@@ -49,15 +52,24 @@ export class CoinsService {
     })
       .pipe(
         map((data: []) => {
+          console.log(data)
           return data.map((coin) => {
             return this.handleCoinModel(coin)
           })
         })
+      ).subscribe(
+        (coins) => {
+          this.formService.handleStore(ActionType.GetPageCoins, coins)
+          this.loaderService.loader.next({ loader: false, progress: 100 })
+        },
+        () => {
+          this.loaderService.loader.next({ loader: false, progress: 100 })
+        }
       )
   }
 
   // GET - get currencies of coin by id
-  public getCoinData(id: string): Observable<CurrencyModel> {
+  public getCoinCurrency(id: string): Observable<CurrencyModel> {
 
     return this.http.get<CurrencyModel>(this.url + "/currency/" + id)
 

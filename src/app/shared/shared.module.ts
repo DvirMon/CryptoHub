@@ -7,6 +7,8 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
 // IMPORT SHARED MODULES
 import { MaterialModule } from '../material/material.module';
 
@@ -35,6 +37,7 @@ import { DialogModule } from '../dialog/dialog.module';
     CommonModule,
     DialogModule,
     MaterialModule,
+    ScrollingModule,
     NgxSkeletonLoaderModule
   ],
   providers: [

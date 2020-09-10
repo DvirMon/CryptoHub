@@ -3,11 +3,20 @@
   border-radius: 25px;
   background-color: rgba($color, $alpha);
 }
-.row {
+
+.coins-container {
   padding: 3%;
-  margin: 0;
-  color: white;
-  font-size: 20px;
+
+  .row {
+    margin: 0;
+    color: white;
+    font-size: 20px;
+  }
+
+  .row-web {
+    height: 75vh;
+    overflow: auto;
+  }
 }
 
 .coin-card {
@@ -15,7 +24,7 @@
 }
 
 .coin-data-start {
-  @include coin(grey, 0.4); 
+  @include coin(grey, 0.4);
 }
 
 .coin-data-middle {
@@ -27,3 +36,5 @@
   @include coin(#71c9db, 0.5);
   transition: background-color 3s;
 }
+
+// from 560px down
