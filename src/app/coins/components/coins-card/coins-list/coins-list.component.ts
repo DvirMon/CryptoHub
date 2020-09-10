@@ -86,7 +86,7 @@ export class CoinsListComponent implements OnInit {
   }
 
   private getNextCoinsData() {
-
+    this.coinService.getNextCoins(this.page++)
   }
 
   // LOGIC SECTION
@@ -103,6 +103,10 @@ export class CoinsListComponent implements OnInit {
         }
       }
     )
+  }
+
+  public onScroll () {
+    console.log("scrolling")
   }
 
 

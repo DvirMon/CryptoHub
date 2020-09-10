@@ -39,9 +39,10 @@ export class CoinsService {
 
   // HTTP SECTION
 
-  // POST request - get coins pagination
-  public getCoins(page: number) {
 
+  // POST request - get coins pagination
+
+  private coinsData(page: number) {
     const params = {
       page,
       per_page: 48
@@ -52,20 +53,10 @@ export class CoinsService {
     })
       .pipe(
         map((data: []) => {
-          console.log(data)
           return data.map((coin) => {
             return this.handleCoinModel(coin)
           })
-        })
-      ).subscribe(
-        (coins) => {
-          this.formService.handleStore(ActionType.GetPageCoins, coins)
-          this.loaderService.loader.next({ loader: false, progress: 100 })
-        },
-        () => {
-          this.loaderService.loader.next({ loader: false, progress: 100 })
-        }
-      )
+        }))
   }
 
   // GET - get currencies of coin by id
@@ -91,6 +82,36 @@ export class CoinsService {
         })
       )
   }
+
+  // LOGIC SECTION
+
+  public getCoins(page: number) {
+    this.coinsData(page).subscribe(
+      (coins) => {
+        this.formService.handleStore(ActionType.GetPageCoins, coins)
+        this.loaderService.loader.next({ loader: false, progress: 100 })
+      },
+      () => {
+        this.loaderService.loader.next({ loader: false, progress: 100 })
+      }
+    )
+  }
+
+  
+  public getNextCoins(page: number) {
+    this.coinsData(page).subscribe(
+      (coins) => {
+        this.formService.handleStore(ActionType.AddPageCoins, coins)
+        this.loaderService.loader.next({ loader: false, progress: 100 })
+      },
+      () => {
+        this.loaderService.loader.next({ loader: false, progress: 100 })
+      }
+    )
+  }
+
+
+
 
 
 

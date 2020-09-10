@@ -25,6 +25,7 @@
     "@ng-bootstrap/ng-bootstrap": "^6.2.0",
     "bootstrap": "^4.5.2",
     "coingecko-api": "^1.0.10",
+    "ngx-infinite-scroll": "^9.1.0",
     "ngx-skeleton-loader": "^2.4.4",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",

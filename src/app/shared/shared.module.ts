@@ -25,6 +25,8 @@ import { CurrencyModel } from '../utilities/models/currency-model';
 
 // EXTERNAL MODULES
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 import { DialogModule } from '../dialog/dialog.module';
 
 
@@ -37,7 +39,7 @@ import { DialogModule } from '../dialog/dialog.module';
     CommonModule,
     DialogModule,
     MaterialModule,
-    ScrollingModule,
+    InfiniteScrollModule,
     NgxSkeletonLoaderModule
   ],
   providers: [
@@ -66,7 +68,8 @@ import { DialogModule } from '../dialog/dialog.module';
     DialogModule,
     ReactiveFormsModule,
     MaterialModule,
-    ReactiveFormsModule,
+
+    InfiniteScrollModule,
     NgxSkeletonLoaderModule,
     
     DashboardComponent,
