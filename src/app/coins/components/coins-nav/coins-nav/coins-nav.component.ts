@@ -38,4 +38,10 @@ export class CoinsNavComponent implements OnInit {
     this.selectedCoins = store.getState().coins.selectedCoins
   }
 
+  public toggleSearch() {
+
+    this.formService.toggleSearch.next(false)
+    
+  }
+
 }

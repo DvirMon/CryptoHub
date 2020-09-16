@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { ActionType } from '../utilities/redux/action-type';
 import { store } from '../utilities/redux/store';
@@ -11,7 +11,10 @@ import { store } from '../utilities/redux/store';
   providedIn: 'root'
 })
 
+
 export class FormService {
+
+  public toggleSearch : Subject<boolean> = new Subject()
 
   constructor(
     private breakpointObserver: BreakpointObserver,

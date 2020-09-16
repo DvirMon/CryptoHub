@@ -29,7 +29,7 @@ export class CoinsListComponent implements OnInit, OnDestroy {
 
   // LOADING PARAMS
   public loader: boolean;
-  public progress: number;
+  public progress: number = 100;
   public page: number = 1
 
   public isMobile: Observable<boolean> = this.formService.isMobile()

@@ -11,7 +11,6 @@ import { SearchService } from 'src/app/services/search.service';
 import { CoinModel } from 'src/app/utilities/models/coin-model';
 
 import { Observable, of } from 'rxjs';
-import { ActionType } from 'src/app/utilities/redux/action-type';
 import { Router } from '@angular/router';
 
 @Component({
@@ -45,6 +44,7 @@ export class CoinsSearchComponent implements OnInit {
     this.search();
     this.subscribeToResults()
     this.subscribeToSearchEntries()
+    this.subscribeToToggleSearch()
   }
 
   // SUBSCRIPTION SECTION
@@ -62,6 +62,14 @@ export class CoinsSearchComponent implements OnInit {
     this.searchService.searchEntries.subscribe(
       (searchEntries) => { 
         this.searchEntries = of(searchEntries)
+      }
+    )
+  } 
+
+  private subscribeToToggleSearch() {
+    this.formService.toggleSearch.subscribe(
+      (toggleSearch) => {
+        this.toggleSearch = toggleSearch
       }
     )
   }
@@ -86,11 +94,12 @@ export class CoinsSearchComponent implements OnInit {
 
   public handleToggleSearch() {
 
-    if(!this.toggleSearch) {
+    this.toggleSearch = !this.toggleSearch
+    
+    if(this.toggleSearch) {
       this.router.navigateByUrl('/coins/search')
     }
 
-    this.toggleSearch = !this.toggleSearch
 
   }
 

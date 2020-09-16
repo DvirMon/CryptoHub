@@ -3,12 +3,9 @@
   <mat-grid-tile colspan="3"></mat-grid-tile>
 
   <!-- line -->
-  <mat-grid-tile *ngIf="coin && !loader && coin.symbol.length < 30" class="text-coin-header" colspan="2" rowspan="4"
-    appTextSize [length]="coin.symbol.length">
-    {{coin.symbol | uppercase }}</mat-grid-tile>
-
-  <mat-grid-tile *ngIf="coin && !loader && coin.symbol.length > 30" colspan="2" rowspan="4" class="text-coin"
-    appTextSize [length]="coin.symbol.length">
+  <mat-grid-tile *ngIf="coin && !loader" colspan="2" rowspan="4" [ngClass]="{
+    'text-coin-header' : coin.symbol.length < 30,
+    'text-coin' : coin.symbol.length > 30}" appTextSize [length]="coin.symbol.length">
     {{coin.symbol | uppercase }}</mat-grid-tile>
 
   <mat-grid-tile *ngIf="loader" rowspan="3" class="skeleton-header">
@@ -27,10 +24,11 @@
   </mat-grid-tile>
 
   <!-- line -->
-  <mat-grid-tile *ngIf="coin && !loader && coin.id.length < 30" rowspan="3" colspan="3" class="text-coin">{{coin.id}}
+  <mat-grid-tile *ngIf="coin && !loader" rowspan="3" colspan="3"
+    [ngClass]="{'text-coin' : coin.id.length < 30, 'text-length' : coin.id.length > 30}">
+    {{coin.id}}
   </mat-grid-tile>
-  <mat-grid-tile *ngIf="coin && !loader && coin.id.length > 30" rowspan="3" colspan="3" class="text-length">{{coin.id}}
-  </mat-grid-tile>
+
   <mat-grid-tile *ngIf="loader" rowspan="3" colspan="3" class="skeleton-text">
     <ngx-skeleton-loader class="skeleton-line" count="1" appearance="line"></ngx-skeleton-loader>
   </mat-grid-tile>

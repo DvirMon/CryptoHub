@@ -1,5 +1,5 @@
-<mat-grid-list *ngIf="coin" cols="2" rowHeight="8vh">
-  <mat-grid-tile>
+<mat-grid-list *ngIf="coin" cols="3" rowHeight="8vh">
+  <mat-grid-tile colspan="2" [ngClass]="{'text-search-mobile' : coin.symbol.length > 20}">
     {{coin.symbol | uppercase}}
   </mat-grid-tile>
   <!-- <ngx-skeleton-loader appearance="line"></ngx-skeleton-loader> -->
