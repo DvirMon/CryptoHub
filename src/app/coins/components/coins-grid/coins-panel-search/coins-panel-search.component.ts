@@ -12,7 +12,7 @@ import { CoinModel } from 'src/app/utilities/models/coin-model';
 export class CoinsPanelSearchComponent implements OnInit {
 
 
-  public searchEntries: CoinModel[];
+  public searchEntries: CoinModel[] = [];
   public progress : number
 
   constructor(
@@ -23,7 +23,7 @@ export class CoinsPanelSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribeToSearchEntries()
-    this.subscribeToLoader()
+    // this.subscribeToLoader()
   }
   
     // SUBSCRIPTION SECTION
@@ -34,17 +34,5 @@ export class CoinsPanelSearchComponent implements OnInit {
       }
     )
   }
-
-  private subscribeToLoader() {
-
-    this.loaderService.loader.subscribe(
-      (loader) => {
-        this.progress = loader.progress
-        // console.log(this.progress)
-      }
-    )
-  }
-
-
 
 }

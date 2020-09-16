@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 import { CoinsService } from 'src/app/services/coins.service';
@@ -7,27 +7,28 @@ import { LoaderService } from 'src/app/services/loader.service'
 
 import { CoinModel } from 'src/app/utilities/models/coin-model';
 
-import { Observable, of } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { store } from 'src/app/utilities/redux/store';
-import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-coins-list',
   templateUrl: './coins-list.component.html',
   styleUrls: ['./coins-list.component.scss']
 })
-export class CoinsListComponent implements OnInit {
+export class CoinsListComponent implements OnInit, OnDestroy {
 
 
   @ViewChild(CdkVirtualScrollViewport)
   viewport: CdkVirtualScrollViewport
 
   @Input() coins: CoinModel[]
+  @Input() searchMode: boolean
+
+  private unsubscribeLouder: Subscription
 
 
   // LOADING PARAMS
-  public loader: boolean = true
-  public searchMode: boolean = false
+  public loader: boolean;
   public progress: number;
   public page: number = 1
 
@@ -40,18 +41,25 @@ export class CoinsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribeToLoader()
-    this.setSkeletonGrid()
+
+    if (!this.searchMode) {
+      this.setSkeletonGrid()
+    }
+  }
+
+  ngOnDestroy(): void {
+
+    this.unsubscribeLouder.unsubscribe()
+
   }
 
 
   private subscribeToLoader() {
 
-    this.loaderService.loader.subscribe(
+    this.unsubscribeLouder = this.loaderService.loader.subscribe(
       (loader) => {
         this.loader = loader.loader
         this.progress = loader.progress
-
-        console.log(loader)
       }
     )
   }
@@ -66,7 +74,6 @@ export class CoinsListComponent implements OnInit {
   // LOGIC SECTION
 
   private setSkeletonGrid() {
-
 
     this.isMobile.subscribe(
       (isMobile) => {

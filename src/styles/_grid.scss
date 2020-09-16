@@ -5,13 +5,18 @@
 
 .text-coin-header > figure.mat-figure {
   justify-content: flex-start;
-  padding-left: 20%;
-  font-size: 30px;
+  padding-left: 15%;
 }
+
 .text-coin > figure.mat-figure {
   justify-content: flex-start;
   padding-left: 10%;
-  font-size: 25px;
+}
+
+.text-length > figure.mat-figure {
+  justify-content: flex-start;
+  padding-left: 5%;
+  font-size: 15px;
 }
 
 .coin-toggle > figure.mat-figure {

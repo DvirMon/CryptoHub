@@ -1,15 +1,23 @@
-<mat-grid-list cols="2" rowHeight="2vh">
+<mat-grid-list cols="3" rowHeight="2vh">
 
-  <mat-grid-tile colspan="2"></mat-grid-tile>
+  <mat-grid-tile colspan="3"></mat-grid-tile>
 
   <!-- line -->
-  <mat-grid-tile *ngIf="coin && !loader" rowspan="3" class="text-coin-header">{{coin.symbol | uppercase }}</mat-grid-tile>
+  <mat-grid-tile *ngIf="coin && !loader && coin.symbol.length < 30" class="text-coin-header" colspan="2" rowspan="4"
+    appTextSize [length]="coin.symbol.length">
+    {{coin.symbol | uppercase }}</mat-grid-tile>
+
+  <mat-grid-tile *ngIf="coin && !loader && coin.symbol.length > 30" colspan="2" rowspan="4" class="text-coin"
+    appTextSize [length]="coin.symbol.length">
+    {{coin.symbol | uppercase }}</mat-grid-tile>
+
   <mat-grid-tile *ngIf="loader" rowspan="3" class="skeleton-header">
     <ngx-skeleton-loader animation="progress" count="1" appearance="line"></ngx-skeleton-loader>
   </mat-grid-tile>
 
+
   <!-- toggle -->
-  <mat-grid-tile *ngIf="coin && !loader" class="coin-toggle" rowspan="3">
+  <mat-grid-tile *ngIf="coin && !loader" rowspan="3" class="coin-toggle">
     <mat-slide-toggle [checked]="checked" (change)="handleToggle($event)" color="primary">
     </mat-slide-toggle>
   </mat-grid-tile>
@@ -19,11 +27,17 @@
   </mat-grid-tile>
 
   <!-- line -->
-  <mat-grid-tile *ngIf="coin && !loader" rowspan="3" colspan="2" class="text-coin">{{coin.id}}</mat-grid-tile>
-  <mat-grid-tile *ngIf="loader" rowspan="3" colspan="2" class="skeleton-text">
-    <ngx-skeleton-loader  class="skeleton-line" count="1" appearance="line"></ngx-skeleton-loader>
+  <mat-grid-tile *ngIf="coin && !loader && coin.id.length < 30" rowspan="3" colspan="3" class="text-coin">{{coin.id}}
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="coin && !loader && coin.id.length > 30" rowspan="3" colspan="3" class="text-length">{{coin.id}}
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="loader" rowspan="3" colspan="3" class="skeleton-text">
+    <ngx-skeleton-loader class="skeleton-line" count="1" appearance="line"></ngx-skeleton-loader>
   </mat-grid-tile>
 
-  <mat-grid-tile colspan="2"></mat-grid-tile>
+  <!-- line -->
+
+
+  <mat-grid-tile colspan="3"></mat-grid-tile>
 
 </mat-grid-list>

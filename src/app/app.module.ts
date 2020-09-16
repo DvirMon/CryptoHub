@@ -24,7 +24,7 @@ import { ErrorComponent } from './components/error/error.component';
     AboutComponent,
     PageNotFoundComponent,
     HomeComponent,
-    ErrorComponent
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,

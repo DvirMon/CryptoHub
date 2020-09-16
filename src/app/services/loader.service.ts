@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 export interface LoaderData {
   loader?: boolean,
@@ -11,7 +11,7 @@ export interface LoaderData {
 })
 export class LoaderService {
 
-  public loader: BehaviorSubject<LoaderData> = new BehaviorSubject({ loader: true, progress: 0 })
+  public loader: Subject<LoaderData> = new Subject()
 
   constructor() { }
 

@@ -28,12 +28,14 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { DialogModule } from '../dialog/dialog.module';
+import { TextSizeDirective } from '../utilities/directives/text-size.directive';
 
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
+    TextSizeDirective
   ],
   imports: [ 
     CommonModule,
@@ -71,8 +73,9 @@ import { DialogModule } from '../dialog/dialog.module';
     MaterialModule,
 
     NgxSkeletonLoaderModule,
-    
+     
     DashboardComponent,
+    TextSizeDirective
   ]
-})
+  })
 export class SharedModule { }
