@@ -1,4 +1,4 @@
-<mat-grid-list cols="2" rowHeight="8vh">
+<mat-grid-list *ngIf="coin" cols="2" rowHeight="8vh">
   <mat-grid-tile>
     {{coin.symbol | uppercase}}
   </mat-grid-tile>

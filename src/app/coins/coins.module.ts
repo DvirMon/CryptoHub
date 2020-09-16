@@ -14,10 +14,12 @@ import { CoinsMobileSearchComponent } from './components/coins-nav/coins-search-
 import { CoinsSearchItemComponent } from './components/coins-nav/coins-search-item/coins-search-item.component';
 
 // CARD COMPONENTS
-import { CoinsListComponent } from './components/coins-card/coins-list/coins-list.component';
-import { CoinsItemComponent } from './components/coins-card/coins-item/coins-item.component';
-import { CoinsToggleComponent } from './components/coins-card/coins-toggle/coins-toggle.component';
-import { CoinsExpendPanelComponent } from './components/coins-card/coins-expend-panel/coins-expend-panel.component';
+import { CoinsListComponent } from './components/coins-grid/coins-list/coins-list.component';
+import { CoinsItemComponent } from './components/coins-grid/coins-item/coins-item.component';
+import { CoinsToggleComponent } from './components/coins-grid/coins-toggle/coins-toggle.component';
+import { CoinsExpendPanelComponent } from './components/coins-grid/coins-expend-panel/coins-expend-panel.component';
+import { CoinsPanelComponent } from './components/coins-grid/coins-panel/coins-panel.component';
+import { CoinsPanelSearchComponent } from './components/coins-grid/coins-panel-search/coins-panel-search.component';
 
 
 @NgModule({
@@ -27,13 +29,16 @@ import { CoinsExpendPanelComponent } from './components/coins-card/coins-expend-
     CoinsBarComponent,
     CoinsNavComponent,
     CoinsSearchComponent,
+    CoinsSearchItemComponent,
     CoinsMobileSearchComponent,
 
     CoinsListComponent,
     CoinsItemComponent,
     CoinsExpendPanelComponent,
     CoinsToggleComponent,
-    CoinsSearchItemComponent,
+    
+    CoinsPanelComponent,
+    CoinsPanelSearchComponent,
     
 
   ],

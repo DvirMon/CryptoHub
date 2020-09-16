@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { CoinModel } from '../utilities/models/coin-model';
 import { CoinsService, SearchData } from './coins.service';
@@ -11,6 +11,7 @@ export class SearchService {
 
   public searchEntries: BehaviorSubject<CoinModel[]> = new BehaviorSubject([])
   public results: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public searchSkeleton: Subject<number> = new Subject();
   public searchResults: string[] = []
 
   constructor(

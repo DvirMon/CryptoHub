@@ -3,13 +3,13 @@
   <mat-grid-tile colspan="2"></mat-grid-tile>
 
   <!-- line -->
-  <mat-grid-tile *ngIf="coin" rowspan="3" class="text-coin-header">{{coin.symbol | uppercase }}</mat-grid-tile>
+  <mat-grid-tile *ngIf="coin && !loader" rowspan="3" class="text-coin-header">{{coin.symbol | uppercase }}</mat-grid-tile>
   <mat-grid-tile *ngIf="loader" rowspan="3" class="skeleton-header">
     <ngx-skeleton-loader animation="progress" count="1" appearance="line"></ngx-skeleton-loader>
   </mat-grid-tile>
 
   <!-- toggle -->
-  <mat-grid-tile *ngIf="coin" class="coin-toggle" rowspan="3">
+  <mat-grid-tile *ngIf="coin && !loader" class="coin-toggle" rowspan="3">
     <mat-slide-toggle [checked]="checked" (change)="handleToggle($event)" color="primary">
     </mat-slide-toggle>
   </mat-grid-tile>
@@ -19,7 +19,7 @@
   </mat-grid-tile>
 
   <!-- line -->
-  <mat-grid-tile *ngIf="coin" rowspan="3" colspan="2" class="text-coin">{{coin.id}}</mat-grid-tile>
+  <mat-grid-tile *ngIf="coin && !loader" rowspan="3" colspan="2" class="text-coin">{{coin.id}}</mat-grid-tile>
   <mat-grid-tile *ngIf="loader" rowspan="3" colspan="2" class="skeleton-text">
     <ngx-skeleton-loader  class="skeleton-line" count="1" appearance="line"></ngx-skeleton-loader>
   </mat-grid-tile>

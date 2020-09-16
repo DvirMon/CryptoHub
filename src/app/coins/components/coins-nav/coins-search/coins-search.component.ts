@@ -12,6 +12,7 @@ import { CoinModel } from 'src/app/utilities/models/coin-model';
 
 import { Observable, of } from 'rxjs';
 import { ActionType } from 'src/app/utilities/redux/action-type';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-coins-search',
@@ -25,18 +26,17 @@ export class CoinsSearchComponent implements OnInit {
 
   public searchControl = new FormControl();
   public searchEntries: Observable<CoinModel[]>;
-  public entries: Observable<number>;
   public isMobile: Observable<boolean> = this.formService.isMobile()
 
   public results: boolean;
-
   public toggleSearch: boolean = false
   public mobile: boolean;
 
   constructor(
     private searchService: SearchService,
     private formService: FormService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private router : Router
 
   ) { }
 
@@ -71,9 +71,7 @@ export class CoinsSearchComponent implements OnInit {
   // main search function
 
   public search(): void {
-
-    this.formService.handleStore(ActionType.UpdateLoader)
-
+    
     this.searchService.handleSearch(this.searchControl).subscribe(
       () => {
         this.searchInput.nativeElement.focus()
@@ -87,6 +85,10 @@ export class CoinsSearchComponent implements OnInit {
   }
 
   public handleToggleSearch() {
+
+    if(!this.toggleSearch) {
+      this.router.navigateByUrl('/coins/search')
+    }
 
     this.toggleSearch = !this.toggleSearch
 

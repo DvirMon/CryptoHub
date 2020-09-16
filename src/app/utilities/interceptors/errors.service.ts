@@ -11,7 +11,6 @@ import { DialogService } from 'src/app/services/dialog.service';
 export class ErrorsService {
 
 
-
   constructor(
     private dialogService: DialogService,
     private ngZone: NgZone,

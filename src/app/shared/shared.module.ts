@@ -39,7 +39,7 @@ import { DialogModule } from '../dialog/dialog.module';
     CommonModule,
     DialogModule,
     MaterialModule,
-    InfiniteScrollModule,
+    ScrollingModule,
     NgxSkeletonLoaderModule
   ],
   providers: [
@@ -67,9 +67,9 @@ import { DialogModule } from '../dialog/dialog.module';
     CommonModule,
     DialogModule,
     ReactiveFormsModule,
+    ScrollingModule,
     MaterialModule,
 
-    InfiniteScrollModule,
     NgxSkeletonLoaderModule,
     
     DashboardComponent,
