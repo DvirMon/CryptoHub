@@ -59,10 +59,12 @@ export class CoinsListComponent implements OnInit, OnDestroy {
 
   private subscribeToLoader() {
 
-    this.unsubscribeLouder = this.loaderService.loader.subscribe(
+    this.unsubscribeLouder = this.loaderService.gridLoader.subscribe(
       (loader) => {
         this.loader = loader.loader
         this.progress = loader.progress
+
+        // console.log(loader)
 
       }
     )

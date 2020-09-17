@@ -8,7 +8,7 @@
     'text-coin' : coin.symbol.length > 30}" appTextSize [length]="coin.symbol.length">
     {{coin.symbol | uppercase }}</mat-grid-tile>
 
-  <mat-grid-tile *ngIf="loader" rowspan="3" class="skeleton-header">
+  <mat-grid-tile *ngIf="loader" colspan="2" rowspan="4" class="skeleton-header-tile">
     <ngx-skeleton-loader animation="progress" count="1" appearance="line"></ngx-skeleton-loader>
   </mat-grid-tile>
 
@@ -18,7 +18,8 @@
     <mat-slide-toggle [checked]="checked" (change)="handleToggle($event)" color="primary">
     </mat-slide-toggle>
   </mat-grid-tile>
-  <mat-grid-tile *ngIf="loader" rowspan="3" class="text-skeleton-toggle">
+
+  <mat-grid-tile *ngIf="loader" rowspan="3" class="skeleton-toggle-tile">
     <ngx-skeleton-loader class="skeleton-toggle" animation="progress" count="1" appearance="line">
     </ngx-skeleton-loader>
   </mat-grid-tile>
@@ -29,14 +30,18 @@
     {{coin.id}}
   </mat-grid-tile>
 
-  <mat-grid-tile *ngIf="loader" rowspan="3" colspan="3" class="skeleton-text">
+  <mat-grid-tile *ngIf="loader" rowspan="3" colspan="3" class="skeleton-text-tile">
     <ngx-skeleton-loader class="skeleton-line" count="1" appearance="line"></ngx-skeleton-loader>
   </mat-grid-tile>
 
-  <span class="status">{{panel.opened}}</span>
-  
-  <mat-grid-tile colspan="3" [rowspan]="panel.opened ? 14 : 4">
-    <app-coins-expend-panel #panel [coin]="coin"></app-coins-expend-panel>
+  <span class="status">opened</span>
+
+  <mat-grid-tile *ngIf="!loader" colspan="3" [rowspan]="panel.opened ? 14 : 4">
+    <app-coins-expend-panel #panel [coin]="coin" [loader]="expendLoader"></app-coins-expend-panel>
+  </mat-grid-tile>
+
+  <mat-grid-tile *ngIf="loader" rowspan="4" colspan="3" class="skeleton-expend-tile">
+    <ngx-skeleton-loader count="1" appearance="line"></ngx-skeleton-loader>
   </mat-grid-tile>
 
 </mat-grid-list>

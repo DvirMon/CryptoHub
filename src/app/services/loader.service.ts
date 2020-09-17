@@ -11,11 +11,9 @@ export interface LoaderData {
 })
 export class LoaderService {
 
-  public loader: Subject<LoaderData> = new Subject()
+  public gridLoader: BehaviorSubject<LoaderData> = new BehaviorSubject({ loader: true, progress: 0 })
+  public expendLoader: BehaviorSubject<boolean> = new BehaviorSubject(true)
 
   constructor() { }
 
-  public loaderRef() {
-    return this.loader
-  }
 }

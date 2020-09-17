@@ -3,6 +3,7 @@ import {  Component, Input, OnInit } from '@angular/core';
 
 import { CoinsService } from 'src/app/services/coins.service';
 import { DialogService } from 'src/app/services/dialog.service';
+import { LoaderService } from 'src/app/services/loader.service';
 
 import { CoinModel } from 'src/app/utilities/models/coin-model';
 
@@ -21,16 +22,20 @@ export class CoinsItemComponent implements OnInit {
 
   private selectedCoins: string[] = []
   public checked: boolean
+  public expendLoader: boolean
+
 
   constructor(
     private coinsService: CoinsService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private loaderService : LoaderService
   ) { }
 
   ngOnInit(): void {
     if (this.coin !== undefined) {
       this.subscribeToStore()
-      this.subscribeToSubject()
+      this.subscribeToToggleSubject()
+      this.subscribeToLoaderSubject()
       this.handleCoinChecked()
     }
   }
@@ -44,7 +49,7 @@ export class CoinsItemComponent implements OnInit {
     this.selectedCoins = store.getState().coins.selectedCoins
   }
 
-  private subscribeToSubject() {
+  private subscribeToToggleSubject() {
 
     this.coinsService.toggleSubject.subscribe(
       (data) => {
@@ -58,6 +63,18 @@ export class CoinsItemComponent implements OnInit {
       }
     )
   }
+
+  
+  private subscribeToLoaderSubject() {
+
+    this.loaderService.expendLoader.subscribe(
+      (loader) => {
+        this.expendLoader = loader
+      }
+    )
+  }
+
+
 
   // LOGIC SECTION
 

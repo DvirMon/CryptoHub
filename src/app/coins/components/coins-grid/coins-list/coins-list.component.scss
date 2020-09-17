@@ -35,12 +35,12 @@ cdk-virtual-scroll-viewport, virtual-scroller {
 
 .coin-data-middle {
   @include coin(#71c9db, 0.4);
-  transition: background-color 3s;
+  transition: background-color 2s;
 }
 
 .coin-data-complete {
   @include coin(#71c9db, 0.6);
-  // transition: background-color 3s;
+  transition: background-color 2s;
 }
 
 // from 560px down

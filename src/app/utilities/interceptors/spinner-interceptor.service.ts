@@ -21,11 +21,7 @@ import { environment } from 'src/environments/environment';
 export class SpinnerInterceptorService implements HttpInterceptor {
 
 
-  private url = {
-    search: "https://api.coingecko.com/api/v3/coins/list",
-    pagination: `${environment.server}/api/coins`,
-    currency: "https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=ils%2Cusd%2Ceur"
-  }
+  private url = `${environment.server}/api/coins`
 
 
   constructor(
@@ -36,13 +32,10 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    console.log(request.reportProgress)
-    
-    if (request.reportProgress) { 
-      this.loaderService.loader.next({ loader: false, progress: 0 })
+    if (request.reportProgress) {
+      this.handleProgressSubject(request, true, 0)
       return this.handleProgressInterceptor(next, request)
     }
-
 
     let spinnerRef: MatDialogRef<DialogComponent, any>
 
@@ -62,7 +55,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     return next.handle(request).pipe(
       tap(
         (event: HttpEvent<any>) => {
-           if (event.type === HttpEventType.Response) {
+          if (event.type === HttpEventType.Response) {
             spinnerRef.close()
           }
         }),
@@ -72,19 +65,36 @@ export class SpinnerInterceptorService implements HttpInterceptor {
       }))
   }
 
-  handleProgressInterceptor(next: HttpHandler, request: HttpRequest<any>): Observable<HttpEvent<any>> {
+  private handleProgressInterceptor(next: HttpHandler, request: HttpRequest<any>): Observable<HttpEvent<any>> {
     return next.handle(request)
       .pipe(
         tap((event: HttpEvent<any>) => {
+
           if (event.type === HttpEventType.DownloadProgress) {
+
             const progress = Math.round(event.loaded / event.total * 100)
-            this.loaderService.loader.next({ loader: true, progress })
+
+            this.handleProgressSubject(request, true, 30)
+
           }
           else if (event.type === HttpEventType.Response) {
-            this.loaderService.loader.next({ loader: false, progress: 100 })
+
+            this.handleProgressSubject(request, false, 100)
+
           }
         }, error => {
         })
       );
+  }
+
+
+  private handleProgressSubject(request: HttpRequest<any>, loader: boolean, progress: number) {
+
+    console.log(loader)
+
+    this.url === request.url
+      ? this.loaderService.gridLoader.next({ loader, progress })
+      : this.loaderService.expendLoader.next(loader)
+
   }
 }

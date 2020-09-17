@@ -8,13 +8,11 @@
     <mat-grid-list cols="3" rowHeight="5vh">
       <mat-grid-tile colspan="2">USD: {{currency.usd | currency}}</mat-grid-tile>
       <mat-grid-tile rowspan="3">
-        <img src={{currency.url}} [width]="(isMobile | async) ?  90 : 80">
+        <!-- <img *ngIf="!loader" src={{currency.url}} [width]="(isMobile | async) ?  90 : 80"> -->
+        <ngx-skeleton-loader  count="1" appearance="circle"></ngx-skeleton-loader>
       </mat-grid-tile>
       <mat-grid-tile colspan="2">EUR: {{currency.eur | currency:"EUR"}}</mat-grid-tile>
       <mat-grid-tile colspan="2">ILS: {{currency.ils | currency:"ILS"}}</mat-grid-tile>
     </mat-grid-list>
   </mat-expansion-panel>
-  <!-- <mat-grid-tile *ngIf="loader" rowspan="3" colspan="2" class="skeleton-text">
-    <ngx-skeleton-loader count="3" appearance="line"></ngx-skeleton-loader>
-  </mat-grid-tile> -->
 </mat-accordion>

@@ -13,6 +13,7 @@ import { CurrencyModel } from 'src/app/utilities/models/currency-model';
 export class CoinsExpendPanelComponent implements OnInit {
 
   @Input() coin: CoinModel;
+  @Input() loader: boolean;
 
   public opened: boolean = false;
   private data: boolean = false

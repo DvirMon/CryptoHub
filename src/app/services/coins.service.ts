@@ -49,24 +49,20 @@ export class CoinsService {
       per_page: 48
     }
 
-    return this.http.post<CoinModel[]>(this.url, params, {
-      reportProgress: true
-    })
+    return this.http.post<CoinModel[]>(this.url, params, { reportProgress: true })
   }
 
   // GET - get currencies of coin by id
   public getCoinCurrency(id: string): Observable<CurrencyModel> {
 
-    return this.http.get<CurrencyModel>(this.url + "/currency/" + id)
+    return this.http.get<CurrencyModel>(this.url + "/currency/" + id, { reportProgress: true })
 
   }
 
   // GET request - get coins by search
   public searchCoins(): Observable<CoinModel[]> {
 
-    return this.http.get<CoinModel[]>(this.url, {
-      reportProgress: true
-    })
+    return this.http.get<CoinModel[]>(this.url, { reportProgress: true })
       .pipe(
         map((coins: CoinModel[]) => {
 
@@ -81,10 +77,10 @@ export class CoinsService {
     this.coinsData(page).subscribe(
       (coins) => {
         this.formService.handleStore(ActionType.GetPageCoins, coins)
-        this.loaderService.loader.next({ loader: false, progress: 100 })
+        // this.loaderService.gridLoader.next({ loader: false, progress: 100 })
       },
       () => {
-        this.loaderService.loader.next({ loader: false, progress: 100 })
+        // this.loaderService.gridLoader.next({ loader: false, progress: 100 })
       }
     )
   }
@@ -94,10 +90,10 @@ export class CoinsService {
     this.coinsData(page).subscribe(
       (coins) => {
         this.formService.handleStore(ActionType.AddPageCoins, coins)
-        this.loaderService.loader.next({ loader: false, progress: 100 })
+        // this.loaderService.gridLoader.next({ loader: false, progress: 100 })
       },
       () => {
-        this.loaderService.loader.next({ loader: false, progress: 100 })
+        // this.loaderService.gridLoader.next({ loader: false, progress: 100 })
       }
     )
   }
