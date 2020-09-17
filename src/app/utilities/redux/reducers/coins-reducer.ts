@@ -17,7 +17,7 @@ export const coinsReducer = (oldAppState = new CoinsAuthState(), action: Action)
       newAppState.loader = true
       break
     case ActionType.AddPageCoins:
-      newAppState.coins.concat(action.payload)
+      newAppState.coins = newAppState.coins.concat(action.payload)
       break
     case ActionType.AddCoin:
       newAppState.selectedCoins.push(action.payload)

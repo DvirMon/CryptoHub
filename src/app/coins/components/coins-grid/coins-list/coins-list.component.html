@@ -1,21 +1,23 @@
 <div class="coins-container">
 
   <!--COINS GRID -->
-  <cdk-virtual-scroll-viewport itemSize="75vh">
-    <div [ngClass]="{'row' : true, 'row-viewport' : !(isMobile | async)}">
-      <div class="col-xl-3 col-lg-3 coin-card" *ngFor="let coin of coins">
+  <div [ngClass]="{'row' : true, 'row-viewport' : !(isMobile | async)}">
+    
+    <virtual-scroller #scroll [items]="coins" (vsEnd)="onScroll($event)">
+      <div class="col-xl-3 col-lg-3 coin-card" *ngFor="let coin of scroll.viewPortItems">
         <div [ngClass]="{
             'coin-data-start' :(progress < 15), 
             'coin-data-middle' :(progress > 15), 
             'coin-data-complete' :(progress === 100), 
             'mat-elevation-z2' : true}">
           <app-coins-item [loader]="loader" [coin]="coin"></app-coins-item>
-          <app-coins-expend-panel *ngIf="!loader" [coin]="coin"></app-coins-expend-panel>
+          <!-- <app-coins-expend-panel *ngIf="!loader" [coin]="coin"></app-coins-expend-panel> -->
         </div>
       </div>
-    </div>
-    
-  </cdk-virtual-scroll-viewport>
+    </virtual-scroller>
 
-  
+  </div>
+
+
+
 </div>

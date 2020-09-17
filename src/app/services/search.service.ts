@@ -39,7 +39,7 @@ export class SearchService {
           return this.filter(data.coins, option)
         }),
         map((coins: CoinModel[]) => {
-          return coins.splice(0, 50)
+          return coins.splice(0, 48)
         }),
         tap((coins: CoinModel[]) => {
           return coins.sort((a, b) => {

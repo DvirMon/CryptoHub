@@ -13,7 +13,7 @@ export class TextSizeDirective implements OnInit {
 
   ngOnInit() {
 
-    if (this.length < 30) {
+    if (this.length < 15) {
       this.fontSize = "30px"
     }
     else {

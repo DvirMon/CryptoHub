@@ -8,6 +8,7 @@ import { LoaderService } from 'src/app/services/loader.service'
 import { CoinModel } from 'src/app/utilities/models/coin-model';
 
 import { Observable, Subscription } from 'rxjs';
+import { IPageInfo } from 'ngx-virtual-scroller';
 import { store } from 'src/app/utilities/redux/store';
 
 @Component({
@@ -35,6 +36,7 @@ export class CoinsListComponent implements OnInit, OnDestroy {
   public isMobile: Observable<boolean> = this.formService.isMobile()
 
   constructor(
+    private coinService: CoinsService,
     private formService: FormService,
     private loaderService: LoaderService
   ) { }
@@ -53,6 +55,7 @@ export class CoinsListComponent implements OnInit, OnDestroy {
 
   }
 
+  // SUBSCRIPTION SECTION
 
   private subscribeToLoader() {
 
@@ -60,6 +63,7 @@ export class CoinsListComponent implements OnInit, OnDestroy {
       (loader) => {
         this.loader = loader.loader
         this.progress = loader.progress
+
       }
     )
   }
@@ -67,8 +71,8 @@ export class CoinsListComponent implements OnInit, OnDestroy {
   // HTTP SECTION
 
   public getNextCoinsData() {
-
-    // this.coinService.getNextCoins(this.page++)
+    this.page = this.page + 1
+    this.coinService.getNextCoins(this.page)
   }
 
   // LOGIC SECTION
@@ -86,8 +90,13 @@ export class CoinsListComponent implements OnInit, OnDestroy {
     )
   }
 
-  public onScroll() {
-    // console.log("scrolling")
+  public onScroll(event: IPageInfo) {
+    if (event.endIndex !== this.coins.length - 1 || this.searchMode || this.coins.length < 13) {
+      return
+    }
+
+    this.getNextCoinsData()
+
   }
 
 

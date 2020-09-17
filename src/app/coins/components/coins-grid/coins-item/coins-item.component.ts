@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {  Component, Input, OnInit } from '@angular/core';
 
 
 import { CoinsService } from 'src/app/services/coins.service';
@@ -28,9 +28,11 @@ export class CoinsItemComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.subscribeToStore()
-    this.subscribeToSubject()
-    this.handleCoinChecked()
+    if (this.coin !== undefined) {
+      this.subscribeToStore()
+      this.subscribeToSubject()
+      this.handleCoinChecked()
+    }
   }
 
   // SUBSCRIPTION SECTION
@@ -43,8 +45,10 @@ export class CoinsItemComponent implements OnInit {
   }
 
   private subscribeToSubject() {
+
     this.coinsService.toggleSubject.subscribe(
       (data) => {
+
         if (this.coin.symbol === data.coin) {
           this.checked = false
         }
@@ -74,23 +78,22 @@ export class CoinsItemComponent implements OnInit {
   // checked selected coins after refresh
 
   private handleCoinChecked() {
-
-    this.selectedCoins.map(coinId => {
-
-      if (coinId === this.coin.symbol) {
-        this.checked = true
-      }
-
+    
+    this.checked = !!this.selectedCoins.find((coinId: string) => {
+      return coinId === this.coin.symbol
     })
+
   }
+
 
 
   // DIALOG COINS SECTION
 
   private handleCoinsDialog() {
+
+
     const payload = { coins: [...this.selectedCoins], lastSelect: this.coin.symbol }
     this.dialogService.handleCoinsDialog(payload)
-
   }
 
 

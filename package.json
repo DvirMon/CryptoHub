@@ -27,6 +27,7 @@
     "coingecko-api": "^1.0.10",
     "ngx-infinite-scroll": "^9.1.0",
     "ngx-skeleton-loader": "^2.4.4",
+    "ngx-virtual-scroller": "^4.0.3",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "rxjs": "~6.5.4",

@@ -9,6 +9,7 @@ import { MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/d
 
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
+
 // IMPORT SHARED MODULES
 import { MaterialModule } from '../material/material.module';
 
@@ -18,7 +19,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 // INTERCEPTORS
 import { SpinnerInterceptorService } from '../utilities/interceptors/spinner-interceptor.service';
 import { ErrorsService } from '../utilities/interceptors/errors.service';
- 
+
 // MODELS
 import { CoinModel } from '../utilities/models/coin-model';
 import { CurrencyModel } from '../utilities/models/currency-model';
@@ -26,6 +27,7 @@ import { CurrencyModel } from '../utilities/models/currency-model';
 // EXTERNAL MODULES
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 
 import { DialogModule } from '../dialog/dialog.module';
 import { TextSizeDirective } from '../utilities/directives/text-size.directive';
@@ -42,7 +44,8 @@ import { TextSizeDirective } from '../utilities/directives/text-size.directive';
     DialogModule,
     MaterialModule,
     ScrollingModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    VirtualScrollerModule
   ],
   providers: [
     {
@@ -73,7 +76,8 @@ import { TextSizeDirective } from '../utilities/directives/text-size.directive';
     MaterialModule,
 
     NgxSkeletonLoaderModule,
-     
+    VirtualScrollerModule,
+    
     DashboardComponent,
     TextSizeDirective
   ]

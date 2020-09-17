@@ -43,6 +43,7 @@ export class CoinsService {
   // POST request - get coins pagination
 
   private coinsData(page: number) {
+
     const params = {
       page,
       per_page: 48
@@ -51,12 +52,6 @@ export class CoinsService {
     return this.http.post<CoinModel[]>(this.url, params, {
       reportProgress: true
     })
-      .pipe(
-        map((data: []) => {
-          return data.map((coin) => {
-            return this.handleCoinModel(coin)
-          })
-        }))
   }
 
   // GET - get currencies of coin by id
@@ -97,7 +92,7 @@ export class CoinsService {
     )
   }
 
-  
+
   public getNextCoins(page: number) {
     this.coinsData(page).subscribe(
       (coins) => {
@@ -110,11 +105,6 @@ export class CoinsService {
     )
   }
 
-
-
-
-
-
   // STORE SECTION
 
   public addSelectedCoin(coinId: string) {
@@ -125,11 +115,4 @@ export class CoinsService {
     this.formService.handleStore(ActionType.DeleteCoin, coinId)
   }
 
-  // FORMAT MODEL SECTION
-
-  private handleCoinModel(serverCoin: any) {
-    return new CoinModel(
-      serverCoin.id, serverCoin.name, serverCoin.symbol, serverCoin.image.large
-    )
-  }
 }
