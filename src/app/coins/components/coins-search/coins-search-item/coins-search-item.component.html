@@ -1,13 +1,24 @@
-<mat-grid-list *ngIf="coin" cols="3" rowHeight="8vh">
-  <mat-grid-tile colspan="2" [ngClass]="{'text-search-mobile' : coin.symbol.length > 20}">
-    {{coin.symbol | uppercase}}
-  </mat-grid-tile>
-  <!-- <ngx-skeleton-loader appearance="line"></ngx-skeleton-loader> -->
-  <mat-grid-tile>
-    <button mat-raised-button color="primary">
-      Show
-      <!-- <ngx-skeleton-loader appearance="line"></ngx-skeleton-loader> -->
-    </button>
-  </mat-grid-tile>
-</mat-grid-list>
+
+<mat-accordion>
+
+  <mat-expansion-panel (opened)="getCoinData()" class="mat-elevation-z0">
+    
+    <mat-expansion-panel-header class="search-indicator">
+      <mat-panel-title>
+        {{coin.symbol | uppercase}}  {{coin.id.length < 25 ? '| ' + coin.id : ''}}
+      </mat-panel-title>
+      <mat-divider></mat-divider>
+    </mat-expansion-panel-header>
+
+    <mat-grid-list cols="3" rowHeight="2vh">
+      <mat-grid-tile colspan="3"></mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="2">USD: {{currency.usd | currency}}</mat-grid-tile>
+      <mat-grid-tile rowspan="6">
+        <img src={{currency.url}} width="50px">
+      </mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="2">EUR: {{currency.eur | currency:"EUR"}}</mat-grid-tile>
+      <mat-grid-tile colspan="2" rowspan="2">ILS: {{currency.ils | currency:"ILS"}}</mat-grid-tile>
+    </mat-grid-list>
+  </mat-expansion-panel>
+</mat-accordion>
 <mat-divider></mat-divider>

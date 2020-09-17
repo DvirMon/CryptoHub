@@ -36,8 +36,9 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if (request.reportProgress) {
-
+    console.log(request.reportProgress)
+    
+    if (request.reportProgress) { 
       this.loaderService.loader.next({ loader: false, progress: 0 })
       return this.handleProgressInterceptor(next, request)
     }

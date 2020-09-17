@@ -19,6 +19,8 @@
   border-color: #f5c6cb;
 }
 
-
-
-
+@media (max-width: 600px) {
+  .dialog-coins .mat-dialog-container {
+    width: 330px;
+  }
+}

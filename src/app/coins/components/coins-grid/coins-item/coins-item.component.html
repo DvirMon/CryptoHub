@@ -33,13 +33,10 @@
     <ngx-skeleton-loader class="skeleton-line" count="1" appearance="line"></ngx-skeleton-loader>
   </mat-grid-tile>
 
-  <!-- line -->
-
-
-  <!-- <mat-grid-tile colspan="3"></mat-grid-tile> -->
   <span class="status">{{panel.opened}}</span>
+  
   <mat-grid-tile colspan="3" [rowspan]="panel.opened ? 14 : 4">
-    <app-coins-expend-panel #panel [loader]="!loader" [coin]="coin"></app-coins-expend-panel>
+    <app-coins-expend-panel #panel [coin]="coin"></app-coins-expend-panel>
   </mat-grid-tile>
 
 </mat-grid-list>

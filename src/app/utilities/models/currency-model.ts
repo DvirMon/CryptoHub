@@ -4,5 +4,6 @@ export class CurrencyModel {
     public usd? : number,
     public eur? : number,
     public ils? : number,
+    public url? : string,
   ) {}
 }

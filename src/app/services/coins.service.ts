@@ -62,18 +62,15 @@ export class CoinsService {
   }
 
   // GET request - get coins by search
-  public searchCoins(): Observable<SearchData> {
+  public searchCoins(): Observable<CoinModel[]> {
+
     return this.http.get<CoinModel[]>(this.url, {
       reportProgress: true
     })
       .pipe(
         map((coins: CoinModel[]) => {
 
-          const data = {
-            coins: this.sortService.getSortedData(coins),
-            entries: coins.length
-          }
-          return data
+          return this.sortService.getSortedData(coins)
         })
       )
   }
