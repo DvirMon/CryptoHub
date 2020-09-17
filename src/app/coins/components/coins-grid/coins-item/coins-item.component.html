@@ -36,6 +36,10 @@
   <!-- line -->
 
 
-  <mat-grid-tile colspan="3"></mat-grid-tile>
+  <!-- <mat-grid-tile colspan="3"></mat-grid-tile> -->
+  <span class="status">{{panel.opened}}</span>
+  <mat-grid-tile colspan="3" [rowspan]="panel.opened ? 14 : 4">
+    <app-coins-expend-panel #panel [loader]="!loader" [coin]="coin"></app-coins-expend-panel>
+  </mat-grid-tile>
 
 </mat-grid-list>

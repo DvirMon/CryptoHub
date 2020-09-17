@@ -13,8 +13,7 @@
     </button>
     <mat-menu #menu="matMenu" xPosition="after">
       <button mat-menu-item *ngFor="let coin of selectedCoins">
-        <mat-icon>clear</mat-icon>
-        <span> {{coin |uppercase}}</span>
+        {{coin |uppercase}}
       </button>
     </mat-menu>
   </mat-list-item>
@@ -39,10 +38,9 @@
         <mat-icon mat-list-icon>monetization_on</mat-icon>
         <div mat-line *ngIf="!(isMobile | async)">Selected Coins</div>
       </button>
-      <mat-menu #menuMobile="matMenu">
+      <mat-menu #menuMobile="matMenu" >
         <button mat-menu-item *ngFor="let coin of selectedCoins">
-          <mat-icon>clear</mat-icon>
-          <span> {{coin |uppercase}}</span>
+          {{coin |uppercase}}
         </button>
       </mat-menu>
     </mat-list-item>

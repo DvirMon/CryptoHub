@@ -8,7 +8,6 @@
 .mat-drawer.mat-sidenav.sidenav {
   height: inherit;
   z-index: 50;
-
 }
 
 .mat-toolbar.mat-primary {
@@ -33,5 +32,28 @@ app-coins-nav-search {
   width: 100%;
 }
 
+.fade-in {
+  animation : fade-in 4s;
+}
 
+.fade-out {
+  animation : fade-out 4s;
+}
 
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

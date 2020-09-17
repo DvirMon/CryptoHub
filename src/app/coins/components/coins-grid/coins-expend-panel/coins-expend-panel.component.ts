@@ -12,11 +12,13 @@ import { CurrencyModel } from 'src/app/utilities/models/currency-model';
 })
 export class CoinsExpendPanelComponent implements OnInit {
 
+  
+
   @Input() coin: CoinModel;
   @Input() loader: boolean;
 
 
-  public panelOpenState: boolean = false;
+  public opened: boolean = false;
   private data: boolean = false
   public isMobile : Observable<boolean> = this.formService.isMobile()
   
@@ -33,10 +35,13 @@ export class CoinsExpendPanelComponent implements OnInit {
 
   public getCoinData() {
 
+    this.opened = true
+    
     if (this.data) {
       return
     }
 
+    
     this.coinsService.getCoinCurrency(this.coin.id).subscribe(
       (currency) => {
         this.currency = currency
@@ -45,9 +50,11 @@ export class CoinsExpendPanelComponent implements OnInit {
     )
   }
 
-  public handleCoinData() {
+  public deleteCoinData() {
     setTimeout(() => {
       this.data = false
     }, 120000)
+
+    this.opened = false
   }
 }

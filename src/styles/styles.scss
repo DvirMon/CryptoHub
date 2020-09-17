@@ -24,17 +24,20 @@ mat-grid-tile {
   flex: 1;
 }
 
-
 span.matsuffix.ng-star-inserted {
   font-size: 14px;
 }
 
-
 mat-expansion-panel,
 .mat-expansion-panel-header,
 .mat-expansion-panel-content {
-  background-color: transparent;
+  background-color: rgba(#71c9db, 0.4);
   font-size: 18px;
+  
+  &:hover { 
+    background-color: rgba(#71c9db, 0.8);
+
+  }
 }
 
 .mat-slide-toggle-bar {
@@ -46,9 +49,8 @@ input.mat-input-element[_ngcontent-fex-c161].caret-white {
   caret-color: white;
 }
 
-
 .mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-bar {
-  background-color:  #3f51b5;
+  background-color: #3f51b5;
 }
 
 .mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-thumb {
