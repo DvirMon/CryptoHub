@@ -1,20 +1,21 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { ChartData, ChartService } from 'src/app/services/chart.service';
 import { ChartModel } from 'src/app/utilities/models/chart-data';
 import { store } from 'src/app/utilities/redux/store';
 
+import { interval } from 'rxjs';
+
 @Component({
   selector: 'app-my-line-chart',
   templateUrl: './my-line-chart.component.html',
   styleUrls: ['./my-line-chart.component.scss']
 })
-export class MyLineChartComponent implements OnInit, AfterViewInit {
+export class MyLineChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  public selectedCoins
 
-  public serverData: ChartModel[] = []
+  // CHART PARAMS
 
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
@@ -24,6 +25,12 @@ export class MyLineChartComponent implements OnInit, AfterViewInit {
   };
   public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
+
+  // 
+
+  private selectedCoins: string[] = []
+  private serverData: ChartModel[] = []
+  private clearInterval: any
 
   constructor(
     private chartService: ChartService
@@ -36,10 +43,16 @@ export class MyLineChartComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
 
-    setInterval(() => {
+    this.getChartData()
+
+    this.clearInterval = setInterval(() => {
       this.getChartData()
     }, 2000)
 
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.clearInterval)
   }
 
   // SUBSCRIPTION SECTION
