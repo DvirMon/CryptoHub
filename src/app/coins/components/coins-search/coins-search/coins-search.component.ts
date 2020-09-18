@@ -25,6 +25,7 @@ export class CoinsSearchComponent implements OnInit {
 
   public searchControl = new FormControl();
   public searchEntries: Observable<CoinModel[]>;
+
   public isMobile: Observable<boolean> = this.formService.isMobile()
 
   public results: boolean;
@@ -79,7 +80,7 @@ export class CoinsSearchComponent implements OnInit {
   // main search function
 
   public search(): void {
-    
+
     this.searchService.handleSearch(this.searchControl).subscribe(
       () => {
         this.searchInput.nativeElement.focus()
@@ -100,8 +101,8 @@ export class CoinsSearchComponent implements OnInit {
       this.router.navigateByUrl('/coins/search')
     }
 
-
   }
+
 
 
 }

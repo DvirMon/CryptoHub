@@ -41,3 +41,12 @@
 .text-name > figure.mat-figure {
   font-size: 14px;
 }
+
+ngx-skeleton-loader > span.loader.circle.progress.ng-star-inserted {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: grey;
+  margin: auto;
+}
+

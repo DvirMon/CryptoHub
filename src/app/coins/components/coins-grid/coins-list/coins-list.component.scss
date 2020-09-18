@@ -1,16 +1,19 @@
-@mixin coin($color, $alpha) {
+@mixin coin-card($color, $alpha) {
   padding: 1%;
   border-radius: 25px;
   background-color: rgba($color, $alpha);
 }
 
-cdk-virtual-scroll-viewport, virtual-scroller {
-  height: 75vh;
+cdk-virtual-scroll-viewport,
+virtual-scroller {
+  height: 74vh;
   width: 100%;
 }
 
 .coins-container {
-  padding: 2%;
+  padding-top: 2%;
+  padding-left: 3%;
+  padding-right: 3%;
 
   .row {
     margin: 0;
@@ -19,7 +22,7 @@ cdk-virtual-scroll-viewport, virtual-scroller {
   }
 
   .row-viewport {
-    height: 75vh;
+    height: 74vh;
     overflow: auto;
   }
 }
@@ -30,24 +33,42 @@ cdk-virtual-scroll-viewport, virtual-scroller {
 }
 
 .coin-data-start {
-  @include coin(grey, 0.4);
+  @include coin-card(grey, 0.4);
 }
 
-.coin-data-middle {
-  @include coin(#71c9db, 0.4);
-  transition: background-color 2s;
-}
 
 .coin-data-complete {
-  @include coin(#71c9db, 0.6);
-  transition: background-color 2s;
+  animation: coin-complete 2s;
+  @include coin-card(#71c9db, 0.5);
+}
+
+
+@keyframes coin-complete {
+  0% {
+    @include coin-card(grey, 0.4);
+  }
+  50% {
+    @include coin-card(#71c9db, 0.4);
+  }
+  100% {
+    @include coin-card(#71c9db, 0.5);
+  }
+}
+.row-btn {
+  padding-top: 1%;
+  text-align : right;
+  z-index: 10;
 }
 
 // from 560px down
 
 @media (max-width: 600px) {
   virtual-scroller {
-    height: 85vh;
+    height: 78vh;
     width: 100%;
   }
+  .row-btn {
+    padding-top: 3%;
+  }
 }
+

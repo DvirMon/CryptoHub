@@ -17,13 +17,11 @@ export class CoinsPanelSearchComponent implements OnInit {
 
   constructor(
     private searchService: SearchService,
-    private loaderService : LoaderService
 
   ) { }
 
   ngOnInit(): void {
     this.subscribeToSearchEntries()
-    // this.subscribeToLoader()
   }
   
     // SUBSCRIPTION SECTION

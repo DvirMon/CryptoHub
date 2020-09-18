@@ -1,5 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { CoinsService } from 'src/app/services/coins.service';
 import { FormService } from 'src/app/services/form.service';
@@ -8,7 +7,7 @@ import { LoaderService } from 'src/app/services/loader.service'
 import { CoinModel } from 'src/app/utilities/models/coin-model';
 
 import { Observable, Subscription } from 'rxjs';
-import { IPageInfo } from 'ngx-virtual-scroller';
+import { IPageInfo, VirtualScrollerComponent } from 'ngx-virtual-scroller';
 import { store } from 'src/app/utilities/redux/store';
 
 @Component({
@@ -18,9 +17,6 @@ import { store } from 'src/app/utilities/redux/store';
 })
 export class CoinsListComponent implements OnInit, OnDestroy {
 
-
-  @ViewChild(CdkVirtualScrollViewport)
-  viewport: CdkVirtualScrollViewport
 
   @Input() coins: CoinModel[]
   @Input() searchMode: boolean
@@ -34,6 +30,7 @@ export class CoinsListComponent implements OnInit, OnDestroy {
   public page: number = 1
 
   public isMobile: Observable<boolean> = this.formService.isMobile()
+  public offset: boolean
 
   constructor(
     private coinService: CoinsService,
@@ -64,8 +61,6 @@ export class CoinsListComponent implements OnInit, OnDestroy {
         this.loader = loader.loader
         this.progress = loader.progress
 
-        // console.log(loader)
-
       }
     )
   }
@@ -86,18 +81,29 @@ export class CoinsListComponent implements OnInit, OnDestroy {
         if (store.getState().coins.coins.length === 0) {
           isMobile
             ? this.coins.length = 5
-            : this.coins.length = 12
+            : this.coins.length = 41
         }
       }
     )
   }
 
   public onScroll(event: IPageInfo) {
-    if (event.endIndex !== this.coins.length - 1 || this.searchMode || this.coins.length < 13) {
+    if (event.endIndex !== this.coins.length - 1 || this.searchMode || this.coins.length < 42) {
       return
     }
 
+    this.offset = true
+
     this.getNextCoinsData()
+
+  }
+
+  public scrollToTop(scroll: VirtualScrollerComponent) {
+
+    scroll.scrollToIndex(1, true, 0, 3000)
+    this.offset = false
+
+
 
   }
 

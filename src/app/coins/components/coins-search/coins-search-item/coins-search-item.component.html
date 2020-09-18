@@ -4,7 +4,7 @@
   <mat-expansion-panel (opened)="getCoinData()" class="mat-elevation-z0">
     
     <mat-expansion-panel-header class="search-indicator">
-      <mat-panel-title>
+      <mat-panel-title *ngIf="coin">
         {{coin.symbol | uppercase}}  {{coin.id.length < 25 ? '| ' + coin.id : ''}}
       </mat-panel-title>
       <mat-divider></mat-divider>

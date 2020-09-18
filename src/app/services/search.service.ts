@@ -12,12 +12,12 @@ export class SearchService {
 
   public searchEntries: BehaviorSubject<CoinModel[]> = new BehaviorSubject([])
   public results: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  public searchSkeleton: Subject<number> = new Subject();
-  public searchResults: string[] = []
+ 
+  public searchSkeleton: CoinModel[] = []
 
   constructor(
     private coinsService: CoinsService,
-    private sortService : SortService
+    private sortService: SortService
   ) { }
 
 
@@ -30,11 +30,12 @@ export class SearchService {
         if (!searchTerm || !searchTerm.trim() || this.validFormat(searchTerm)) {
           return this.handleError()
         }
+        this.handleSearchSkeleton()
         return this.search(searchTerm.trim().toLocaleLowerCase())
       }))
   }
 
-  public search(option: string): Observable<CoinModel[]> {
+  private search(option: string): Observable<CoinModel[]> {
     return this.coinsService.searchCoins()
       .pipe(
         map((coins: CoinModel[]) => {
@@ -78,6 +79,11 @@ export class SearchService {
     this.results.next(false)
     this.searchEntries.next(response)
     return of(response)
+  }
+
+  private handleSearchSkeleton() {
+    this.searchSkeleton.length = 48
+    this.searchEntries.next(this.searchSkeleton)
   }
 
 

@@ -22,7 +22,6 @@ export class CoinsMobileSearchComponent implements OnInit {
 
   public searchEntries: Observable<CoinModel[]>;
   public searchResults: Observable<number>;
-  public skeletonResults = []
 
   public isMobile: Observable<boolean> = this.formService.isMobile()
   public results: boolean;
@@ -67,9 +66,6 @@ export class CoinsMobileSearchComponent implements OnInit {
 
   public search(): void {
 
-    this.setSkeletonResults()
-
-
     this.searchService.handleSearch(this.searchControl).subscribe(
       () => {
         this.searchInput.nativeElement.focus()
@@ -82,12 +78,6 @@ export class CoinsMobileSearchComponent implements OnInit {
   }
 
   public onSelect(option: string) {
-  }
-
-  private setSkeletonResults() {
-    this.skeletonResults.length = 12
-    this.searchEntries = of(this.skeletonResults)
-
   }
 
 

@@ -38,7 +38,6 @@ export class CoinsSearchItemComponent implements OnInit {
 
     this.coinsService.getCoinCurrency(this.coin.id).subscribe(
       (currency) => {
-        console.log(currency)
         this.currency = currency
         this.data = true
       }

@@ -74,7 +74,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
             const progress = Math.round(event.loaded / event.total * 100)
 
-            this.handleProgressSubject(request, true, 30)
+            this.handleProgressSubject(request, true, progress)
 
           }
           else if (event.type === HttpEventType.Response) {
@@ -89,8 +89,6 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
 
   private handleProgressSubject(request: HttpRequest<any>, loader: boolean, progress: number) {
-
-    console.log(loader)
 
     this.url === request.url
       ? this.loaderService.gridLoader.next({ loader, progress })
