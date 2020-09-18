@@ -5,18 +5,21 @@ import { ChartComponent } from './components/chart/chart.component';
 import { SharedModule } from '../shared/shared.module';
 import { ChartRoutingModule } from './chart-routing.module';
 
-import { ChartsModule as NgChartsModule } from 'ng2-charts';
+import { ChartsModule } from 'ng2-charts';
+import { MyLineChartComponent } from './components/my-line-chart/my-line-chart.component';
 
  
 
 @NgModule({
   declarations: [
-    ChartComponent
+    ChartComponent,
+    MyLineChartComponent
   ],
   imports: [
     CommonModule,
     ChartRoutingModule,
-    SharedModule
+    SharedModule,
+    ChartsModule
 
   ],
 })

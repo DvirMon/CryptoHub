@@ -1,0 +1,19 @@
+.chart {
+  width: 50%;
+
+  canvas {
+    padding: 5%;
+    background-color: white;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .chart {
+    width: 95%;
+    // height: 50%;
+    margin: auto;
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+  }
+}

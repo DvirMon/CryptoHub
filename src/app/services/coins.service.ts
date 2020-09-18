@@ -70,5 +70,9 @@ export class CoinsService {
   public deleteSelectedCoin(coinId: string) {
     this.formService.handleStore(ActionType.DeleteCoin, coinId)
   }
+  public deleteAllSelectedCoin() {
+    this.formService.handleStore(ActionType.DeleteAllCoins)
+  }
+
 
 }

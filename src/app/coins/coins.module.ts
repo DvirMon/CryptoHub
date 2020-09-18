@@ -22,6 +22,7 @@ import { CoinsItemComponent } from './components/coins-grid/coins-item/coins-ite
 
 import { CoinsExpendPanelComponent } from './components/coins-grid/coins-expend-panel/coins-expend-panel.component';
 import { CoinsToggleComponent } from './components/coins-grid/coins-toggle/coins-toggle.component';
+import { CoinsMenuComponent } from './components/coins-nav/coins-menu/coins-menu.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { CoinsToggleComponent } from './components/coins-grid/coins-toggle/coins
     CoinsItemComponent,
     CoinsExpendPanelComponent,
     CoinsToggleComponent,
+    CoinsMenuComponent,
 
 
   ],

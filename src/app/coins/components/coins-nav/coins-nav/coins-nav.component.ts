@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Observable } from 'rxjs';
+
 import { FormService } from 'src/app/services/form.service';
-import { store } from 'src/app/utilities/redux/store';
+
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-coins-nav',
@@ -23,19 +24,10 @@ export class CoinsNavComponent implements OnInit {
 
   constructor(
     private formService: FormService
+
   ) { }
 
   ngOnInit(): void {
-    this.subscribeToStore()
-  }
-
-  private subscribeToStore() {
-    store.subscribe(
-      () => {
-        this.selectedCoins = store.getState().coins.selectedCoins
-      }
-    )
-    this.selectedCoins = store.getState().coins.selectedCoins
   }
 
   public toggleSearch() {
@@ -43,5 +35,6 @@ export class CoinsNavComponent implements OnInit {
     this.formService.toggleSearch.next(false)
     
   }
+
 
 }

@@ -1,0 +1,9 @@
+<div  class="chart">
+  <canvas *ngIf="lineChartData.length > 0"  baseChart height="500" 
+    [datasets]="lineChartData"
+    [labels]="lineChartLabels"
+    [options]="lineChartOptions"
+    [legend]="lineChartLegend"
+    [chartType]="lineChartType">
+  </canvas>
+</div>

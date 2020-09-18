@@ -1,0 +1,8 @@
+<div>
+  <button mat-menu-item (click)="deleteCoins()">
+    Delete All Coins
+  </button>
+  <button mat-menu-item *ngFor="let coin of selectedCoins">
+    {{coin |titlecase}}
+  </button>
+</div>

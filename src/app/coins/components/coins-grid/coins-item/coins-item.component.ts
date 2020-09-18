@@ -87,8 +87,8 @@ export class CoinsItemComponent implements OnInit {
 
     } else {
       event.checked
-        ? this.coinsService.addSelectedCoin(this.coin.symbol)
-        : this.coinsService.deleteSelectedCoin(this.coin.symbol)
+        ? this.coinsService.addSelectedCoin(this.coin.id)
+        : this.coinsService.deleteSelectedCoin(this.coin.id)
     }
   }
 
@@ -97,7 +97,7 @@ export class CoinsItemComponent implements OnInit {
   private handleCoinChecked() {
     
     this.checked = !!this.selectedCoins.find((coinId: string) => {
-      return coinId === this.coin.symbol
+      return coinId === this.coin.id
     })
 
   }
