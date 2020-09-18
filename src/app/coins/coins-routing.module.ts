@@ -12,7 +12,7 @@ const routes: Routes = [
     path: "", component: CoinsRootComponent, children: [
       { path: "list", component: CoinsPanelComponent },
       { path: "search", component: CoinsPanelSearchComponent },
-      { path: "charts", loadChildren: () => import('../charts/charts.module').then(m => m.ChartsModule) },
+      { path: "charts", loadChildren: () => import('../charts/chart.module').then(m => m.ChartModule) },
       { path: "info", component: AboutComponent },
     ]
   },

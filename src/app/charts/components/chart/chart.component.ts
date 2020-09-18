@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ChartService } from 'src/app/services/chart.service';
+import { ChartModel } from 'src/app/utilities/models/chart-data';
 
 @Component({
   selector: 'app-chart',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChartComponent implements OnInit {
 
-  constructor() { }
+  public data : ChartModel[] = [];
+
+  constructor(
+    private chartService : ChartService
+  ) { }
 
   ngOnInit(): void {
   }

@@ -21,16 +21,16 @@ export class CoinsListComponent implements OnInit, OnDestroy {
   @Input() coins: CoinModel[]
   @Input() searchMode: boolean
 
-  private unsubscribeLouder: Subscription
-
 
   // LOADING PARAMS
   public loader: boolean;
   public progress: number = 100;
-  public page: number = 1
 
   public isMobile: Observable<boolean> = this.formService.isMobile()
   public offset: boolean
+
+  private page: number = 1
+  private unsubscribeLouder: Subscription
 
   constructor(
     private coinService: CoinsService,
@@ -39,12 +39,13 @@ export class CoinsListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+
     this.subscribeToLoader()
 
     if (!this.searchMode) {
       this.setSkeletonGrid()
     }
-  }
+  } 
 
   ngOnDestroy(): void {
 

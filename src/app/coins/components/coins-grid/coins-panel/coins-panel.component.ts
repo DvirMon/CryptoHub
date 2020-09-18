@@ -12,7 +12,6 @@ import { store } from 'src/app/utilities/redux/store';
 export class CoinsPanelComponent implements OnInit {
 
   public coins: CoinModel[] = []
-  private page : number
 
   constructor(
     private coinService: CoinsService,
@@ -33,12 +32,13 @@ export class CoinsPanelComponent implements OnInit {
     this.coins = store.getState().coins.coins
   }
 
+  // LOGIC SECTION
 
   private getCoinsData() {
 
     if (this.coins.length < 13) {
 
-      this.coinService.getCoins(this.page)
+      this.coinService.getCoins(1)
     }
 
   }

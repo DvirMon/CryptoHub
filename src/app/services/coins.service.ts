@@ -7,16 +7,9 @@ import { map } from 'rxjs/operators';
 import { CoinModel } from '../utilities/models/coin-model';
 import { CurrencyModel } from '../utilities/models/currency-model';
 import { FormService } from './form.service';
-import { SortService } from './sort.service';
 
 import { ActionType } from '../utilities/redux/action-type';
 import { environment } from 'src/environments/environment';
-
-
-export interface SearchData {
-  coins: CoinModel[],
-  entries: number
-}
 
 @Injectable({
   providedIn: 'root'
