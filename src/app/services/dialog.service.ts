@@ -19,11 +19,11 @@ export interface CoinsDialogData {
 }
 
 export interface ErrorDialogData {
+  message?: string,
   error?: string,
-  message: string,
-  status: any
+  status?: any
 }
- 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -43,7 +43,7 @@ export class DialogService {
     @Inject(MAT_DIALOG_DEFAULT_OPTIONS) private dialogConfig: MatDialogConfig
   ) { }
 
- 
+
   // open spinner dialog
   public openSpinner(): MatDialogRef<DialogComponent> {
     const data = this.handleDate("spinner")
@@ -117,9 +117,11 @@ export class DialogService {
         message = error.error
         break
       default:
-        message = error?.error ? error.error : this.errorData.message
+        message = error.error ? error.error : this.errorData.message
     }
-    return { message, status : error.status }
+
+
+    return { message, status: error.status }
   }
 
 }

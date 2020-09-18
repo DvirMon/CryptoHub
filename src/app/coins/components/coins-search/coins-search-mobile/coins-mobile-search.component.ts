@@ -66,7 +66,7 @@ export class CoinsMobileSearchComponent implements OnInit {
 
   public search(): void {
 
-    this.searchService.handleSearch(this.searchControl).subscribe(
+    this.searchService.search(this.searchControl).subscribe(
       () => {
         this.searchInput.nativeElement.focus()
       },

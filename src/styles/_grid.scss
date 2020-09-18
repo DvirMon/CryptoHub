@@ -30,7 +30,8 @@
 
 // SKELETON
 
-.skeleton-toggle-tile > figure.mat-figure {
+.skeleton-toggle-tile > figure.mat-figure,
+.mat-dialog-actions > figure.mat-figure {
   justify-content: flex-end;
 }
 
@@ -49,4 +50,3 @@ ngx-skeleton-loader > span.loader.circle.progress.ng-star-inserted {
   background-color: grey;
   margin: auto;
 }
-

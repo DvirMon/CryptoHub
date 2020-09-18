@@ -69,7 +69,7 @@ export class CoinsListComponent implements OnInit, OnDestroy {
 
   public getNextCoinsData() {
     this.page = this.page + 1
-    this.coinService.getNextCoins(this.page)
+    this.coinService.getCoins(this.page)
   }
 
   // LOGIC SECTION

@@ -1,8 +1,8 @@
 <div [ngSwitch]="data.type">
-    
+
     <mat-grid-list *ngSwitchCase="'error'" cols="1" rowHeight="5vh">
         <mat-grid-tile>
-            Message: {{data.payload.message}}
+            {{data.payload.message}}
         </mat-grid-tile>
         <mat-grid-tile *ngIf="data.payload.status && !development">
             Status: {{data.payload.status}}

@@ -11,8 +11,6 @@ import { SortService } from './sort.service';
 
 import { ActionType } from '../utilities/redux/action-type';
 import { environment } from 'src/environments/environment';
-import { LoaderService } from './loader.service';
-
 
 
 export interface SearchData {
@@ -32,71 +30,43 @@ export class CoinsService {
   constructor(
     private http: HttpClient,
     private formService: FormService,
-    private sortService: SortService,
-    private loaderService: LoaderService
 
   ) { }
 
   // HTTP SECTION
 
 
-  // POST request - get coins pagination
+  // POST request - get coins pagination - http://localhost:3000/api/coins
 
-  private coinsData(page: number) {
+  public getCoins(page: number) {
 
     const params = {
       page,
       per_page: 48
     }
 
-    return this.http.post<CoinModel[]>(this.url, params, { reportProgress: true })
+    return this.http.post<CoinModel[]>(this.url, params, { reportProgress: true }).subscribe(
+      (coins: CoinModel[]) => {
+
+        page === 1
+          ? this.formService.handleStore(ActionType.GetPageCoins, coins)
+          : this.formService.handleStore(ActionType.AddPageCoins, coins)
+
+
+
+      }
+    )
   }
 
-  // GET - get currencies of coin by id
+  // GET - get currencies of coin by id - http://localhost:3000/api/coins/currency:id
+  
   public getCoinCurrency(id: string): Observable<CurrencyModel> {
-
+    
     return this.http.get<CurrencyModel>(this.url + "/currency/" + id, { reportProgress: true })
-
+    
   }
+  
 
-  // GET request - get coins by search
-  public searchCoins(): Observable<CoinModel[]> {
-
-    return this.http.get<CoinModel[]>(this.url, { reportProgress: true })
-      .pipe(
-        map((coins: CoinModel[]) => {
-
-          return this.sortService.getSortedData(coins)
-        })
-      )
-  }
-
-  // LOGIC SECTION
-
-  public getCoins(page: number) {
-    this.coinsData(page).subscribe(
-      (coins) => {
-        this.formService.handleStore(ActionType.GetPageCoins, coins)
-        // this.loaderService.gridLoader.next({ loader: false, progress: 100 })
-      },
-      () => {
-        // this.loaderService.gridLoader.next({ loader: false, progress: 100 })
-      }
-    )
-  }
-
-
-  public getNextCoins(page: number) {
-    this.coinsData(page).subscribe(
-      (coins) => {
-        this.formService.handleStore(ActionType.AddPageCoins, coins)
-        // this.loaderService.gridLoader.next({ loader: false, progress: 100 })
-      },
-      () => {
-        // this.loaderService.gridLoader.next({ loader: false, progress: 100 })
-      }
-    )
-  }
 
   // STORE SECTION
 

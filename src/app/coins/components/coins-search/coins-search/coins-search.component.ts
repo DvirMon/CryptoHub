@@ -81,7 +81,7 @@ export class CoinsSearchComponent implements OnInit {
 
   public search(): void {
 
-    this.searchService.handleSearch(this.searchControl).subscribe(
+    this.searchService.search(this.searchControl).subscribe(
       () => {
         this.searchInput.nativeElement.focus()
         this.loaderService.gridLoader.next({ loader: false, progress: 100 })
