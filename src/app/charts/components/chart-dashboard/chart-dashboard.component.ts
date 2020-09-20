@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
+import { FormService } from 'src/app/services/form.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
 export class ChartDashboardComponent {
 
 
-  public cols: Observable<number> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+  public cols: Observable<number> = this.formService.isHandset().pipe(
     map(({ matches }) => {
       if (matches) {
         return 1
@@ -21,7 +22,7 @@ export class ChartDashboardComponent {
     }))
 
 
-  public cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+  public cards =  this.formService.isHandset().pipe(
     map(({ matches }) => {
 
       if (matches) {
@@ -29,7 +30,6 @@ export class ChartDashboardComponent {
           { title: 'Card 1', cols: 1, rows: 1 },
           { title: 'Card 2', cols: 1, rows: 1 },
           { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
         ];
       }
 
@@ -41,5 +41,9 @@ export class ChartDashboardComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver) { }
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private formService: FormService
+
+  ) { }
 }

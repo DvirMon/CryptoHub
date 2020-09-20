@@ -8,6 +8,7 @@ import { CoinsRootComponent } from './components/coins-root/coins-root.component
 // NAVIGATION COMPONENTS
 import { CoinsBarComponent } from './components/coins-nav/coins-bar/coins-bar.component';
 import { CoinsNavComponent } from './components/coins-nav/coins-nav/coins-nav.component';
+import { CoinsMenuComponent } from './components/coins-nav/coins-menu/coins-menu.component';
 
 // SEARCH COMPONENTS
 import { CoinsSearchComponent } from './components/coins-search/coins-search/coins-search.component';
@@ -20,9 +21,9 @@ import { CoinsPanelSearchComponent } from './components/coins-grid/coins-panel-s
 import { CoinsListComponent } from './components/coins-grid/coins-list/coins-list.component';
 import { CoinsItemComponent } from './components/coins-grid/coins-item/coins-item.component';
 
-import { CoinsExpendPanelComponent } from './components/coins-grid/coins-expend-panel/coins-expend-panel.component';
-import { CoinsToggleComponent } from './components/coins-grid/coins-toggle/coins-toggle.component';
-import { CoinsMenuComponent } from './components/coins-nav/coins-menu/coins-menu.component';
+// CARD COMPONENTS
+import { CoinsExpendPanelComponent } from './components/coins-card/coins-expend-panel/coins-expend-panel.component';
+import { CoinsToggleComponent } from './components/coins-card/coins-toggle/coins-toggle.component';
 
 
 @NgModule({
@@ -43,13 +44,14 @@ import { CoinsMenuComponent } from './components/coins-nav/coins-menu/coins-menu
     CoinsExpendPanelComponent,
     CoinsToggleComponent,
     CoinsMenuComponent,
+  
 
 
   ],
   imports: [
     CommonModule,
     CoinsRoutingModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class CoinsModule { }

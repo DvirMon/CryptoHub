@@ -1,6 +1,5 @@
 @mixin coin-card($color, $alpha) {
-  padding: 1%;
-  border-radius: 25px;
+  border-radius: 2px;
   background-color: rgba($color, $alpha);
 }
 
@@ -29,7 +28,7 @@ virtual-scroller {
 
 .coin-card {
   padding: 1%;
-  display: inline-block;
+  display: inline-table;
 }
 
 .coin-data-start {
