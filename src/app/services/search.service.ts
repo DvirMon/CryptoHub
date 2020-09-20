@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 
-import { CoinModel } from '../utilities/models/coin-model';
+import { CoinModel } from '../utilities/models/coin.model';
 import { CoinsService } from './coins.service';
 import { SortService } from './sort.service';
 
@@ -24,7 +24,6 @@ export class SearchService {
 
   constructor(
     private http: HttpClient,
-    private coinsService: CoinsService,
     private sortService: SortService
   ) { }
 

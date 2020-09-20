@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { CoinModel } from '../utilities/models/coin-model';
-import { CurrencyModel } from '../utilities/models/currency-model';
+import { CoinModel } from '../utilities/models/coin.model';
+import { CurrencyModel } from '../utilities/models/currency.model';
 import { FormService } from './form.service';
 
 import { ActionType } from '../utilities/redux/action-type';

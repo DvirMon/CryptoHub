@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { CoinsService } from 'src/app/services/coins.service';
-import { CoinModel } from 'src/app/utilities/models/coin-model';
+import { CoinModel } from 'src/app/utilities/models/coin.model';
 import { store } from 'src/app/utilities/redux/store';
 
 @Component({

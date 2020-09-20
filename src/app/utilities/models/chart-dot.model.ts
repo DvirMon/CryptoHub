@@ -1,4 +1,4 @@
-export class ChartModel {
+export class ChartDotModel {
 
   constructor(
     public label?: string,

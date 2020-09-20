@@ -1,70 +1,63 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { ChartData, ChartService } from 'src/app/services/chart.service';
-import { ChartModel } from 'src/app/utilities/models/chart-data';
+import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
 import { store } from 'src/app/utilities/redux/store';
 
-import { interval } from 'rxjs';
-
 @Component({
-  selector: 'app-my-line-chart',
+  selector: 'app-chart-line-card',
   templateUrl: './my-line-chart.component.html',
   styleUrls: ['./my-line-chart.component.scss']
 })
-export class MyLineChartComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy {
+
+
+  @Input() selectedCoins: string[] = []
 
 
   // CHART PARAMS
-
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
+
   public lineChartOptions: ChartOptions = {
     responsive: true,
-    maintainAspectRatio: false
-  };
+    maintainAspectRatio: false,
+    scales: { //you're missing this
+      yAxes: [{
+        scaleLabel: {
+          display: true,
+          labelString: 'Coin Currency $'
+        }
+      }]
+    }
+  }
+
   public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
 
-  // 
-
-  private selectedCoins: string[] = []
-  private serverData: ChartModel[] = []
   private clearInterval: any
+  private data: ChartDotModel[] = []
 
   constructor(
     private chartService: ChartService
   ) { }
 
   ngOnInit() {
-    this.subscribeToStore()
     this.setStartChartData()
+    this.getChartData()
   }
 
   ngAfterViewInit(): void {
-
-    this.getChartData()
-
     this.clearInterval = setInterval(() => {
       this.getChartData()
     }, 2000)
-
   }
 
   ngOnDestroy(): void {
     clearInterval(this.clearInterval)
   }
 
-  // SUBSCRIPTION SECTION
-
-  private subscribeToStore() {
-    store.subscribe(
-      () => {
-        this.selectedCoins = store.getState().coins.selectedCoins
-      }
-    )
-    this.selectedCoins = store.getState().coins.selectedCoins
-  }
 
   // CHART SECTION
 
@@ -72,7 +65,7 @@ export class MyLineChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.lineChartData = this.selectedCoins.map(
       (label: string) => {
-        return new ChartModel(label, [0])
+        return new ChartDotModel(label, [0])
       }
     )
 
@@ -86,7 +79,7 @@ export class MyLineChartComponent implements OnInit, AfterViewInit, OnDestroy {
   private getChartData() {
     this.chartService.getChartData().subscribe(
       (serverData: ChartData) => {
-        this.serverData = serverData.usd
+        this.data = serverData.usd
         this.updateChartDots()
         this.formatChartDots()
 
@@ -96,9 +89,11 @@ export class MyLineChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // LOGIC SECTION
 
+
+
   private updateChartDots() {
 
-    this.lineChartData.map((dot: ChartModel) => {
+    this.lineChartData.map((dot: ChartDotModel) => {
       const coin = this.findCoinToUpdate(dot.label)
       dot.data = dot.data.concat(coin.data)
     })
@@ -108,7 +103,7 @@ export class MyLineChartComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private findCoinToUpdate(label: string) {
-    return this.serverData.find((dot: ChartModel) => dot.label === label)
+    return this.data.find((dot: ChartDotModel) => dot.label === label)
   }
 
   private formatChartDots() {

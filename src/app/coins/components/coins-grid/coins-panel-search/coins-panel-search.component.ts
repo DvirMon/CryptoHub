@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader.service';
 import { SearchService } from 'src/app/services/search.service';
-import { CoinModel } from 'src/app/utilities/models/coin-model';
+import { CoinModel } from 'src/app/utilities/models/coin.model';
 
 @Component({
   selector: 'app-coins-panel-search',

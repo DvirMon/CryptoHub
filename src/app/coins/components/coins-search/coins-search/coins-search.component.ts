@@ -8,7 +8,7 @@ import { FormService } from 'src/app/services/form.service';
 import { LoaderService } from 'src/app/services/loader.service';
 import { SearchService } from 'src/app/services/search.service';
 
-import { CoinModel } from 'src/app/utilities/models/coin-model';
+import { CoinModel } from 'src/app/utilities/models/coin.model';
 
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';

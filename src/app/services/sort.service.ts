@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
-import { CoinModel } from '../utilities/models/coin-model';
+import { CoinModel } from '../utilities/models/coin.model';
 
 @Injectable({
   providedIn: 'root'

@@ -5,17 +5,11 @@ import { CoinsAuthState } from '../app-state/coins-state';
 export const coinsReducer = (oldAppState = new CoinsAuthState(), action: Action): CoinsAuthState => {
 
   const newAppState: CoinsAuthState = oldAppState
-
+ 
   switch (action.type) {
     case ActionType.GetPageCoins:
       newAppState.coins = action.payload
-      break
-    case ActionType.Mobile:
-      newAppState.coins = action.payload
-      break
-    case ActionType.UpdateLoader:
-      newAppState.loader = true
-      break
+      break 
     case ActionType.AddPageCoins:
       newAppState.coins = newAppState.coins.concat(action.payload)
       break

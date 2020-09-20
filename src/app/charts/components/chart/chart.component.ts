@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartService } from 'src/app/services/chart.service';
-import { ChartModel } from 'src/app/utilities/models/chart-data';
+import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
 
 @Component({
   selector: 'app-chart',
@@ -9,7 +9,7 @@ import { ChartModel } from 'src/app/utilities/models/chart-data';
 })
 export class ChartComponent implements OnInit {
 
-  public data : ChartModel[] = [];
+  public data : ChartDotModel[] = [];
 
   constructor(
     private chartService : ChartService

@@ -4,7 +4,7 @@ import { CoinsService } from 'src/app/services/coins.service';
 import { FormService } from 'src/app/services/form.service';
 import { LoaderService } from 'src/app/services/loader.service'
 
-import { CoinModel } from 'src/app/utilities/models/coin-model';
+import { CoinModel } from 'src/app/utilities/models/coin.model';
 
 import { Observable, Subscription } from 'rxjs';
 import { IPageInfo, VirtualScrollerComponent } from 'ngx-virtual-scroller';

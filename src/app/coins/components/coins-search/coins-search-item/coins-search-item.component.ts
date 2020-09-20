@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CoinsService } from 'src/app/services/coins.service';
-import { CoinModel } from 'src/app/utilities/models/coin-model';
-import { CurrencyModel } from 'src/app/utilities/models/currency-model';
+import { CoinModel } from 'src/app/utilities/models/coin.model';
+import { CurrencyModel } from 'src/app/utilities/models/currency.model';
 
 @Component({
   selector: 'app-coins-search-item',

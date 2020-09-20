@@ -5,7 +5,7 @@ import { CoinsService } from 'src/app/services/coins.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { LoaderService } from 'src/app/services/loader.service';
 
-import { CoinModel } from 'src/app/utilities/models/coin-model';
+import { CoinModel } from 'src/app/utilities/models/coin.model';
 
 
 import { store } from 'src/app/utilities/redux/store';

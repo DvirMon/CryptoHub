@@ -4,7 +4,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 
 import { FormService } from 'src/app/services/form.service';
 import { SearchService } from 'src/app/services/search.service';
-import { CoinModel } from 'src/app/utilities/models/coin-model';
+import { CoinModel } from 'src/app/utilities/models/coin.model';
 
 import { Observable, of } from 'rxjs';
 

@@ -25,6 +25,7 @@
     "@ng-bootstrap/ng-bootstrap": "^6.2.0",
     "bootstrap": "^4.5.2",
     "chart.js": "^2.9.3",
+    "chartjs-plugin-labels": "^1.1.0",
     "coingecko-api": "^1.0.10",
     "ng2-charts": "^2.4.1",
     "ngx-infinite-scroll": "^9.1.0",

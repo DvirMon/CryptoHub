@@ -1,5 +1,5 @@
 <div class="grid-container">
-  <mat-grid-list [cols]="cols | async" rowHeight="290px">
+  <mat-grid-list [cols]="cols | async" rowHeight="315px">
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
       <mat-card class="dashboard-card">
         <mat-card-header>
@@ -14,9 +14,15 @@
             </mat-menu>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div *ngIf="card.title === 'chart'">
-           <app-my-line-chart></app-my-line-chart>
+        <mat-card-content class="dashboard-card-content" *ngIf="serverData.length > 0">
+          <div *ngIf="card.type === 'chart-line'">
+            <app-chart-line-card [selectedCoins]="selectedCoins"></app-chart-line-card>
+          </div>
+          <div *ngIf="card.type === 'chart-bar'">
+            <app-chart-bar-card></app-chart-bar-card>
+          </div>
+          <div *ngIf="card.type === 'chart-pie'">
+            <app-chart-pie-card [data]="serverData" [pieChartLabels]="selectedCoins"></app-chart-pie-card>
           </div>
         </mat-card-content>
       </mat-card>

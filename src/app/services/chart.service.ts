@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { ChartModel } from '../utilities/models/chart-data';
+import { ChartDotModel } from '../utilities/models/chart-dot.model';
 
 import { environment } from 'src/environments/environment';
 
 import { Observable } from 'rxjs';
 import { store } from '../utilities/redux/store';
+import { tap } from 'rxjs/operators';
 
 export interface ChartData {
-  usd : ChartModel[],
-  eur : ChartModel[],
-  ils : ChartModel[],
+  usd : ChartDotModel[],
+  eur : ChartDotModel[],
+  ils : ChartDotModel[], 
 }
 
 @Injectable({
@@ -19,7 +20,7 @@ export interface ChartData {
 })
 export class ChartService {
 
-  public url: string = environment.server + '/api/coins'
+  public url: string = environment.server + '/api/coins/chart'
 
   constructor(
     private http: HttpClient,
@@ -31,7 +32,11 @@ export class ChartService {
  
   public getChartData(): Observable<ChartData> {
     const ids = store.getState().coins.selectedCoins
-    return this.http.post<ChartData>(this.url + "/chart", { ids }, { reportProgress: true })
+    return this.http.post<ChartData>(this.url, { ids }, { reportProgress: true }).pipe(
+      tap((data : ChartData) => {
+        
+      })
+    )
 
   }
 }

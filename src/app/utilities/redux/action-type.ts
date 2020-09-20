@@ -1,17 +1,19 @@
 export enum ActionType {
 
-  Mobile,
-
+  //  COINS ACTIONS
+  
   GetPageCoins,
   GetCoinData,
   GetChartData,
-
+  
   AddCoin,
   AddPageCoins,
-
+  
   DeleteCoin,
   DeleteAllCoins,
+  
+  //  CHART ACTIONS
 
-  UpdateLoader
+  GetChartDots
 
 } 
