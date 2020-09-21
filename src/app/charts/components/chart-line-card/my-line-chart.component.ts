@@ -1,9 +1,8 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import {  Label } from 'ng2-charts';
 import { ChartData, ChartService } from 'src/app/services/chart.service';
 import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
-import { store } from 'src/app/utilities/redux/store';
 
 @Component({
   selector: 'app-chart-line-card',
@@ -15,7 +14,6 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
 
   @Input() selectedCoins: string[] = []
 
-
   // CHART PARAMS
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
@@ -23,11 +21,11 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
   public lineChartOptions: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
-    scales: { //you're missing this
+    scales: { 
       yAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Coin Currency $'
+          labelString: 'Current Price $'
         }
       }]
     }
@@ -49,13 +47,13 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   ngAfterViewInit(): void {
-    this.clearInterval = setInterval(() => {
-      this.getChartData()
-    }, 2000)
+    // this.clearInterval = setInterval(() => {
+    //   this.getChartData()
+    // }, 2000)
   }
 
   ngOnDestroy(): void {
-    clearInterval(this.clearInterval)
+    // clearInterval(this.clearInterval)
   }
 
 

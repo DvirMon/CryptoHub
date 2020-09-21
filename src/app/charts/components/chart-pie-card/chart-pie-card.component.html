@@ -1,12 +1,20 @@
-<div >
-  <div *ngIf="pieChartLabels && pieChartData.length > 0">
-    <canvas baseChart
-    [data]="pieChartData"
-    [labels]="pieChartLabels"
-    [chartType]="pieChartType"
-    [options]="pieChartOptions"
-    [plugins]="pieChartPlugins"
-    [legend]="pieChartLegend">
-  </canvas>
-</div>
+<div>
+  <mat-grid-list [cols]="cols  |async" rowHeight="5vh">
+    <mat-grid-tile colspan="1">
+    </mat-grid-tile>
+    <mat-grid-tile rowspan="6">
+      <canvas #pieChart baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+        [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend"
+        (chartClick)="handlePieSection($event)">
+      </canvas>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      {{label | titlecase}}
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1">
+      {{currency | currency}}
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>

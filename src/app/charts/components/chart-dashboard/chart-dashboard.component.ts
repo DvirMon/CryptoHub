@@ -32,7 +32,6 @@ export class ChartDashboardComponent implements OnInit {
       if (matches) {
         return this.cardsMobileGrid
       }
-
       return this.cardsWebGrid
     })
   );
@@ -44,11 +43,12 @@ export class ChartDashboardComponent implements OnInit {
     { title: 'Card 1', type: 'chart-line', cols: 1, rows: 1 },
     { title: 'Card 2', cols: 1, rows: 1 },
     { title: 'Card 3', cols: 1, rows: 1 },
+    { title: 'Card 4', type: 'chart', cols: 1, rows: 1 },
   ];
 
   private cardsWebGrid: CardGridModel[] = [
     { title: 'Real-Time Coins Currency Data', type: 'chart-line', cols: 2, rows: 2 },
-    { title: 'Coin Currencies', type: 'chart-bar', cols: 1, rows: 1 },
+    { title: 'Selected Coins Currencies', type: 'chart-bar', cols: 1, rows: 1 },
     { title: 'Coins Value By Currency', type: 'chart-pie', cols: 1, rows: 1 },
     { title: 'Card 4', type: 'chart', cols: 3, rows: 1 },
   ];

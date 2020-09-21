@@ -23,23 +23,23 @@ import { ErrorsService } from '../utilities/interceptors/errors.service';
 // MODELS
 import { CoinModel } from '../utilities/models/coin.model';
 import { CurrencyModel } from '../utilities/models/currency.model';
-
-// EXTERNAL MODULES
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { VirtualScrollerModule } from 'ngx-virtual-scroller';
-
 import { DialogModule } from '../dialog/dialog.module';
-import { TextSizeDirective } from '../utilities/directives/text-size.directive';
 import { ChartDotModel } from '../utilities/models/chart-dot.model';
 import { CardGridModel } from '../utilities/models/card-grid.mode';
 
+// EXTERNAL MODULES
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 
+
+import { TextSizeDirective } from '../utilities/directives/text-size.directive';
+import { TruncatePipe } from '../utilities/pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    TextSizeDirective
+    TextSizeDirective,
+    TruncatePipe
   ],
   imports: [ 
     CommonModule,
@@ -89,7 +89,8 @@ import { CardGridModel } from '../utilities/models/card-grid.mode';
     VirtualScrollerModule,
     
     DashboardComponent,
-    TextSizeDirective
+    TextSizeDirective,
+    TruncatePipe
   ]
   })
 export class SharedModule { }

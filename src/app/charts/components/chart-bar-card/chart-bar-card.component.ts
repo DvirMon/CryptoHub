@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
 
 @Component({
   selector: 'app-chart-bar-card',
@@ -8,6 +9,11 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./chart-bar-card.component.scss']
 })
 export class ChartBarCardComponent implements OnInit {
+
+  
+  @Input() data: ChartDotModel[]
+  // @Input() barChartLabels: Label[] = [];
+
 
   public barChartOptions: ChartOptions = {
     responsive: true,

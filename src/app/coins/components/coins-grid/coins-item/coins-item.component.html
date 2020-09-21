@@ -28,7 +28,7 @@
   <!-- line -->
   <mat-grid-tile *ngIf="coin && !loader" rowspan="3" colspan="3"
     [ngClass]="{'text-coin' : coin.id.length < 30, 'text-length' : coin.id.length > 30}">
-    {{coin.id}}
+    {{coin.id | truncate:[30, '...']}}
   </mat-grid-tile>
 
   <mat-grid-tile *ngIf="loader" rowspan="3" colspan="3" class="skeleton-text-tile">
