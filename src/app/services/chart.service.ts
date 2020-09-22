@@ -13,7 +13,8 @@ import { CoinModel } from '../utilities/models/coin.model';
 export interface ChartData {
   usd : ChartDotModel[],
   eur : ChartDotModel[],
-  ils : ChartDotModel[], 
+  ils : ChartDotModel[],
+  currencies : string[] 
 }
 
 @Injectable({

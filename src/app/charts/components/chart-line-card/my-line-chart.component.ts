@@ -14,6 +14,7 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
 
 
   @Input() selectedCoins: CoinModel[] = []
+  @Input() currentCurrency: string = "";
 
   // CHART PARAMS
   public lineChartData: ChartDataSets[] = [];
@@ -26,7 +27,7 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
       yAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Current Price $'
+          labelString: 'Current Price'
         }
       }]
     }
@@ -45,17 +46,16 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
   ngOnInit() {
     this.setStartChartData()
     this.getChartData()
-    console.log(this.selectedCoins)
   }
 
   ngAfterViewInit(): void {
-    // this.clearInterval = setInterval(() => {
-    //   this.getChartData()
-    // }, 2000)
+    this.clearInterval = setInterval(() => {
+      this.getChartData()
+    }, 2000)
   }
 
   ngOnDestroy(): void {
-    // clearInterval(this.clearInterval)
+    clearInterval(this.clearInterval)
   }
 
 
@@ -78,8 +78,8 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
 
   private getChartData() {
     this.chartService.getChartData().subscribe(
-      (serverData: ChartData) => {
-        this.data = serverData.usd
+      (chartData: ChartData) => {
+        this.data = chartData[this.currentCurrency.toLocaleLowerCase()]
         this.updateChartDots()
         this.formatChartDots()
 

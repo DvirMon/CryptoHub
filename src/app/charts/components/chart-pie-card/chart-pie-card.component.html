@@ -1,20 +1,22 @@
 <div>
   <mat-grid-list [cols]="cols  |async" rowHeight="5vh">
-    <mat-grid-tile colspan="1">
+    <mat-grid-tile rowspan="6">
+      <mat-grid-list cols="2" rowHeight="5vh">
+        <div *ngFor="let dot of data">
+          <mat-grid-tile>
+            {{dot.label | titlecase}}
+          </mat-grid-tile>
+          <mat-grid-tile>
+            {{dot.data | currency : currentCurrency  }}
+          </mat-grid-tile>
+        </div>
+      </mat-grid-list>
     </mat-grid-tile>
     <mat-grid-tile rowspan="6">
       <canvas #pieChart baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
         [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend"
         (chartClick)="handlePieSection($event)">
       </canvas>
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-      {{label | titlecase}}
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-      {{currency | currency}}
     </mat-grid-tile>
   </mat-grid-list>
 </div>

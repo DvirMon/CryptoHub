@@ -4,25 +4,30 @@
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            {{card.title | titlecase}}
+            {{card.title | titlecase}} in {{chartCurrencies[card.type]}}
             <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
+              <button (click)="changeCurrency(currency, card.type)" mat-menu-item *ngFor="let currency of currencies">
+                {{currency | uppercase}}
+              </button>
             </mat-menu>
           </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content" *ngIf="serverData.length > 0">
-          <div *ngIf="card.type === 'chart-line'">
-            <app-chart-line-card [selectedCoins]="selectedCoins"></app-chart-line-card>
+        <mat-card-content class="dashboard-card-content" *ngIf="data.length > 0">
+          <div *ngIf="card.type === 'line'">
+            <app-chart-line-card  
+            [selectedCoins]="selectedCoins" 
+            [currentCurrency]="chartCurrencies.line"
+            ></app-chart-line-card>
           </div>
-          <div *ngIf="card.type === 'chart-bar'">
+          <div *ngIf="card.type === 'bar'">
             <app-chart-bar-card></app-chart-bar-card>
           </div>
-          <div *ngIf="card.type === 'chart-pie'">
-            <app-chart-pie-card [data]="serverData" [selectedCoins]="selectedCoins"></app-chart-pie-card>
+          <div *ngIf="card.type === 'pie'">
+            <app-chart-pie-card [data]="data" [selectedCoins]="selectedCoins" [currentCurrency]="chartCurrencies.pie">
+            </app-chart-pie-card>
           </div>
         </mat-card-content>
       </mat-card>

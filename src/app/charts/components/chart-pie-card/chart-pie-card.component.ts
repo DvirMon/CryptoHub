@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ChartOptions, ChartPoint, ChartType } from 'chart.js';
+import { ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective, Label, SingleDataSet } from 'ng2-charts';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -20,6 +20,7 @@ export class ChartPieCardComponent implements OnInit {
 
   @Input() data: ChartDotModel[]
   @Input() selectedCoins: CoinModel[] = [];
+  @Input() currentCurrency: string
 
 
   public cols: Observable<number> = this.formService.isHandset().pipe(
@@ -55,7 +56,6 @@ export class ChartPieCardComponent implements OnInit {
   ngOnInit() {
 
     this.handlePieChartData()
-    this.handlePieChartLabels()
     this.setStartData()
 
   }
@@ -64,14 +64,10 @@ export class ChartPieCardComponent implements OnInit {
   private handlePieChartData() {
     this.data.map(dot => {
       this.pieChartData.push(dot.data)
+      this.pieChartLabels.push(dot.label)
     })
   }
 
-  private handlePieChartLabels() {
-    this.selectedCoins.map(coin => {
-      this.pieChartLabels.push(coin.id)
-    })
-  }
 
   // LOGIC SECTION
   public handlePieSection(event?) {

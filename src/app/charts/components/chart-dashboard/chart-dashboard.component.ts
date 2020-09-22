@@ -17,6 +17,11 @@ import { CoinModel } from 'src/app/utilities/models/coin.model';
 
 export class ChartDashboardComponent implements OnInit {
 
+  public chartCurrencies = {
+    line : "USD",
+    pie : "USD",
+  }
+
 
   public cols: Observable<number> = this.formService.isHandset().pipe(
     map(({ matches }) => {
@@ -37,20 +42,24 @@ export class ChartDashboardComponent implements OnInit {
     })
   );
 
-  public serverData: ChartDotModel[] = []
+  public data: ChartDotModel[] = []
+  public currencies: string[] = []
+  public currentCurrency: string
   public selectedCoins: CoinModel[] = []
 
+  private chartData: ChartData;
+
   private cardsMobileGrid: CardGridModel[] = [
-    { title: 'Card 1', type: 'chart-line', cols: 1, rows: 1 },
+    { title: 'Card 1', type: 'line', cols: 1, rows: 1 },
     { title: 'Card 2', cols: 1, rows: 1 },
     { title: 'Card 3', cols: 1, rows: 1 },
     { title: 'Card 4', type: 'chart', cols: 1, rows: 1 },
   ];
 
   private cardsWebGrid: CardGridModel[] = [
-    { title: 'Real-Time Coins Currency Data', type: 'chart-line', cols: 2, rows: 2 },
-    { title: 'Selected Coins Currencies', type: 'chart-bar', cols: 1, rows: 1 },
-    { title: 'Coins Value By Currency', type: 'chart-pie', cols: 1, rows: 1 },
+    { title: 'Real-Time Coins Currency Data', type: 'line', cols: 2, rows: 2 },
+    { title: 'Selected Coins Currencies', type: 'bar', cols: 1, rows: 1 },
+    { title: 'Coins Market Value', type: 'pie', cols: 1, rows: 1 },
     { title: 'Card 4', type: 'chart', cols: 3, rows: 1 },
   ];
 
@@ -67,8 +76,10 @@ export class ChartDashboardComponent implements OnInit {
 
   private getChartData() {
     this.chartService.getChartData().subscribe(
-      (serverData: ChartData) => {
-        this.serverData = serverData.usd
+      (chartData: ChartData) => {
+        this.chartData = chartData
+        this.data = chartData.usd
+        this.currencies = chartData.currencies
 
       }
     )
@@ -81,6 +92,12 @@ export class ChartDashboardComponent implements OnInit {
       }
     )
     this.selectedCoins = store.getState().coins.selectedCoins
+  }
+
+  public changeCurrency(currency: string, type: string) {
+
+    this.data = this.chartData[currency]
+    this.chartCurrencies[type] = currency.toUpperCase()
   }
 
 
