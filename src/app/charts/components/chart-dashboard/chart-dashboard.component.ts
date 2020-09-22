@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { FormService } from 'src/app/services/form.service';
@@ -6,6 +6,7 @@ import { CardGridModel } from 'src/app/utilities/models/card-grid.mode';
 import { ChartData, ChartService } from 'src/app/services/chart.service';
 import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
 import { store } from 'src/app/utilities/redux/store';
+import { CoinModel } from 'src/app/utilities/models/coin.model';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class ChartDashboardComponent implements OnInit {
   );
 
   public serverData: ChartDotModel[] = []
-  public selectedCoins : string[] = []
+  public selectedCoins: CoinModel[] = []
 
   private cardsMobileGrid: CardGridModel[] = [
     { title: 'Card 1', type: 'chart-line', cols: 1, rows: 1 },
@@ -54,15 +55,15 @@ export class ChartDashboardComponent implements OnInit {
   ];
 
   constructor(
-    private chartService : ChartService,
+    private chartService: ChartService,
     private formService: FormService
   ) { }
 
   ngOnInit(): void {
-    this.getChartData() 
-    this.subscribeToStore()   
+    this.getChartData()
+    this.subscribeToStore()
   }
-  
+
 
   private getChartData() {
     this.chartService.getChartData().subscribe(
@@ -82,6 +83,9 @@ export class ChartDashboardComponent implements OnInit {
     this.selectedCoins = store.getState().coins.selectedCoins
   }
 
-  
+
+
+
+
 
 }

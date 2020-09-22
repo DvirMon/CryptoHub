@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
-import {  Label } from 'ng2-charts';
+import { Label } from 'ng2-charts';
 import { ChartData, ChartService } from 'src/app/services/chart.service';
 import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
+import { CoinModel } from 'src/app/utilities/models/coin.model';
 
 @Component({
   selector: 'app-chart-line-card',
@@ -12,7 +13,7 @@ import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
 export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
-  @Input() selectedCoins: string[] = []
+  @Input() selectedCoins: CoinModel[] = []
 
   // CHART PARAMS
   public lineChartData: ChartDataSets[] = [];
@@ -21,7 +22,7 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
   public lineChartOptions: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
-    scales: { 
+    scales: {
       yAxes: [{
         scaleLabel: {
           display: true,
@@ -44,6 +45,7 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
   ngOnInit() {
     this.setStartChartData()
     this.getChartData()
+    console.log(this.selectedCoins)
   }
 
   ngAfterViewInit(): void {
@@ -62,8 +64,8 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
   private setStartChartData() {
 
     this.lineChartData = this.selectedCoins.map(
-      (label: string) => {
-        return new ChartDotModel(label, [0])
+      (coin: CoinModel) => {
+        return new ChartDotModel(coin.id, [0])
       }
     )
 

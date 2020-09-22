@@ -16,7 +16,7 @@
 
   <!-- toggle -->
   <mat-grid-tile *ngIf="coin && !loader" rowspan="3" class="coin-toggle">
-    <mat-slide-toggle [checked]="checked" (change)="handleToggle($event)" color="primary">
+    <mat-slide-toggle #toggle [checked]="checked" (change)="handleToggle($event)" color="primary">
     </mat-slide-toggle>
   </mat-grid-tile>
 
@@ -34,9 +34,6 @@
   <mat-grid-tile *ngIf="loader" rowspan="3" colspan="3" class="skeleton-text-tile">
     <ngx-skeleton-loader class="skeleton-line" count="1" appearance="line"></ngx-skeleton-loader>
   </mat-grid-tile>
-
-  <span class="status">opened</span>
-
 
   <mat-grid-tile *ngIf="loader" rowspan="4" colspan="3" class="skeleton-expend-tile">
     <ngx-skeleton-loader count="1" appearance="line"></ngx-skeleton-loader>

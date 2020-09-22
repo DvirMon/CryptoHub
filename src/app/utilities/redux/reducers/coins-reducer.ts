@@ -1,3 +1,4 @@
+import { CoinModel } from '../../models/coin.model';
 import { Action } from '../action';
 import { ActionType } from '../action-type';
 import { CoinsAuthState } from '../app-state/coins-state';
@@ -31,8 +32,8 @@ export const coinsReducer = (oldAppState = new CoinsAuthState(), action: Action)
 
 }
 
-const deleteLogic = (selectedCoins: string[], id: string) => {
-  const indexToDelete = selectedCoins.findIndex(coinId => coinId === id)
+const deleteLogic = (selectedCoins: CoinModel[], id: string) => {
+  const indexToDelete = selectedCoins.findIndex(coin => coin.id === id)
   if (indexToDelete >= 0) {
     selectedCoins.splice(indexToDelete, 1)
   }

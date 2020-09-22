@@ -6,6 +6,7 @@ import { FormService } from './form.service';
 
 import { DialogComponent } from '../dialog/components/dialog/dialog.component';
 import { CoinsDialogComponent } from '../dialog/components/dialog-coins/coins-dialog.component';
+import { CoinModel } from '../utilities/models/coin.model';
 
 
 export interface DialogData {
@@ -14,8 +15,8 @@ export interface DialogData {
 }
 
 export interface CoinsDialogData {
-  coins: string[],
-  lastSelect: string
+  coins: CoinModel[],
+  lastSelect: CoinModel
 }
 
 export interface ErrorDialogData {

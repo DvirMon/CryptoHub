@@ -3,6 +3,6 @@
     Delete All Coins
   </button>
   <button mat-menu-item *ngFor="let coin of selectedCoins">
-    {{coin |titlecase}}
+    {{coin.symbol |uppercase}}
   </button>
 </div>

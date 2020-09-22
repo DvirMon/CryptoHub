@@ -22,7 +22,7 @@
             <app-chart-bar-card></app-chart-bar-card>
           </div>
           <div *ngIf="card.type === 'chart-pie'">
-            <app-chart-pie-card [data]="serverData" [pieChartLabels]="selectedCoins"></app-chart-pie-card>
+            <app-chart-pie-card [data]="serverData" [selectedCoins]="selectedCoins"></app-chart-pie-card>
           </div>
         </mat-card-content>
       </mat-card>

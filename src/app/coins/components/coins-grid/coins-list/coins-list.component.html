@@ -10,10 +10,7 @@
           'coin-data-complete' :(progress >= 19), 
           'mat-elevation-z2' : true}">
           <app-coins-item [loader]="loader" [coin]="coin"></app-coins-item>
-
-          <!-- <mat-grid-tile *ngIf="!loader" colspan="3" [rowspan]="panel.opened ? 14 : 4"> -->
-            <app-coins-expend-panel #panel [coin]="coin" [loader]="loader"></app-coins-expend-panel>
-          <!-- </mat-grid-tile> -->
+          <app-coins-expend-panel *ngIf="!loader" #panel [coin]="coin" [loader]="loader"></app-coins-expend-panel>
         </div>
       </div>
     </virtual-scroller>

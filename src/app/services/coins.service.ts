@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { CoinModel } from '../utilities/models/coin.model';
 import { CurrencyModel } from '../utilities/models/currency.model';
@@ -12,11 +11,12 @@ import { ActionType } from '../utilities/redux/action-type';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
 export class CoinsService {
 
-  public toggleSubject: Subject<{ coin: string, lastSelect: string }> = new Subject()
+  public toggleData: Subject<{ coin: CoinModel, lastSelect: CoinModel }> = new Subject()
+  public toggleState: Subject<CoinModel[]> = new Subject()
   public url: string = environment.server + '/api/coins'
 
 
@@ -52,19 +52,19 @@ export class CoinsService {
   }
 
   // GET - get currencies of coin by id - http://localhost:3000/api/coins/currency:id
-  
+
   public getCoinCurrency(id: string): Observable<CurrencyModel> {
-    
+
     return this.http.get<CurrencyModel>(this.url + "/currency/" + id, { reportProgress: true })
-    
+
   }
-  
+
 
 
   // STORE SECTION
 
-  public addSelectedCoin(coinId: string) {
-    this.formService.handleStore(ActionType.AddCoin, coinId)
+  public addSelectedCoin(coin: CoinModel) {
+    this.formService.handleStore(ActionType.AddCoin, coin)
   }
 
   public deleteSelectedCoin(coinId: string) {

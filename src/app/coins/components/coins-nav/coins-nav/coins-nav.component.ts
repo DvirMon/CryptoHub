@@ -12,14 +12,13 @@ import { Observable } from 'rxjs';
 })
 export class CoinsNavComponent implements OnInit {
 
-  @Input() drawer: MatSidenav
+  @Input() drawer: MatSidenav 
   public selectedCoins: string[] = []
   public isMobile: Observable<boolean> = this.formService.isMobile()
 
   public routers = [
     { label: "Home", route: "/coins/list", icon: "home" },
     { label: "Real-Time Charts", route: "/coins/charts", icon: "insert_chart" },
-    { label: "About Me", route: "/coins/info", icon: "info" },
   ]
 
   constructor(
@@ -31,7 +30,6 @@ export class CoinsNavComponent implements OnInit {
   }
 
   public toggleSearch() {
-
     this.formService.toggleSearch.next(false)
     
   }

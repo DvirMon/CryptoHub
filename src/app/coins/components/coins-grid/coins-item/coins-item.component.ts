@@ -1,4 +1,5 @@
-import {  Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 
 import { CoinsService } from 'src/app/services/coins.service';
@@ -15,29 +16,34 @@ import { store } from 'src/app/utilities/redux/store';
   templateUrl: './coins-item.component.html',
   styleUrls: ['./coins-item.component.scss']
 })
-export class CoinsItemComponent implements OnInit {
+export class CoinsItemComponent implements OnInit, AfterViewInit {
+
+  @ViewChild(MatSlideToggle) toggle: MatSlideToggle
 
   @Input() coin: CoinModel
   @Input() loader: boolean
 
-  private selectedCoins: string[] = []
   public checked: boolean
-  public expendLoader: boolean
+  public selected: boolean
 
+  private selectedCoins: CoinModel[] = []
 
   constructor(
     private coinsService: CoinsService,
     private dialogService: DialogService,
-    private loaderService : LoaderService
   ) { }
 
   ngOnInit(): void {
     if (this.coin !== undefined) {
       this.subscribeToStore()
-      this.subscribeToToggleSubject()
-      this.subscribeToLoaderSubject()
+      this.subscribeToToggleData()
+      this.subscribeToToggleState()
       this.handleCoinChecked()
     }
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
   // SUBSCRIPTION SECTION
@@ -49,30 +55,34 @@ export class CoinsItemComponent implements OnInit {
     this.selectedCoins = store.getState().coins.selectedCoins
   }
 
-  private subscribeToToggleSubject() {
+  private subscribeToToggleData() {
 
-    this.coinsService.toggleSubject.subscribe(
+    this.coinsService.toggleData.subscribe(
       (data) => {
 
-        if (this.coin.symbol === data.coin) {
+        if (this.coin.symbol === data.coin.symbol) {
           this.checked = false
-        }
-        if (this.coin.symbol === data.lastSelect) {
+          this.selected = false
+        } 
+        if (this.coin.symbol === data.lastSelect.symbol) {
           this.checked = true
+          this.selected = true
         }
       }
     )
   }
 
-  
-  private subscribeToLoaderSubject() {
+  private subscribeToToggleState() {
 
-    this.loaderService.expendLoader.subscribe(
-      (loader) => {
-        this.expendLoader = loader
+    this.coinsService.toggleState.subscribe(
+      (coins: CoinModel[]) => {
+        if (coins.length > 0) {
+          this.handleCoinSUnChecked(coins)
+        }
       }
     )
   }
+
 
 
 
@@ -80,25 +90,48 @@ export class CoinsItemComponent implements OnInit {
 
   public handleToggle(event) {
 
-    if (this.selectedCoins.length >= 5 && event.checked) {
-
+    if ((this.selectedCoins.length >= 5 && !this.selected)) {
       this.handleCoinsDialog()
       event.source.checked = false
-
-    } else {
+    } 
+    
+    else {
       event.checked
-        ? this.coinsService.addSelectedCoin(this.coin.id)
-        : this.coinsService.deleteSelectedCoin(this.coin.id)
+        ? this.handleSelectCoin()
+        : this.handleUnSelectCoin()
     }
   }
 
   // checked selected coins after refresh
 
   private handleCoinChecked() {
-    
-    this.checked = !!this.selectedCoins.find((coinId: string) => {
-      return coinId === this.coin.id
+
+    this.checked = !!this.selectedCoins.find((coin : CoinModel) => {
+      return coin.id === this.coin.id
     })
+
+    this.selected = this.checked
+
+  }
+
+  private handleCoinSUnChecked(selectedCoins: CoinModel[]) {
+
+    selectedCoins.find((coin: CoinModel) => {
+      if (coin.id === this.coin.id) {
+        this.toggle.checked = false
+        this.selected = false
+      }
+    })
+  }
+
+  private handleSelectCoin() {
+    this.coinsService.addSelectedCoin(this.coin)
+    this.selected = true
+
+  }
+  private handleUnSelectCoin() {
+    this.coinsService.deleteSelectedCoin(this.coin.id)
+    this.selected = false
 
   }
 
@@ -108,8 +141,7 @@ export class CoinsItemComponent implements OnInit {
 
   private handleCoinsDialog() {
 
-
-    const payload = { coins: [...this.selectedCoins], lastSelect: this.coin.symbol }
+    const payload = { coins: [...this.selectedCoins], lastSelect: this.coin }
     this.dialogService.handleCoinsDialog(payload)
   }
 

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FormService } from 'src/app/services/form.service';
 import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
+import { CoinModel } from 'src/app/utilities/models/coin.model';
 
 @Component({
   selector: 'app-chart-pie-card',
@@ -18,7 +19,7 @@ export class ChartPieCardComponent implements OnInit {
 
 
   @Input() data: ChartDotModel[]
-  @Input() pieChartLabels: Label[] = [];
+  @Input() selectedCoins: CoinModel[] = [];
 
 
   public cols: Observable<number> = this.formService.isHandset().pipe(
@@ -37,6 +38,7 @@ export class ChartPieCardComponent implements OnInit {
   }
 
   public pieChartData: SingleDataSet = [];
+  public pieChartLabels: Label[] = [];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [];
@@ -53,6 +55,7 @@ export class ChartPieCardComponent implements OnInit {
   ngOnInit() {
 
     this.handlePieChartData()
+    this.handlePieChartLabels()
     this.setStartData()
 
   }
@@ -61,6 +64,12 @@ export class ChartPieCardComponent implements OnInit {
   private handlePieChartData() {
     this.data.map(dot => {
       this.pieChartData.push(dot.data)
+    })
+  }
+
+  private handlePieChartLabels() {
+    this.selectedCoins.map(coin => {
+      this.pieChartLabels.push(coin.id)
     })
   }
 

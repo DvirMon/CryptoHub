@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CoinsService } from 'src/app/services/coins.service';
+import { CoinModel } from 'src/app/utilities/models/coin.model';
 import { store } from 'src/app/utilities/redux/store';
 
 @Component({
@@ -9,7 +10,7 @@ import { store } from 'src/app/utilities/redux/store';
 })
 export class CoinsMenuComponent implements OnInit {
 
-  public selectedCoins: string[] = []
+  public selectedCoins: CoinModel[] = []
 
   constructor(
     private coinsService: CoinsService
@@ -33,6 +34,7 @@ export class CoinsMenuComponent implements OnInit {
   // LOGIC SECTION
 
   public deleteCoins() {
+    this.coinsService.toggleState.next(this.selectedCoins)
     this.coinsService.deleteAllSelectedCoin()
   }
 
