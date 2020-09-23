@@ -59,10 +59,10 @@ export class ChartDashboardComponent implements OnInit {
   ];
 
   private cardsWebGrid: CardGridModel[] = [
-    { title: 'Coins Real-Time  Market Price', type: 'line', cols: 2, rows: 7 },
-    { title: 'Coins Currencies', type: 'bar', cols: 1, rows: 4 },
-    { title: 'Coins Market Value', type: 'pie', cols: 1, rows: 4 },
-    { title: 'Coin Market Price History', type: 'history', cols: 3, rows: 5 },
+    { title: 'Coins Real-Time  Market Price', type: 'line', cols: 2, rows: 5 },
+    { title: 'Coins Currencies', type: 'bar', cols: 1, rows: 3 },
+    { title: 'Coins Market Value', type: 'pie', cols: 1, rows: 3 },
+    { title: 'Coin Market Price History', type: 'history', cols: 3, rows: 3 },
   ];
 
   constructor(

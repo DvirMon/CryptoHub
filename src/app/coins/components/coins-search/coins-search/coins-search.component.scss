@@ -16,19 +16,10 @@ div {
   @include search-input(0);
 }
 
-// from 840px down
-@media (min-width: size(md)) {
-  .show {
-    @include search-input(90%);
-  }
+.show {
+  @include search-input(90%);
 }
 
-// from 560px down
-@media (max-width: size(sm)) {
-  .show {
-    @include search-input(80%);
-  }
-}
 .search-form {
   width: 100%;
   font-size: 16px;

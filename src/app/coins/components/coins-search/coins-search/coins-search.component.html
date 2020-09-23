@@ -1,6 +1,6 @@
 <div >
   <mat-form-field [ngClass]="{'search-input' : true, 'show' : toggleSearch}">
-      <mat-label>Please Enter Query</mat-label>
+      <mat-label>Please Enter Coin Symbol</mat-label>
       <input type="text" style="caret-color: white" placeholder="Search Coins..." matInput #searchInput
         [formControl]="searchControl">
       <span *ngIf="(searchEntries |async).length > 0 && toggleSearch" class="matsuffix" matSuffix>

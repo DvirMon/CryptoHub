@@ -1,3 +1,8 @@
+@mixin select-coins($width) {
+  width: $width;
+  transition: width 1s;
+}
+
 mat-nav-list {
   display: flex;
 }
@@ -8,7 +13,13 @@ mat-icon {
   font-size: 16px;
 }
 
+div.selected-coins {
+  @include select-coins(0px);
+}
 
+div.show {
+  @include select-coins(300px);
+}
 
 @media (min-width: size(md)) {
   mat-toolbar {

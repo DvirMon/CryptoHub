@@ -14,6 +14,8 @@ export class ChartLineHistoryComponent implements OnInit {
 
   @Input() coinId: string
 
+  private stepSize: number = 0
+
   public lineChartData: ChartDataSets[] = [];
 
   public lineChartLabels: Label[] = [];
@@ -21,17 +23,17 @@ export class ChartLineHistoryComponent implements OnInit {
     responsive: true,
     scales: {
       yAxes: [{
-        offset : true,
+        offset: true,
         ticks: {
           beginAtZero: true,
-          stepSize: 4000,
+          stepSize: this.stepSize,
           min: 0,
         }
       }],
-      
+
       xAxes: [{
         ticks: {
-          maxTicksLimit : 3
+          maxTicksLimit: 12
           // display: false,
         }
       }]
@@ -60,10 +62,29 @@ export class ChartLineHistoryComponent implements OnInit {
           this.coinId, market_history.values
         ))
 
+        this.lineChartOptions.scales.yAxes[0].ticks.stepSize = this.handleStepSize(market_history.values)
+
         this.lineChartLabels = market_history.dates
 
       }
     )
+  }
+
+  private handleStepSize(values): number {
+
+    console.log((Math.ceil(Math.max(...values)) / 5)
+    )
+    const stepSize = (Math.ceil(Math.max(...values)) / 5)
+
+    if (stepSize > 100) {
+
+      return Math.ceil(stepSize / 100) * 100
+    }
+
+
+
+    return stepSize
+
   }
 
 }
