@@ -9,12 +9,17 @@ import { Observable } from 'rxjs';
 import { store } from '../utilities/redux/store';
 import { tap } from 'rxjs/operators';
 import { CoinModel } from '../utilities/models/coin.model';
+import { MarketHistoryModel } from '../utilities/models/market-history.model';
 
 export interface ChartData {
-  usd : ChartDotModel[],
-  eur : ChartDotModel[],
-  ils : ChartDotModel[],
-  currencies : string[] 
+  usd: ChartDotModel[],
+  eur: ChartDotModel[],
+  ils: ChartDotModel[],
+  currencies: string[]
+}
+
+export interface MarketHistoryData {
+  market_history: MarketHistoryModel[]
 }
 
 @Injectable({
@@ -22,7 +27,7 @@ export interface ChartData {
 })
 export class ChartService {
 
-  public url: string = environment.server + '/api/coins/chart'
+  public url: string = environment.server + '/api/coins'
 
   constructor(
     private http: HttpClient,
@@ -31,16 +36,21 @@ export class ChartService {
 
 
   // POST - get currencies for chart - http://localhost:3000/api/coins/chart
- 
+  
   public getChartData(): Observable<ChartData> {
-    const ids = store.getState().coins.selectedCoins.map((coin : CoinModel) => {
+
+    const ids = store.getState().coins.selectedCoins.map((coin: CoinModel) => {
       return coin.id
     })
-    return this.http.post<ChartData>(this.url, { ids }, { reportProgress: true }).pipe(
-      tap((data : ChartData) => {
-        
-      })
-    )
+
+    return this.http.post<ChartData>(this.url + "/chart", { ids }, { reportProgress: true })
+    
+  }
+  
+  // GET - get coin market price history - http://localhost:3000/api/coins/chart
+
+  public getCoinMarketHistory(coinId: string): Observable<MarketHistoryModel> {
+    return this.http.get<MarketHistoryModel>(this.url + "/market/history/" + coinId, { reportProgress: true })
 
   }
 }

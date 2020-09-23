@@ -4,6 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 import { DialogService } from 'src/app/services/dialog.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class ErrorsService {
   constructor(
     private dialogService: DialogService,
     private ngZone: NgZone,
+    private router : Router
   ) { 
 
   } 
@@ -33,8 +35,12 @@ export class ErrorsService {
 
       console.error(error);
 
-      if (error.status == 401) {
+      if (error.status === 401) {
         return
+      }
+
+      if (error.status === 0) {
+        this.router.navigateByUrl("welcome")
       }
       
       spinnerRef.close()

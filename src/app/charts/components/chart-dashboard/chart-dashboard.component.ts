@@ -18,9 +18,11 @@ import { CoinModel } from 'src/app/utilities/models/coin.model';
 export class ChartDashboardComponent implements OnInit {
 
   public chartCurrencies = {
-    line : "USD",
-    pie : "USD",
+    line: "USD",
+    pie: "USD",
   }
+
+  public coinId : string
 
 
   public cols: Observable<number> = this.formService.isHandset().pipe(
@@ -53,14 +55,14 @@ export class ChartDashboardComponent implements OnInit {
     { title: 'Card 1', type: 'line', cols: 1, rows: 1 },
     { title: 'Card 2', cols: 1, rows: 1 },
     { title: 'Card 3', cols: 1, rows: 1 },
-    { title: 'Card 4', type: 'chart', cols: 1, rows: 1 },
+    { title: 'Card 4', type: 'history', cols: 1, rows: 1 },
   ];
 
   private cardsWebGrid: CardGridModel[] = [
-    { title: 'Real-Time Coins Currency Data', type: 'line', cols: 2, rows: 2 },
-    { title: 'Selected Coins Currencies', type: 'bar', cols: 1, rows: 1 },
-    { title: 'Coins Market Value', type: 'pie', cols: 1, rows: 1 },
-    { title: 'Card 4', type: 'chart', cols: 3, rows: 1 },
+    { title: 'Coins Real-Time  Market Price', type: 'line', cols: 2, rows: 7 },
+    { title: 'Coins Currencies', type: 'bar', cols: 1, rows: 4 },
+    { title: 'Coins Market Value', type: 'pie', cols: 1, rows: 4 },
+    { title: 'Coin Market Price History', type: 'history', cols: 3, rows: 5 },
   ];
 
   constructor(
@@ -69,8 +71,9 @@ export class ChartDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getChartData()
     this.subscribeToStore()
+    this.getChartData()
+    this.coinId = this.selectedCoins[0].id
   }
 
 
@@ -98,6 +101,10 @@ export class ChartDashboardComponent implements OnInit {
 
     this.data = this.chartData[currency]
     this.chartCurrencies[type] = currency.toUpperCase()
+  }
+
+  public changeCoin(coinId: string) {
+
   }
 
 

@@ -1,26 +1,29 @@
 <div class="grid-container">
-  <mat-grid-list [cols]="cols | async" rowHeight="44vh">
+  <mat-grid-list [cols]="cols | async" rowHeight="11vh">
     <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
             {{card.title | titlecase}} in {{chartCurrencies[card.type]}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu">
-              <mat-icon>more_vert</mat-icon>
+            <button *ngIf="card.type !== 'history'" mat-icon-button class="more-button" [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon> 
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
               <button (click)="changeCurrency(currency, card.type)" mat-menu-item *ngFor="let currency of currencies">
                 {{currency | uppercase}}
-              </button>
+              </button> 
             </mat-menu>
+            <!-- <mat-menu *ngIf="card.type === 'history'" #menu="matMenu" xPosition="before">
+              <button (click)="changeCoin(coinId)" mat-menu-item *ngFor="let coinId of selectedCoins">
+                {{coinId | uppercase}}
+              </button>
+            </mat-menu> -->
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content" *ngIf="data.length > 0">
           <div *ngIf="card.type === 'line'">
-            <app-chart-line-card  
-            [selectedCoins]="selectedCoins" 
-            [currentCurrency]="chartCurrencies.line"
-            ></app-chart-line-card>
+            <app-chart-line-card [selectedCoins]="selectedCoins" [currentCurrency]="chartCurrencies.line">
+            </app-chart-line-card>
           </div>
           <div *ngIf="card.type === 'bar'">
             <app-chart-bar-card></app-chart-bar-card>
@@ -28,6 +31,9 @@
           <div *ngIf="card.type === 'pie'">
             <app-chart-pie-card [data]="data" [selectedCoins]="selectedCoins" [currentCurrency]="chartCurrencies.pie">
             </app-chart-pie-card>
+          </div>
+          <div *ngIf="card.type === 'history' && coinId">
+            <app-chart-line-history [coinId]="coinId"></app-chart-line-history>
           </div>
         </mat-card-content>
       </mat-card>
