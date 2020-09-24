@@ -17,7 +17,7 @@ export class CoinsDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private dialogRef : MatDialogRef<CoinsDialogComponent>,
+    public dialogRef : MatDialogRef<CoinsDialogComponent>,
     private coinsService: CoinsService
 
   ) {
@@ -37,7 +37,7 @@ export class CoinsDialogComponent implements OnInit {
     this.coinsService.deleteSelectedCoin(coin.id)
     this.coinsService.addSelectedCoin(this.payload.lastSelect)
     this.coinsService.toggleData.next({ coin, lastSelect: this.payload.lastSelect })
-    this.dialogRef.close()
+    // this.dialogRef.close()
 
   }
 

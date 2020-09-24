@@ -1,12 +1,18 @@
 import { Injectable, Inject } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 
+// IMPORTS MATERIAL
+import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+// IMPORTS SERVICES
 import { FormService } from './form.service';
 
-import { DialogComponent } from '../dialog/components/dialog/dialog.component';
-import { CoinsDialogComponent } from '../dialog/components/dialog-coins/coins-dialog.component';
+// IMPORTS MODELS
 import { CoinModel } from '../utilities/models/coin.model';
+
+// IMPORTS COMPONENTS
+import { DialogComponent } from '../dialog/components/dialog/dialog.component';
+import { CoinsDialogComponent } from '../coins/components/coins-dialog/coins-dialog.component';
 
 
 export interface DialogData {

@@ -1,6 +1,6 @@
 @mixin select-coins($width) {
   width: $width;
-  transition: width 1s;
+  transition: width 0.5s;
 }
 
 mat-nav-list {
@@ -11,14 +11,6 @@ mat-nav-list {
 mat-icon {
   color: white;
   font-size: 16px;
-}
-
-div.selected-coins {
-  @include select-coins(0px);
-}
-
-div.show {
-  @include select-coins(300px);
 }
 
 @media (min-width: size(md)) {
@@ -49,4 +41,18 @@ div.show {
       font-size: 20px;
     }
   }
+}
+
+.example-container {
+  background-color: transparent;
+  width: 500px;
+  height: 60px;
+}
+
+.example-sidenav {
+  color: white;
+  background-color: transparent;
+  width: 500px;
+  height: 60px;
+  padding-top: 1%;
 }

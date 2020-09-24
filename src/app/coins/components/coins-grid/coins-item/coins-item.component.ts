@@ -60,11 +60,12 @@ export class CoinsItemComponent implements OnInit, AfterViewInit {
     this.coinsService.toggleData.subscribe(
       (data) => {
 
-        if (this.coin.symbol === data.coin.symbol) {
+        if (data.coin && this.coin.symbol === data.coin.symbol) {
           this.checked = false
           this.selected = false
-        } 
-        if (this.coin.symbol === data.lastSelect.symbol) {
+        }
+        
+        if (data.lastSelect && this.coin.symbol === data.lastSelect.symbol) {
           this.checked = true
           this.selected = true
         }
@@ -93,8 +94,8 @@ export class CoinsItemComponent implements OnInit, AfterViewInit {
     if ((this.selectedCoins.length >= 5 && !this.selected)) {
       this.handleCoinsDialog()
       event.source.checked = false
-    } 
-    
+    }
+
     else {
       event.checked
         ? this.handleSelectCoin()
@@ -106,7 +107,7 @@ export class CoinsItemComponent implements OnInit, AfterViewInit {
 
   private handleCoinChecked() {
 
-    this.checked = !!this.selectedCoins.find((coin : CoinModel) => {
+    this.checked = !!this.selectedCoins.find((coin: CoinModel) => {
       return coin.id === this.coin.id
     })
 

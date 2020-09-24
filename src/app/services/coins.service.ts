@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CoinsService {
 
-  public toggleData: Subject<{ coin: CoinModel, lastSelect: CoinModel }> = new Subject()
+  public toggleData: Subject<{ coin?: CoinModel, lastSelect?: CoinModel }> = new Subject()
   public toggleState: Subject<CoinModel[]> = new Subject()
   public url: string = environment.server + '/api/coins'
 

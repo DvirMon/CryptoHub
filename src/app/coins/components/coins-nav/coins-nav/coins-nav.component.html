@@ -25,6 +25,7 @@
 <!-- WEB SECTION -->
 <ng-template #elseBlock>
   <mat-nav-list>
+    
     <mat-list-item disableRipple="true" routerLink="{{route.route}}" *ngFor="let route of routers">
       <button mat-button type="button">
         <mat-icon mat-list-icon>{{route.icon}}</mat-icon>
@@ -33,16 +34,19 @@
     </mat-list-item>
 
     <mat-list-item disableRipple="true">
-      <button mat-button type="button" (click)="toggleSelectedCoins()">
+
+      <button mat-button type="button" (click)="selectDrawer.toggle()">
         <mat-icon mat-list-icon>monetization_on</mat-icon>
         <div mat-line>Selected Coins</div>
       </button>
-      <div [ngClass]="{'selected-coins' : true, 'show' : toggleSelect}">
-        <button mat-button *ngFor="let coin of selectedCoins">{{coin.symbol}}</button>
-      </div>
-      <!-- <mat-menu #menuMobile="matMenu" xPosition="after">
-        <app-coins-menu></app-coins-menu>
-      </mat-menu> -->
+
+      <mat-drawer-container class="example-container" autosize>
+        <mat-drawer #selectDrawer class="example-sidenav" mode="side">
+          <app-coins-toggle [dialog]="false" [coins]="selectedCoins">
+          </app-coins-toggle>
+        </mat-drawer>
+
+      </mat-drawer-container>
     </mat-list-item>
   </mat-nav-list>
 </ng-template>
