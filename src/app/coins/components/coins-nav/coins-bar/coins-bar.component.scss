@@ -57,3 +57,22 @@ app-coins-nav-search {
     opacity: 0;
   }
 }
+
+
+// from 560px down
+
+@media (max-width: size(sm)) {
+
+  .mat-toolbar.mat-primary {
+    height: 10vh;
+  }
+  
+  app-coins-nav {
+    height: 100%;
+    width: 100%;
+  }
+  
+}
+
+
+

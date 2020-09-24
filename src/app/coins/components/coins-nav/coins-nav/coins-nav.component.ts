@@ -35,11 +35,6 @@ export class CoinsNavComponent implements OnInit {
   }
 
 
-  // public toggleSearch() {
-  //   this.formService.toggleSearch.next(false)
-
-  // }
-
   private subscribeToStore() {
     store.subscribe(
       () => {

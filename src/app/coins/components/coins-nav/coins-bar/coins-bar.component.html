@@ -1,15 +1,15 @@
 <mat-sidenav-container class="sidenav-container">
 
-  <mat-sidenav #drawer [ngClass]="{'sidenav' : true}" fixedInViewport
-    [attr.role]="'navigation'" [mode]="'over'" [opened]="false">
+  <mat-sidenav #drawer [ngClass]="{'sidenav' : true}" fixedInViewport [attr.role]="'navigation'" [mode]="'over'"
+    [opened]="false">
     <app-coins-mobile-search [drawer]="drawer"></app-coins-mobile-search>
   </mat-sidenav>
-  
+
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <app-coins-nav [drawer]="drawer"></app-coins-nav>
       <span class="spacer"></span>
-      <app-coins-search></app-coins-search>
+      <app-coins-search *ngIf="!(isMobile | async)"></app-coins-search>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

@@ -52,10 +52,10 @@ export class ChartDashboardComponent implements OnInit {
   private chartData: ChartData;
 
   private cardsMobileGrid: CardGridModel[] = [
-    { title: 'Card 1', type: 'line', cols: 1, rows: 1 },
-    { title: 'Card 2', cols: 1, rows: 1 },
-    { title: 'Card 3', cols: 1, rows: 1 },
-    { title: 'Card 4', type: 'history', cols: 1, rows: 1 },
+    { title: 'Card 1', type: 'line', cols: 1, rows: 6 },
+    { title: 'Card 2', cols: 1, rows: 6 },
+    { title: 'Card 3', cols: 1, rows: 6 },
+    { title: 'Card 4', type: 'history', cols: 1, rows: 6 },
   ];
 
   private cardsWebGrid: CardGridModel[] = [
