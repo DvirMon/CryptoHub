@@ -13,9 +13,10 @@ import { Observable, of } from 'rxjs';
   templateUrl: './coins-mobile-search.component.html',
   styleUrls: ['./coins-mobile-search.component.scss']
 })
-export class CoinsMobileSearchComponent implements OnInit {
+export class CoinsSearchMobileComponent implements OnInit {
 
   @Input() drawer: MatSidenav
+  
   @ViewChild('searchInput') searchInput: ElementRef;
 
   public searchControl = new FormControl();

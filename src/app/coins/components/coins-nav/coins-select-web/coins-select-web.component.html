@@ -1,0 +1,12 @@
+<mat-list-item disableRipple="true">
+  <button mat-icon-button type="button" (click)="handleToggle()">
+    <mat-icon [matBadge]="selectedCoins.length > 0 ? selectedCoins.length : ''" matBadgeColor="warn" mat-list-icon>
+      monetization_on</mat-icon>
+  </button>
+  <mat-drawer-container class="drawer-container" autosize>
+    <mat-drawer #drawer class="drawer-sidenav" mode="side">
+      <app-coins-toggle [dialog]="false" [coins]="selectedCoins" (deleteAll)="handleEmitDeleteAll($event)"
+        (delete)="handleEmitDelete($event)"></app-coins-toggle>
+    </mat-drawer>
+  </mat-drawer-container>
+</mat-list-item>

@@ -89,7 +89,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
 
   private handleProgressSubject(request: HttpRequest<any>, loader: boolean, progress: number) {
-
+ 
     this.url === request.url
       ? this.loaderService.gridLoader.next({ loader, progress })
       : this.loaderService.expendLoader.next(loader)

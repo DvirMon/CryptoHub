@@ -62,7 +62,6 @@ export class CoinsNavComponent implements OnInit {
     this.selectedCoins = [...store.getState().coins.selectedCoins]
   }
 
-
   // EVENTS SECTION
 
   public onClick() {

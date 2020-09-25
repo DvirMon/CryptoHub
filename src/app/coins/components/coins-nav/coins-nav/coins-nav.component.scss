@@ -1,64 +1,18 @@
 @import "~src/styles/styles";
 
-@mixin select-coins($width) {
-  width: $width;
-  transition: width 0.5s;
-}
-
 mat-nav-list {
   display: flex;
+
+  mat-list-item {
+    width: 55px;
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
 }
 
-.mat-list-base .mat-list-item .mat-line,
-mat-icon {
+ mat-icon {
   color: white;
   font-size: 16px;
-}
-
-@media (min-width: size(md)) {
-  mat-toolbar {
-    mat-nav-list {
-      color: white;
-
-      mat-list-item {
-        color: white;
-        font-size: 20px;
-
-        &:hover {
-          background-color: transparent;
-        }
-      }
-    }
-  }
-}
-
-// from 560px down
-
-@media (max-width: size(sm)) {
-  mat-nav-list {
-    color: black;
-
-    mat-list-item {
-      color: black;
-      font-size: 20px;
-    }
-
-    &.search-btn {
-      color: red;
-    }
-  }
-}
-
-.example-container {
-  background-color: transparent;
-  width: 500px;
-  height: 60px;
-}
-
-.example-sidenav {
-  color: white;
-  background-color: transparent;
-  width: 500px;
-  height: 60px;
-  padding-top: 2%;
 }
