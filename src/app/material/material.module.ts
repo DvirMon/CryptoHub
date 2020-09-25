@@ -26,6 +26,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
@@ -38,6 +40,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatIconModule,
     MatListModule,
     MatGridListModule,
+    MatMenuModule,
 
     MatCardModule,
     MatExpansionModule,
@@ -49,10 +52,12 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatFormFieldModule,
     MatInputModule,
 
+    MatBadgeModule,
+    MatTooltipModule,
+
     MatCheckboxModule,
     MatDialogModule,
     MatAutocompleteModule,
-    MatMenuModule,
   ]
 })
 export class MaterialModule { }

@@ -45,20 +45,5 @@ input.mat-input-element[_ngcontent-fex-c161].caret-white {
   background-color: #3f51b5;
 }
 
-@mixin select-coins($width) {
-  width: $width;
-  transition: width 1s;
-}
-
-mat-list-tem.selected-coins > .mat-list-item-content {
-  @include select-coins(0);
-  display: none;
-  font-size: 40px;
-  color: red;
-}
-
-mat-list-tem.show {
-  @include select-coins(100%);
-}
 
 

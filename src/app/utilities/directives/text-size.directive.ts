@@ -1,4 +1,5 @@
 import { Directive, HostBinding, Input, OnInit } from '@angular/core';
+import { CoinModel } from '../models/coin.model';
 
 @Directive({
   selector: '[appTextSize]'
@@ -6,6 +7,9 @@ import { Directive, HostBinding, Input, OnInit } from '@angular/core';
 export class TextSizeDirective implements OnInit {
 
   @Input() length: number
+  @Input() state: string
+  @Input() coin: CoinModel
+
   @HostBinding("style.fontSize") public fontSize: string;
 
   constructor() {
@@ -13,16 +17,21 @@ export class TextSizeDirective implements OnInit {
 
   ngOnInit() {
 
-    if (this.length < 15) {
-      this.fontSize = "30px"
-    }
-    else {
-      this.fontSize = "15px"
+    if (this.state === "symbol") {
 
+      this.coin.symbol.length < 15
+        ? this.fontSize = "30px"
+        : this.fontSize = "22px"
     }
+
+    // if (this.state === "id") {
+
+    //   this.coin.id.length < 15
+    //     ? this.fontSize = "30px"
+    //     : this.fontSize = "15px"
+    // }
+
   }
-
-
 
 
 }

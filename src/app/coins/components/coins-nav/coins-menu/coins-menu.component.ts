@@ -34,7 +34,6 @@ export class CoinsMenuComponent implements OnInit {
   // LOGIC SECTION
 
   public deleteCoins() {
-    this.coinsService.toggleState.next(this.selectedCoins)
     this.coinsService.deleteAllSelectedCoin()
   }
 

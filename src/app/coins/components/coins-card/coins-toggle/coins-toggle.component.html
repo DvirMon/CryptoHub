@@ -1,14 +1,14 @@
 <mat-grid-list [cols]="dialog ? 5 : 6" rowHeight="6vh">
-  <mat-grid-tile *ngFor="let coin of coins">
+  <mat-grid-tile *ngFor="let coin of coins" @fade>
     <mat-grid-list cols="1" rowHeight="3vh">
       <mat-grid-tile>{{coin.symbol |uppercase}}</mat-grid-tile>
       <mat-grid-tile>
-        <mat-slide-toggle [color]="dialog ? 'primary' : ''" (change)="handleToggle(coin)" [checked]="true">
+        <mat-slide-toggle [color]="dialog ? '' : ''" (change)="handleToggle(coin)" [checked]="checked">
         </mat-slide-toggle>
       </mat-grid-tile>
     </mat-grid-list>
   </mat-grid-tile>
   <mat-grid-tile *ngIf="!dialog">
-    <button mat-raised-button>Unselect</button>
+    <button (click)="unSelectAll()" mat-raised-button>Unselect</button>
   </mat-grid-tile>
 </mat-grid-list>

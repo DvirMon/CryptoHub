@@ -15,16 +15,18 @@
   position: -webkit-sticky;
   top: 0;
   z-index: 5;
-  height: 12vh;
+  height: 10vh;
 }
 
 .sidenav {
-  width: 100%;
+  width: 400px;
 }
 
 app-coins-search {
   width: 60vh;
   margin-top: 18px;
+  z-index: 5;
+  color: white;
 }
 
 app-coins-nav-search {
@@ -71,7 +73,11 @@ app-coins-nav-search {
     height: 100%;
     width: 100%;
   }
-  
+ 
+  .sidenav {
+    width: 100%;
+  }
+    
 }
 
 

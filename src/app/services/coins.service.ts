@@ -9,9 +9,10 @@ import { FormService } from './form.service';
 
 import { ActionType } from '../utilities/redux/action-type';
 import { environment } from 'src/environments/environment';
+import { store } from '../utilities/redux/store';
 
 @Injectable({
-  providedIn: 'root' 
+  providedIn: 'root'
 })
 export class CoinsService {
 
@@ -71,6 +72,8 @@ export class CoinsService {
     this.formService.handleStore(ActionType.DeleteCoin, coinId)
   }
   public deleteAllSelectedCoin() {
+    const selectedCoins: CoinModel[] = store.getState().coins.selectedCoins
+    this.toggleState.next(selectedCoins)
     this.formService.handleStore(ActionType.DeleteAllCoins)
   }
 

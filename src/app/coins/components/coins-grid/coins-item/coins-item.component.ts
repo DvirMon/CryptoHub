@@ -25,8 +25,8 @@ export class CoinsItemComponent implements OnInit, AfterViewInit {
 
   public checked: boolean
   public selected: boolean
-
-  private selectedCoins: CoinModel[] = []
+  public smaller: boolean = false
+  public selectedCoins: CoinModel[] = []
 
   constructor(
     private coinsService: CoinsService,
@@ -39,6 +39,10 @@ export class CoinsItemComponent implements OnInit, AfterViewInit {
       this.subscribeToToggleData()
       this.subscribeToToggleState()
       this.handleCoinChecked()
+
+      if (this.coin.symbol.length > 30) {
+        this.smaller = true
+      }
     }
   }
 
@@ -57,14 +61,14 @@ export class CoinsItemComponent implements OnInit, AfterViewInit {
 
   private subscribeToToggleData() {
 
-    this.coinsService.toggleData.subscribe(
+        this.coinsService.toggleData.subscribe(
       (data) => {
-
+        
         if (data.coin && this.coin.symbol === data.coin.symbol) {
-          this.checked = false
+          this.toggle.checked = false
           this.selected = false
         }
-        
+
         if (data.lastSelect && this.coin.symbol === data.lastSelect.symbol) {
           this.checked = true
           this.selected = true

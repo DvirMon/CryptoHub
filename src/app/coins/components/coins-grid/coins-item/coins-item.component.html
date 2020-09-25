@@ -4,24 +4,24 @@
 
   <!-- line -->
   <mat-grid-tile *ngIf="coin && !loader" colspan="2" rowspan="4" [ngClass]="{
-    'text-coin-header' : coin.symbol.length < 30,
-    'text-coin' : coin.symbol.length > 30}" appTextSize [length]="coin.symbol.length">
-    {{coin.symbol | uppercase }}
+    'text-coin-header' : !smaller,
+    'text-coin' : smaller}" appTextSize [coin]="coin" [state]="'symbol'">
+    {{coin.symbol | truncate:[12, '...'] | uppercase }}
   </mat-grid-tile>
-
+ 
   <mat-grid-tile *ngIf="loader" colspan="2" rowspan="4" class="skeleton-header-tile">
-    <ngx-skeleton-loader animation="progress" count="1" appearance="line"></ngx-skeleton-loader>
+    <ngx-skeleton-loader animation="pulse" count="1" appearance="line"></ngx-skeleton-loader>
   </mat-grid-tile>
 
 
   <!-- toggle -->
   <mat-grid-tile *ngIf="coin && !loader" rowspan="3" class="coin-toggle">
-    <mat-slide-toggle #toggle [checked]="checked" (change)="handleToggle($event)" color="primary">
+    <mat-slide-toggle #toggle [checked]="checked" (change)="handleToggle($event)">
     </mat-slide-toggle>
   </mat-grid-tile>
 
   <mat-grid-tile *ngIf="loader" rowspan="3" class="skeleton-toggle-tile">
-    <ngx-skeleton-loader class="skeleton-toggle" animation="progress" count="1" appearance="line">
+    <ngx-skeleton-loader class="skeleton-toggle" animation="pulse" count="1" appearance="line">
     </ngx-skeleton-loader>
   </mat-grid-tile>
 
@@ -32,11 +32,11 @@
   </mat-grid-tile>
 
   <mat-grid-tile *ngIf="loader" rowspan="3" colspan="3" class="skeleton-text-tile">
-    <ngx-skeleton-loader class="skeleton-line" count="1" appearance="line"></ngx-skeleton-loader>
+    <ngx-skeleton-loader class="skeleton-line" count="1" appearance="line" animation="pulse"></ngx-skeleton-loader>
   </mat-grid-tile>
 
   <mat-grid-tile *ngIf="loader" rowspan="4" colspan="3" class="skeleton-expend-tile">
-    <ngx-skeleton-loader count="1" appearance="line"></ngx-skeleton-loader>
+    <ngx-skeleton-loader count="1" appearance="line" animation="pulse"></ngx-skeleton-loader>
   </mat-grid-tile>
 
 </mat-grid-list>
