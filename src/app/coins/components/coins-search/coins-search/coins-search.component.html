@@ -1,13 +1,19 @@
-<div >
-  <mat-form-field [ngClass]="{'search-input' : true, 'show' : toggleSearch}">
-      <mat-label>Please Enter Coin Symbol</mat-label>
-      <input type="text" style="caret-color: white" placeholder="Search Coins..." matInput #searchInput
-        [formControl]="searchControl">
-      <span *ngIf="(searchEntries |async).length > 0 && toggleSearch" class="matsuffix" matSuffix>
-        Found {{(searchEntries |async).length}} results</span>
-      <span *ngIf="results && toggleSearch" class="matsuffix" matSuffix>Found 0 results</span>
-    </mat-form-field>
-    <button mat-icon-button *ngIf="!(isMobile | async)" (click)="handleToggleSearch()">
-      <mat-icon>search</mat-icon>
-    </button>
-</div>
+<mat-toolbar color="primary">
+  <mat-form-field class="search-input">
+    <mat-label>Please Enter Query</mat-label>
+    <input type="text" placeholder="Search Coins..." matInput #searchInput autocomplete="off"
+      [formControl]="searchControl">
+    <span *ngIf="(searchEntries | async).length > 0" class="matsuffix" matSuffix>Found
+      {{(searchEntries | async).length}} results</span>
+    <span *ngIf="results" class="matsuffix" matSuffix> Found 0 results</span>
+  </mat-form-field>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="drawer.toggle(false)">
+    <mat-icon aria-label="Side nav toggle icon">keyboard_arrow_left</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-list>
+  <mat-list-item *ngFor="let option of searchEntries | async">
+    <app-coins-search-item [coin]="option"></app-coins-search-item>
+  </mat-list-item>
+</mat-list>

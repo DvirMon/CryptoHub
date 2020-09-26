@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SearchService {
 
-  public url: string = environment.server + '/api/coins'
+  public url: string = environment.server + '/api/coins/search'
 
 
   public searchEntries: BehaviorSubject<CoinModel[]> = new BehaviorSubject([])
@@ -36,7 +36,6 @@ export class SearchService {
 
     return this.http.get<CoinModel[]>(this.url, { reportProgress: true })
       .pipe(
-
         // sort by abc 
         map((coins: CoinModel[]) => {
           return this.sortService.getSortedData(coins)

@@ -13,6 +13,7 @@ export class LoaderService {
 
   public gridLoader: BehaviorSubject<LoaderData> = new BehaviorSubject({ loader: true, progress: 0 })
   public expendLoader: BehaviorSubject<boolean> = new BehaviorSubject(true)
+  public searchLoader: BehaviorSubject<boolean> = new BehaviorSubject(true)
 
   constructor() { }
 

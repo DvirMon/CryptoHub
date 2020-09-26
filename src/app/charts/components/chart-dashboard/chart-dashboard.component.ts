@@ -22,8 +22,6 @@ export class ChartDashboardComponent implements OnInit {
     pie: "USD",
   }
 
-  public coinId : string
-
 
   public cols: Observable<number> = this.formService.isHandset().pipe(
     map(({ matches }) => {
@@ -45,9 +43,12 @@ export class ChartDashboardComponent implements OnInit {
   );
 
   public data: ChartDotModel[] = []
-  public currencies: string[] = []
-  public currentCurrency: string
   public selectedCoins: CoinModel[] = []
+  public currencies: string[] = []
+  public ids: string[] = []
+  public coinToDelete: CoinModel
+  public currentCurrency: string
+  public coinId: string
 
   private chartData: ChartData;
 
@@ -73,12 +74,13 @@ export class ChartDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.subscribeToStore()
     this.getChartData()
+    this.subscribeToCoinToggle()
     this.coinId = this.selectedCoins[0].id
   }
 
 
   private getChartData() {
-    this.chartService.getChartData().subscribe(
+    this.chartService.getChartData(this.ids).subscribe(
       (chartData: ChartData) => {
         this.chartData = chartData
         this.data = chartData.usd
@@ -92,10 +94,28 @@ export class ChartDashboardComponent implements OnInit {
     store.subscribe(
       () => {
         this.selectedCoins = store.getState().coins.selectedCoins
+        this.ids = store.getState().coins.selectedCoins.map((coin: CoinModel) => {
+          return coin.id
+        })
+      })
+    this.selectedCoins = store.getState().coins.selectedCoins
+    this.ids = store.getState().coins.selectedCoins.map((coin: CoinModel) => {
+      return coin.id
+    })
+  }
+
+  private subscribeToCoinToggle() {
+    this.chartService.deleteCoin.subscribe(
+      (coin: CoinModel) => {
+
+        if (coin) {
+          this.coinToDelete = coin
+          this.getChartData()
+        }
       }
     )
-    this.selectedCoins = store.getState().coins.selectedCoins
   }
+
 
   public changeCurrency(currency: string, type: string) {
 
@@ -103,9 +123,7 @@ export class ChartDashboardComponent implements OnInit {
     this.chartCurrencies[type] = currency.toUpperCase()
   }
 
-  public changeCoin(coinId: string) {
 
-  }
 
 
 

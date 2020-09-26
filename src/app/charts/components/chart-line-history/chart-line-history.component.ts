@@ -72,8 +72,7 @@ export class ChartLineHistoryComponent implements OnInit {
 
   private handleStepSize(values): number {
 
-    console.log((Math.ceil(Math.max(...values)) / 5)
-    )
+    
     const stepSize = (Math.ceil(Math.max(...values)) / 5)
 
     if (stepSize > 100) {

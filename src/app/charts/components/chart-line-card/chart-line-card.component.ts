@@ -8,13 +8,15 @@ import { CoinModel } from 'src/app/utilities/models/coin.model';
 
 @Component({
   selector: 'app-chart-line-card',
-  templateUrl: './my-line-chart.component.html',
-  styleUrls: ['./my-line-chart.component.scss']
+  templateUrl: './chart-line-card.component.html',
+  styleUrls: ['./chart-line-card.component.scss']
 })
 export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
+  @Input() ids: string[] = []
   @Input() selectedCoins: CoinModel[] = []
+  @Input() coinToDelete: CoinModel
   @Input() currentCurrency: string = "";
 
   // CHART PARAMS
@@ -78,9 +80,10 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
   // HTTP SECTION
 
   private getChartData() {
-    this.chartService.getChartData().subscribe(
+    this.chartService.getChartData(this.ids).subscribe(
       (chartData: ChartData) => {
         this.data = chartData[this.currentCurrency.toLocaleLowerCase()]
+        this.deleteChartDots()
         this.updateChartDots()
         this.formatChartDots()
 
@@ -89,6 +92,22 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   // LOGIC SECTION
+
+  private deleteChartDots() {
+
+    if (this.coinToDelete) {
+
+      const indexToDelete = this.lineChartData.findIndex((dot: ChartDotModel) => {
+        return dot.label === this.coinToDelete.id
+      })
+
+      console.log(indexToDelete)
+
+      if (indexToDelete >= 0) {
+        this.lineChartData.splice(indexToDelete, 1)
+      }
+    }
+  }
 
 
 

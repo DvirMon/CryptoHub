@@ -6,11 +6,11 @@ import { CoinsAuthState } from '../app-state/coins-state';
 export const coinsReducer = (oldAppState = new CoinsAuthState(), action: Action): CoinsAuthState => {
 
   const newAppState: CoinsAuthState = oldAppState
- 
+
   switch (action.type) {
     case ActionType.GetPageCoins:
       newAppState.coins = action.payload
-      break 
+      break
     case ActionType.AddPageCoins:
       newAppState.coins = newAppState.coins.concat(action.payload)
       break
@@ -33,7 +33,7 @@ export const coinsReducer = (oldAppState = new CoinsAuthState(), action: Action)
 }
 
 const deleteLogic = (selectedCoins: CoinModel[], id: string) => {
-  const indexToDelete = selectedCoins.findIndex(coin => coin.id === id)
+  const indexToDelete = selectedCoins.findIndex((coin: CoinModel) => coin.id === id)
   if (indexToDelete >= 0) {
     selectedCoins.splice(indexToDelete, 1)
   }

@@ -13,7 +13,6 @@ import { CoinsSelectMobileComponent } from './components/coins-nav/coins-select-
 
 // SEARCH COMPONENTS
 import { CoinsSearchComponent } from './components/coins-search/coins-search/coins-search.component';
-import { CoinsSearchMobileComponent } from './components/coins-search/coins-search-mobile/coins-mobile-search.component';
 import { CoinsSearchItemComponent } from './components/coins-search/coins-search-item/coins-search-item.component';
 
 // GRID COMPONENTS
@@ -27,7 +26,7 @@ import { CoinsExpendPanelComponent } from './components/coins-card/coins-expend-
 import { CoinsToggleComponent } from './components/coins-card/coins-toggle/coins-toggle.component';
 
 @NgModule({
-  declarations: [
+  declarations: [ 
     CoinsRootComponent,
 
     CoinsBarComponent,
@@ -37,7 +36,6 @@ import { CoinsToggleComponent } from './components/coins-card/coins-toggle/coins
 
     CoinsSearchComponent,
     CoinsSearchItemComponent,
-    CoinsSearchMobileComponent,
 
     CoinsPanelComponent,
     CoinsListComponent,

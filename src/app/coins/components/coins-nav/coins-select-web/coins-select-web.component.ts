@@ -19,7 +19,6 @@ export class CoinsSelectWebComponent implements OnInit {
   private deleteAll: boolean
 
   constructor(
-    private formService: FormService,
     private coinsService: CoinsService
 
   ) { }
@@ -45,7 +44,7 @@ export class CoinsSelectWebComponent implements OnInit {
     this.coinsToDelete.push(coinId)
   }
 
-  public handleEmitDeleteAll(state: boolean) {
+  public handleEmitDeleteAll() {
     this.deleteAll = true
   }
 

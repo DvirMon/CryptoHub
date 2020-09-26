@@ -21,7 +21,8 @@ import { environment } from 'src/environments/environment';
 export class SpinnerInterceptorService implements HttpInterceptor {
 
 
-  private url = `${environment.server}/api/coins`
+  private baseUrl = `${environment.server}/api/coins`
+  private searchUrl = `${environment.server}/api/coins/search`
 
 
   constructor(
@@ -89,10 +90,23 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
 
   private handleProgressSubject(request: HttpRequest<any>, loader: boolean, progress: number) {
- 
-    this.url === request.url
-      ? this.loaderService.gridLoader.next({ loader, progress })
-      : this.loaderService.expendLoader.next(loader)
+
+    switch (request.url) {
+      case this.baseUrl:
+        this.loaderService.gridLoader.next({ loader, progress })
+        break
+      case this.searchUrl:
+        this.loaderService.searchLoader.next(loader)
+        break
+      default:
+        this.loaderService.expendLoader.next(loader)
+        break
+
+    }
+
+    // this.url === request.url
+    //   ? this.loaderService.gridLoader.next({ loader, progress })
+    //   : this.loaderService.expendLoader.next(loader)
 
   }
 }

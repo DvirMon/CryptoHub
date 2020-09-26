@@ -5,7 +5,7 @@ import { ChartDotModel } from '../utilities/models/chart-dot.model';
 
 import { environment } from 'src/environments/environment';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { store } from '../utilities/redux/store';
 import { tap } from 'rxjs/operators';
 import { CoinModel } from '../utilities/models/coin.model';
@@ -27,6 +27,8 @@ export interface MarketHistoryData {
 })
 export class ChartService {
 
+  public deleteCoin: Subject<CoinModel> = new Subject()
+ 
   public url: string = environment.server + '/api/coins'
 
   constructor(
@@ -37,11 +39,8 @@ export class ChartService {
 
   // POST - get currencies for chart - http://localhost:3000/api/coins/chart
   
-  public getChartData(): Observable<ChartData> {
-
-    const ids = store.getState().coins.selectedCoins.map((coin: CoinModel) => {
-      return coin.id
-    })
+  public getChartData(ids : string[]): Observable<ChartData> {
+    // console.log(ids)
 
     return this.http.post<ChartData>(this.url + "/chart", { ids }, { reportProgress: true })
     

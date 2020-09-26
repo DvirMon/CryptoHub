@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CoinsService } from 'src/app/services/coins.service';
+import { LoaderService } from 'src/app/services/loader.service';
 import { CoinModel } from 'src/app/utilities/models/coin.model';
 import { CurrencyModel } from 'src/app/utilities/models/currency.model';
 
@@ -11,17 +12,31 @@ import { CurrencyModel } from 'src/app/utilities/models/currency.model';
 export class CoinsSearchItemComponent implements OnInit {
 
   @Input() coin: CoinModel
-  public panelOpenState: boolean = false;
 
+  public panelOpenState: boolean = false;
 
   private data: boolean = false
 
   constructor(
     private coinsService: CoinsService,
+    private loaderService: LoaderService,
     public currency: CurrencyModel
   ) { }
 
+
+
   ngOnInit(): void {
+
+    this.subscribeToSearchLoader()
+  }
+
+  // SUBSCRIPTION SECTION
+
+  private subscribeToSearchLoader() {
+    this.loaderService.searchLoader.subscribe(
+      (loader: boolean) => {
+        console.log(loader)
+      })
   }
 
   public togglePanel() {
