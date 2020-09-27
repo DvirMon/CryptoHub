@@ -52,7 +52,7 @@ export class CoinsToggleComponent implements OnInit {
 
   public handleToggle(coin: CoinModel) {
 
-    
+
     if (this.dialog) {
       this.coinsService.addSelectedCoin(this.lastSelect)
       this.coinsService.toggleData.next({ coin, lastSelect: this.lastSelect })
@@ -61,25 +61,24 @@ export class CoinsToggleComponent implements OnInit {
         this.dialogRef.close()
       }, 500)
     }
-    
+
     else {
       this.coinsService.toggleData.next({ coin })
     }
-    
-    
+
     setTimeout(() => {
       this.coinsService.deleteSelectedCoin(coin.id)
       this.chartService.deleteCoin.next(coin)
     }, 500)
 
- 
+
   }
 
   public unSelectAll() {
     this.checked = false
     this.deleteAll.emit(true)
 
-  } 
+  }
 
   private subscribeToChartCoin(coin: CoinModel) {
     this.chartService.deleteCoin.next(coin)

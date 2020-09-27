@@ -24,7 +24,6 @@
           <div *ngIf="card.type === 'line'">
             <app-chart-line-card 
             [selectedCoins]="selectedCoins" 
-            [ids]="ids" 
             [coinToDelete]="coinToDelete"
             [currentCurrency]="chartCurrencies.line">
             </app-chart-line-card>
@@ -32,8 +31,8 @@
           <div *ngIf="card.type === 'bar'">
             <app-chart-bar-card></app-chart-bar-card>
           </div>
-          <div *ngIf="card.type === 'pie'">
-            <app-chart-pie-card [data]="data" [selectedCoins]="selectedCoins" [currentCurrency]="chartCurrencies.pie">
+          <div *ngIf="card.type === 'pie'"> 
+            <app-chart-pie-card [data]="data" [currentCurrency]="chartCurrencies.pie">
             </app-chart-pie-card>
           </div>
           <div *ngIf="card.type === 'history' && coinId">

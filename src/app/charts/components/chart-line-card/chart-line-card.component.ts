@@ -5,6 +5,7 @@ import { Label } from 'ng2-charts';
 import { ChartData, ChartService } from 'src/app/services/chart.service';
 import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
 import { CoinModel } from 'src/app/utilities/models/coin.model';
+import { store } from 'src/app/utilities/redux/store';
 
 @Component({
   selector: 'app-chart-line-card',
@@ -14,15 +15,14 @@ import { CoinModel } from 'src/app/utilities/models/coin.model';
 export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
-  @Input() ids: string[] = []
   @Input() selectedCoins: CoinModel[] = []
   @Input() coinToDelete: CoinModel
   @Input() currentCurrency: string = "";
-
+  
   // CHART PARAMS
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
-
+  
   public lineChartOptions: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -35,18 +35,21 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
       }]
     }
   }
-
+  
   public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
-
-  private clearInterval: any
+  
+  // COMPONENT PRAMS
+  private ids: string[] = []
   private data: ChartDotModel[] = []
-
+  private clearInterval: any
+  
   constructor(
     private chartService: ChartService
   ) { }
 
   ngOnInit() {
+    this.subscribeToStore()
     this.setStartChartData()
     this.getChartData()
   }
@@ -59,6 +62,20 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
 
   ngOnDestroy(): void {
     clearInterval(this.clearInterval)
+  }
+
+  // SUBSCRIPTION SECTION
+
+  private subscribeToStore() {
+    store.subscribe(
+      () => {
+        this.ids = store.getState().coins.selectedCoins.map((coin: CoinModel) => {
+          return coin.id
+        })
+      })
+    this.ids = store.getState().coins.selectedCoins.map((coin: CoinModel) => {
+      return coin.id
+    })
   }
 
 
@@ -101,14 +118,11 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
         return dot.label === this.coinToDelete.id
       })
 
-      console.log(indexToDelete)
-
       if (indexToDelete >= 0) {
         this.lineChartData.splice(indexToDelete, 1)
       }
     }
   }
-
 
 
   private updateChartDots() {
@@ -119,13 +133,13 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
     })
 
     this.lineChartLabels.push(new Date().toLocaleTimeString())
-
   }
 
   private findCoinToUpdate(label: string) {
     return this.data.find((dot: ChartDotModel) => dot.label === label)
   }
 
+  // KEEP ONLY 12 DOTS
   private formatChartDots() {
     if (this.lineChartLabels.length > 12) {
       this.lineChartData.map(dots => {
@@ -134,5 +148,4 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
       this.lineChartLabels.shift()
     }
   }
-
 }

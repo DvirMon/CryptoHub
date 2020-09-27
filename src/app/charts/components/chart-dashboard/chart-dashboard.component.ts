@@ -74,7 +74,7 @@ export class ChartDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.subscribeToStore()
     this.getChartData()
-    this.subscribeToCoinToggle()
+    this.subscribeToCoinDelete()
     this.coinId = this.selectedCoins[0].id
   }
 
@@ -104,7 +104,7 @@ export class ChartDashboardComponent implements OnInit {
     })
   }
 
-  private subscribeToCoinToggle() {
+  private subscribeToCoinDelete() {
     this.chartService.deleteCoin.subscribe(
       (coin: CoinModel) => {
 
