@@ -46,7 +46,7 @@ export class CoinsListComponent implements OnInit, OnDestroy {
       this.setSkeletonGrid()
     }
   } 
-
+ 
   ngOnDestroy(): void {
 
     this.unsubscribeLouder.unsubscribe()

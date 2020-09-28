@@ -5,6 +5,7 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { CoinsService } from 'src/app/services/coins.service';
 import { DialogService } from 'src/app/services/dialog.service';
 import { LoaderService } from 'src/app/services/loader.service';
+import { ToggleService } from 'src/app/services/toggle.service';
 
 import { CoinModel } from 'src/app/utilities/models/coin.model';
 
@@ -23,17 +24,22 @@ export class CoinsItemComponent implements OnInit, AfterViewInit {
   @Input() coin: CoinModel
   @Input() loader: boolean
 
+  // TOGGLE PRAMS
+  public selectedCoins: CoinModel[] = []
   public checked: boolean
   public selected: boolean
+
   public smaller: boolean = false
-  public selectedCoins: CoinModel[] = []
 
   constructor(
     private coinsService: CoinsService,
     private dialogService: DialogService,
+    private toggleService: ToggleService
+
   ) { }
 
   ngOnInit(): void {
+
     if (this.coin !== undefined) {
       this.subscribeToStore()
       this.subscribeToToggleData()
@@ -61,16 +67,16 @@ export class CoinsItemComponent implements OnInit, AfterViewInit {
 
   private subscribeToToggleData() {
 
-        this.coinsService.toggleData.subscribe(
+    this.toggleService.toggleData.subscribe(
       (data) => {
-        
+
         if (data.coin && this.coin.symbol === data.coin.symbol) {
           this.toggle.checked = false
           this.selected = false
         }
 
         if (data.lastSelect && this.coin.symbol === data.lastSelect.symbol) {
-          this.checked = true
+          this.toggle.checked = true
           this.selected = true
         }
       }
@@ -79,10 +85,10 @@ export class CoinsItemComponent implements OnInit, AfterViewInit {
 
   private subscribeToToggleState() {
 
-    this.coinsService.toggleState.subscribe(
+    this.toggleService.toggleState.subscribe(
       (coins: CoinModel[]) => {
         if (coins.length > 0) {
-          this.handleCoinSUnChecked(coins)
+          this.handleCoinsUnChecked(coins)
         }
       }
     )
@@ -104,6 +110,7 @@ export class CoinsItemComponent implements OnInit, AfterViewInit {
       event.checked
         ? this.handleSelectCoin()
         : this.handleUnSelectCoin()
+
     }
   }
 
@@ -119,7 +126,7 @@ export class CoinsItemComponent implements OnInit, AfterViewInit {
 
   }
 
-  private handleCoinSUnChecked(selectedCoins: CoinModel[]) {
+  private handleCoinsUnChecked(selectedCoins: CoinModel[]) {
 
     selectedCoins.find((coin: CoinModel) => {
       if (coin.id === this.coin.id) {
@@ -127,13 +134,14 @@ export class CoinsItemComponent implements OnInit, AfterViewInit {
         this.selected = false
       }
     })
+
   }
 
   private handleSelectCoin() {
     this.coinsService.addSelectedCoin(this.coin)
     this.selected = true
-
   }
+
   private handleUnSelectCoin() {
     this.coinsService.deleteSelectedCoin(this.coin.id)
     this.selected = false

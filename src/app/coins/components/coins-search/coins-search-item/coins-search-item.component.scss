@@ -3,3 +3,14 @@ app-coins-expend-panel {
   height: 100%;
 }
 
+ngx-skeleton-loader {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+
+  &.skeleton-image {
+    width: 50px;
+    width: 50px;
+  }
+}

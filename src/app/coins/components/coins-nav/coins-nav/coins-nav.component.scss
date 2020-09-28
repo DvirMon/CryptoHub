@@ -4,7 +4,7 @@ mat-nav-list {
   display: flex;
 
   mat-list-item {
-    width: 55px;
+    width: 75px;
 
     &:hover {
       background-color: transparent;
@@ -12,7 +12,16 @@ mat-nav-list {
   }
 }
 
- mat-icon {
+mat-icon {
   color: white;
   font-size: 16px;
+}
+
+// from 560px down
+
+@media (max-width: size(sm)) {
+
+  mat-nav-list > mat-list-item {
+    width: 50px;
+  }
 }

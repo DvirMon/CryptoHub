@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CoinsService } from 'src/app/services/coins.service';
+import { ToggleService } from 'src/app/services/toggle.service';
 import { CoinModel } from 'src/app/utilities/models/coin.model';
 
 @Component({
@@ -13,7 +14,8 @@ export class CoinsSelectMobileComponent implements OnInit {
 
 
   constructor(
-    private coinsService: CoinsService
+    private coinsService: CoinsService,
+    private toggleService: ToggleService
   ) { }
 
   ngOnInit(): void {
@@ -22,7 +24,9 @@ export class CoinsSelectMobileComponent implements OnInit {
     // LOGIC SECTION
 
     public deleteCoins() {
+      this.toggleService.toggleAllSelectedCoins()
       this.coinsService.deleteAllSelectedCoin()
+      
     }
   
 

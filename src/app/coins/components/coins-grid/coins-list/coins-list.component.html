@@ -2,7 +2,6 @@
 
   <!--COINS GRID -->
   <div [ngClass]="{'row' : true, 'row-viewport' : !(isMobile | async)}">
-
     <virtual-scroller #scroll [items]="coins" (vsEnd)="onScroll($event)">
       <div class="col-xl-3 col-lg-3 coin-card" *ngFor="let coin of scroll.viewPortItems">
         <div [ngClass]="{
@@ -14,7 +13,6 @@
         </div>
       </div>
     </virtual-scroller>
-
   </div>
 
   <div class="row-btn">

@@ -1,23 +1,32 @@
-
 <mat-accordion>
 
   <mat-expansion-panel (opened)="getCoinData()" class="mat-elevation-z0">
-    
+
     <mat-expansion-panel-header class="search-indicator">
-      <mat-panel-title *ngIf="coin">
-        {{coin.symbol | uppercase}}  {{coin.id.length < 25 ? '| ' + coin.id : ''}}
+      <mat-panel-title>
+        <span *ngIf="coin">
+          {{coin.symbol | uppercase}} | {{coin.id| truncate:[20, '...'] }}
+        </span>
+        <ngx-skeleton-loader *ngIf="!coin" count="1" appearance="line">
+        </ngx-skeleton-loader>
       </mat-panel-title>
       <mat-divider></mat-divider>
     </mat-expansion-panel-header>
 
-    <mat-grid-list cols="3" rowHeight="2vh">
-      <mat-grid-tile colspan="3"></mat-grid-tile>
-      <mat-grid-tile colspan="2" rowspan="2">USD: {{currency.usd | currency}}</mat-grid-tile>
-      <mat-grid-tile rowspan="6">
-        <img src={{currency.url}} width="50px">
+    <mat-grid-list cols="2" rowHeight="2vh">
+      <mat-grid-tile colspan="2"></mat-grid-tile>
+      <mat-grid-tile rowspan="2">USD: {{currency.usd | currency}}</mat-grid-tile>
+      <mat-grid-tile rowspan="2">
+        <mat-slide-toggle #toggle [checked]="checked" (change)="handleToggle($event)">
+        </mat-slide-toggle>
       </mat-grid-tile>
-      <mat-grid-tile colspan="2" rowspan="2">EUR: {{currency.eur | currency:"EUR"}}</mat-grid-tile>
-      <mat-grid-tile colspan="2" rowspan="2">ILS: {{currency.ils | currency:"ILS"}}</mat-grid-tile>
+      <mat-grid-tile rowspan="2">EUR: {{currency.eur | currency:"EUR"}}</mat-grid-tile>
+      <mat-grid-tile rowspan="4">
+        <img *ngIf="currency.url" src={{currency.url}} width="50">
+        <ngx-skeleton-loader *ngIf="!currency.url" class="skeleton-search-circle" count="1" appearance="circle">
+        </ngx-skeleton-loader>
+      </mat-grid-tile>
+      <mat-grid-tile rowspan="2">ILS: {{currency.ils | currency:"ILS"}}</mat-grid-tile>
     </mat-grid-list>
   </mat-expansion-panel>
 </mat-accordion>

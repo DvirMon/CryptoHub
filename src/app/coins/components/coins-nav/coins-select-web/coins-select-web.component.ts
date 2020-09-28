@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { CoinsService } from 'src/app/services/coins.service';
 import { FormService } from 'src/app/services/form.service';
+import { ToggleService } from 'src/app/services/toggle.service';
 import { CoinModel } from 'src/app/utilities/models/coin.model';
 
 @Component({
@@ -19,7 +20,9 @@ export class CoinsSelectWebComponent implements OnInit {
   private deleteAll: boolean
 
   constructor(
-    private coinsService: CoinsService
+    private coinsService: CoinsService,
+    private toggleService: ToggleService
+
 
   ) { }
 
@@ -33,8 +36,8 @@ export class CoinsSelectWebComponent implements OnInit {
     this.drawer.toggle()
 
     if (!this.drawer.opened) {
-      this.handleCoinDelete()
-      this.handleDeleteAll()
+      // this.handleCoinDelete()
+      // this.handleDeleteAll()
     }
 
   }
@@ -57,7 +60,7 @@ export class CoinsSelectWebComponent implements OnInit {
 
   private handleDeleteAll() {
     if (this.deleteAll) {
-      this.coinsService.deleteAllSelectedCoin()
+
       this.deleteAll = false
     }
   }

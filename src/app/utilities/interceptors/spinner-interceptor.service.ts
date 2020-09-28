@@ -22,8 +22,6 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
 
   private baseUrl = `${environment.server}/api/coins`
-  private searchUrl = `${environment.server}/api/coins/search`
-
 
   constructor(
     private dialogService: DialogService,
@@ -95,18 +93,10 @@ export class SpinnerInterceptorService implements HttpInterceptor {
       case this.baseUrl:
         this.loaderService.gridLoader.next({ loader, progress })
         break
-      case this.searchUrl:
-        this.loaderService.searchLoader.next(loader)
-        break
       default:
         this.loaderService.expendLoader.next(loader)
         break
 
     }
-
-    // this.url === request.url
-    //   ? this.loaderService.gridLoader.next({ loader, progress })
-    //   : this.loaderService.expendLoader.next(loader)
-
   }
 }

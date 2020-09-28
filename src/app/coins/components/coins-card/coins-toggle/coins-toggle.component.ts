@@ -15,6 +15,7 @@ import { CoinModel } from 'src/app/utilities/models/coin.model';
 // IMPORT COMPONENTS
 import { CoinsDialogComponent } from '../../coins-dialog/coins-dialog.component';
 import { ChartService } from 'src/app/services/chart.service';
+import { ToggleService } from 'src/app/services/toggle.service';
 
 @Component({
   selector: 'app-coins-toggle',
@@ -43,7 +44,8 @@ export class CoinsToggleComponent implements OnInit {
 
   constructor(
     private coinsService: CoinsService,
-    private chartService: ChartService
+    private chartService: ChartService,
+    private toggleService: ToggleService
   ) { }
 
   ngOnInit(): void {
@@ -55,15 +57,15 @@ export class CoinsToggleComponent implements OnInit {
 
     if (this.dialog) {
       this.coinsService.addSelectedCoin(this.lastSelect)
-      this.coinsService.toggleData.next({ coin, lastSelect: this.lastSelect })
+      this.toggleService.toggleData.next({ coin, lastSelect: this.lastSelect })
 
       setTimeout(() => {
         this.dialogRef.close()
       }, 500)
     }
-
+ 
     else {
-      this.coinsService.toggleData.next({ coin })
+      this.toggleService.toggleData.next({ coin, lastSelect: null })
     }
 
     setTimeout(() => {
@@ -76,12 +78,9 @@ export class CoinsToggleComponent implements OnInit {
 
   public unSelectAll() {
     this.checked = false
-    this.deleteAll.emit(true)
-
+    this.toggleService.toggleAllSelectedCoins()
+    this.coinsService.deleteAllSelectedCoin()
   }
 
-  private subscribeToChartCoin(coin: CoinModel) {
-    this.chartService.deleteCoin.next(coin)
-  }
 
 }

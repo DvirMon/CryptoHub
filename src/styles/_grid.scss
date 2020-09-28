@@ -1,3 +1,10 @@
+@mixin skeleton-image($width, $height) {
+  width: $width;
+  height: $height;
+  border-radius: 50%;
+  background-color: grey;
+  margin: auto;
+}
 
 .text-header > figure.mat-figure {
   justify-content: flex-start;
@@ -44,10 +51,12 @@
   font-size: 14px;
 }
 
-ngx-skeleton-loader > span.loader.circle.progress.ng-star-inserted {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background-color: grey;
-  margin: auto;
+ngx-skeleton-loader.skeleton-expend-circle
+  > span.loader.circle.progress.ng-star-inserted {
+  @include skeleton-image(80px, 80px);
+}
+
+ngx-skeleton-loader.skeleton-search-circle
+  > span.loader.circle.progress.ng-star-inserted {
+  @include skeleton-image(55px, 55px);
 }

@@ -20,7 +20,6 @@ export class CoinsSearchComponent implements OnInit {
   @ViewChild('searchInput') searchInput: ElementRef;
 
   public searchControl = new FormControl();
-
   public searchEntries: Observable<CoinModel[]>;
   public searchResults: Observable<number>;
 
@@ -43,7 +42,6 @@ export class CoinsSearchComponent implements OnInit {
 
   // SUBSCRIPTION SECTION
 
-
   private subscribeToResults() {
     this.searchService.results.subscribe(
       (results) => {
@@ -60,10 +58,7 @@ export class CoinsSearchComponent implements OnInit {
   }
 
 
-
-  // LOGIC SECTION
-
-  // main search function
+  // HTTP SECTION
 
   public search(): void {
 
@@ -77,10 +72,5 @@ export class CoinsSearchComponent implements OnInit {
       }
     )
   }
-
-  public onSelect(option: string) {
-  }
-
-
 
 }

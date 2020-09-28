@@ -8,8 +8,8 @@
     <mat-grid-list cols="2" rowHeight="6vh">
       <mat-grid-tile class="text-coin">USD: {{currency.usd | currency}}</mat-grid-tile>
       <mat-grid-tile rowspan="3">
-        <img *ngIf="currency.url" src={{currency.url}} [width]="(isMobile | async) ?  80 : 80">
-        <ngx-skeleton-loader *ngIf="!currency.url" class="skeleton-image" count="1" appearance="circle"></ngx-skeleton-loader>
+        <img *ngIf="currency.url" src={{currency.url}} width="80">
+        <ngx-skeleton-loader *ngIf="!currency.url" class="skeleton-expend-circle" count="1" appearance="circle"></ngx-skeleton-loader>
       </mat-grid-tile>
       <mat-grid-tile class="text-coin">EUR: {{currency.eur | currency:"EUR"}}</mat-grid-tile>
       <mat-grid-tile class="text-coin">ILS: {{currency.ils | currency:"ILS"}}</mat-grid-tile>

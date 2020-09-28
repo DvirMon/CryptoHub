@@ -1,9 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
 
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="'dialog'" 
-  position="end"
-  [mode]="'over'" 
-  [opened]=" false"> 
+  <mat-sidenav #drawer class="sidenav" fixedInViewport position="end" [mode]="'slide'" [opened]=" false">
     <app-coins-search [drawer]="drawer"></app-coins-search>
   </mat-sidenav>
 

@@ -10,21 +10,20 @@ import { FormService } from './form.service';
 import { ActionType } from '../utilities/redux/action-type';
 import { environment } from 'src/environments/environment';
 import { store } from '../utilities/redux/store';
+import { ToggleService } from './toggle.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoinsService {
 
-  public toggleData: Subject<{ coin?: CoinModel, lastSelect?: CoinModel }> = new Subject()
-  public toggleState: Subject<CoinModel[]> = new Subject()
+
   public url: string = environment.server + '/api/coins'
 
 
   constructor(
     private http: HttpClient,
     private formService: FormService,
-
   ) { }
 
   // HTTP SECTION
@@ -72,8 +71,7 @@ export class CoinsService {
     this.formService.handleStore(ActionType.DeleteCoin, coinId)
   }
   public deleteAllSelectedCoin() {
-    const selectedCoins: CoinModel[] = store.getState().coins.selectedCoins
-    this.toggleState.next(selectedCoins)
+    
     this.formService.handleStore(ActionType.DeleteAllCoins)
   }
 
