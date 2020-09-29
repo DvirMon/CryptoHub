@@ -18,9 +18,6 @@
   height: 10vh;
 }
 
-.sidenav {
-  width: 400px;
-}
 
 app-coins-search {
   width: 60vh;
@@ -78,6 +75,10 @@ app-coins-nav-search {
     width: 100%;
   }
     
+}
+
+.btn-search {
+  z-index: 100;
 }
 
 

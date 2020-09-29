@@ -1,17 +1,18 @@
 <mat-sidenav-container class="sidenav-container">
 
-  <mat-sidenav #drawer class="sidenav" fixedInViewport position="end" [mode]="'slide'" [opened]=" false">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport position="end" [mode]="'slide'" autosize>
     <app-coins-search [drawer]="drawer"></app-coins-search>
   </mat-sidenav>
-
   <mat-sidenav-content>
+
     <mat-toolbar color="primary">
-      <app-coins-nav [drawer]="drawer"></app-coins-nav>
+      <app-coins-nav></app-coins-nav>
       <span class="spacer"></span>
-      <button mat-icon-button type="button" (click)="drawer.toggle()">
+      <button class="btn-search" mat-icon-button type="button" (click)="drawer.toggle()">
         <mat-icon mat-list-icon>search</mat-icon>
       </button>
     </mat-toolbar>
+
     <ng-content></ng-content>
   </mat-sidenav-content>
 

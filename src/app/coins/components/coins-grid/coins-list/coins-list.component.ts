@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 import { CoinsService } from 'src/app/services/coins.service';
 import { FormService } from 'src/app/services/form.service';
@@ -9,17 +9,19 @@ import { CoinModel } from 'src/app/utilities/models/coin.model';
 import { Observable, Subscription } from 'rxjs';
 import { IPageInfo, VirtualScrollerComponent } from 'ngx-virtual-scroller';
 import { store } from 'src/app/utilities/redux/store';
+import { MatSidenav } from '@angular/material/sidenav';
+import { SideNavService } from 'src/app/services/side-nav.service';
 
 @Component({
   selector: 'app-coins-list',
   templateUrl: './coins-list.component.html',
   styleUrls: ['./coins-list.component.scss']
 })
-export class CoinsListComponent implements OnInit, OnDestroy {
+export class CoinsListComponent implements OnInit, OnDestroy, AfterViewInit {
 
+  @ViewChild(MatSidenav) public sidenav: MatSidenav;
 
   @Input() coins: CoinModel[]
-  @Input() searchMode: boolean
 
 
   // LOADING PARAMS
@@ -35,18 +37,21 @@ export class CoinsListComponent implements OnInit, OnDestroy {
   constructor(
     private coinService: CoinsService,
     private formService: FormService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private sidenavService: SideNavService
   ) { }
 
   ngOnInit(): void {
 
     this.subscribeToLoader()
+    this.setSkeletonGrid()
+  }
 
-    if (!this.searchMode) {
-      this.setSkeletonGrid()
-    }
-  } 
- 
+
+  ngAfterViewInit(): void {
+    this.sidenavService.setSidenav(this.sidenav);
+  }
+
   ngOnDestroy(): void {
 
     this.unsubscribeLouder.unsubscribe()
@@ -89,7 +94,7 @@ export class CoinsListComponent implements OnInit, OnDestroy {
   }
 
   public onScroll(event: IPageInfo) {
-    if (event.endIndex !== this.coins.length - 1 || this.searchMode || this.coins.length < 42) {
+    if (event.endIndex !== this.coins.length - 1 || this.coins.length < 42) {
       return
     }
 

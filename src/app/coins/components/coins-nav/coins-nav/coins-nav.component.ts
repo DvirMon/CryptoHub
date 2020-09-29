@@ -25,9 +25,7 @@ import { CoinsService } from 'src/app/services/coins.service';
 })
 export class CoinsNavComponent implements OnInit {
 
-  @ViewChild(MatDrawer) selectDrawer: MatDrawer
-
-  @Input() drawer: MatSidenav
+  @ViewChild(MatDrawer) drawer: MatDrawer
 
   public selectedCoins: CoinModel[] = []
   public isMobile: Observable<boolean> = this.formService.isMobile()
@@ -69,14 +67,14 @@ export class CoinsNavComponent implements OnInit {
   }
 
   public handleToggle() {
-    this.selectDrawer.toggle()
-    if (!this.selectDrawer.opened) {
+    this.drawer.toggle()
+    if (!this.drawer.opened) {
       this.handleCoinDelete()
       this.handleDeleteAll()
     }
 
   }
-  
+
   // EMIT EVENTS SECTION
   public handleEmitDelete(coinId: string) {
     this.coinsToDelete.push(coinId)
@@ -85,7 +83,7 @@ export class CoinsNavComponent implements OnInit {
   public handleEmitDeleteAll(state: boolean) {
     this.deleteAll = true
   }
-  
+
   // LOGIC SECTION
   private handleCoinDelete() {
     this.coinsToDelete.map((coinId: string) => {
