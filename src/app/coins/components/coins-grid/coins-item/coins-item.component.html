@@ -10,7 +10,7 @@
   </mat-grid-tile>
  
   <mat-grid-tile *ngIf="loader" colspan="2" rowspan="4" class="skeleton-header-tile">
-    <ngx-skeleton-loader animation="pulse" count="1" appearance="line"></ngx-skeleton-loader>
+    <ngx-skeleton-loader  count="1" appearance="line"></ngx-skeleton-loader>
   </mat-grid-tile>
 
 
@@ -21,7 +21,7 @@
   </mat-grid-tile>
 
   <mat-grid-tile *ngIf="loader" rowspan="3" class="skeleton-toggle-tile">
-    <ngx-skeleton-loader class="skeleton-toggle" animation="pulse" count="1" appearance="line">
+    <ngx-skeleton-loader class="skeleton-toggle"  count="1" appearance="line">
     </ngx-skeleton-loader>
   </mat-grid-tile>
 
@@ -32,11 +32,11 @@
   </mat-grid-tile>
 
   <mat-grid-tile *ngIf="loader" rowspan="3" colspan="3" class="skeleton-text-tile">
-    <ngx-skeleton-loader class="skeleton-line" count="1" appearance="line" animation="pulse"></ngx-skeleton-loader>
+    <ngx-skeleton-loader class="skeleton-line" count="1" appearance="line" ></ngx-skeleton-loader>
   </mat-grid-tile>
 
   <mat-grid-tile *ngIf="loader" rowspan="4" colspan="3" class="skeleton-expend-tile">
-    <ngx-skeleton-loader count="1" appearance="line" animation="pulse"></ngx-skeleton-loader>
+    <ngx-skeleton-loader count="1" appearance="line" ></ngx-skeleton-loader>
   </mat-grid-tile>
 
 </mat-grid-list>

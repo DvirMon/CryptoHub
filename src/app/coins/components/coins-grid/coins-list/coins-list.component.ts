@@ -9,7 +9,7 @@ import { CoinModel } from 'src/app/utilities/models/coin.model';
 import { Observable, Subscription } from 'rxjs';
 import { IPageInfo, VirtualScrollerComponent } from 'ngx-virtual-scroller';
 import { store } from 'src/app/utilities/redux/store';
-import { MatSidenav } from '@angular/material/sidenav';
+import { MatDrawer, MatSidenav } from '@angular/material/sidenav';
 import { SideNavService } from 'src/app/services/side-nav.service';
 
 @Component({
@@ -17,9 +17,8 @@ import { SideNavService } from 'src/app/services/side-nav.service';
   templateUrl: './coins-list.component.html',
   styleUrls: ['./coins-list.component.scss']
 })
-export class CoinsListComponent implements OnInit, OnDestroy, AfterViewInit {
+export class CoinsListComponent implements OnInit, OnDestroy {
 
-  @ViewChild(MatSidenav) public sidenav: MatSidenav;
 
   @Input() coins: CoinModel[]
 
@@ -38,7 +37,6 @@ export class CoinsListComponent implements OnInit, OnDestroy, AfterViewInit {
     private coinService: CoinsService,
     private formService: FormService,
     private loaderService: LoaderService,
-    private sidenavService: SideNavService
   ) { }
 
   ngOnInit(): void {
@@ -48,9 +46,6 @@ export class CoinsListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
 
-  ngAfterViewInit(): void {
-    this.sidenavService.setSidenav(this.sidenav);
-  }
 
   ngOnDestroy(): void {
 

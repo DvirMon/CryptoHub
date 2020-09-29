@@ -18,6 +18,9 @@
   height: 10vh;
 }
 
+.sidenav {
+  width: 400px;
+}
 
 app-coins-search {
   width: 60vh;
@@ -32,11 +35,11 @@ app-coins-nav-search {
 }
 
 .fade-in {
-  animation : fade-in 4s;
+  animation: fade-in 4s;
 }
 
 .fade-out {
-  animation : fade-out 4s;
+  animation: fade-out 4s;
 }
 
 @keyframes fade-in {
@@ -57,29 +60,23 @@ app-coins-nav-search {
   }
 }
 
-
 // from 560px down
 
 @media (max-width: size(sm)) {
-
   .mat-toolbar.mat-primary {
     height: 10vh;
   }
-  
+
   app-coins-nav {
     height: 100%;
     width: 100%;
   }
- 
+
   .sidenav {
     width: 100%;
   }
-    
 }
 
 .btn-search {
   z-index: 100;
 }
-
-
-

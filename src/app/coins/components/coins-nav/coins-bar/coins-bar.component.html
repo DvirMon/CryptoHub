@@ -1,11 +1,16 @@
 <mat-sidenav-container class="sidenav-container">
 
-  <mat-sidenav #drawer class="sidenav" fixedInViewport position="end" [mode]="'slide'" autosize>
+  <mat-sidenav #drawer class="sidenav" fixedInViewport position="end" mode="'slide'" autosize>
     <app-coins-search [drawer]="drawer"></app-coins-search>
   </mat-sidenav>
   <mat-sidenav-content>
 
     <mat-toolbar color="primary">
+      <button type="button" [ngClass]="{'hamburger' : true, 'hamburger--collapse' : true}" mat-button (click)="toggleSideNav()">
+        <div class="hamburger-box">
+          <div class="hamburger-inner"></div>
+        </div>
+      </button>
       <app-coins-nav></app-coins-nav>
       <span class="spacer"></span>
       <button class="btn-search" mat-icon-button type="button" (click)="drawer.toggle()">
@@ -14,6 +19,8 @@
     </mat-toolbar>
 
     <ng-content></ng-content>
+
+
   </mat-sidenav-content>
 
 </mat-sidenav-container>

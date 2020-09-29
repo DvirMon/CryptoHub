@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
 import { Observable, of } from 'rxjs';
 import { CoinsService } from 'src/app/services/coins.service';
+import { SideNavService } from 'src/app/services/side-nav.service';
 import { CoinModel } from 'src/app/utilities/models/coin.model';
 import { store } from 'src/app/utilities/redux/store';
 
@@ -11,16 +13,26 @@ import { store } from 'src/app/utilities/redux/store';
 })
 export class CoinsPanelComponent implements OnInit {
 
+  @ViewChild(MatDrawer) public sidenav: MatDrawer;
+
   public coins: CoinModel[] = []
 
   constructor(
     private coinService: CoinsService,
+    private sidenavService: SideNavService
+
   ) { }
 
   ngOnInit(): void {
 
     this.subscribeToStore()
     this.getCoinsData()
+  }
+
+  
+  ngAfterViewInit(): void {
+    console.log(this.sidenav)
+    this.sidenavService.setSidenav(this.sidenav);
   }
 
   // SUBSCRIPTION SECTION

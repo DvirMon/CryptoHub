@@ -32,7 +32,7 @@ virtual-scroller {
 }
 
 .coin-data-start {
-  @include coin-card(grey, 0.4);
+  @include coin-card(rgb(48, 45, 45), 0.8);
 }
 
 
@@ -44,7 +44,7 @@ virtual-scroller {
 
 @keyframes coin-complete {
   0% {
-    @include coin-card(grey, 0.4);
+    @include coin-card(rgb(48, 45, 45), 0.8);
   }
   50% {
     @include coin-card(#71c9db, 0.4);
