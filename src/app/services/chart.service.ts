@@ -40,8 +40,6 @@ export class ChartService {
   // POST - get currencies for chart - http://localhost:3000/api/coins/chart
   
   public getChartData(ids : string[]): Observable<ChartData> {
-    console.log(ids)
-
     return this.http.post<ChartData>(this.url + "/chart", { ids }, { reportProgress: true })
     
   }

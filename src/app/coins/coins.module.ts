@@ -19,6 +19,7 @@ import { CoinsSearchItemComponent } from './components/coins-search/coins-search
 import { CoinsPanelComponent } from './components/coins-grid/coins-panel/coins-panel.component';
 import { CoinsListComponent } from './components/coins-grid/coins-list/coins-list.component';
 import { CoinsItemComponent } from './components/coins-grid/coins-item/coins-item.component';
+import { CoinsDrawerComponent } from './components/coins-grid/coins-drawer/coins-drawer.component';
 
 // HELPER COMPONENTS
 import { CoinsDialogComponent } from './components/coins-dialog/coins-dialog.component';
@@ -44,6 +45,7 @@ import { CoinsToggleComponent } from './components/coins-card/coins-toggle/coins
     CoinsDialogComponent,
     CoinsExpendPanelComponent,
     CoinsToggleComponent,
+    CoinsDrawerComponent,
 
 
   ],

@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 // IMPORT REDUX
 import { store } from 'src/app/utilities/redux/store';
 import { CoinsService } from 'src/app/services/coins.service';
+import { SideNavService } from 'src/app/services/side-nav.service';
 
 
 @Component({
@@ -41,7 +42,9 @@ export class CoinsNavComponent implements OnInit {
 
   constructor(
     private formService: FormService,
-    private coinsService: CoinsService
+    private coinsService: CoinsService,
+    private sidenavService: SideNavService
+
 
   ) { }
 
@@ -97,6 +100,13 @@ export class CoinsNavComponent implements OnInit {
       this.deleteAll = false
     }
   }
+
+
+  // SIDENAV SECTION
+  public toggleSideNav() {
+    this.sidenavService.toggle()
+  }
+
 
 
 

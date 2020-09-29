@@ -13,13 +13,11 @@ import { store } from 'src/app/utilities/redux/store';
 })
 export class CoinsPanelComponent implements OnInit {
 
-  @ViewChild(MatDrawer) public sidenav: MatDrawer;
 
   public coins: CoinModel[] = []
 
   constructor(
     private coinService: CoinsService,
-    private sidenavService: SideNavService
 
   ) { }
 
@@ -29,11 +27,6 @@ export class CoinsPanelComponent implements OnInit {
     this.getCoinsData()
   }
 
-  
-  ngAfterViewInit(): void {
-    console.log(this.sidenav)
-    this.sidenavService.setSidenav(this.sidenav);
-  }
 
   // SUBSCRIPTION SECTION
 

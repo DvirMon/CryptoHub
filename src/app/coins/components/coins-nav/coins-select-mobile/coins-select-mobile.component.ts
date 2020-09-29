@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CoinsService } from 'src/app/services/coins.service';
 import { ToggleService } from 'src/app/services/toggle.service';
 import { CoinModel } from 'src/app/utilities/models/coin.model';
+import { store } from 'src/app/utilities/redux/store';
 
 @Component({
   selector: 'app-coins-select-mobile',
@@ -10,24 +11,53 @@ import { CoinModel } from 'src/app/utilities/models/coin.model';
 })
 export class CoinsSelectMobileComponent implements OnInit {
 
-  @Input() selectedCoins: CoinModel[] = []
+  public selectedCoins: CoinModel[] = []
 
+  public isExpanded: boolean = true;
+  public showSubmenu: boolean = false;
+  public isShowing: boolean = false;
+  public showSubSubMenu: boolean = false;
 
   constructor(
     private coinsService: CoinsService,
     private toggleService: ToggleService
   ) { }
 
+
+
   ngOnInit(): void {
+
+    this.subscribeToStore()
   }
 
-    // LOGIC SECTION
+  // SUBSCRIPTION SECTION
 
-    public deleteCoins() {
-      this.toggleService.toggleAllSelectedCoins()
-      this.coinsService.deleteAllSelectedCoin()
-      
-    }
-  
+  private subscribeToStore() {
+    store.subscribe(
+      () => {
+        this.selectedCoins = [...store.getState().coins.selectedCoins]
+      }
+    )
+    this.selectedCoins = [...store.getState().coins.selectedCoins]
+  }
+
+
+  public handleToggle(coin: CoinModel) {
+
+    // this.toggleService.toggleData.next({ coin, lastSelect: null })
+
+  }
+
+
+  // LOGIC SECTION
+
+  public deleteCoins() {
+    // this.toggleService.toggleAllSelectedCoins()
+    // this.coinsService.deleteAllSelectedCoin()
+
+  }
+
+
+
 
 }

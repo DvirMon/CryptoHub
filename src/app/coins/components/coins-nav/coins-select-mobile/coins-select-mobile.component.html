@@ -1,15 +1,19 @@
-<mat-list-item disableRipple="true">
-  <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
-    <mat-icon mat-list-icon [matBadge]="selectedCoins.length > 0 ? selectedCoins.length : ''" matBadgeColor="warn">
-      monetization_on
-    </mat-icon>
-  </button>
-  <mat-menu #menu="matMenu" xPosition="after">
-    <button mat-menu-item (click)="deleteCoins()">
-      Delete All Coins
-    </button>
-    <button mat-menu-item *ngFor="let coin of selectedCoins">
-      {{coin.symbol |uppercase}}
-    </button>
-  </mat-menu>
-</mat-list-item>
+<mat-list>
+  <div mat-subheader>Selected Coins</div>
+
+  <mat-list-item disableRipple="true" *ngFor="let coin of selectedCoins">
+    <mat-grid-list cols="2" rowHeight="3vh">
+      <mat-grid-tile>{{coin.symbol |uppercase}}</mat-grid-tile>
+      <mat-grid-tile>
+        <mat-slide-toggle (change)="handleToggle(coin)" [checked]="true">
+        </mat-slide-toggle>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-divider></mat-divider>
+  </mat-list-item>
+  <mat-list-item (click)="deleteCoins()">
+    <div mat-line> Delete All</div>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>

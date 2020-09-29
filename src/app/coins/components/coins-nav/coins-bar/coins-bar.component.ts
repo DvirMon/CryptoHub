@@ -16,16 +16,10 @@ export class CoinsBarComponent implements AfterViewInit {
 
   constructor(
     private formService: FormService,
-    private sidenavService: SideNavService
 
   ) { }
 
 
   ngAfterViewInit(): void {
-  }
-
-  public toggleSideNav() {
-    console.log(this.sidenavService.sidenav)
-    this.sidenavService.toggle()
   }
 }

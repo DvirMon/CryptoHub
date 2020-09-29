@@ -6,11 +6,6 @@
   <mat-sidenav-content>
 
     <mat-toolbar color="primary">
-      <button type="button" [ngClass]="{'hamburger' : true, 'hamburger--collapse' : true}" mat-button (click)="toggleSideNav()">
-        <div class="hamburger-box">
-          <div class="hamburger-inner"></div>
-        </div>
-      </button>
       <app-coins-nav></app-coins-nav>
       <span class="spacer"></span>
       <button class="btn-search" mat-icon-button type="button" (click)="drawer.toggle()">
@@ -18,7 +13,9 @@
       </button>
     </mat-toolbar>
 
-    <ng-content></ng-content>
+    <app-coins-drawer>
+      <ng-content></ng-content>
+    </app-coins-drawer>
 
 
   </mat-sidenav-content>
