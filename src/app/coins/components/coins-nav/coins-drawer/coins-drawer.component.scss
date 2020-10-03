@@ -1,0 +1,22 @@
+.drawer-container {
+  background-color: transparent;
+  height: 90vh;
+}
+.drawer-sidenav {
+  width: 117px;
+}
+
+mat-list-item {
+  border: transparent;
+  outline: transparent;
+
+  cursor: pointer;
+
+  &.active {
+    background-color: #bfa3ee;
+  }
+}
+
+.mat-button {
+  padding: 0;
+}

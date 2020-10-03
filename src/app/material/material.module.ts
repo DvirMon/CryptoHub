@@ -29,6 +29,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import {MatRippleModule} from '@angular/material/core';
+
+
 @NgModule({
   declarations: [],
   exports: [
@@ -58,6 +61,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatCheckboxModule,
     MatDialogModule,
     MatAutocompleteModule,
+    MatRippleModule
   ]
 })
 export class MaterialModule { }

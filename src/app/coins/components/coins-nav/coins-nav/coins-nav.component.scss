@@ -1,27 +1,17 @@
-@import "~src/styles/styles";
-
-mat-nav-list {
-  display: flex;
-
-  mat-list-item {
-    width: 75px;
-
-    &:hover {
-      background-color: transparent;
-    }
-  }
-}
-
 mat-icon {
-  color: white;
-  font-size: 16px;
+  font-size: 25px;
 }
 
-// from 560px down
+.drawer-container {
+  background-color: transparent;
+  width: 500px;
+  height: 60px;
+}
 
-@media (max-width: size(sm)) {
-
-  mat-nav-list > mat-list-item {
-    width: 50px;
-  }
+.drawer-sidenav {
+  color: white;
+  background-color: transparent;
+  width: 500px;
+  height: 60px;
+  padding-top: 2%;
 }

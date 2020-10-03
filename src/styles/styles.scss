@@ -45,5 +45,15 @@ input.mat-input-element[_ngcontent-fex-c161].caret-white {
   background-color: #3f51b5;
 }
 
+mat-list-item.nav {
+  div.mat-list-item-content {
+    div.mat-list-text {
+      padding: 0;
 
-
+      div.mat-line {
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+  }
+}

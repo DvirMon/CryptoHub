@@ -1,8 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-// IMPORT ANGULAR ANIMATIONS
-import { animate, state, style, transition, trigger } from '@angular/animations';
-
 // IMPORT MATERIEL
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -21,25 +18,17 @@ import { ToggleService } from 'src/app/services/toggle.service';
   selector: 'app-coins-toggle',
   templateUrl: './coins-toggle.component.html',
   styleUrls: ['./coins-toggle.component.scss'],
-  animations: [
-    trigger('fade', [
-      state('in', style({ opacity: 1 })),
-      transition(':enter', [style({ opacity: 0 }), animate(600)]),
-    ]),
-  ],
+  
 })
 export class CoinsToggleComponent implements OnInit {
 
 
   @Input() dialog: boolean
-  @Input() coins: CoinModel[]
+  @Input() checked: boolean
+  @Input() coin: CoinModel
   @Input() lastSelect: CoinModel
   @Input() dialogRef: MatDialogRef<CoinsDialogComponent>
 
-  @Output() public delete = new EventEmitter<string>();
-  @Output() public deleteAll = new EventEmitter<boolean>();
-
-  public checked: boolean = true
 
 
   constructor(
@@ -48,8 +37,10 @@ export class CoinsToggleComponent implements OnInit {
     private toggleService: ToggleService
   ) { }
 
+
   ngOnInit(): void {
     this.checked = true
+
   }
 
   public handleToggle(coin: CoinModel) {
@@ -63,7 +54,7 @@ export class CoinsToggleComponent implements OnInit {
         this.dialogRef.close()
       }, 500)
     }
- 
+
     else {
       this.toggleService.toggleData.next({ coin, lastSelect: null })
     }
@@ -76,11 +67,7 @@ export class CoinsToggleComponent implements OnInit {
 
   }
 
-  public unSelectAll() {
-    this.checked = false
-    this.toggleService.toggleAllSelectedCoins()
-    this.coinsService.deleteAllSelectedCoin()
-  }
+
 
 
 }

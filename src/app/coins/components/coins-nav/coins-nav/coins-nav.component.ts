@@ -30,20 +30,14 @@ export class CoinsNavComponent implements OnInit {
 
   public selectedCoins: CoinModel[] = []
   public isMobile: Observable<boolean> = this.formService.isMobile()
-  public toggleSelect: boolean = false
 
   public routers = [
     { label: "Home", route: "/coins/list", icon: "home" },
     { label: "Real-Time Charts", route: "/coins/charts", icon: "insert_chart" },
   ]
 
-  private coinsToDelete: string[] = []
-  private deleteAll: boolean
-
   constructor(
     private formService: FormService,
-    private coinsService: CoinsService,
-    private sidenavService: SideNavService
 
 
   ) { }
@@ -62,51 +56,6 @@ export class CoinsNavComponent implements OnInit {
     )
     this.selectedCoins = [...store.getState().coins.selectedCoins]
   }
-
-  // EVENTS SECTION
-
-  public onClick() {
-    this.formService.toggleSearch.next(false)
-  }
-
-  public handleToggle() {
-    this.drawer.toggle()
-    if (!this.drawer.opened) {
-      this.handleCoinDelete()
-      this.handleDeleteAll()
-    }
-
-  }
-
-  // EMIT EVENTS SECTION
-  public handleEmitDelete(coinId: string) {
-    this.coinsToDelete.push(coinId)
-  }
-
-  public handleEmitDeleteAll(state: boolean) {
-    this.deleteAll = true
-  }
-
-  // LOGIC SECTION
-  private handleCoinDelete() {
-    this.coinsToDelete.map((coinId: string) => {
-      this.coinsService.deleteSelectedCoin(coinId)
-    })
-  }
-
-  private handleDeleteAll() {
-    if (this.deleteAll) {
-      this.coinsService.deleteAllSelectedCoin()
-      this.deleteAll = false
-    }
-  }
-
-
-  // SIDENAV SECTION
-  public toggleSideNav() {
-    this.sidenavService.toggle()
-  }
-
 
 
 

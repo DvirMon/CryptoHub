@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { SideNavService } from 'src/app/services/side-nav.service';
 
@@ -12,6 +12,13 @@ export class CoinsDrawerComponent implements OnInit, AfterViewInit {
   @ViewChild(MatDrawer) public sidenav: MatDrawer;
 
 
+  @Input() mode: boolean = true
+
+  public routers = [
+    { label: "Home", route: "/coins/list", icon: "home" },
+    { label: "Charts", route: "/coins/charts", icon: "insert_chart" },
+  ]
+
   constructor(
     private sidenavService: SideNavService
 
@@ -24,7 +31,7 @@ export class CoinsDrawerComponent implements OnInit, AfterViewInit {
     this.sidenavService.setSidenav(this.sidenav);
   }
 
-  
 
-  
+
+
 }
