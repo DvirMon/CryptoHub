@@ -19,7 +19,7 @@ mat-grid-list {
 // from 560px down
 @media (max-width: size(sm)) {
   .btn-mobile {
-    width: 40vh;
+    width: 42vh;
     font-size: 50px;
   }
 
@@ -34,7 +34,8 @@ mat-grid-list {
     font-weight: 500;
   }
 
-  .grid-mobile {
-    margin: auto;
+  mat-grid-list.grid-mobile {
+    position: relative;
+    top: 100px;
   }
 }

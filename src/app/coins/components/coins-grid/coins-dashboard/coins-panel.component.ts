@@ -1,8 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDrawer } from '@angular/material/sidenav';
-import { Observable, of } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { CoinsService } from 'src/app/services/coins.service';
-import { SideNavService } from 'src/app/services/side-nav.service';
 import { CoinModel } from 'src/app/utilities/models/coin.model';
 import { store } from 'src/app/utilities/redux/store';
 
