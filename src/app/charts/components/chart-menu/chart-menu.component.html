@@ -1,0 +1,21 @@
+<div *ngIf="card.type !== 'history'">
+  <button mat-icon-button class="more-button" [matMenuTriggerFor]="currencyMenu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #currencyMenu="matMenu" xPosition="before">
+    <button (click)="handleMenuChange(currency, card.type)" mat-menu-item *ngFor="let currency of currencies">
+      {{currency | uppercase}}
+    </button>
+  </mat-menu>
+</div> 
+
+<div *ngIf="card.type === 'history'">
+  <button mat-icon-button class="more-button" [matMenuTriggerFor]="coinsMenu">
+    <mat-icon>more_vert</mat-icon>
+  </button> 
+  <mat-menu #coinsMenu="matMenu" xPosition="before">
+    <button (click)="handleMenuChange(coin.id, card.type)" mat-menu-item *ngFor="let coin of selectedCoins">
+      {{coin.symbol | uppercase}}
+    </button>
+  </mat-menu>
+</div>

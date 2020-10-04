@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { FormService } from 'src/app/services/form.service';
-import { CardGridModel } from 'src/app/utilities/models/card-grid.mode';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+
 import { ChartData, ChartService } from 'src/app/services/chart.service';
+
+import { ChartCardModel } from 'src/app/utilities/models/chart-card.mode';
 import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
-import { store } from 'src/app/utilities/redux/store';
 import { CoinModel } from 'src/app/utilities/models/coin.model';
 
+import { store } from 'src/app/utilities/redux/store';
+
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-chart-dashboard',
@@ -15,66 +16,48 @@ import { CoinModel } from 'src/app/utilities/models/coin.model';
   styleUrls: ['./chart-dashboard.component.scss']
 })
 
-export class ChartDashboardComponent implements OnInit {
+export class ChartDashboardComponent implements OnInit, AfterViewInit {
+
+  // GRID PARAMS
+  public cards: Observable<ChartCardModel[]> = this.chartService.cards
+  public cols: Observable<number> = this.chartService.cols
+
 
   public chartCurrencies = {
     line: "USD",
     pie: "USD",
   }
 
-
-  public cols: Observable<number> = this.formService.isHandset().pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return 1
-      }
-      return 3
-    }))
-
-
-  public cards = this.formService.isHandset().pipe(
-    map(({ matches }) => {
-
-      if (matches) {
-        return this.cardsMobileGrid
-      }
-      return this.cardsWebGrid
-    })
-  );
-
   public data: ChartDotModel[] = []
   public selectedCoins: CoinModel[] = []
+
   public currencies: string[] = []
   public ids: string[] = []
+
   public coinToDelete: CoinModel
   public currentCurrency: string
   public coinId: string
 
   private chartData: ChartData;
 
-  private cardsMobileGrid: CardGridModel[] = [
-    { title: 'Coins Real-Time  Market Price', type: 'line', cols: 1, rows: 6 },
-  ];
-
-  private cardsWebGrid: CardGridModel[] = [
-    { title: 'Coins Real-Time  Market Price', type: 'line', cols: 2, rows: 5 },
-    { title: 'Coins Currencies', type: 'bar', cols: 1, rows: 3 },
-    { title: 'Coins Market Value', type: 'pie', cols: 1, rows: 3 },
-    { title: 'Coin Market Price History', type: 'history', cols: 3, rows: 3 },
-  ];
-
   constructor(
     private chartService: ChartService,
-    private formService: FormService
   ) { }
 
   ngOnInit(): void {
     this.subscribeToStore()
     this.getChartData()
     this.subscribeToCoinDelete()
-    this.coinId = this.selectedCoins[0].id
   }
 
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.handleHistoryData(this.selectedCoins[0].id)
+    }, 800)
+  }
+
+
+  // HTTP SECTION
 
   private getChartData() {
     this.chartService.getChartData(this.ids).subscribe(
@@ -86,6 +69,8 @@ export class ChartDashboardComponent implements OnInit {
       }
     )
   }
+
+  // SUBSCRIPTION SECTION
 
   private subscribeToStore() {
     store.subscribe(
@@ -113,11 +98,26 @@ export class ChartDashboardComponent implements OnInit {
     )
   }
 
+  // LOGIC SECTION
+  public handleMenuChange(event: { payload: string, type: string }) {
 
-  public changeCurrency(currency: string, type: string) {
+    if (event.type !== "history") {
 
-    this.data = this.chartData[currency]
-    this.chartCurrencies[type] = currency.toUpperCase()
+      this.data = this.chartData[event.payload]
+      this.chartCurrencies[event.type] = event.payload.toUpperCase()
+    }
+
+    else {
+      this.handleHistoryData(event.payload)
+
+    }
+  }
+
+  private handleHistoryData(coinId: string) {
+
+    // console.log(2)
+    this.chartService.historyCoin.next(coinId)
+
   }
 
 

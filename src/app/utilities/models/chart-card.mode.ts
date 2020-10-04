@@ -1,4 +1,4 @@
-export class CardGridModel {
+export class ChartCardModel {
 
   constructor( 
     public title?: string,

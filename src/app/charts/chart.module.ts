@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ChartComponent } from './components/chart/chart.component';
 import { SharedModule } from '../shared/shared.module';
 import { ChartRoutingModule } from './chart-routing.module';
 
@@ -12,17 +11,18 @@ import { ChartLineCardComponent } from './components/chart-line-card/chart-line-
 import { ChartBarCardComponent } from './components/chart-bar-card/chart-bar-card.component';
 import { ChartPieCardComponent } from './components/chart-pie-card/chart-pie-card.component';
 import { ChartLineHistoryComponent } from './components/chart-line-history/chart-line-history.component';
+import { ChartMenuComponent } from './components/chart-menu/chart-menu.component';
 
  
 
 @NgModule({
   declarations: [
-    ChartComponent,
     ChartDashboardComponent,
     ChartLineCardComponent,
     ChartBarCardComponent,
     ChartPieCardComponent,
-    ChartLineHistoryComponent
+    ChartLineHistoryComponent,
+    ChartMenuComponent
   ],
   imports: [ 
     CommonModule,

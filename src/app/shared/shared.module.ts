@@ -25,7 +25,7 @@ import { CoinModel } from '../utilities/models/coin.model';
 import { CurrencyModel } from '../utilities/models/currency.model';
 import { DialogModule } from '../dialog/dialog.module';
 import { ChartDotModel } from '../utilities/models/chart-dot.model';
-import { CardGridModel } from '../utilities/models/card-grid.mode';
+import { ChartCardModel } from '../utilities/models/chart-card.mode';
 
 // EXTERNAL MODULES
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
@@ -77,8 +77,8 @@ import { MatListModule } from '@angular/material/list';
       useValue: new ChartDotModel()
     },
     {
-      provide: CardGridModel,
-      useValue: new CardGridModel()
+      provide: ChartCardModel,
+      useValue: new ChartCardModel()
     },
     {
       provide: HTTP_INTERCEPTORS,
