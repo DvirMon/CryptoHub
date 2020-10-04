@@ -35,12 +35,10 @@ virtual-scroller {
   @include coin-card(rgb(48, 45, 45), 0.8);
 }
 
-
 .coin-data-complete {
   animation: coin-complete 2s;
   @include coin-card(#71c9db, 0.5);
 }
-
 
 @keyframes coin-complete {
   0% {
@@ -55,13 +53,18 @@ virtual-scroller {
 }
 .row-btn {
   padding-top: 1%;
-  text-align : right;
+  text-align: right;
   z-index: 100;
 }
 
 // from 560px down
 
 @media (max-width: 600px) {
+
+  .coins-container {
+    padding-top: 7%;
+
+  }
   virtual-scroller {
     height: 78vh;
     width: 100%;
@@ -70,4 +73,3 @@ virtual-scroller {
     padding-top: 3%;
   }
 }
-

@@ -20,8 +20,7 @@ import { SideNavService } from 'src/app/services/side-nav.service';
 export class CoinsListComponent implements OnInit, OnDestroy {
 
 
-  @Input() coins: CoinModel[]
-
+  public coins: CoinModel[] = []
 
   // LOADING PARAMS
   public loader: boolean;
@@ -41,6 +40,8 @@ export class CoinsListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
+    this.subscribeToStore()
+    this.getCoinsData()
     this.subscribeToLoader()
     this.setSkeletonGrid()
   }
@@ -55,6 +56,13 @@ export class CoinsListComponent implements OnInit, OnDestroy {
 
   // SUBSCRIPTION SECTION
 
+  private subscribeToStore() {
+    store.subscribe(() => {
+      this.coins = store.getState().coins.coins
+    })
+    this.coins = store.getState().coins.coins
+  }
+
   private subscribeToLoader() {
 
     this.unsubscribeLouder = this.loaderService.gridLoader.subscribe(
@@ -68,7 +76,15 @@ export class CoinsListComponent implements OnInit, OnDestroy {
 
   // HTTP SECTION
 
-  public getNextCoinsData() {
+  private getCoinsData() {
+
+    if (this.coins.length < 13) {
+      this.coinService.getCoins(1)
+    }
+
+  }
+
+  private getNextCoinsData() {
     this.page = this.page + 1
     this.coinService.getCoins(this.page)
   }
@@ -81,19 +97,26 @@ export class CoinsListComponent implements OnInit, OnDestroy {
       (isMobile) => {
         if (store.getState().coins.coins.length === 0) {
           isMobile
-            ? this.coins.length = 5
-            : this.coins.length = 41
+            ? this.coins.length = 4
+            : this.coins.length = 16
         }
       }
     )
   }
 
+
+
   public onScroll(event: IPageInfo) {
-    if (event.endIndex !== this.coins.length - 1 || this.coins.length < 42) {
+
+
+    if (event.endIndex > (this.coins.length/1.1)) {
+      this.offset = true
+    }
+
+    if (event.endIndex !== this.coins.length - 1) {
       return
     }
 
-    this.offset = true
 
     this.getNextCoinsData()
 
@@ -103,8 +126,6 @@ export class CoinsListComponent implements OnInit, OnDestroy {
 
     scroll.scrollToIndex(1, true, 0, 3000)
     this.offset = false
-
-
 
   }
 

@@ -44,9 +44,6 @@ export class CoinsService {
         page === 1
           ? this.formService.handleStore(ActionType.GetPageCoins, coins)
           : this.formService.handleStore(ActionType.AddPageCoins, coins)
-
-
-
       }
     )
   }

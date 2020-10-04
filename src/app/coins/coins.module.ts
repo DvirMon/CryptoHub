@@ -3,17 +3,16 @@ import { CommonModule } from '@angular/common';
 import { CoinsRoutingModule } from './coins-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
-import { CoinsRootComponent } from './components/coins-root/coins-root.component';
+// DASHBOARD COMPONENTS
+import { CoinsRootComponent } from './components/coins-grid/coins-root/coins-root.component';
+import { CoinsListComponent } from './components/coins-grid/coins-list/coins-list.component';
+import { CoinsItemComponent } from './components/coins-grid/coins-item/coins-item.component';
  
 // NAVIGATION COMPONENTS
 import { CoinsBarComponent } from './components/coins-nav/coins-bar/coins-bar.component';
 import { CoinsNavComponent } from './components/coins-nav/coins-nav/coins-nav.component';
 import { CoinsDrawerComponent } from './components/coins-nav/coins-drawer/coins-drawer.component';
 
-// DASHBOARD COMPONENTS
-import { CoinsPanelComponent } from './components/coins-grid/coins-dashboard/coins-panel.component';
-import { CoinsListComponent } from './components/coins-grid/coins-list/coins-list.component';
-import { CoinsItemComponent } from './components/coins-grid/coins-item/coins-item.component';
 
 // SEARCH COMPONENTS
 import { CoinsSearchComponent } from './components/coins-search/coins-search/coins-search.component';
@@ -27,7 +26,10 @@ import { CoinsToggleListComponent } from './components/coins-card/coins-toggle-l
 
 @NgModule({
   declarations: [ 
+ 
     CoinsRootComponent,
+    CoinsListComponent,
+    CoinsItemComponent,
 
     CoinsBarComponent,
     CoinsNavComponent,
@@ -35,9 +37,6 @@ import { CoinsToggleListComponent } from './components/coins-card/coins-toggle-l
     CoinsSearchComponent,
     CoinsSearchItemComponent,
 
-    CoinsPanelComponent,
-    CoinsListComponent,
-    CoinsItemComponent,
 
     CoinsDialogComponent,
     CoinsExpendPanelComponent,
