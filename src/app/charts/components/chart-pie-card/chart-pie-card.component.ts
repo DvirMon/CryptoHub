@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
 import { BaseChartDirective, Label, SingleDataSet } from 'ng2-charts';
 import { Observable } from 'rxjs';
@@ -15,21 +15,11 @@ import { store } from 'src/app/utilities/redux/store';
   styleUrls: ['./chart-pie-card.component.scss']
 })
 
-export class ChartPieCardComponent implements OnInit {
+export class ChartPieCardComponent implements OnInit , OnDestroy{
 
-  @ViewChild(BaseChartDirective) pieChart: BaseChartDirective;
 
   @Input() data: ChartDotModel[]
   @Input() currentCurrency: string
-
-  public cols: Observable<number> = this.formService.isHandset().pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return 1
-      }
-      return 2
-    }))
-
 
   public pieChartOptions: ChartOptions = {
     responsive: true,
@@ -40,7 +30,6 @@ export class ChartPieCardComponent implements OnInit {
   public pieChartLabels: Label[] = [];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
-  public pieChartPlugins = [];
 
   public label: any
   public currency: any
@@ -49,7 +38,6 @@ export class ChartPieCardComponent implements OnInit {
 
 
   constructor(
-    private formService: FormService,
     private chartService: ChartService
   ) { }
 
@@ -58,6 +46,10 @@ export class ChartPieCardComponent implements OnInit {
     this.handlePieChartData()
     this.setStartData()
     this.subscribeToCoinDelete()
+  }
+
+  ngOnDestroy(): void {
+    
   }
 
   // SUBSCRIPTION SECTION
@@ -88,7 +80,6 @@ export class ChartPieCardComponent implements OnInit {
   private getChartData() {
     this.chartService.getChartData(this.ids).subscribe(
       (chartData: ChartData) => {
-        console.log(chartData)
         this.data = chartData[this.currentCurrency.toLocaleLowerCase()]
         this.handlePieChartData()
       }
@@ -106,16 +97,6 @@ export class ChartPieCardComponent implements OnInit {
 
 
   // LOGIC SECTION
-  public handlePieSection(event?) {
-
-    if (event.active[0]) {
-      const index = event.active[0]._index
-      this.label = this.pieChartLabels[index]
-      this.currency = this.pieChartData[index]
-
-    }
-
-  }
 
   private setStartData() {
     this.label = this.pieChartLabels[0]

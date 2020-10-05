@@ -13,9 +13,10 @@
       </mat-grid-list>
     </mat-grid-tile>
     <mat-grid-tile rowspan="6">
-      <canvas #pieChart baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-        [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend"
-        (chartClick)="handlePieSection($event)">
+      <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+        [options]="pieChartOptions" [legend]="pieChartLegend"
+        
+        >
       </canvas>
     </mat-grid-tile>
   </mat-grid-list>

@@ -26,7 +26,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   public chartTitle = {
     line: "USD",
     pie: "USD",
-    doughnut: "BITCOIN",
+    doughnut: "",
   }
 
   public data: ChartDotModel[] = []
@@ -48,25 +48,27 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.subscribeToStore()
     this.subscribeToCoinId()
-    this.getChartData()
+    this.handleChartData()
   }
 
   ngAfterViewInit(): void {
 
     setTimeout(() => {
-      this.handleHistoryData(this.selectedCoins[0].id)
+      this.handleLineHistoryChartData(this.selectedCoins[0].id)
+      this.handleDoughnutChartData(this.selectedCoins[0].id)
     }, 800)
   }
 
 
   // HTTP SECTION
 
-  private getChartData() {
+  private handleChartData() {
     this.chartService.getChartData(this.ids).subscribe(
       (chartData: ChartData) => {
         this.chartData = chartData
         this.data = this.chartData.usd
         this.currencies = this.chartData.currencies
+
       }
     )
   }
@@ -94,13 +96,14 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
 
         if (coin) {
           this.coinToDelete = coin
-          this.getChartData()
+          this.handleChartData()
         }
       }
     )
   }
 
   // LOGIC SECTION
+
   public handleMenuChange(event: { payload: string, type: string }) {
 
     if (event.type === "pie" || event.type === "line") {
@@ -110,18 +113,23 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     }
 
     else if (event.type === "history") {
-      this.handleHistoryData(event.payload)
-
+      this.handleLineHistoryChartData(event.payload)
     }
 
     else {
-      this.chartTitle[event.type] = event.payload.toUpperCase()
+      this.handleDoughnutChartData(event.payload)
     }
   }
 
-  private handleHistoryData(coinId: string) {
+  private handleLineHistoryChartData(coinId: string) {
 
     this.chartService.historyCoin.next(coinId)
+
+  }
+
+  private handleDoughnutChartData(coinId: string) {
+    this.chartTitle["doughnut"] = coinId
+    this.chartService.doughnutCoin.next(coinId)
 
   }
 
