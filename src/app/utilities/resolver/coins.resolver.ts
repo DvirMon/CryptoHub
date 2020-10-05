@@ -10,7 +10,7 @@ import { store } from '../redux/store';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriesResolver implements Resolve<Observable<CoinModel[]> | Promise<CoinModel[]> | CoinModel[]>{
+export class CoinsResolver implements Resolve<Observable<CoinModel[]> | Promise<CoinModel[]> | CoinModel[]>{
 
   constructor(
     private coinsService: CoinsService
@@ -22,9 +22,10 @@ export class CategoriesResolver implements Resolve<Observable<CoinModel[]> | Pro
   ): Observable<CoinModel[]> | Promise<CoinModel[]> | CoinModel[] {
 
     if (store.getState().coins.coins.length === 0) {
-      this.coinsService.getCoins(1)
-    }
 
+      this.coinsService.getCoins(1)
+      return store.getState().coins.coins
+    }
     return store.getState().coins.coins
   }
 }

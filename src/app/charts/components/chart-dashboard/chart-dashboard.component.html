@@ -4,7 +4,7 @@
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            {{card.title | titlecase}} in {{chartCurrencies[card.type]}}
+            {{card.title | titlecase}} {{chartTitle[card.type]}}
 
             <app-chart-menu [card]="card" [currencies]="currencies" [selectedCoins]="selectedCoins"
               (changeChart)="handleMenuChange($event)">
@@ -16,14 +16,15 @@
 
           <div *ngIf="card.type === 'line'">
             <app-chart-line-card [selectedCoins]="selectedCoins" [coinToDelete]="coinToDelete"
-              [currentCurrency]="chartCurrencies.line">
+              [currentCurrency]="chartTitle.line">
             </app-chart-line-card>
           </div>
-          <div *ngIf="card.type === 'bar'">
-            <app-chart-bar-card></app-chart-bar-card>
+          <div *ngIf="card.type === 'doughnut'"> 
+            <!-- <app-chart-bar-card></app-chart-bar-card> -->
+            <app-chart-doughnut-card></app-chart-doughnut-card>
           </div>
           <div *ngIf="card.type === 'pie'">
-            <app-chart-pie-card [data]="data" [currentCurrency]="chartCurrencies.pie">
+            <app-chart-pie-card [data]="data" [currentCurrency]="chartTitle.pie">
             </app-chart-pie-card>
           </div>
           <div *ngIf="card.type === 'history'">

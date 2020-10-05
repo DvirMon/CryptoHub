@@ -41,7 +41,6 @@ export class CoinsListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.subscribeToStore()
-    this.getCoinsData()
     this.subscribeToLoader()
     this.setSkeletonGrid()
   }
@@ -76,14 +75,6 @@ export class CoinsListComponent implements OnInit, OnDestroy {
 
   // HTTP SECTION
 
-  private getCoinsData() {
-
-    if (this.coins.length < 13) {
-      this.coinService.getCoins(1)
-    }
-
-  }
-
   private getNextCoinsData() {
     this.page = this.page + 1
     this.coinService.getCoins(this.page)
@@ -109,7 +100,7 @@ export class CoinsListComponent implements OnInit, OnDestroy {
   public onScroll(event: IPageInfo) {
 
 
-    if (event.endIndex > (this.coins.length/1.1)) {
+    if (event.endIndex > (this.coins.length / 1.1)) {
       this.offset = true
     }
 

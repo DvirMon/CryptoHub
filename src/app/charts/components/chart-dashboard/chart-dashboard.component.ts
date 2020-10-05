@@ -23,9 +23,10 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   public cols: Observable<number> = this.chartService.cols
 
 
-  public chartCurrencies = {
+  public chartTitle = {
     line: "USD",
     pie: "USD",
+    doughnut: "BITCOIN",
   }
 
   public data: ChartDotModel[] = []
@@ -46,11 +47,12 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.subscribeToStore()
+    this.subscribeToCoinId()
     this.getChartData()
-    this.subscribeToCoinDelete()
   }
 
   ngAfterViewInit(): void {
+
     setTimeout(() => {
       this.handleHistoryData(this.selectedCoins[0].id)
     }, 800)
@@ -63,12 +65,12 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     this.chartService.getChartData(this.ids).subscribe(
       (chartData: ChartData) => {
         this.chartData = chartData
-        this.data = chartData.usd
-        this.currencies = chartData.currencies
-
+        this.data = this.chartData.usd
+        this.currencies = this.chartData.currencies
       }
     )
   }
+
 
   // SUBSCRIPTION SECTION
 
@@ -86,7 +88,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     })
   }
 
-  private subscribeToCoinDelete() {
+  private subscribeToCoinId() {
     this.chartService.deleteCoin.subscribe(
       (coin: CoinModel) => {
 
@@ -101,21 +103,24 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   // LOGIC SECTION
   public handleMenuChange(event: { payload: string, type: string }) {
 
-    if (event.type !== "history") {
+    if (event.type === "pie" || event.type === "line") {
 
       this.data = this.chartData[event.payload]
-      this.chartCurrencies[event.type] = event.payload.toUpperCase()
+      this.chartTitle[event.type] = event.payload.toUpperCase()
+    }
+
+    else if (event.type === "history") {
+      this.handleHistoryData(event.payload)
+
     }
 
     else {
-      this.handleHistoryData(event.payload)
-
+      this.chartTitle[event.type] = event.payload.toUpperCase()
     }
   }
 
   private handleHistoryData(coinId: string) {
 
-    // console.log(2)
     this.chartService.historyCoin.next(coinId)
 
   }

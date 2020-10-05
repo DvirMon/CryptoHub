@@ -1,0 +1,24 @@
+<div>
+  <mat-grid-list cols="3" rowHeight="5vh">
+    <mat-grid-tile rowspan="6">
+      <mat-grid-list cols="2" rowHeight="5vh">
+        <div *ngFor="let label of doughnutChartLabels">
+          <mat-grid-tile>
+            {{label}}
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <!-- {{dot.data | currency : currentCurrency  }} -->
+          </mat-grid-tile>
+        </div>
+      </mat-grid-list>
+    </mat-grid-tile>
+    <mat-grid-tile rowspan="6"  colspan="2"> 
+      <canvas baseChart
+      [data]="doughnutChartData"
+      [labels]="doughnutChartLabels"
+      [chartType]="doughnutChartType">
+      [options]="doughnutChartOptions"
+    </canvas>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
