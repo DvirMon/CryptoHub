@@ -1,22 +1,18 @@
-// IMPORT ANGULAR
+//  ANGULAR MODULES
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-
 import { ErrorHandler, NgModule } from '@angular/core';
 
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
-
+// ANGULAR CDK
+import { LayoutModule } from '@angular/cdk/layout';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 
-
-// IMPORT SHARED MODULES
+// ANGULAR MATERIAL MODULES
 import { MaterialModule } from '../material/material.module';
-
-// IMPORT COMPONENTS
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
 // INTERCEPTORS
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SpinnerInterceptorService } from '../utilities/interceptors/spinner-interceptor.service';
 import { ErrorsService } from '../utilities/interceptors/errors.service';
 
@@ -31,25 +27,17 @@ import { ChartCardModel } from '../utilities/models/chart-card.mode';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 
-
+// DIRECTIVES & PIPES
 import { TextSizeDirective } from '../utilities/directives/text-size.directive';
 import { TruncatePipe } from '../utilities/pipes/truncate.pipe';
-import { NavigationComponent } from './components/navigation/navigation.component';
-import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
-    DashboardComponent,
     TextSizeDirective,
     TruncatePipe,
-    NavigationComponent
   ],
-  imports: [ 
+  imports: [
     CommonModule,
     DialogModule,
     MaterialModule,
@@ -57,29 +45,14 @@ import { MatListModule } from '@angular/material/list';
     NgxSkeletonLoaderModule,
     VirtualScrollerModule,
     LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule
   ],
   providers: [
-    {
-      provide: CoinModel,
-      useValue: new CoinModel()
-    },
+
     {
       provide: CurrencyModel,
       useValue: new CurrencyModel()
     },
-    {
-      provide: ChartDotModel,
-      useValue: new ChartDotModel()
-    },
-    {
-      provide: ChartCardModel,
-      useValue: new ChartCardModel()
-    },
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: SpinnerInterceptorService,
@@ -91,7 +64,7 @@ import { MatListModule } from '@angular/material/list';
       provide: ErrorHandler,
       useClass: ErrorsService
     },
-  ],  
+  ],
   exports: [
     CommonModule,
     DialogModule,
@@ -101,10 +74,9 @@ import { MatListModule } from '@angular/material/list';
 
     NgxSkeletonLoaderModule,
     VirtualScrollerModule,
-    
-    DashboardComponent,
+
     TextSizeDirective,
     TruncatePipe
   ]
-  })
+})
 export class SharedModule { }

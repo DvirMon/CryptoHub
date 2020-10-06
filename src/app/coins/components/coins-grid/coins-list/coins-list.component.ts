@@ -36,9 +36,10 @@ export class CoinsListComponent implements OnInit, OnDestroy {
     private coinService: CoinsService,
     private formService: FormService,
     private loaderService: LoaderService,
-  ) { }
+  ) { } 
 
   ngOnInit(): void {
+
 
     this.subscribeToStore()
     this.subscribeToLoader()

@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { ChartDotModel } from '../utilities/models/chart-dot.model';
-
-import { environment } from 'src/environments/environment';
-
-import { Observable, Subject } from 'rxjs';
-import { store } from '../utilities/redux/store';
-import { map, switchMap, tap } from 'rxjs/operators';
+// IMPORT MODELS
 import { CoinModel } from '../utilities/models/coin.model';
 import { MarketHistoryModel } from '../utilities/models/market-history.model';
-import { FormService } from './form.service';
+import { ChartDotModel } from '../utilities/models/chart-dot.model';
 import { ChartCardModel } from '../utilities/models/chart-card.mode';
+
+// IMPORT SERVICES
+import { FormService } from './form.service';
+
+// IMPORT REDUX AND RXJS
+import { map, switchMap, tap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+
+import { environment } from 'src/environments/environment';
 
 export interface ChartData {
   usd: ChartDotModel[],
