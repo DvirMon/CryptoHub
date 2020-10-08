@@ -31,6 +31,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
   public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+
     if (request.reportProgress) {
       this.handleProgressSubject(request, true, 0)
       return this.handleProgressInterceptor(next, request)
@@ -41,6 +42,7 @@ export class SpinnerInterceptorService implements HttpInterceptor {
     this.ngZone.run(() => {
       spinnerRef = this.dialogService.openSpinner()
     });
+
 
 
     return this.handleSpinnerInterceptor(next, request, spinnerRef)

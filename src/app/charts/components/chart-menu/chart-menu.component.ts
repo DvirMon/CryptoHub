@@ -2,6 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ChartCardModel } from 'src/app/utilities/models/chart-card.mode';
 import { CoinModel } from 'src/app/utilities/models/coin.model';
 
+import { faCoins } from '@fortawesome/free-solid-svg-icons';
+
+
 @Component({
   selector: 'app-chart-menu',
   templateUrl: './chart-menu.component.html',
@@ -13,16 +16,23 @@ export class ChartMenuComponent implements OnInit {
   @Input() selectedCoins: CoinModel[]
   @Input() currencies: string[]
 
-  @Output() changeChart: EventEmitter<{ payload: string, type: string }> = new EventEmitter()
+  @Output() changeCoin: EventEmitter<{ type: string, coin : string }> = new EventEmitter()
+  @Output() changeCurrency: EventEmitter<{ type: string, currency : string }> = new EventEmitter()
+
+  public faIcon = faCoins;
 
   constructor() { }
 
   ngOnInit(): void {
-  } 
- 
+  }
+
   // LOGIC SECTION
-  public handleMenuChange(payload: string, type: string) {
-    this.changeChart.emit({ payload, type })
+  public handleCurrencyChange(type: string, currency : string) {
+    this.changeCurrency.emit({ type, currency })
+  }
+
+  public handleCoinChange(type: string , coin : string) {
+    this.changeCoin.emit({ type, coin })
   }
 
 

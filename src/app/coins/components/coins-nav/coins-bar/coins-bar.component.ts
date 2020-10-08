@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormService } from 'src/app/services/form.service';
+
 import { SideNavService } from 'src/app/services/side-nav.service';
-import { Observable } from 'rxjs';
 import { CoinModel } from 'src/app/utilities/models/coin.model';
 import { store } from 'src/app/utilities/redux/store';
 
+import { faCoins } from '@fortawesome/free-solid-svg-icons';
+
+ 
 @Component({
   selector: 'app-coins-bar',
   templateUrl: './coins-bar.component.html',
@@ -12,10 +14,9 @@ import { store } from 'src/app/utilities/redux/store';
 })
 export class CoinsBarComponent implements OnInit {
 
-
   public selectedCoins: CoinModel[] = []
-
   public mode: boolean = true
+  public faIcon = faCoins;
 
   constructor(
     private sidenavService: SideNavService

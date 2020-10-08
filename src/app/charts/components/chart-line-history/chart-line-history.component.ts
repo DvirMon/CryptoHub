@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 
 import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
 
-import { ChartService } from 'src/app/services/chart.service';
+import { ChartHistory, ChartService } from 'src/app/services/chart.service';
 
 import { MarketHistoryModel } from 'src/app/utilities/models/market-history.model';
 import { Subscription } from 'rxjs';
@@ -17,6 +17,8 @@ import { map, switchMap } from 'rxjs/operators';
   styleUrls: ['./chart-line-history.component.scss']
 })
 export class ChartLineHistoryComponent implements OnInit, OnDestroy {
+
+  @Input() currentCurrency: string
 
   public lineChartData: ChartDataSets[] = [];
 
@@ -67,12 +69,13 @@ export class ChartLineHistoryComponent implements OnInit, OnDestroy {
 
   private subscribeToConId() {
     this.unsubscribe = this.chartService.historyCoin.subscribe(
-      (coinId: string) => {
-        this.coinId = coinId
+      (history: ChartHistory) => {
+        this.coinId = history.coinId
       })
-  }
+  } 
 
   private subscribeToChartData() {
+    console.log(3)
     this.chartService.getCoinMarketHistory().subscribe(
       (market_history: MarketHistoryModel) => {
         this.handleChartData(market_history)
@@ -83,14 +86,12 @@ export class ChartLineHistoryComponent implements OnInit, OnDestroy {
 
   // HTTP SECTION
   private handleChartData(market_history: MarketHistoryModel) {
-    this.lineChartData = []
 
+    this.lineChartData = []
 
     this.lineChartData.push(new ChartDotModel(
       this.coinId, market_history.values
     ))
-
-    this.lineChartOptions.scales.yAxes[0].ticks.stepSize = this.handleStepSize(market_history.values)
 
     this.lineChartLabels = market_history.dates
 

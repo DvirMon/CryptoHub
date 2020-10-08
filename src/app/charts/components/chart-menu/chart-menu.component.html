@@ -1,20 +1,27 @@
-<div *ngIf="card.type === 'line' || card.type ==='pie'">
-  <button mat-icon-button class="more-button" [matMenuTriggerFor]="currencyMenu">
+<div class="more-button">
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>
   </button>
+
+  <mat-menu #menu="matMenu">
+
+    <button *ngIf="card.type === 'history'" mat-menu-item [matMenuTriggerFor]="coinsMenu">
+      <fa-icon [icon]="faIcon"></fa-icon>
+    </button>
+    <button  mat-menu-item [matMenuTriggerFor]="currencyMenu">
+      <mat-icon>attach_money</mat-icon>
+    </button>
+  </mat-menu>
+
   <mat-menu #currencyMenu="matMenu" xPosition="before">
-    <button (click)="handleMenuChange(currency, card.type)" mat-menu-item *ngFor="let currency of currencies">
+    <button (click)="handleCurrencyChange(card.type, currency)" mat-menu-item *ngFor="let currency of currencies">
       {{currency | uppercase}}
     </button>
   </mat-menu>
-</div>
 
-<div *ngIf="card.type === 'history' || card.type ==='doughnut'">
-  <button mat-icon-button class="more-button" [matMenuTriggerFor]="coinsMenu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
   <mat-menu #coinsMenu="matMenu" xPosition="before">
-    <button (click)="handleMenuChange(coin.id, card.type)" mat-menu-item *ngFor="let coin of selectedCoins">
+    <button (click)="handleCoinChange(card.type, coin.id)" mat-menu-item *ngFor="let coin of selectedCoins">
       {{coin.symbol | uppercase}}
     </button>
   </mat-menu>

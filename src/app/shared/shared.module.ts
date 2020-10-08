@@ -11,21 +11,20 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MaterialModule } from '../material/material.module';
 import { MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 
+
 // INTERCEPTORS
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SpinnerInterceptorService } from '../utilities/interceptors/spinner-interceptor.service';
 import { ErrorsService } from '../utilities/interceptors/errors.service';
+import { DialogModule } from '../dialog/dialog.module';
 
 // MODELS
-import { CoinModel } from '../utilities/models/coin.model';
 import { CurrencyModel } from '../utilities/models/currency.model';
-import { DialogModule } from '../dialog/dialog.module';
-import { ChartDotModel } from '../utilities/models/chart-dot.model';
-import { ChartCardModel } from '../utilities/models/chart-card.mode';
 
 // EXTERNAL MODULES
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // DIRECTIVES & PIPES
 import { TextSizeDirective } from '../utilities/directives/text-size.directive';
@@ -33,7 +32,7 @@ import { TruncatePipe } from '../utilities/pipes/truncate.pipe';
 
 
 @NgModule({
-  declarations: [
+  declarations: [ 
     TextSizeDirective,
     TruncatePipe,
   ],
@@ -44,6 +43,7 @@ import { TruncatePipe } from '../utilities/pipes/truncate.pipe';
     ScrollingModule,
     NgxSkeletonLoaderModule,
     VirtualScrollerModule,
+    FontAwesomeModule,
     LayoutModule,
   ],
   providers: [
@@ -74,7 +74,8 @@ import { TruncatePipe } from '../utilities/pipes/truncate.pipe';
 
     NgxSkeletonLoaderModule,
     VirtualScrollerModule,
-
+    FontAwesomeModule,
+ 
     TextSizeDirective,
     TruncatePipe
   ]

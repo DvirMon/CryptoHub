@@ -3,7 +3,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ChartData, ChartService } from 'src/app/services/chart.service';
 
 import { ChartCardModel } from 'src/app/utilities/models/chart-card.mode';
-import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
+import { ChartDotModel, DoughnutDot } from 'src/app/utilities/models/chart-dot.model';
 import { CoinModel } from 'src/app/utilities/models/coin.model';
 
 import { store } from 'src/app/utilities/redux/store';
@@ -23,27 +23,28 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   public cols: Observable<number> = this.chartService.cols
 
 
-  public chartTitle = {
+  public currentChartCurrency = {
     line: "USD",
     pie: "USD",
-    doughnut: "",
+    history: "USD",
   }
 
   public data: ChartDotModel[] = []
+  public doughnutData: DoughnutDot[] = []
   public selectedCoins: CoinModel[] = []
 
   public currencies: string[] = []
   public ids: string[] = []
 
   public coinToDelete: CoinModel
-  public currentCurrency: string
-  public coinId: string
 
   private chartData: ChartData;
+  private currentHistoryCoin: string;
 
   constructor(
     private chartService: ChartService,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.subscribeToStore()
@@ -55,8 +56,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
 
     setTimeout(() => {
       this.handleLineHistoryChartData(this.selectedCoins[0].id)
-      this.handleDoughnutChartData(this.selectedCoins[0].id)
-    }, 800)
+    }, 1000)
   }
 
 
@@ -68,7 +68,6 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
         this.chartData = chartData
         this.data = this.chartData.usd
         this.currencies = this.chartData.currencies
-
       }
     )
   }
@@ -90,6 +89,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
     })
   }
 
+  // DELETE COIN WHEN TOGGLE
   private subscribeToCoinId() {
     this.chartService.deleteCoin.subscribe(
       (coin: CoinModel) => {
@@ -104,34 +104,37 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
 
   // LOGIC SECTION
 
-  public handleMenuChange(event: { payload: string, type: string }) {
+  // Change chart data by coin currency
+  public handleCurrencyChange(payload: { type: string, currency: string }) {
 
-    if (event.type === "pie" || event.type === "line") {
 
-      this.data = this.chartData[event.payload]
-      this.chartTitle[event.type] = event.payload.toUpperCase()
-    }
+    this.currentChartCurrency[payload.type] = payload.currency.toUpperCase()
 
-    else if (event.type === "history") {
-      this.handleLineHistoryChartData(event.payload)
+    if (payload.type === "pie" || payload.type === "line") {
+      this.data = this.chartData[payload.currency]
     }
 
     else {
-      this.handleDoughnutChartData(event.payload)
+      console.log()
+      this.handleLineHistoryChartData(this.currentHistoryCoin)
     }
+
   }
 
+  // Change chart data by coin 
+
+  public handleCoinChange(payload: { type: string, coin: string }) {
+    this.handleLineHistoryChartData(payload.coin)
+  }
+
+  // handle history chart subject
   private handleLineHistoryChartData(coinId: string) {
-
-    this.chartService.historyCoin.next(coinId)
-
+    this.currentHistoryCoin = coinId
+    this.chartService.historyCoin.next({ coinId, currency: this.currentChartCurrency.history })
   }
 
-  private handleDoughnutChartData(coinId: string) {
-    this.chartTitle["doughnut"] = coinId
-    this.chartService.doughnutCoin.next(coinId)
 
-  }
+
 
 
 

@@ -1,3 +1,5 @@
+import { Injectable } from '@angular/core'
+
 export class ChartDotModel {
 
   constructor(
@@ -5,4 +7,12 @@ export class ChartDotModel {
     public data?: number[],
   ) { }
 }
+
+export class DoughnutDot {
+  constructor(
+    public label?: string,
+    public data?: number
+  ) { }
+}
+
 

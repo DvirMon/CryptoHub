@@ -26,13 +26,10 @@ export class ChartPieCardComponent implements OnInit , OnDestroy{
     maintainAspectRatio: false,
   }
 
-  public pieChartData: SingleDataSet = [];
   public pieChartLabels: Label[] = [];
+  public pieChartData: SingleDataSet = [];
   public pieChartType: ChartType = 'pie';
   public pieChartLegend = true;
-
-  public label: any
-  public currency: any
 
   private ids: string[] = []
 
@@ -44,7 +41,6 @@ export class ChartPieCardComponent implements OnInit , OnDestroy{
   ngOnInit() {
     this.subscribeToStore()
     this.handlePieChartData()
-    this.setStartData()
     this.subscribeToCoinDelete()
   }
 
@@ -89,7 +85,7 @@ export class ChartPieCardComponent implements OnInit , OnDestroy{
 
   // CHART SECTION
   private handlePieChartData() {
-    this.data.map(dot => {
+    this.data.map((dot : ChartDotModel) => {
       this.pieChartData.push(dot.data)
       this.pieChartLabels.push(dot.label)
     })
@@ -98,10 +94,6 @@ export class ChartPieCardComponent implements OnInit , OnDestroy{
 
   // LOGIC SECTION
 
-  private setStartData() {
-    this.label = this.pieChartLabels[0]
-    this.currency = this.pieChartData[0]
-  }
 
   private cleanChartData() {
     this.pieChartData = []

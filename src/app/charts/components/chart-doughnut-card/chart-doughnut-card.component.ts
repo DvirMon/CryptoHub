@@ -1,23 +1,18 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChartOptions, ChartType } from 'chart.js';
-import { Label, MultiDataSet, SingleDataSet } from 'ng2-charts';
-
+import { Label, SingleDataSet } from 'ng2-charts';
 import { ChartService } from 'src/app/services/chart.service';
-import { CoinsService } from 'src/app/services/coins.service';
 
-import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
-import { CurrencyModel } from 'src/app/utilities/models/currency.model';
-
-import { Subscription } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { DoughnutDot } from 'src/app/utilities/models/chart-dot.model';
 
 @Component({
   selector: 'app-chart-doughnut-card',
   templateUrl: './chart-doughnut-card.component.html',
   styleUrls: ['./chart-doughnut-card.component.scss']
 })
-export class ChartDoughnutCardComponent implements OnInit, OnDestroy {
+export class ChartDoughnutCardComponent implements OnInit {
 
+  @Input() data: DoughnutDot[] = []
 
   public doughnutChartOptions: ChartOptions = {
     responsive: true,
@@ -28,74 +23,53 @@ export class ChartDoughnutCardComponent implements OnInit, OnDestroy {
   public doughnutChartData: SingleDataSet = [];
   public doughnutChartType: ChartType = 'doughnut';
 
-  public data: ChartDotModel[] = []
-
-  private unsubscribe: Subscription
 
   constructor(
-    private chartService: ChartService,
-    private coinService: CoinsService
+    private chartService: ChartService
   ) { }
 
   ngOnInit() {
+
     this.subscribeToCoinId()
+
+    this.handleDoughnutChartData()
+    setTimeout(() => {
+
+    }, 500)
   }
 
-  ngOnDestroy(): void {
-    this.unsubscribe.unsubscribe()
-  }
 
   private subscribeToCoinId() {
 
-    this.unsubscribe = this.chartService.doughnutCoin.pipe(
-      switchMap((coinId: string) => {
-        return this.coinService.getCoinCurrency(coinId)
-      }))
-      .pipe(
-        map((currency: CurrencyModel) => {
-          delete currency.url
-          return currency
-        }))
-      .subscribe(
-        (currency: CurrencyModel) => {
-          this.clearData()
-          this.handleChartDot(currency)
+    this.chartService.doughnutCoin.subscribe(
+      (coinId: string) => {
+        if (coinId)  {
+          this.clearChartData()
+          this.handleDoughnutChartData()
         }
-
-      )
-  }
-
-  private handleChartDot(currency: any) {
-
-
-    for (const item in currency) {
-
-      this.handleDoughnutData(currency[item], item)
-      this.handleChartInfo(currency[item], item)
-    }
+      }
+    )
   }
 
 
-  private handleChartInfo(data: any, item: string) {
+  private handleDoughnutChartData() {
 
-    const dot = {
-      label: item.toLocaleUpperCase(),
-      data: data
-    }
+    console.log(this.data)
 
-    this.data.push(dot)
+    this.data.map((dot: DoughnutDot) => {
+      this.doughnutChartLabels.push(dot.label)
+      this.doughnutChartData.push(dot.data)
+    })
+
+
   }
 
-  private handleDoughnutData(data: number, item: string) {
-
-    this.doughnutChartLabels.push(item)
-    this.doughnutChartData.push(data)
-  }
-
-  private clearData() {
-    this.data = []
+  private clearChartData() {
     this.doughnutChartLabels = []
     this.doughnutChartData = []
+
   }
+
+
 
 }

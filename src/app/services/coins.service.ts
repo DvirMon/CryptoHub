@@ -63,7 +63,7 @@ export class CoinsService {
   public addSelectedCoin(coin: CoinModel) {
     this.formService.handleStore(ActionType.AddCoin, coin)
   }
-
+ 
   public deleteSelectedCoin(coinId: string) {
     this.formService.handleStore(ActionType.DeleteCoin, coinId)
   }
