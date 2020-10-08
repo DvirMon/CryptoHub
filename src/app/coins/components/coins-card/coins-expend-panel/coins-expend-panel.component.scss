@@ -4,9 +4,9 @@ mat-expansion-panel,
   background-color: rgba(#71c9db, 0.6);
   font-size: 18px;
 
-  &:hover {
-    background-color: rgba(#71c9db, 0.6);
-  }
+  // &:hover {
+  background-color: rgba(#71c9db, 0.6);
+  // }
 }
 
 ngx-skeleton-loader {
@@ -16,3 +16,7 @@ ngx-skeleton-loader {
   display: flex;
 }
 
+.mat-expansion-panel:not(.mat-expanded):not([aria-disabled="true"])
+  .mat-expansion-panel-header:hover {
+  background-color: rgba(#71c9db, 0.6);
+}

@@ -2,21 +2,23 @@
   background-color: transparent;
   height: 90vh;
 }
-.drawer-sidenav {
-  width: 117px;
+mat-list, .drawer-sidenav { 
+  width: 123px;
 }
 
 mat-list-item {
+  // width: 135px;
   border: transparent;
   outline: transparent;
-
+  
   cursor: pointer;
-
+  
   &.active {
     background-color: #bfa3ee;
   }
 }
 
 .mat-button {
+  width: 123px;
   padding: 0;
 }
