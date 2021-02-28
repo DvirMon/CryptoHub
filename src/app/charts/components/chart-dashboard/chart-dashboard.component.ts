@@ -9,6 +9,8 @@ import { CoinModel } from 'src/app/utilities/models/coin.model';
 import { store } from 'src/app/utilities/redux/store';
 
 import { Observable, of } from 'rxjs';
+import { FormService } from 'src/app/services/form.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-chart-dashboard',
@@ -19,8 +21,35 @@ import { Observable, of } from 'rxjs';
 export class ChartDashboardComponent implements OnInit, AfterViewInit {
 
   // GRID PARAMS
-  public cards: Observable<ChartCardModel[]> = this.chartService.cards
-  public cols: Observable<number> = this.chartService.cols
+  // public cols: Observable<number> = this.chartService.cols
+  // public cards: Observable<ChartCardModel[]> = this.chartService.cards
+
+
+
+  public isMobile: Observable<boolean> = this.formService.isMobile()
+
+  public cardsMobile : ChartCardModel[] = this.chartService.cardsMobileGrid;
+  public cardsDesk : ChartCardModel[] = this.chartService.cardsWebGrid;
+
+  public cards: Observable<ChartCardModel[]> = this.formService.isHandset().pipe(
+    map(({ matches }) => {
+      if (matches) {
+        return this.chartService.cardsMobileGrid
+      }
+      return this.chartService.cardsWebGrid
+    })
+    );
+
+    public cols: Observable<number> = this.formService.isHandset().pipe(
+      map(({ matches }) => {
+        if (matches) {
+          console.log(matches)
+          return 1
+        }
+        console.log(matches)
+      return 3
+    }))
+
 
   public currentChartCurrency = {
     line: "USD",
@@ -41,6 +70,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
 
   constructor(
     private chartService: ChartService,
+    private formService : FormService
   ) {
   }
 

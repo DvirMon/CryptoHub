@@ -42,31 +42,31 @@ export class ChartService {
   public historyCoin: Subject<ChartHistory> = new Subject()
 
   // GRID PARAMS
-  public cards: Observable<ChartCardModel[]> = this.formService.isHandset().pipe(
-    map(({ matches }) => {
+  // public cards: Observable<ChartCardModel[]> = this.formService.isHandset().pipe(
+  //   map(({ matches }) => {
 
-      if (matches) {
-        return this.cardsMobileGrid
-      }
-      return this.cardsWebGrid
-    })
-  );
+  //     if (matches) {
+  //       return this.cardsMobileGrid
+  //     }
+  //     return this.cardsWebGrid
+  //   })
+  // );
 
-  public cols: Observable<number> = this.formService.isHandset().pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return 1
-      }
-      return 3
-    }))
+  // public cols: Observable<number> = this.formService.isHandset().pipe(
+  //   map(({ matches }) => {
+  //     if (matches) {
+  //       return 1
+  //     }
+  //     return 3
+  //   }))
 
 
 
-  private cardsMobileGrid: ChartCardModel[] = [
+  public cardsMobileGrid: ChartCardModel[] = [
     { title: 'Coins Real-Time Market Price', type: 'line', cols: 1, rows: 6 },
   ];
 
-  private cardsWebGrid: ChartCardModel[] = [
+  public cardsWebGrid: ChartCardModel[] = [
     { title: 'Coins Real-Time Market Price', type: 'line', cols: 2, rows: 6 },
     { title: 'Coins Market Value', type: 'pie', cols: 1, rows: 3 },
     { title: 'Coin Market Price History', type: 'history', cols: 3, rows: 4 },
@@ -76,7 +76,6 @@ export class ChartService {
 
   constructor(
     private http: HttpClient,
-    private formService: FormService
   ) { }
 
 

@@ -12,6 +12,7 @@ import { ChartMenuComponent } from './components/chart-menu/chart-menu.component
 import { ChartLineCardComponent } from './components/chart-line-card/chart-line-card.component';
 import { ChartLineHistoryComponent } from './components/chart-line-history/chart-line-history.component';
 import { ChartPieCardComponent } from './components/chart-pie-card/chart-pie-card.component';
+import { ChartCardComponent } from './components/chart-card/chart-card.component';
 
  
 
@@ -23,6 +24,7 @@ import { ChartPieCardComponent } from './components/chart-pie-card/chart-pie-car
     ChartLineCardComponent,
     ChartPieCardComponent,
     ChartLineHistoryComponent,
+    ChartCardComponent,
   ],
   imports: [ 
     CommonModule,

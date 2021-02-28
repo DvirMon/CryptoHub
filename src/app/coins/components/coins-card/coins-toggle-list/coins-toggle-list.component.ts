@@ -9,6 +9,7 @@ import { ToggleService } from 'src/app/services/toggle.service';
 import { CoinModel } from 'src/app/utilities/models/coin.model';
 import { CoinsDialogComponent } from '../../coins-dialog/coins-dialog.component';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,7 +25,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class CoinsToggleListComponent implements OnInit {
 
-   
+
   @Input() dialog: boolean
   @Input() selectedCoins: CoinModel[]
   @Input() lastSelect: CoinModel
@@ -34,7 +35,8 @@ export class CoinsToggleListComponent implements OnInit {
 
   constructor(
     private coinsService: CoinsService,
-    private toggleService: ToggleService
+    private toggleService: ToggleService,
+    private router : Router
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +48,7 @@ export class CoinsToggleListComponent implements OnInit {
     this.checked = false
     this.toggleService.toggleAllSelectedCoins()
     this.coinsService.deleteAllSelectedCoin()
+    this.router.navigateByUrl('/coins')
   }
 
 
