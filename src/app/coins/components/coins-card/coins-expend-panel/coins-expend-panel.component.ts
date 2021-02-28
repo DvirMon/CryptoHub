@@ -15,20 +15,21 @@ export class CoinsExpendPanelComponent implements OnInit {
   @Input() coin: CoinModel;
   @Input() loader: boolean;
 
-  public opened: boolean = false;
   private data: boolean = false
-  public isMobile: Observable<boolean> = this.formService.isMobile()
+
+  public opened: boolean = false;
+  public isMobile: Observable<boolean> = this.formService.isMobile();
+  public currency: CurrencyModel = CurrencyModel.create();
 
   constructor(
     private coinsService: CoinsService,
     private formService: FormService,
-    public currency: CurrencyModel
   ) { }
 
   ngOnInit(): void {
   }
 
-  // HTTP SECTION 
+  // HTTP SECTION
 
   public getCoinData() {
 

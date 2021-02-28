@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 
 import { DialogService } from 'src/app/services/dialog.service';
 
@@ -12,7 +12,8 @@ import { store } from '../redux/store';
 export class ChartGuard implements CanActivate {
 
   constructor(
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private router : Router
   ) {
   }
 
@@ -34,7 +35,7 @@ export class ChartGuard implements CanActivate {
     }
     else {
       this.dialogService.handleErrorDialog({ error: "Please choose at least one coin to continue" })
-      return false
+      return this.router.navigateByUrl('coins')
     }
 
 

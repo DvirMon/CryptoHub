@@ -22,7 +22,6 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   public cards: Observable<ChartCardModel[]> = this.chartService.cards
   public cols: Observable<number> = this.chartService.cols
 
-
   public currentChartCurrency = {
     line: "USD",
     pie: "USD",
@@ -120,7 +119,7 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
 
   }
 
-  // Change chart data by coin 
+  // Change chart data by coin
 
   public handleCoinChange(payload: { type: string, coin: string }) {
     this.handleLineHistoryChartData(payload.coin)

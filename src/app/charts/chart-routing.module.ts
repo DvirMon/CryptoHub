@@ -7,7 +7,7 @@ import { ChartDashboardComponent } from './components/chart-dashboard/chart-dash
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     canActivate: [ChartGuard],
     component: ChartDashboardComponent,
   },

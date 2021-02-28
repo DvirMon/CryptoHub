@@ -67,7 +67,7 @@ export class ChartService {
   ];
 
   private cardsWebGrid: ChartCardModel[] = [
-    { title: 'Coins Real-Time Market Price', type: 'line', cols: 2, rows: 4 },
+    { title: 'Coins Real-Time Market Price', type: 'line', cols: 2, rows: 6 },
     { title: 'Coins Market Value', type: 'pie', cols: 1, rows: 3 },
     { title: 'Coin Market Price History', type: 'history', cols: 3, rows: 4 },
   ];

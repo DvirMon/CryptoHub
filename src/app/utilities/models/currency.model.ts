@@ -6,4 +6,8 @@ export class CurrencyModel {
     public ils? : number,
     public url? : string,
   ) {}
+
+  public static create () : CurrencyModel {
+    return new CurrencyModel();
+  }
 }

@@ -52,7 +52,6 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
     this.subscribeToStore()
     this.setStartChartData()
     this.getChartData()
-    console.log(this.currentCurrency)
     this.handleAxiosTitle()
   }
 
@@ -154,8 +153,5 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
 
   private handleAxiosTitle() {
     this.lineChartOptions.scales.yAxes[0].scaleLabel.labelString = this.currentCurrency
-
-    console.log(this.lineChartOptions.scales.yAxes[0].scaleLabel.labelString)
-
   }
 }

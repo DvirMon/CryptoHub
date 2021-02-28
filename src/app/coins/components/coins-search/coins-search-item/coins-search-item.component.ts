@@ -27,12 +27,12 @@ export class CoinsSearchItemComponent implements OnInit {
   private selected: boolean
 
   public checked: boolean
+  public currency: CurrencyModel = CurrencyModel.create();
 
   constructor(
     private coinsService: CoinsService,
     private dialogService: DialogService,
     private toggleService: ToggleService,
-    public currency: CurrencyModel
   ) { }
 
 
@@ -40,8 +40,6 @@ export class CoinsSearchItemComponent implements OnInit {
 
     if (this.coin !== undefined) {
       this.subscribeToStore()
-      // this.subscribeToToggleData()
-      // this.subscribeToToggleState()
       this.handleCoinChecked()
 
     }
@@ -57,8 +55,6 @@ export class CoinsSearchItemComponent implements OnInit {
     })
     this.selectedCoins = store.getState().coins.selectedCoins
   }
-
-
 
 
   // LOGIC SECTION

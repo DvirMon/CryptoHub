@@ -8,11 +8,8 @@ export class SideNavService {
 
   constructor() { }
 
-  // public sidenav: MatSidenav;
   public sidenav: MatDrawer;
 
-
-  // public setSidenav(sidenav: MatSidenav) {
   public setSidenav(sidenav: MatDrawer) {
     this.sidenav = sidenav;
   }

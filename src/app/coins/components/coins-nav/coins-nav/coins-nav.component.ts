@@ -14,8 +14,6 @@ import { Observable } from 'rxjs';
 
 // IMPORT REDUX
 import { store } from 'src/app/utilities/redux/store';
-import { CoinsService } from 'src/app/services/coins.service';
-import { SideNavService } from 'src/app/services/side-nav.service';
 
 
 @Component({
@@ -32,7 +30,7 @@ export class CoinsNavComponent implements OnInit {
   public isMobile: Observable<boolean> = this.formService.isMobile()
 
   public routers = [
-    { label: "Home", route: "/coins/list", icon: "home" },
+    { label: "Home", route: "/coins", icon: "home" },
     { label: "Real-Time Charts", route: "/coins/charts", icon: "insert_chart" },
   ]
 

@@ -72,10 +72,9 @@ export class ChartLineHistoryComponent implements OnInit, OnDestroy {
       (history: ChartHistory) => {
         this.coinId = history.coinId
       })
-  } 
+  }
 
   private subscribeToChartData() {
-    console.log(3)
     this.chartService.getCoinMarketHistory().subscribe(
       (market_history: MarketHistoryModel) => {
         this.handleChartData(market_history)
