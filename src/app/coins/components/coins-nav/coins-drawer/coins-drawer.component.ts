@@ -32,6 +32,10 @@ export class CoinsDrawerComponent implements OnInit, AfterViewInit {
     this.sidenavService.setSidenav(this.sidenav);
   }
 
+  onClick() : void {
+  this.sidenav.close()
+  }
+
 
 
 

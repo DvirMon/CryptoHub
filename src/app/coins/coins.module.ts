@@ -7,12 +7,10 @@ import { SharedModule } from '../shared/shared.module';
 import { CoinsRootComponent } from './components/coins-grid/coins-root/coins-root.component';
 import { CoinsListComponent } from './components/coins-grid/coins-list/coins-list.component';
 import { CoinsItemComponent } from './components/coins-grid/coins-item/coins-item.component';
- 
+
 // NAVIGATION COMPONENTS
 import { CoinsBarComponent } from './components/coins-nav/coins-bar/coins-bar.component';
-import { CoinsNavComponent } from './components/coins-nav/coins-nav/coins-nav.component';
 import { CoinsDrawerComponent } from './components/coins-nav/coins-drawer/coins-drawer.component';
-
 
 // SEARCH COMPONENTS
 import { CoinsSearchComponent } from './components/coins-search/coins-search/coins-search.component';
@@ -25,23 +23,21 @@ import { CoinsToggleComponent } from './components/coins-card/coins-toggle/coins
 import { CoinsToggleListComponent } from './components/coins-card/coins-toggle-list/coins-toggle-list.component';
 
 @NgModule({
-  declarations: [ 
- 
+  declarations: [
+
     CoinsRootComponent,
     CoinsListComponent,
     CoinsItemComponent,
 
     CoinsBarComponent,
-    CoinsNavComponent,
+    CoinsDrawerComponent,
 
     CoinsSearchComponent,
     CoinsSearchItemComponent,
 
-
     CoinsDialogComponent,
     CoinsExpendPanelComponent,
     CoinsToggleComponent,
-    CoinsDrawerComponent,
     CoinsToggleListComponent,
 
 
