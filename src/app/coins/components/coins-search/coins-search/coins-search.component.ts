@@ -16,7 +16,7 @@ import { Observable, of } from 'rxjs';
 export class CoinsSearchComponent implements OnInit {
 
   @Input() drawer: MatSidenav
-  
+
   @ViewChild('searchInput') searchInput: ElementRef;
 
   public searchControl = new FormControl();

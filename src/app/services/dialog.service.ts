@@ -45,7 +45,6 @@ export class DialogService {
 
   constructor(
     private dialog: MatDialog,
-    private formService: FormService,
     @Inject(MAT_DIALOG_DATA) private data: DialogData,
     @Inject(MAT_DIALOG_DEFAULT_OPTIONS) private dialogConfig: MatDialogConfig
   ) { }
@@ -86,6 +85,7 @@ export class DialogService {
     switch (data.type) {
       case "error":
         dialogConfig.disableClose = true;
+        dialogConfig.hasBackdrop = true;
         dialogConfig.data = data
         dialogConfig.panelClass = "dialog-error"
         break

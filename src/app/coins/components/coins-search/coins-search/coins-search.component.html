@@ -1,14 +1,18 @@
+
 <mat-toolbar color="primary">
+
+<form action=".">
   <mat-form-field class="search-input">
     <mat-label>Please Enter Coin Symbol</mat-label>
-    <input type="text" matInput #searchInput autocomplete="off"
+    <input type="search" matInput #searchInput autocomplete="off"
       [formControl]="searchControl">
     <span *ngIf="(searchEntries | async).length > 0" class="matsuffix" matSuffix>Found
       {{(searchEntries | async).length}} results</span>
     <span *ngIf="results" class="matsuffix" matSuffix> Found 0 results</span>
   </mat-form-field>
+</form>
   <span class="spacer"></span>
-  <button mat-icon-button (click)="drawer.toggle(false)">
+  <button type="button" mat-icon-button (click)="drawer.toggle(false)">
     <mat-icon aria-label="Side nav toggle icon">clear</mat-icon>
   </button>
 </mat-toolbar>

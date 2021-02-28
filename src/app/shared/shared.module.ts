@@ -1,6 +1,7 @@
 //  ANGULAR MODULES
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule} from '@angular/forms' 
 import { ErrorHandler, NgModule } from '@angular/core';
 
 // ANGULAR CDK
@@ -69,6 +70,7 @@ import { TruncatePipe } from '../utilities/pipes/truncate.pipe';
     CommonModule,
     DialogModule,
     ReactiveFormsModule,
+    FormsModule,
     ScrollingModule,
     MaterialModule,
 

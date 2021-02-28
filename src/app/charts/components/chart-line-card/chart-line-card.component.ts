@@ -15,14 +15,14 @@ import { store } from 'src/app/utilities/redux/store';
 export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
-  @Input() selectedCoins: CoinModel[] = []
-  @Input() coinToDelete: CoinModel
-  @Input() currentCurrency: string = "";
-  
+  @Input() selectedCoins: CoinModel[];
+  @Input() coinToDelete: CoinModel;
+  @Input() currentCurrency: string;
+
   // CHART PARAMS
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
-  
+
   public lineChartOptions: ChartOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -30,20 +30,20 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
       yAxes: [{
         scaleLabel: {
           display: true,
-          labelString: 'Current Price'
+          labelString: ""
         }
       }]
     }
   }
-  
+
   public lineChartLegend = true;
   public lineChartType: ChartType = 'line';
-  
+
   // COMPONENT PRAMS
   private ids: string[] = []
   private data: ChartDotModel[] = []
   private clearInterval: any
-  
+
   constructor(
     private chartService: ChartService
   ) { }
@@ -52,6 +52,8 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
     this.subscribeToStore()
     this.setStartChartData()
     this.getChartData()
+    console.log(this.currentCurrency)
+    this.handleAxiosTitle()
   }
 
   ngAfterViewInit(): void {
@@ -100,6 +102,7 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
     this.chartService.getChartData(this.ids).subscribe(
       (chartData: ChartData) => {
         this.data = chartData[this.currentCurrency.toLocaleLowerCase()]
+        this.handleAxiosTitle()
         this.deleteChartDots()
         this.updateChartDots()
         this.formatChartDots()
@@ -147,5 +150,12 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
       })
       this.lineChartLabels.shift()
     }
+  }
+
+  private handleAxiosTitle() {
+    this.lineChartOptions.scales.yAxes[0].scaleLabel.labelString = this.currentCurrency
+
+    console.log(this.lineChartOptions.scales.yAxes[0].scaleLabel.labelString)
+
   }
 }

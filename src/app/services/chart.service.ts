@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 // IMPORT MODELS
 import { CoinModel } from '../utilities/models/coin.model';
 import { MarketHistoryModel } from '../utilities/models/market-history.model';
-import { ChartDotModel, DoughnutDot } from '../utilities/models/chart-dot.model';
+import { ChartDotModel } from '../utilities/models/chart-dot.model';
 import { ChartCardModel } from '../utilities/models/chart-card.mode';
 
 // IMPORT SERVICES
@@ -40,8 +40,6 @@ export class ChartService {
 
   public deleteCoin: Subject<CoinModel> = new Subject()
   public historyCoin: Subject<ChartHistory> = new Subject()
-  public doughnutCoin: Subject<string> = new Subject()
-
 
   // GRID PARAMS
   public cards: Observable<ChartCardModel[]> = this.formService.isHandset().pipe(
@@ -106,28 +104,6 @@ export class ChartService {
 
     return this.http.get<CurrencyModel>(this.url + "/currency/" + id, { reportProgress: true })
 
-  }
-
-  public handleDoughnutData(coinId: string): Observable<DoughnutDot[]> {
-
-    return this.getCoinCurrency(coinId)
-      .pipe(
-        map((currency: CurrencyModel) => {
-          delete currency.url
-          return this.formatDoughnutDot(currency)
-        }))
-
-  }
-
-  private formatDoughnutDot(currency: CurrencyModel) {
-
-    let data: DoughnutDot[] = []
-    for (const field in currency) {
-
-      data.push(new DoughnutDot(field.toUpperCase(), currency[field]))
-    }
-
-    return data
   }
 
 }

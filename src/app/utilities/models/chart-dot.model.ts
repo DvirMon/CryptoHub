@@ -7,12 +7,3 @@ export class ChartDotModel {
     public data?: number[],
   ) { }
 }
-
-export class DoughnutDot {
-  constructor(
-    public label?: string,
-    public data?: number
-  ) { }
-}
-
-

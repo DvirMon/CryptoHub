@@ -3,7 +3,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ChartData, ChartService } from 'src/app/services/chart.service';
 
 import { ChartCardModel } from 'src/app/utilities/models/chart-card.mode';
-import { ChartDotModel, DoughnutDot } from 'src/app/utilities/models/chart-dot.model';
+import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
 import { CoinModel } from 'src/app/utilities/models/coin.model';
 
 import { store } from 'src/app/utilities/redux/store';
@@ -30,7 +30,6 @@ export class ChartDashboardComponent implements OnInit, AfterViewInit {
   }
 
   public data: ChartDotModel[] = []
-  public doughnutData: DoughnutDot[] = []
   public selectedCoins: CoinModel[] = []
 
   public currencies: string[] = []

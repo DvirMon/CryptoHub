@@ -4,7 +4,7 @@
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
-            {{card.title | titlecase}} ({{currentChartCurrency[card.type]}})
+            {{card.title | titlecase}} 
 
             <app-chart-menu [card]="card" [currencies]="currencies" [selectedCoins]="selectedCoins"
               (changeCurrency)="handleCurrencyChange($event)" (changeCoin)="handleCoinChange($event)">
