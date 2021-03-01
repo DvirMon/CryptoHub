@@ -9,6 +9,7 @@
 
     </mat-card-title>
   </mat-card-header>
+
   <mat-card-content class="dashboard-card-content" *ngIf="data.length > 0">
 
     <div *ngIf="card.type === 'line'">
@@ -16,12 +17,15 @@
       [currentCurrency]="currentChartCurrency.line">
     </app-chart-line-card>
   </div>
+
   <div *ngIf="card.type === 'pie'">
     <app-chart-pie-card [data]="data" [currentCurrency]="currentChartCurrency.pie">
     </app-chart-pie-card>
   </div>
+
   <div *ngIf="card.type === 'history'">
     <app-chart-line-history [currentCurrency]="currentChartCurrency.history"></app-chart-line-history>
   </div>
+  
 </mat-card-content>
 </mat-card>

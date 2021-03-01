@@ -4,9 +4,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 // IMPORTS MATERIAL
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-// IMPORTS SERVICES
-import { FormService } from './form.service';
-
 // IMPORTS MODELS
 import { CoinModel } from '../utilities/models/coin.model';
 
@@ -56,13 +53,14 @@ export class DialogService {
     return this.dialog.open(DialogComponent, this.handleConfig(data));
   }
 
-  // open error dialog 
+  // open error dialog
   public handleErrorDialog(error: HttpErrorResponse | ErrorDialogData) {
-    const payload = this.handleErrorDialogData(error)
+    const payload = this.handleErrorDialogMessage(error)
     const data = this.handleDate("error", payload)
     this.dialog.open(DialogComponent, this.handleConfig(data))
   }
 
+  // handle coins dialog
   public handleCoinsDialog(payload: CoinsDialogData): MatDialogRef<CoinsDialogComponent> {
     const data = this.handleDate('coins', payload)
     return this.dialog.open(CoinsDialogComponent, this.handleConfig(data));
@@ -82,25 +80,21 @@ export class DialogService {
 
     const dialogConfig = { ...this.dialogConfig }
 
+    dialogConfig.hasBackdrop = true;
+    dialogConfig.data = data;
+
     switch (data.type) {
       case "error":
         dialogConfig.disableClose = true;
-        dialogConfig.hasBackdrop = true;
-        dialogConfig.data = data
         dialogConfig.panelClass = "dialog-error"
         break
-
       case "spinner":
         dialogConfig.autoFocus = true;
-        dialogConfig.hasBackdrop = true;
-        dialogConfig.data = data;
         dialogConfig.panelClass = "dialog-spinner"
         break
       case "coins":
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        dialogConfig.hasBackdrop = true;
-        dialogConfig.data = data;
         dialogConfig.panelClass = "dialog-coins"
         break
     }
@@ -109,7 +103,7 @@ export class DialogService {
   }
 
 
-  private handleErrorDialogData(error: HttpErrorResponse | ErrorDialogData): ErrorDialogData {
+  private handleErrorDialogMessage(error: HttpErrorResponse | ErrorDialogData): ErrorDialogData {
 
     let message = ''
 
@@ -126,7 +120,6 @@ export class DialogService {
       default:
         message = error.error ? error.error : this.errorData.message
     }
-
 
     return { message, status: error.status }
   }
