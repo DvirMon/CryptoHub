@@ -1,5 +1,5 @@
 import { Directive, HostBinding, Input, OnInit } from '@angular/core';
-import { CoinModel } from '../models/coin.model';
+import { CoinModel } from '../../utilities/models/coin.model';
 
 @Directive({
   selector: '[appTextSize]'

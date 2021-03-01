@@ -1,27 +1,28 @@
+// ANGULAR MODULES
 import { Injectable, NgZone } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpEventType } from '@angular/common/http';
 
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse, HttpErrorResponse, HttpEventType } from '@angular/common/http';
+// ANGULAR MATERIEL
+import { MatDialogRef } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/dialog/components/dialog/dialog.component';
+
+// RXJS
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
+// SERVICES
 import { DialogService } from 'src/app/services/dialog.service';
-
 import { LoaderService } from 'src/app/services/loader.service';
 
-import { DialogComponent } from 'src/app/dialog/components/dialog/dialog.component';
-
-
 import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 
-
 export class SpinnerInterceptorService implements HttpInterceptor {
 
-
-  private baseUrl = `${environment.server}/api/coins`
+  private url = `${environment.server}/api/coins`
 
   constructor(
     private dialogService: DialogService,
@@ -90,9 +91,8 @@ export class SpinnerInterceptorService implements HttpInterceptor {
 
 
   private handleProgressSubject(request: HttpRequest<any>, loader: boolean, progress: number) {
-
     switch (request.url) {
-      case this.baseUrl:
+      case this.url:
         this.loaderService.gridLoader.next({ loader, progress })
         break
       default:

@@ -24,14 +24,16 @@ import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 // DIRECTIVES & PIPES
-import { TextSizeDirective } from '../utilities/directives/text-size.directive';
-import { TruncatePipe } from '../utilities/pipes/truncate.pipe';
+import { TextSizeDirective } from './directives/text-size.directive';
+import { TruncatePipe } from './pipes/truncate.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 @NgModule({
   declarations: [
     TextSizeDirective,
     TruncatePipe,
+    FilterPipe,
   ],
   imports: [
     CommonModule,
@@ -69,7 +71,8 @@ import { TruncatePipe } from '../utilities/pipes/truncate.pipe';
     FontAwesomeModule,
 
     TextSizeDirective,
-    TruncatePipe
+    TruncatePipe,
+    FilterPipe,
   ]
 })
 export class SharedModule { }

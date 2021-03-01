@@ -13,12 +13,13 @@ import { environment } from 'src/environments/environment';
 })
 export class SearchService {
 
-  public url: string = environment.server + '/api/coins/search'
-
+  private url: string = environment.server + '/api/coins/search'
+  private searchSkeleton: CoinModel[] = []
+  private entires: number = 48;
+  private skeletonEntries: number = 48;
+ 
   public searchEntries: BehaviorSubject<CoinModel[]> = new BehaviorSubject([])
   public results: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
-  public searchSkeleton: CoinModel[] = []
 
   constructor(
     private http: HttpClient,
@@ -29,31 +30,17 @@ export class SearchService {
 
   // GET request - get coins by search - http://localhost:3000/api/coins
 
-
   private getCoins(option: string): Observable<CoinModel[]> {
 
     return this.http.get<CoinModel[]>(this.url, { reportProgress: true })
       .pipe(
-        // sort by abc
         map((coins: CoinModel[]) => {
-          return this.sortService.getSortedData(coins)
+          return this.handleSearchEntries(coins, option)
         }),
-        // filter matching coins to search option
-        map((coins: CoinModel[]) => {
-          return this.sortService.filter(coins, option)
-        }),
-        // splice for the first 48 results
-        map((coins: CoinModel[]) => {
-          return coins.splice(0, 48)
-        }),
-        // sort results by length
-        map((coins: CoinModel[]) => {
-          return coins.sort((a, b) => {
-            return this.sortService.sortLength(a.symbol, b.symbol)
-          })
-        }),
-        // handle data
-        tap(coins => {
+        // handle success and error
+        tap(coins => { 
+
+          this.skeletonEntries = coins.length
 
           if (coins.length === 0) {
             return this.handleError()
@@ -65,6 +52,8 @@ export class SearchService {
   }
 
   // LOGIC SECTION
+
+  // search main method
 
   public search(searchControl): Observable<CoinModel[]> {
 
@@ -101,9 +90,20 @@ export class SearchService {
     return of(response)
   }
 
+  // handle search grid
   private handleSearchSkeleton() {
-    this.searchSkeleton.length = 48
+    this.searchSkeleton.length = this.skeletonEntries
     this.searchEntries.next(this.searchSkeleton)
+  }
+
+  // format search entries
+  private handleSearchEntries(coins: CoinModel[], option: string): CoinModel[] {
+    return this.sortService
+      .filter(coins, option)
+      .slice(0, this.entires)
+      .sort((a, b) => {
+        return this.sortService.sortLength(a.symbol, b.symbol)
+      })
   }
 
 

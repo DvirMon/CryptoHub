@@ -16,21 +16,21 @@ export class ErrorsService {
     private dialogService: DialogService,
     private ngZone: NgZone,
     private router : Router
-  ) { 
+  ) {
 
-  } 
+  }
 
   public handleError(error) {
 
 
     let spinnerRef;
-    
+
     this.ngZone.run(() => {
       spinnerRef = this.dialogService.openSpinner()
     });
-    
-    
-    
+
+
+
     if (error instanceof HttpErrorResponse) {
 
       console.error(error);
@@ -42,21 +42,18 @@ export class ErrorsService {
       if (error.status === 0) {
         this.router.navigateByUrl("welcome")
       }
-      
-      spinnerRef.close()
+
 
       environment.production
-        ? this.dialogService.handleErrorDialog(this.dialogService.errorData)
-        : this.dialogService.handleErrorDialog(error)
+      ? this.dialogService.handleErrorDialog(this.dialogService.errorData)
+      : this.dialogService.handleErrorDialog(error)
     }
     else {
-
-      spinnerRef.close()
-
       this.dialogService.handleErrorDialog(this.dialogService.errorData)
       console.error(error);
-
     }
+
+    spinnerRef.close()
   }
 
 }

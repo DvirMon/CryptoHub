@@ -9,9 +9,6 @@ export class SortService {
 
   constructor() { }
 
-  public sort: MatSort;
-
-
   // sort
   public getSortedData(data: CoinModel[]): CoinModel[] {
 
@@ -23,7 +20,7 @@ export class SortService {
   // filter by search value
   public filter(options: CoinModel[], value: string): CoinModel[] {
     const filterValue = value.toLowerCase();
-    return options.filter(option => option.symbol.toLowerCase().includes(filterValue));
+    return options.filter(option => option.symbol.toLowerCase().startsWith(filterValue));
   }
 
   // sort by length

@@ -3,12 +3,12 @@
 
 <form action=".">
   <mat-form-field class="search-input">
-    <mat-label>Please Enter Coin Symbol</mat-label>
+    <mat-label>Search coin by symbol</mat-label>
     <input type="search" matInput #searchInput autocomplete="off"
       [formControl]="searchControl">
-    <span *ngIf="(searchEntries | async).length > 0" class="matsuffix" matSuffix>Found
+    <span *ngIf="!results && (searchEntries | async).length > 0" class="matsuffix" matSuffix>Found
       {{(searchEntries | async).length}} results</span>
-    <span *ngIf="results" class="matsuffix" matSuffix> Found 0 results</span>
+    <span *ngIf="results && searchControl.value" class="matsuffix" matSuffix> Found 0 results</span>
   </mat-form-field>
 </form>
   <span class="spacer"></span>

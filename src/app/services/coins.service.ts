@@ -16,9 +16,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CoinsService {
 
-
   private url: string = environment.server + '/api/coins'
-
 
   constructor(
     private http: HttpClient,
