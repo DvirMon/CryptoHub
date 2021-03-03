@@ -27,11 +27,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TextSizeDirective } from './directives/text-size.directive';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { ParallaxDirective } from './directives/parallax.directive';
 
 
 @NgModule({
   declarations: [
     TextSizeDirective,
+    ParallaxDirective,
     TruncatePipe,
     FilterPipe,
   ],
@@ -70,6 +72,7 @@ import { FilterPipe } from './pipes/filter.pipe';
     VirtualScrollerModule,
     FontAwesomeModule,
 
+    ParallaxDirective,
     TextSizeDirective,
     TruncatePipe,
     FilterPipe,

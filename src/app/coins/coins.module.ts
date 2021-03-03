@@ -48,7 +48,7 @@ import { CoinsToggleListComponent } from './components/coins-card/coins-toggle-l
     SharedModule,
   ]
   , exports: [
-    CoinsDialogComponent
+    CoinsDialogComponent,
   ]
 })
 export class CoinsModule { }
