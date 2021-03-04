@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { CoinsService } from 'src/app/services/coins.service';
 import { FormService } from 'src/app/services/form.service';
@@ -9,8 +9,6 @@ import { CoinModel } from 'src/app/utilities/models/coin.model';
 import { Observable, Subscription } from 'rxjs';
 import { IPageInfo, VirtualScrollerComponent } from 'ngx-virtual-scroller';
 import { store } from 'src/app/utilities/redux/store';
-import { MatDrawer, MatSidenav } from '@angular/material/sidenav';
-import { SideNavService } from 'src/app/services/side-nav.service';
 
 @Component({
   selector: 'app-coins-list',
@@ -36,26 +34,22 @@ export class CoinsListComponent implements OnInit, OnDestroy {
     private coinService: CoinsService,
     private formService: FormService,
     private loaderService: LoaderService,
-  ) { } 
+  ) { }
 
+  // LIFE CYCLE SECTION
   ngOnInit(): void {
-
-
     this.subscribeToStore()
     this.subscribeToLoader()
     this.setSkeletonGrid()
   }
 
-
-
   ngOnDestroy(): void {
-
     this.unsubscribeLouder.unsubscribe()
-
   }
 
   // SUBSCRIPTION SECTION
 
+  // subscribe to store
   private subscribeToStore() {
     store.subscribe(() => {
       this.coins = store.getState().coins.coins
@@ -63,8 +57,8 @@ export class CoinsListComponent implements OnInit, OnDestroy {
     this.coins = store.getState().coins.coins
   }
 
+  // subscribe to subject
   private subscribeToLoader() {
-
     this.unsubscribeLouder = this.loaderService.gridLoader.subscribe(
       (loader) => {
         this.loader = loader.loader
@@ -96,28 +90,25 @@ export class CoinsListComponent implements OnInit, OnDestroy {
     )
   }
 
-
-
   public onScroll(event: IPageInfo) {
 
-
-    if (event.endIndex > (this.coins.length / 1.1)) {
-      this.offset = true
-    }
+    this.scrollToTopVisibility(event)
 
     if (event.endIndex !== this.coins.length - 1) {
       return
     }
 
-
     this.getNextCoinsData()
-
   }
 
   public scrollToTop(scroll: VirtualScrollerComponent) {
-
     scroll.scrollToIndex(1, true, 0, 3000)
     this.offset = false
+
+  }
+
+  private scrollToTopVisibility (event: IPageInfo) {
+    event.endIndex > 20 ? this.offset = true : this.offset = false
 
   }
 
