@@ -13,13 +13,15 @@
 
       <span class="spacer"></span>
       <div class="btn">
-        <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
+        <button mat-icon-button type="button" [matMenuTriggerFor]="menu" (menuOpened)="onMenuOpen()">
           <mat-icon [matBadge]="selectedCoins.length > 0 ? selectedCoins.length : ''" matBadgeColor="warn"
             mat-list-icon>
             monetization_on</mat-icon>
         </button>
-        <mat-menu #menu="matMenu">
-          <app-coins-toggle-list [selectedCoins]="selectedCoins"></app-coins-toggle-list>
+        <mat-menu #menu="matMenu" (close)="onClose()" >
+          <app-coins-toggle-list [selectedCoins]="selectedList"></app-coins-toggle-list>
+          <!-- <ng-template matMenuContent>
+          </ng-template> -->
         </mat-menu>
       </div>
       <div class="btn">

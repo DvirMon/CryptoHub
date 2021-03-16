@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 // IMPORT MATERIEL
 import { MatDialogRef } from '@angular/material/dialog';
@@ -13,7 +13,6 @@ import { CoinModel } from 'src/app/utilities/models/coin.model';
 import { CoinsDialogComponent } from '../../coins-dialog/coins-dialog.component';
 import { ChartService } from 'src/app/services/chart.service';
 import { ToggleService } from 'src/app/services/toggle.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-coins-toggle',
@@ -21,12 +20,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./coins-toggle.component.scss'],
 
 })
-export class CoinsToggleComponent implements OnInit {
+export class CoinsToggleComponent implements OnInit, OnDestroy {
 
 
   @Input() dialog: boolean
   @Input() checked: boolean
-  @Input() coinsLeft: number
   @Input() coin: CoinModel
   @Input() lastSelect: CoinModel
   @Input() dialogRef: MatDialogRef<CoinsDialogComponent>
@@ -35,13 +33,15 @@ export class CoinsToggleComponent implements OnInit {
     private coinsService: CoinsService,
     private chartService: ChartService,
     private toggleService: ToggleService,
-    private router : Router
   ) { }
 
 
   ngOnInit(): void {
     this.checked = true
+  }
 
+  ngOnDestroy(): void {
+    this.coin = null
   }
 
   public handleToggle(coin: CoinModel) {
@@ -49,6 +49,8 @@ export class CoinsToggleComponent implements OnInit {
     // dialog true - when reach max coins
 
     if (this.dialog) {
+
+      // updated new selected coin
       this.coinsService.addSelectedCoin(this.lastSelect)
       this.toggleService.toggleData.next({ coin, lastSelect: this.lastSelect })
 
@@ -56,7 +58,6 @@ export class CoinsToggleComponent implements OnInit {
         this.dialogRef.close()
       }, 500)
     }
-
 
     else {
       this.toggleService.toggleData.next({ coin, lastSelect: null })
@@ -67,9 +68,6 @@ export class CoinsToggleComponent implements OnInit {
       this.chartService.deleteCoin.next(coin)
     }, 500)
 
-    // if (this.coinsLeft === 1) {
-    //   this.router.navigateByUrl("/coins")
-    // }
   }
 
 

@@ -1,15 +1,18 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+// ANGULAR CORE
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+
+// ANGULAR MATERIAL
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 
-
+// SERVICES
 import { CoinsService } from 'src/app/services/coins.service';
 import { DialogService } from 'src/app/services/dialog.service';
-import { LoaderService } from 'src/app/services/loader.service';
 import { ToggleService } from 'src/app/services/toggle.service';
 
+// MODELS
 import { CoinModel } from 'src/app/utilities/models/coin.model';
 
-
+// REDUX
 import { store } from 'src/app/utilities/redux/store';
 
 @Component({
@@ -17,7 +20,7 @@ import { store } from 'src/app/utilities/redux/store';
   templateUrl: './coins-item.component.html',
   styleUrls: ['./coins-item.component.scss']
 })
-export class CoinsItemComponent implements OnInit, AfterViewInit {
+export class CoinsItemComponent implements OnInit {
 
   @ViewChild(MatSlideToggle) toggle: MatSlideToggle
 
@@ -50,10 +53,6 @@ export class CoinsItemComponent implements OnInit, AfterViewInit {
         this.smaller = true
       }
     }
-  }
-
-  ngAfterViewInit(): void {
-
   }
 
   // SUBSCRIPTION SECTION

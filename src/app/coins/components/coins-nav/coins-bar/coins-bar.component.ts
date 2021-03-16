@@ -6,7 +6,7 @@ import { store } from 'src/app/utilities/redux/store';
 
 import { faCoins } from '@fortawesome/free-solid-svg-icons';
 
- 
+
 @Component({
   selector: 'app-coins-bar',
   templateUrl: './coins-bar.component.html',
@@ -15,6 +15,7 @@ import { faCoins } from '@fortawesome/free-solid-svg-icons';
 export class CoinsBarComponent implements OnInit {
 
   public selectedCoins: CoinModel[] = []
+  public selectedList: CoinModel[] = []
   public mode: boolean = true
   public faIcon = faCoins;
 
@@ -34,9 +35,11 @@ export class CoinsBarComponent implements OnInit {
     store.subscribe(
       () => {
         this.selectedCoins = [...store.getState().coins.selectedCoins]
+        this.selectedList = [...store.getState().coins.selectedCoins]
       }
     )
     this.selectedCoins = [...store.getState().coins.selectedCoins]
+    this.selectedList = [...store.getState().coins.selectedCoins]
   }
 
 
@@ -44,6 +47,14 @@ export class CoinsBarComponent implements OnInit {
   public toggleSideNav(mode: boolean) {
     this.sidenavService.toggle()
     this.mode = mode
+  }
+
+  public onClose() {
+    this.selectedList = [];
+  }
+
+  public onMenuOpen() {
+    this.selectedList = [...store.getState().coins.selectedCoins]
   }
 
 

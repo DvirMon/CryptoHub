@@ -1,15 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+// ANGULAR CORE
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
-// IMPORT ANGULAR ANIMATIONS
+// ANGULAR ANIMATIONS
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
+import { CoinsDialogComponent } from '../../coins-dialog/coins-dialog.component';
+import { MatDialogRef } from '@angular/material/dialog';
+
+// SERVICES
 import { CoinsService } from 'src/app/services/coins.service';
 import { ToggleService } from 'src/app/services/toggle.service';
 
+// MODELS
 import { CoinModel } from 'src/app/utilities/models/coin.model';
-import { CoinsDialogComponent } from '../../coins-dialog/coins-dialog.component';
-import { MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +27,7 @@ import { Router } from '@angular/router';
     ]),
   ],
 })
-export class CoinsToggleListComponent implements OnInit {
+export class CoinsToggleListComponent  {
 
   @Input() dialog: boolean
   @Input() selectedCoins: CoinModel[]
@@ -35,11 +39,8 @@ export class CoinsToggleListComponent implements OnInit {
   constructor(
     private coinsService: CoinsService,
     private toggleService: ToggleService,
-    private router : Router
+    private router: Router
   ) { }
-
-  ngOnInit(): void {
-  }
 
   public unSelectAll(event: any) {
 
