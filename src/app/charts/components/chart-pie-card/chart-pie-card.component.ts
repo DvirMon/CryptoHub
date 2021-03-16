@@ -15,7 +15,7 @@ import { store } from 'src/app/utilities/redux/store';
   styleUrls: ['./chart-pie-card.component.scss']
 })
 
-export class ChartPieCardComponent implements OnInit , OnDestroy{
+export class ChartPieCardComponent implements OnInit, OnDestroy {
 
 
   @Input() data: ChartDotModel[]
@@ -45,10 +45,11 @@ export class ChartPieCardComponent implements OnInit , OnDestroy{
   }
 
   ngOnDestroy(): void {
-    
+
   }
 
-  // SUBSCRIPTION SECTION
+  // SUBSCRIPTION SECTION 
+
   private subscribeToCoinDelete() {
     this.chartService.deleteCoin.subscribe(
       (coin) => {
@@ -85,10 +86,13 @@ export class ChartPieCardComponent implements OnInit , OnDestroy{
 
   // CHART SECTION
   private handlePieChartData() {
-    this.data.map((dot : ChartDotModel) => {
-      this.pieChartData.push(dot.data)
-      this.pieChartLabels.push(dot.label)
-    })
+
+    if (this.data) {
+      this.data.map((dot: ChartDotModel) => {
+        this.pieChartData.push(dot.data)
+        this.pieChartLabels.push(dot.label)
+      })
+    }
   }
 
 

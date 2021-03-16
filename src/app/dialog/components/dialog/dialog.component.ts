@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { DialogData } from 'src/app/services/dialog.service';
 import { environment } from 'src/environments/environment'
 
@@ -7,15 +8,19 @@ import { environment } from 'src/environments/environment'
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss']
- 
+
 })
-export class DialogComponent { 
+export class DialogComponent {
 
   public development : boolean = environment.production
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private router : Router
   ) { }
 
+  public onClick() : void {
+    this.router.navigateByUrl("/welcome")
+  }
 
-} 
+}

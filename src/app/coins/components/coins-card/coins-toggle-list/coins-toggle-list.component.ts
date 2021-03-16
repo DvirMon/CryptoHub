@@ -25,7 +25,6 @@ import { Router } from '@angular/router';
 })
 export class CoinsToggleListComponent implements OnInit {
 
-
   @Input() dialog: boolean
   @Input() selectedCoins: CoinModel[]
   @Input() lastSelect: CoinModel
