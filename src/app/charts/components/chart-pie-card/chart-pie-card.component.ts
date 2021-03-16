@@ -45,10 +45,10 @@ export class ChartPieCardComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
+    this.data = []
   }
 
-  // SUBSCRIPTION SECTION 
+  // SUBSCRIPTION SECTION
 
   private subscribeToCoinDelete() {
     this.chartService.deleteCoin.subscribe(
@@ -86,7 +86,6 @@ export class ChartPieCardComponent implements OnInit, OnDestroy {
 
   // CHART SECTION
   private handlePieChartData() {
-
     if (this.data) {
       this.data.map((dot: ChartDotModel) => {
         this.pieChartData.push(dot.data)

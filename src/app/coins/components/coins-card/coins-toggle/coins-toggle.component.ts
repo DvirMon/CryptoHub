@@ -67,9 +67,9 @@ export class CoinsToggleComponent implements OnInit {
       this.chartService.deleteCoin.next(coin)
     }, 500)
 
-    if (this.coinsLeft === 1) {
-      this.router.navigateByUrl("/coins")
-    }
+    // if (this.coinsLeft === 1) {
+    //   this.router.navigateByUrl("/coins")
+    // }
   }
 
 

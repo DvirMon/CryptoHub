@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ChartData, ChartService } from 'src/app/services/chart.service';
 import { ChartCardModel } from 'src/app/utilities/models/chart-card.mode';
 import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
@@ -32,6 +33,7 @@ export class ChartCardComponent implements OnInit {
 
   constructor(
     private chartService: ChartService,
+    private router : Router
   ) {
   }
 
@@ -52,6 +54,11 @@ export class ChartCardComponent implements OnInit {
   // HTTP SECTION
 
   private handleChartData() {
+
+    if(this.selectedCoins.length === 0) {
+      this.router.navigateByUrl("/coins")
+    }
+
     this.chartService.getChartData(this.ids).subscribe(
       (chartData: ChartData) => {
         this.chartData = chartData
@@ -96,7 +103,6 @@ export class ChartCardComponent implements OnInit {
   // Change chart data by coin currency
   public handleCurrencyChange(payload: { type: string, currency: string }) {
 
-
     this.currentChartCurrency[payload.type] = payload.currency.toUpperCase()
 
     if (payload.type === "pie" || payload.type === "line") {
@@ -119,6 +125,14 @@ export class ChartCardComponent implements OnInit {
   private handleLineHistoryChartData(coinId: string) {
     this.currentHistoryCoin = coinId
     this.chartService.historyCoin.next({ coinId, currency: this.currentChartCurrency.history })
+  }
+
+  private handleNoCoins() {
+    console.log(this.selectedCoins.length)
+    if(this.selectedCoins.length == 0) {
+      this.router.navigateByUrl("/coins")
+    }
+
   }
 
 
