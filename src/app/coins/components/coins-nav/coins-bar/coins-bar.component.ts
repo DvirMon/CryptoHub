@@ -49,14 +49,4 @@ export class CoinsBarComponent implements OnInit {
     this.mode = mode
   }
 
-  public onClose() {
-    this.selectedList = [];
-  }
-
-  public onMenuOpen() {
-    this.selectedList = [...store.getState().coins.selectedCoins]
-  }
-
-
-
 }
