@@ -17,7 +17,6 @@ import { store } from 'src/app/utilities/redux/store';
 })
 export class CoinsListComponent implements OnInit, OnDestroy {
 
-
   public coins: CoinModel[] = []
 
   // LOADING PARAMS

@@ -5,10 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { CoinModel } from '../utilities/models/coin.model';
 import { MarketHistoryModel } from '../utilities/models/market-history.model';
 import { ChartDotModel } from '../utilities/models/chart-dot.model';
-import { ChartCardModel } from '../utilities/models/chart-card.mode';
-
-// IMPORT SERVICES
-import { FormService } from './form.service';
 
 // IMPORT REDUX AND RXJS
 import { map, switchMap, tap } from 'rxjs/operators';
@@ -38,8 +34,12 @@ export interface ChartHistory {
 })
 export class ChartService {
 
+
   public deleteCoin: Subject<CoinModel> = new Subject()
   public historyCoin: Subject<ChartHistory> = new Subject()
+
+  public handleChartData: Subject<ChartData> = new Subject()
+  public chartData$: Observable<ChartData> = this.handleChartData.asObservable()
 
   private url: string = environment.server + '/api/coins'
 
@@ -51,7 +51,12 @@ export class ChartService {
   // POST - get currencies for chart - http://localhost:3000/api/coins/chart
 
   public getChartData(ids: string[]): Observable<ChartData> {
-    return this.http.post<ChartData>(this.url + "/chart", { ids }, { reportProgress: true })
+    return this.http.post<ChartData>(this.url + "/chart", { ids }, { reportProgress: true }).pipe(
+      tap((data : ChartData) => {
+        this.handleChartData.next(data)
+      }
+      )
+    )
 
   }
 

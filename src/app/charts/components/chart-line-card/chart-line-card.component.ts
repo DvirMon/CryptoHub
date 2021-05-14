@@ -3,6 +3,7 @@ import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 
 import { ChartData, ChartService } from 'src/app/services/chart.service';
+import { ChartCardModel } from 'src/app/utilities/models/chart-card.mode';
 import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
 import { CoinModel } from 'src/app/utilities/models/coin.model';
 import { store } from 'src/app/utilities/redux/store';
@@ -15,9 +16,9 @@ import { store } from 'src/app/utilities/redux/store';
 export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
+  @Input() card : ChartCardModel
   @Input() selectedCoins: CoinModel[];
   @Input() coinToDelete: CoinModel;
-  @Input() currentCurrency: string;
 
   // CHART PARAMS
   public lineChartData: ChartDataSets[] = [];
@@ -52,7 +53,6 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
     this.subscribeToStore()
     this.setStartChartData()
     this.getChartData()
-    this.handleAxiosTitle()
   }
 
   ngAfterViewInit(): void {
@@ -100,10 +100,10 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
   private getChartData() {
     this.chartService.getChartData(this.ids).subscribe(
       (chartData: ChartData) => {
-        this.data = chartData[this.currentCurrency.toLocaleLowerCase()]
-        this.handleAxiosTitle()
+        this.data = chartData[this.card.currentCurrency.toLocaleLowerCase()]
         this.deleteChartDots()
         this.updateChartDots()
+        this.handleAxiosTitle()
         this.formatChartDots()
 
       }
@@ -152,6 +152,8 @@ export class ChartLineCardComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   private handleAxiosTitle() {
-    this.lineChartOptions.scales.yAxes[0].scaleLabel.labelString = this.currentCurrency
+    this.lineChartOptions.scales.yAxes[0].scaleLabel.labelString = this.card.currentCurrency
   }
+
+
 }

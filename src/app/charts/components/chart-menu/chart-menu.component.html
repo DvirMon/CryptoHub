@@ -9,9 +9,11 @@
     <button *ngIf="card.type === 'history'" mat-menu-item [matMenuTriggerFor]="coinsMenu">
       <fa-icon [icon]="faIcon"></fa-icon>
     </button>
+
     <button  mat-menu-item [matMenuTriggerFor]="currencyMenu">
       <mat-icon>attach_money</mat-icon>
     </button>
+    
   </mat-menu>
 
   <mat-menu #currencyMenu="matMenu" xPosition="before">

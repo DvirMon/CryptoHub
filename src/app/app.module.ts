@@ -8,8 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 // IMPORT SHRED COMPONENTS & ANGULAR MATERIEL MODULES
 import { SharedModule } from './shared/shared.module';
 
-
-
 // IMPORT COMPONENTS
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/root/app.component';

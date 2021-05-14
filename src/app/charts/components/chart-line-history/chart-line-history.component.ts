@@ -83,7 +83,7 @@ export class ChartLineHistoryComponent implements OnInit, OnDestroy {
   }
 
 
-  // HTTP SECTION
+  // LOGIC SECTION
   private handleChartData(market_history: MarketHistoryModel) {
 
     this.lineChartData = []
@@ -98,25 +98,5 @@ export class ChartLineHistoryComponent implements OnInit, OnDestroy {
 
 
 
-
-  // LOGIC SECTION
-  private handleStepSize(values): number {
-
-    const stepSize = (Math.ceil(Math.max(...values)) / 5)
-
-
-    if (stepSize > 100 && stepSize < 1000) {
-
-      return Math.ceil(stepSize / 100) * 100
-    }
-
-    if (stepSize > 1000) {
-
-      return Math.ceil(stepSize / 100) * 100
-    }
-
-    return stepSize
-
-  }
 
 }

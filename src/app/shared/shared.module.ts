@@ -61,6 +61,7 @@ import { ParallaxDirective } from './directives/parallax.directive';
     },
   ],
   exports: [
+    
     CommonModule,
     DialogModule,
     ReactiveFormsModule,

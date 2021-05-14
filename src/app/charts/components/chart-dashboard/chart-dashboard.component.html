@@ -1,8 +1,8 @@
 
 
   <mat-grid-list *ngIf="(isMobile | async)"  cols="1" rowHeight="15vh">
-    <mat-grid-tile *ngFor="let card of cardsMobile" [rowspan]="card.rows" [colspan]="card.cols">
-      <app-chart-card [card]="card"></app-chart-card>
+    <mat-grid-tile  [rowspan]="cardMobile.rows" [colspan]="cardMobile.cols">
+      <app-chart-card [card]="cardMobile"></app-chart-card> 
     </mat-grid-tile>
   </mat-grid-list>
 

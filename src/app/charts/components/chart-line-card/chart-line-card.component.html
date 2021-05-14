@@ -1,9 +1,8 @@
-<div  class="chart">
-  <canvas *ngIf="lineChartData.length > 0"  baseChart height="550" 
-    [datasets]="lineChartData"
-    [labels]="lineChartLabels"
-    [options]="lineChartOptions"
-    [legend]="lineChartLegend"
-    [chartType]="lineChartType">
+<div class="chart">
+  <div *ngIf="lineChartData.length === 0" class="spinner">
+    <mat-spinner></mat-spinner>
+  </div>
+  <canvas *ngIf="lineChartData.length > 0" baseChart height="550" [datasets]="lineChartData" [labels]="lineChartLabels"
+    [options]="lineChartOptions" [legend]="lineChartLegend" [chartType]="lineChartType">
   </canvas>
 </div>

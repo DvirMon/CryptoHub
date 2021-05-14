@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ChartData, ChartService } from 'src/app/services/chart.service';
 import { ChartCardModel } from 'src/app/utilities/models/chart-card.mode';
 import { ChartDotModel } from 'src/app/utilities/models/chart-dot.model';
@@ -15,25 +16,17 @@ export class ChartCardComponent implements OnInit {
 
   @Input() card: ChartCardModel;
 
-  public currentChartCurrency = {
-    line: "USD",
-    pie: "USD",
-    history: "USD",
-  }
-  public data: ChartDotModel[] = [];
+  public chartData$: Observable<ChartData> = this.chartService.chartData$
   public selectedCoins: CoinModel[] = [];
-
   public currencies: string[] = [];
-  public ids: string[] = [];
-
   public coinToDelete: CoinModel = CoinModel.create();
 
-  public chartData: ChartData;
-  public currentHistoryCoin: string;
+  private ids: string[] = [];
+  private currentHistoryCoin: string;
 
   constructor(
     private chartService: ChartService,
-    private router : Router
+    private router: Router
   ) {
   }
 
@@ -55,15 +48,13 @@ export class ChartCardComponent implements OnInit {
 
   private handleChartData() {
 
-    if(this.selectedCoins.length === 0) {
+    if (this.selectedCoins.length === 0) {
       this.router.navigateByUrl("/coins")
     }
 
     this.chartService.getChartData(this.ids).subscribe(
       (chartData: ChartData) => {
-        this.chartData = chartData
-        this.data = this.chartData.usd
-        this.currencies = this.chartData.currencies
+        this.currencies = chartData.currencies
       }
     )
   }
@@ -103,13 +94,11 @@ export class ChartCardComponent implements OnInit {
   // Change chart data by coin currency
   public handleCurrencyChange(payload: { type: string, currency: string }) {
 
-    this.currentChartCurrency[payload.type] = payload.currency.toUpperCase()
 
-    if (payload.type === "pie" || payload.type === "line") {
-      this.data = this.chartData[payload.currency]
-    }
+    this.card.currentCurrency = payload.currency.toUpperCase()
 
-    else {
+
+   if (this.card.type === "history") {
       this.handleLineHistoryChartData(this.currentHistoryCoin)
     }
 
@@ -124,16 +113,10 @@ export class ChartCardComponent implements OnInit {
   // handle history chart subject
   private handleLineHistoryChartData(coinId: string) {
     this.currentHistoryCoin = coinId
-    this.chartService.historyCoin.next({ coinId, currency: this.currentChartCurrency.history })
+    this.chartService.historyCoin.next({ coinId, currency: this.card.currentCurrency })
   }
 
-  private handleNoCoins() {
-    console.log(this.selectedCoins.length)
-    if(this.selectedCoins.length == 0) {
-      this.router.navigateByUrl("/coins")
-    }
 
-  }
 
 
 

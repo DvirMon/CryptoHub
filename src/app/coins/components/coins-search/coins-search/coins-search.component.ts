@@ -67,10 +67,10 @@ export class CoinsSearchComponent implements OnInit {
         this.searchInput.nativeElement.focus()
       },
       (err) => {
-        console.log(err)
         this.searchInput.nativeElement.focus()
       }
     )
   }
+
 
 }

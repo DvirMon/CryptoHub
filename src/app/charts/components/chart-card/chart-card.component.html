@@ -1,31 +1,34 @@
-  <mat-card class="dashboard-card">
-    <mat-card-header>
-      <mat-card-title>
-        {{card.title | titlecase}}
+<mat-card class="dashboard-card">
+  <mat-card-header>
+    <mat-card-title>
+      {{card.title | titlecase}} {{card.currentCurrency}}
 
-        <app-chart-menu [card]="card" [currencies]="currencies" [selectedCoins]="selectedCoins"
+      <app-chart-menu [card]="card" [currencies]="currencies" [selectedCoins]="selectedCoins"
         (changeCurrency)="handleCurrencyChange($event)" (changeCoin)="handleCoinChange($event)">
       </app-chart-menu>
 
     </mat-card-title>
   </mat-card-header>
 
-  <mat-card-content class="dashboard-card-content" *ngIf="data.length > 0">
+  <mat-card-content class="dashboard-card-content" *ngIf="chartData$ | async as data">
 
-    <div *ngIf="card.type === 'line'">
-      <app-chart-line-card [selectedCoins]="selectedCoins" [coinToDelete]="coinToDelete"
-      [currentCurrency]="currentChartCurrency.line">
-    </app-chart-line-card>
-  </div>
+    <span [ngSwitch]="card.type">
+      <ng-container *ngSwitchCase="'line'">
+        <app-chart-line-card [card]="card" [selectedCoins]="selectedCoins" [coinToDelete]="coinToDelete">
+        </app-chart-line-card>
+      </ng-container>
 
-  <div *ngIf="card.type === 'pie'">
-    <app-chart-pie-card [data]="data" [currentCurrency]="currentChartCurrency.pie">
-    </app-chart-pie-card>
-  </div>
+      <ng-container *ngSwitchCase="'pie'">
+        <app-chart-pie-card [data]="data.usd" [currentCurrency]="card.currentCurrency">
+        </app-chart-pie-card>
+      </ng-container>
 
-  <div *ngIf="card.type === 'history'">
-    <app-chart-line-history [currentCurrency]="currentChartCurrency.history"></app-chart-line-history>
-  </div>
-  
-</mat-card-content>
+      <ng-container *ngSwitchCase="'history'">
+        <app-chart-line-history [currentCurrency]="card.currentCurrency"></app-chart-line-history>
+      </ng-container>
+    </span>
+
+
+
+  </mat-card-content>
 </mat-card>
