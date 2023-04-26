@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "virtual-coins"
+  "defaultProject": "virtual-coins",
+  "cli": {
+    "analytics": false
+  }
 }
