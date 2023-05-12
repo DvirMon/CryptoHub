@@ -1,9 +1,0 @@
-<h1 class="mat-display-2" mat-dialog-title>You can only choose up to 5 coins</h1>
-<mat-divider></mat-divider>
-<h2 mat-dialog-title>To add {{payload.lastSelect.symbol |uppercase}} you must unselect one of the following:</h2>
-
-<app-coins-toggle-list [dialog]="true" [selectedCoins]="payload.coins" [lastSelect]="payload.lastSelect" [dialogRef]="dialogRef"></app-coins-toggle-list>
-
-<div mat-dialog-actions>
-  <button (click)="onClose()" mat-button mat-dialog-close cdkFocusInitial>Close</button>
-</div>

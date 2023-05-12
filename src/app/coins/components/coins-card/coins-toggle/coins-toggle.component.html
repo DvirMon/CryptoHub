@@ -1,7 +1,0 @@
-<mat-grid-list *ngIf="coin" [cols]="dialog ? 1 : 2" [rowHeight]="dialog ? '3vh' : '8vh'">
-  <mat-grid-tile>{{coin.symbol |uppercase}}</mat-grid-tile>
-  <mat-grid-tile>
-    <mat-slide-toggle (change)="handleToggle(coin)" [checked]="checked">
-    </mat-slide-toggle>
-  </mat-grid-tile>
-</mat-grid-list>
