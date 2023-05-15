@@ -1,6 +1,3 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-
 import { importProvidersFrom } from '@angular/core';
 import { AppComponent } from './app/app.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
