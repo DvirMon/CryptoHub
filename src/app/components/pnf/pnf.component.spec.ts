@@ -8,8 +8,8 @@ describe('PnfComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PnfComponent ]
-    })
+    imports: [PnfComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(PnfComponent);
