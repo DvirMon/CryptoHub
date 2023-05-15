@@ -1,0 +1,57 @@
+@use "variables" as main;
+
+div {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+div.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
+
+article,
+header {
+  color: main.color(paper);
+}
+
+article {
+  margin: 5% 0;
+}
+
+button.btn-home {
+  font-size: 68px;
+  height: 12vh;
+  width: 52vh;
+  outline: 1px white solid;
+}
+
+.text-header {
+  font-weight: 500;
+}
+
+// from 560px down
+@media (max-width: size(sm)) {
+  .btn-mobile {
+    width: 42vh;
+    font-size: 50px;
+  }
+
+  .mat-display-3 {
+    font-size: 40px;
+    font-weight: 500;
+  }
+
+  .mat-display-4 {
+    font-size: 50px;
+    font-weight: 500;
+  }
+
+  mat-grid-list.grid-mobile {
+    position: relative;
+    top: 100px;
+  }
+}

@@ -1,0 +1,62 @@
+@mixin skeleton-image($width, $height) {
+  width: $width;
+  height: $height;
+  border-radius: 50%;
+  background-color: grey;
+  margin: auto;
+}
+
+.text-header > figure.mat-figure {
+  justify-content: flex-start;
+  padding: 5%;
+}
+
+.text-coin-header > figure.mat-figure {
+  justify-content: flex-start;
+  padding-left: 15%;
+}
+
+.text-coin > figure.mat-figure {
+  justify-content: flex-start;
+  padding-left: 10%;
+}
+
+.text-length > figure.mat-figure {
+  justify-content: flex-start;
+  padding-left: 5%;
+  font-size: 15px;
+}
+
+.text-search-mobile > figure.mat-figure {
+  font-size: 12px;
+}
+
+.coin-toggle > figure.mat-figure {
+  padding: 20px;
+  justify-content: flex-end;
+}
+
+// SKELETON
+
+.skeleton-toggle-tile > figure.mat-figure,
+.mat-dialog-actions > figure.mat-figure {
+  justify-content: flex-end;
+}
+
+.skeleton-text-tile > figure.mat-figure {
+  justify-content: flex-start;
+}
+
+.text-name > figure.mat-figure {
+  font-size: 14px;
+}
+
+ngx-skeleton-loader.skeleton-expend-circle
+  > span.loader.circle.progress.ng-star-inserted {
+  @include skeleton-image(80px, 80px);
+}
+
+ngx-skeleton-loader.skeleton-search-circle
+  > span.loader.circle.progress.ng-star-inserted {
+  @include skeleton-image(55px, 55px);
+}

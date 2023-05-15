@@ -17,6 +17,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "stylePreprocessorOptions": {
+              "includePaths": ["src", "src/styles"]
+            },
             "outputPath": "dist/crypto-coins-client",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -30,7 +33,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/styles/styles.scss"
             ],
             "scripts": []
           },
@@ -93,7 +97,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "src/styles/styles.scss"
             ],
             "scripts": []
           }
