@@ -26,7 +26,6 @@ $grid-breakpoints: (
 }
 
 @mixin bg-image($url) {
-  width: 100% !important;
   background-image: url($url) !important;
   background-position: center !important;
   background-size: cover !important;
