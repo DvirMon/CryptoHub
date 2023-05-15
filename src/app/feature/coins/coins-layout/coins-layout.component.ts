@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CoinsService } from '../coins.service';
 
 @Component({
   selector: 'app-coins-layout',
@@ -9,5 +10,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./coins-layout.component.scss']
 })
 export class CoinsLayoutComponent {
+
+  coinsService : CoinsService = inject(CoinsService)
+
+  coins$ = this.coinsService.getCoins();
 
 }

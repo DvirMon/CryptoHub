@@ -24,29 +24,14 @@ export class CoinsService {
 
   // Get coins by pagination
 
-  public getCoins(page: number) {
-
-    const params = {
-      page,
-      per_page: 48
-    }
-
-    return this.getCoinsPage(params).subscribe(
-      (coins: CoinModel[]) => {
-
-        return coins
-
-        // page === 1
-        //   ? this.formService.handleStore(ActionType.GetPageCoins, coins)
-        //   : this.formService.handleStore(ActionType.AddPageCoins, coins)
-      }
-    )
+  public getCoins(): Observable<CoinModel[]> {
+    return this.http.get<CoinModel[]>(this.url)
   }
 
   // POST request - get coins pagination - http://localhost:3000/api/coins
 
-  private getCoinsPage(params : any): Observable<CoinModel[]> {
-    return this.http.post<CoinModel[]>(this.url, params, { reportProgress: true })
+  private getCoinsPage(params: any): Observable<CoinModel[]> {
+    return this.http.get<CoinModel[]>(this.url)
   }
 
   // GET - get currencies of coin by id - http://localhost:3000/api/coins/currency:id
