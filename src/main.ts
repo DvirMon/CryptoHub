@@ -5,15 +5,17 @@ import { BrowserModule, bootstrapApplication, provideClientHydration } from '@an
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app/app.routs';
+import { provideStore } from '@ngrx/store';
 
 
 bootstrapApplication(AppComponent, {
     providers: [
-        importProvidersFrom(BrowserModule),
-        provideRouter(appRoutes),
-        provideClientHydration(),
-        provideHttpClient(),
-        provideAnimations()
-    ]
+    importProvidersFrom(BrowserModule),
+    provideRouter(appRoutes),
+    provideClientHydration(),
+    provideHttpClient(),
+    provideAnimations(),
+    provideStore()
+]
 })
   .catch(err => console.error(err));
