@@ -8,8 +8,8 @@ describe('TypographyComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TypographyComponent ]
-    })
+    imports: [TypographyComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(TypographyComponent);

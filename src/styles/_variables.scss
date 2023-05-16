@@ -1,11 +1,11 @@
-
 $colors: (
   info: #5bc0de,
   text-primary: #673ab7,
   text-secondary: #8c52f0,
   success-primary: #56c04d,
   success-secondary: #1d8813,
-  paper : #ffffff
+  paper: #ffffff,
+  coin-panel: #71c9db,
 );
 
 $grid-breakpoints: (
@@ -16,7 +16,6 @@ $grid-breakpoints: (
   xl: 1200px,
 );
 
-
 @function color($color-name) {
   @return map-get($colors, $color-name);
 }
@@ -26,7 +25,6 @@ $grid-breakpoints: (
 }
 
 @mixin bg-image($url) {
-  width: 100% !important;
   background-image: url($url) !important;
   background-position: center !important;
   background-size: cover !important;
@@ -36,6 +34,11 @@ $grid-breakpoints: (
   background-image: url($url) !important;
   background-repeat: no-repeat !important;
   background-size: cover !important;
+}
+
+@mixin coin-panel($color, $alpha) {
+  border-radius: 2px;
+  background-color: rgba($color, $alpha);
 }
 
 .highLight {

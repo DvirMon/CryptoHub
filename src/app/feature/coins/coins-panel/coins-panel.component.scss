@@ -1,0 +1,10 @@
+@use "variables" as main;
+
+mat-expansion-panel {
+  @include main.coin-panel(main.color(coin-panel), 1);
+}
+
+.mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
