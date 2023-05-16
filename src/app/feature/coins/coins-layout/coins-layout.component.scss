@@ -1,3 +1,18 @@
- pre {
+div.coins-layout-wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  flex-wrap: wrap;
+}
+
+div.coins-item-wrapper {
   color: white;
- }
+  display: flex;
+  width: 25%;
+  justify-content: center;
+
+  app-coins-panel {
+    width: 90%;
+    margin: 5%;
+  }
+}

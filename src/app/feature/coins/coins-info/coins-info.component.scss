@@ -1,0 +1,14 @@
+div.coin-info-wrapper {
+  display: flex;
+}
+
+section.coin-info-currency {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
+  app-typography {
+    margin: 1%;
+  }
+}

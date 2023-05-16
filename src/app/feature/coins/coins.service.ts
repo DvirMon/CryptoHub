@@ -37,7 +37,6 @@ export class CoinsService {
   // GET - get currencies of coin by id - http://localhost:3000/api/coins/currency:id
 
   public getCoinCurrency(id: string): Observable<CurrencyModel> {
-
     return this.http.get<CurrencyModel>(this.url + "/currency/" + id, { reportProgress: true })
 
   }
