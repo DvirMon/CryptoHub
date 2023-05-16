@@ -6,6 +6,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { appRoutes } from './app/app.routs';
 import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
 
 
 bootstrapApplication(AppComponent, {
@@ -15,7 +16,8 @@ bootstrapApplication(AppComponent, {
     provideClientHydration(),
     provideHttpClient(),
     provideAnimations(),
-    provideStore()
+    provideStore(),
+    provideEffects()
 ]
 })
   .catch(err => console.error(err));
