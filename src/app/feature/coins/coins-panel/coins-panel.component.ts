@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { CoinModel } from 'src/app/models/coin.model';
+import { Coin } from 'src/app/models/coin.model';
 import { CoinsInfoComponent } from '../coins-info/coins-info.component';
-import { CurrencyModel } from 'src/app/models/currency.model';
+import { Currency } from 'src/app/models/currency.model';
 import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -23,8 +23,8 @@ export interface PanelChangedEvent {
 })
 export class CoinsPanelComponent {
 
-  @Input() coin!: CoinModel
-  @Input() info!: CurrencyModel | undefined
+  @Input() coin!: Coin
+  @Input() info!: Currency | undefined
 
 
   panelChangedEvent!: PanelChangedEvent;

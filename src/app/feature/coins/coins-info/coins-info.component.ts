@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgOptimizedImage } from '@angular/common'
-import { CurrencyModel } from 'src/app/models/currency.model';
+import { Currency } from 'src/app/models/currency.model';
 import { TypographyComponent } from 'src/app/shared/components/typography/typography.component';
 
 @Component({
@@ -13,9 +13,9 @@ import { TypographyComponent } from 'src/app/shared/components/typography/typogr
 })
 export class CoinsInfoComponent {
 
-  @Input() info!: CurrencyModel
+  @Input() info!: Currency
 
-  template!: (keyof CurrencyModel)[];
+  template!: (keyof Currency)[];
 
   ngOnInit(): void {
 
@@ -23,10 +23,10 @@ export class CoinsInfoComponent {
 
   }
 
-  private setTemplate(): (keyof CurrencyModel)[] {
+  private setTemplate(): (keyof Currency)[] {
     const arr = Object.keys(this.info);
     arr.pop()
-    return arr as (keyof CurrencyModel)[]
+    return arr as (keyof Currency)[]
   }
 
 }

@@ -1,4 +1,4 @@
-export interface CoinModel {
+export interface Coin {
 
   id: string,
   name: string,

@@ -4,7 +4,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { CoinModel } from 'src/app/models/coin.model';
+import { Coin } from 'src/app/models/coin.model';
 
 @Component({
   selector: 'app-selected-coins',
@@ -15,8 +15,8 @@ import { CoinModel } from 'src/app/models/coin.model';
 })
 export class SelectedCoinsComponent {
 
-  private selectedCoins: CoinModel[] = []
-  public selectedList: CoinModel[] = []
+  private selectedCoins: Coin[] = []
+  public selectedList: Coin[] = []
 
   selectedCoin: WritableSignal<string> = signal(this.setSelectedCoin())
 
