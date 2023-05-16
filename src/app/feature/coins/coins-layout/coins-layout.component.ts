@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { Coin } from 'src/app/models/coin.model';
 import { CoinsInfoComponent } from '../coins-info/coins-info.component';
 import { Currency } from 'src/app/models/currency.model';
+import { StoreService } from 'src/app/ngrx/store.service';
 
 @Component({
   selector: 'app-coins-layout',
@@ -17,9 +18,10 @@ import { Currency } from 'src/app/models/currency.model';
 })
 export class CoinsLayoutComponent {
 
-  coinsService: CoinsService = inject(CoinsService)
+  coinsService: CoinsService = inject(CoinsService);
+  StoreService : StoreService = inject(StoreService);
 
-  coins$: Observable<Coin[]> = this.coinsService.getCoins();
+  coins$: Observable<Coin[]> = this.StoreService.getCoins$()
   coins: Signal<Coin[]> = toSignal(this.coins$, { initialValue: [] });
 
   infoMap: Map<string, Currency> = new Map<string, Currency>();

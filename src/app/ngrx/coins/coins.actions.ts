@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { Coin } from 'src/app/models/coin.model';
 
 export const loadCoins = createAction(
-  '[Coin/API] Load Coin');
+  '[Coin/API] Load Coins');
 
 export const loadCoinsSuccess = createAction(
   '[Coin/API] Load Coin Success',

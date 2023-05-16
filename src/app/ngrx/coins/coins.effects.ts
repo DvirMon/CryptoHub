@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap, of, exhaustMap } from 'rxjs';
 import { CoinsService } from 'src/app/feature/coins/coins.service';
 import { CoinsActions } from './coins.types';
 import { Coin } from 'src/app/models/coin.model';
+import { exhaustMap, map, catchError, of } from 'rxjs';
 
 
 @Injectable()
 
-export class PostEffects {
+export class CoinsEffects {
 
   constructor
     (

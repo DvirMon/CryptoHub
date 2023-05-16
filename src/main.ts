@@ -10,6 +10,7 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { coinsReducer } from './app/ngrx/coins/coins.reducer';
 import { coinsFeatureKey } from './app/ngrx/coins/coins.state';
+import { CoinsEffects } from './app/ngrx/coins/coins.effects';
 
 
 bootstrapApplication(AppComponent, {
@@ -20,7 +21,7 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(),
     provideAnimations(),
     provideStore({ [coinsFeatureKey]: coinsReducer }),
-    provideEffects(),
+    provideEffects(CoinsEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
   ]
 })

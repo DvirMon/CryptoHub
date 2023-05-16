@@ -13,7 +13,7 @@ export class StoreService {
     private store: Store
   ) { }
 
-  getPosts$(): Observable<Coin[]> {
+  getCoins$(): Observable<Coin[]> {
 
     const loaded$ = this.store.select(CoinsSelectors.selectCoinsLoaded)
 
