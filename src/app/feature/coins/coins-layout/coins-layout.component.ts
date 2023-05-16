@@ -22,8 +22,6 @@ export class CoinsLayoutComponent {
   coins$: Observable<CoinModel[]> = this.coinsService.getCoins();
   coins: Signal<CoinModel[]> = toSignal(this.coins$, { initialValue: [] });
 
-
-
   infoMap: Map<string, CurrencyModel> = new Map<string, CurrencyModel>();
 
   onExpandChanged(event: PanelChangedEvent) {
@@ -33,9 +31,5 @@ export class CoinsLayoutComponent {
       this.infoMap.set(panelId, data)
     });
   }
-
-  onOpenedEvent() {
-  }
-
 
 }

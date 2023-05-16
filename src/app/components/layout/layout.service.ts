@@ -1,13 +1,11 @@
 import { Injectable, WritableSignal, signal } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LayoutService {
 
-  private showToolbarSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private showToolbarSignal: WritableSignal<boolean> = signal(false);
+  private showToolbarSignal: WritableSignal<boolean> = signal(true);
 
   constructor() { }
 

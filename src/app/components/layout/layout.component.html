@@ -1,4 +1,12 @@
 <mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav-search"
+    position="end"
+    mode="side"
+    autosize
+  >
+  </mat-sidenav>
   <!-- <mat-sidenav
     #drawer
     class="sidenav"
@@ -17,15 +25,11 @@
   <mat-sidenav-content>
     <ng-container *ngIf="showToolbar()">
       <mat-toolbar color="primary">
-        <button
-          type="button"
-          aria-label="Toggle sidenav"
-          mat-icon-button
-          *ngIf="isHandset$ | async"
-        >
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <app-toolbar></app-toolbar>
+
+        <button mat-icon-button type="button" (click)="drawer.toggle()">
+          <mat-icon>search</mat-icon>
         </button>
-        <span>crypto-coins-client</span>
       </mat-toolbar>
     </ng-container>
 

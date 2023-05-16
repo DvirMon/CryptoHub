@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { LayoutService } from './layout.service';
+import { ToolbarComponent } from '../toolbar/toolbar.component';
 
 @Component({
   selector: 'app-layout',
@@ -17,6 +18,7 @@ import { LayoutService } from './layout.service';
   standalone: true,
   imports: [
     CommonModule,
+    ToolbarComponent,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
