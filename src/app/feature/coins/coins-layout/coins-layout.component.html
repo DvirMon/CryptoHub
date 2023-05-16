@@ -1,7 +1,11 @@
 <div class="coins-layout-wrapper">
   <ng-container *ngFor="let coin of coins$ | async">
     <div class="coins-item-wrapper">
-      <app-coins-panel [coin]="coin">
+      <app-coins-panel
+        (expended)="onExpandChanged($event)"
+        [coin]="coin"
+        [info]="infoMap.get(coin.id)"
+      >
       </app-coins-panel>
     </div>
   </ng-container>

@@ -5,35 +5,66 @@ import { CoinModel } from 'src/app/models/coin.model';
 import { CoinsInfoComponent } from '../coins-info/coins-info.component';
 import { CurrencyModel } from 'src/app/models/currency.model';
 import { CoinsService } from '../coins.service';
+import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
 
 
-export interface PanelOpenEvent {
-  open: boolean;
+export interface PanelChangedEvent {
+  expended: boolean;
+  selected: boolean;
   panelId: string
 }
 
 @Component({
   selector: 'app-coins-panel',
   standalone: true,
-  imports: [CommonModule, MatExpansionModule, CoinsInfoComponent],
+  imports: [CommonModule, MatExpansionModule, MatSlideToggleModule, MatIconModule, CoinsInfoComponent],
   templateUrl: './coins-panel.component.html',
   styleUrls: ['./coins-panel.component.scss']
 })
 export class CoinsPanelComponent {
 
   @Input() coin!: CoinModel
+  @Input() info!: CurrencyModel | undefined
 
-  coinsService: CoinsService = inject(CoinsService)
 
-  // info!: Signal<CurrencyModel | undefined>
+  panelChangedEvent!: PanelChangedEvent;
 
-  info!: CurrencyModel
+  @Output() expended: EventEmitter<PanelChangedEvent> = new EventEmitter()
+  @Output() selected: EventEmitter<PanelChangedEvent> = new EventEmitter()
 
-  onOpenedEvent() {
-    this.coinsService.getCoinCurrency(this.coin.id).subscribe((data: CurrencyModel) => {
+  ngOnInit() {
+    this.panelChangedEvent = {
+      expended: false,
+      selected: false,
+      panelId: this.coin?.id
+    }
 
-      this.info = data
-    });
   }
+
+  public onExpandChanged(value: boolean) {
+
+    const event = this.onChangedEvent(value, 'expended')
+
+    if (value) {
+      this.expended.emit(event)
+    }
+
+  }
+
+  public onToggleChanged(event: MatSlideToggleChange): void {
+    this.selected.emit(this.onChangedEvent(event.checked, 'selected'))
+  }
+
+  private onChangedEvent(value: boolean, key: keyof PanelChangedEvent): PanelChangedEvent {
+    const event = {
+      ...this.panelChangedEvent,
+      [key]: value
+    }
+    this.panelChangedEvent = { ...event }
+
+    return event
+  }
+
 
 }

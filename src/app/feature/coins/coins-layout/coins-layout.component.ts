@@ -1,11 +1,11 @@
 import { Component, Signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoinsService } from '../coins.service';
-import { CoinsPanelComponent } from '../coins-panel/coins-panel.component';
+import { CoinsPanelComponent, PanelChangedEvent } from '../coins-panel/coins-panel.component';
 import { Observable } from 'rxjs';
-import { CurrencyModel } from 'src/app/models/currency.model';
 import { CoinModel } from 'src/app/models/coin.model';
 import { CoinsInfoComponent } from '../coins-info/coins-info.component';
+import { CurrencyModel } from 'src/app/models/currency.model';
 
 @Component({
   selector: 'app-coins-layout',
@@ -20,6 +20,18 @@ export class CoinsLayoutComponent {
 
   coins$: Observable<CoinModel[]> = this.coinsService.getCoins();
 
+  infoMap: Map<string, CurrencyModel> = new Map<string, CurrencyModel>();
+
+  onExpandChanged(event: PanelChangedEvent) {
+
+    const { panelId } = event
+    this.coinsService.getCoinCurrency(panelId).subscribe((data: CurrencyModel) => {
+      this.infoMap.set(panelId, data)
+    });
+  }
+
+  onOpenedEvent() {
+  }
 
 
 }
