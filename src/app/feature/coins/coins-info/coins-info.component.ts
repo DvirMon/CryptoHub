@@ -13,7 +13,8 @@ import { TypographyComponent } from 'src/app/shared/components/typography/typogr
 })
 export class CoinsInfoComponent {
 
-  @Input() info!: Currency
+  @Input() url!: string
+  @Input() currency!: Currency
 
   template!: (keyof Currency)[];
 
@@ -24,9 +25,7 @@ export class CoinsInfoComponent {
   }
 
   private setTemplate(): (keyof Currency)[] {
-    const arr = Object.keys(this.info);
-    arr.pop()
-    return arr as (keyof Currency)[]
+    return Object.keys(this.currency) as (keyof Currency)[];
   }
 
 }

@@ -24,13 +24,13 @@ export class CoinsLayoutComponent {
   coins$: Observable<Coin[]> = this.StoreService.getCoins$()
   coins: Signal<Coin[]> = toSignal(this.coins$, { initialValue: [] });
 
-  infoMap: Map<string, Currency> = new Map<string, Currency>();
+  currencyMap: Map<string, Currency> = new Map<string, Currency>();
 
   onExpandChanged(event: PanelChangedEvent) {
 
     const { panelId } = event
     this.coinsService.getCoinCurrency(panelId).subscribe((data: Currency) => {
-      this.infoMap.set(panelId, data)
+      this.currencyMap.set(panelId, data)
     });
   }
 

@@ -24,7 +24,7 @@ export interface PanelChangedEvent {
 export class CoinsPanelComponent {
 
   @Input() coin!: Coin
-  @Input() info!: Currency | undefined
+  @Input() currency!: Currency | undefined
 
 
   panelChangedEvent!: PanelChangedEvent;

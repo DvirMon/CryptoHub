@@ -4,8 +4,8 @@ import { Coin } from "src/app/models/coin.model";
 export const coinsFeatureKey = 'coins';
 
 export interface CoinsState extends EntityState<Coin> {
-  selectedId?: string | number; // which Products record has been selected
-  loaded: boolean; // has the Products list been loaded
+  selectedId?: string | number; // which Coins record has been selected
+  loaded: boolean; // has the Coins list been loaded
   error?: string | null; // last known error (if any)
 }
 

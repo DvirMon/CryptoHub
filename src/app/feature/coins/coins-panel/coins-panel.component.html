@@ -15,8 +15,8 @@
         </mat-slide-toggle>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <ng-container *ngIf="info">
-      <app-coins-info [info]="info"></app-coins-info>
+    <ng-container *ngIf="currency">
+      <app-coins-info [currency]="currency" [url]="coin.image"></app-coins-info>
     </ng-container>
   </mat-expansion-panel>
 </mat-accordion>
