@@ -1,10 +1,9 @@
-import { Component, EventEmitter, Input, Output, Signal, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CoinModel } from 'src/app/models/coin.model';
 import { CoinsInfoComponent } from '../coins-info/coins-info.component';
 import { CurrencyModel } from 'src/app/models/currency.model';
-import { CoinsService } from '../coins.service';
 import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 

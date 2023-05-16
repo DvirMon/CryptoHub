@@ -1,4 +1,5 @@
 import { Component, Signal, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop'
 import { CommonModule } from '@angular/common';
 import { CoinsService } from '../coins.service';
 import { CoinsPanelComponent, PanelChangedEvent } from '../coins-panel/coins-panel.component';
@@ -19,6 +20,9 @@ export class CoinsLayoutComponent {
   coinsService: CoinsService = inject(CoinsService)
 
   coins$: Observable<CoinModel[]> = this.coinsService.getCoins();
+  coins: Signal<CoinModel[]> = toSignal(this.coins$, { initialValue: [] });
+
+
 
   infoMap: Map<string, CurrencyModel> = new Map<string, CurrencyModel>();
 

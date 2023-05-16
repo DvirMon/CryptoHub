@@ -1,5 +1,5 @@
 <div class="coins-layout-wrapper">
-  <ng-container *ngFor="let coin of coins$ | async">
+  <ng-container *ngFor="let coin of coins()">
     <div class="coins-item-wrapper">
       <app-coins-panel
         (expended)="onExpandChanged($event)"
