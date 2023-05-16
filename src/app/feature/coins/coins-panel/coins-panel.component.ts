@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Coin } from 'src/app/models/coin.model';
-import { CoinsInfoComponent } from '../coins-info/coins-info.component';
 import { Currency } from 'src/app/models/currency.model';
 import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
+import { TypographyComponent } from 'src/app/shared/components/typography/typography.component';
 
 
 export interface PanelChangedEvent {
@@ -17,7 +17,7 @@ export interface PanelChangedEvent {
 @Component({
   selector: 'app-coins-panel',
   standalone: true,
-  imports: [CommonModule, MatExpansionModule, MatSlideToggleModule, MatIconModule, CoinsInfoComponent],
+  imports: [CommonModule, NgOptimizedImage, MatExpansionModule, MatSlideToggleModule, MatIconModule, TypographyComponent],
   templateUrl: './coins-panel.component.html',
   styleUrls: ['./coins-panel.component.scss']
 })

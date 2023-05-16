@@ -5,14 +5,13 @@ import { CoinsService } from '../coins.service';
 import { CoinsPanelComponent, PanelChangedEvent } from '../coins-panel/coins-panel.component';
 import { Observable } from 'rxjs';
 import { Coin } from 'src/app/models/coin.model';
-import { CoinsInfoComponent } from '../coins-info/coins-info.component';
 import { Currency } from 'src/app/models/currency.model';
 import { StoreService } from 'src/app/ngrx/store.service';
 
 @Component({
   selector: 'app-coins-layout',
   standalone: true,
-  imports: [CommonModule, CoinsPanelComponent, CoinsInfoComponent],
+  imports: [CommonModule, CoinsPanelComponent],
   templateUrl: './coins-layout.component.html',
   styleUrls: ['./coins-layout.component.scss']
 })

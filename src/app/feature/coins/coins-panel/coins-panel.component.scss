@@ -8,3 +8,18 @@ mat-expansion-panel {
   justify-content: space-between;
   align-items: center;
 }
+
+div.coin-currency-wrapper {
+  display: flex;
+}
+
+section.coin-currency {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
+  app-typography {
+    margin: 1%;
+  }
+}
