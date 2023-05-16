@@ -25,11 +25,19 @@
   <mat-sidenav-content>
     <ng-container *ngIf="showToolbar()">
       <mat-toolbar color="primary">
-        <app-toolbar></app-toolbar>
+        <section>
+          <button type="button" aria-label="Toggle sidenav" mat-icon-button>
+            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+          </button>
+        </section>
 
-        <button mat-icon-button type="button" (click)="drawer.toggle()">
-          <mat-icon>search</mat-icon>
-        </button>
+        <section>
+          <app-selected-coins></app-selected-coins>
+
+          <button mat-icon-button type="button" (click)="drawer.toggle()">
+            <mat-icon>search</mat-icon>
+          </button>
+        </section>
       </mat-toolbar>
     </ng-container>
 

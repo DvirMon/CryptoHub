@@ -8,8 +8,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+
 import { LayoutService } from './layout.service';
-import { ToolbarComponent } from '../toolbar/toolbar.component';
+import { SelectedCoinsComponent } from '../selected-coins/selected-coins.component';
 
 @Component({
   selector: 'app-layout',
@@ -18,7 +19,7 @@ import { ToolbarComponent } from '../toolbar/toolbar.component';
   standalone: true,
   imports: [
     CommonModule,
-    ToolbarComponent,
+    SelectedCoinsComponent,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -27,16 +28,8 @@ import { ToolbarComponent } from '../toolbar/toolbar.component';
   ]
 })
 export class LayoutComponent {
-  private breakpointObserver = inject(BreakpointObserver);
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
 
   layoutService: LayoutService = inject(LayoutService);
-
   showToolbar: WritableSignal<boolean> = this.layoutService.getToolbarSignal()
 
 
