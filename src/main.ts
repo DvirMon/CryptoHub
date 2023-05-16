@@ -1,4 +1,4 @@
-import { importProvidersFrom } from '@angular/core';
+import { importProvidersFrom, isDevMode } from '@angular/core';
 import { AppComponent } from './app/app.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { BrowserModule, bootstrapApplication, provideClientHydration } from '@angular/platform-browser';
@@ -7,6 +7,7 @@ import { provideRouter } from '@angular/router';
 import { appRoutes } from './app/app.routs';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 
 bootstrapApplication(AppComponent, {
@@ -17,7 +18,8 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(),
     provideAnimations(),
     provideStore(),
-    provideEffects()
+    provideEffects(),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
 ]
 })
   .catch(err => console.error(err));
