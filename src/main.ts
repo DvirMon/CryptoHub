@@ -8,18 +8,20 @@ import { appRoutes } from './app/app.routs';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { coinsReducer } from './app/ngrx/coins/coins.reducer';
+import { coinsFeatureKey } from './app/ngrx/coins/coins.state';
 
 
 bootstrapApplication(AppComponent, {
-    providers: [
+  providers: [
     importProvidersFrom(BrowserModule),
     provideRouter(appRoutes),
     provideClientHydration(),
     provideHttpClient(),
     provideAnimations(),
-    provideStore(),
+    provideStore({ [coinsFeatureKey]: coinsReducer }),
     provideEffects(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
-]
+  ]
 })
   .catch(err => console.error(err));
