@@ -11,7 +11,7 @@ import { TypographyComponent } from 'src/app/shared/components/typography/typogr
 export interface PanelChangedEvent {
   expended: boolean;
   selected: boolean;
-  panelId: string
+  coinId: string
 }
 
 @Component({
@@ -36,7 +36,7 @@ export class CoinsPanelComponent {
     this.panelChangedEvent = {
       expended: false,
       selected: false,
-      panelId: this.coin?.id
+      coinId: this.coin?.id
     }
 
   }

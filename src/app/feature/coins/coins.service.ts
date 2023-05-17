@@ -37,24 +37,11 @@ export class CoinsService {
   // GET - get currencies of coin by id - http://localhost:3000/api/coins/currency:id
 
   public getCoinCurrency(id: string): Observable<Currency> {
+    console.log('http called', id)
     return this.http.get<Currency>(this.url + "/currency/" + id, { reportProgress: true })
 
   }
 
-
-
-  // STORE SECTION
-
-  // public addSelectedCoin(coin: Coin) {
-  //   this.formService.handleStore(ActionType.AddCoin, coin)
-  // }
-
-  // public deleteSelectedCoin(coinId: string) {
-  //   this.formService.handleStore(ActionType.DeleteCoin, coinId)
-  // }
-  // public deleteAllSelectedCoin() {
-  //   this.formService.handleStore(ActionType.DeleteAllCoins)
-  // }
 
 
 }

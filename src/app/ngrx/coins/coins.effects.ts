@@ -15,7 +15,6 @@ export class CoinsEffects {
   constructor
     (
       private coinsService: CoinsService,
-      private store: Store,
       private actions$: Actions
 
     ) { }
@@ -34,27 +33,12 @@ export class CoinsEffects {
   updateCoinCurrency$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CoinsActions.updateCoinCurrency),
-      exhaustMap((payload) =>
-        this.coinsService.getCoinCurrency(payload.id).pipe(
-          map((currency: Currency) => CoinsActions.updateCoinCurrencySuccess({ currency }),
-            catchError(() => EMPTY)
-          )
+      exhaustMap((payload) => this.coinsService.getCoinCurrency(payload.id).pipe(
+        map((currency: Currency) => CoinsActions.updateCoinCurrencySuccess({ id: payload.id, currency }),
+          catchError(() => EMPTY)
         )
+      )
       )
     )
   )
-  // updateCoinCurrency$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(CoinsActions.selectedCoinId),
-  //     exhaustMap((payload) =>
-  //       this.coinsService.getCoinCurrency(payload.id).pipe(
-  //         map((currency: Currency) => CoinsActions.updateCoinCurrencySuccess({ currency }),
-  //           catchError(() => EMPTY)
-  //         )
-  //       )
-  //     )
-  //   )
-  // )
-
-
 }

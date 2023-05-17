@@ -1,4 +1,4 @@
-import { Component, Signal, inject } from '@angular/core';
+import { Component, Signal, inject, computed, effect, signal, WritableSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop'
 import { CommonModule } from '@angular/common';
 import { CoinsService } from '../coins.service';
@@ -17,19 +17,32 @@ import { StoreService } from 'src/app/ngrx/store.service';
 })
 export class CoinsLayoutComponent {
 
-  coinsService: CoinsService = inject(CoinsService);
-  StoreService: StoreService = inject(StoreService);
+  private storeService: StoreService = inject(StoreService);
 
-  coins$: Observable<Coin[]> = this.StoreService.getCoins$()
-  coins: Signal<Coin[]> = toSignal(this.coins$, { initialValue: [] });
+  private coins$: Observable<Coin[]> = this.storeService.getCoins$()
+  readonly coins: Signal<Coin[]> = toSignal(this.coins$, { initialValue: [] });
 
-  currencyMap$ = this.StoreService.getCurrencyMap()
-  currencyMap: Signal<{ [key: string]: Currency }> = toSignal(this.currencyMap$, { initialValue: {} });
+  private currencyMap$ = this.storeService.getCurrencyMap$()
+  readonly currencyMap: Signal<{ [key: string]: Currency }> = toSignal(this.currencyMap$, { initialValue: {} });
+
+  readonly coinId: WritableSignal<string | undefined> = signal(undefined)
+
+  constructor() {
+
+    effect(() => {
+      if (this.coinId()) {
+        this.storeService.setCurrencyMap(this.coinId() as string)
+      }
+    })
+  }
+
 
   onExpandChanged(event: PanelChangedEvent) {
 
-    const { panelId } = event
-    this.StoreService.setSelectedCoin(panelId)
+    const { coinId } = event
+    if (!this.currencyMap()[coinId]) {
+      this.coinId.set(coinId)
+    }
   }
 
 }

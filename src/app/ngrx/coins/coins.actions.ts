@@ -14,11 +14,6 @@ export const loadCoinsFailure = createAction(
   props<{ err: any }>()
 );
 
-export const selectedCoinId = createAction(
-  '[Coin/API] Update Selected Coin Id',
-  props<{ id: string }>()
-);
-
 export const updateCoinCurrency = createAction(
   '[Coin/API] Update Coin Currency',
   props<{ id: string }>()
@@ -26,7 +21,7 @@ export const updateCoinCurrency = createAction(
 
 export const updateCoinCurrencySuccess = createAction(
   '[Coin/API] Update Coin Currency Success',
-  props<{ currency: Currency }>()
+  props<{ id: string, currency: Currency }>()
 );
 
 export const updateCoinCurrencyFailure = createAction(
