@@ -25,24 +25,25 @@ export class CoinsLayoutComponent {
   private currencyMap$ = this.storeService.getCurrencyMap$()
   readonly currencyMap: Signal<{ [key: string]: Currency }> = toSignal(this.currencyMap$, { initialValue: {} });
 
-  readonly coinId: WritableSignal<string | undefined> = signal(undefined)
+  readonly selectedId: WritableSignal<string | undefined> = signal(undefined)
 
   constructor() {
 
-    effect(() => {
-      if (this.coinId()) {
-        this.storeService.setCurrencyMap(this.coinId() as string)
-      }
-    })
   }
 
 
-  onExpandChanged(event: PanelChangedEvent) {
+  onExpandChanged(event: PanelChangedEvent): void {
 
-    const { coinId } = event
-    if (!this.currencyMap()[coinId]) {
-      this.coinId.set(coinId)
+    const { coin } = event
+    if (!this.currencyMap()[coin.id]) {
+      this.storeService.setCurrencyMap(coin.id)
     }
+  }
+
+  onSelectedChanged(event: PanelChangedEvent): void {
+
+    const { checked, coin } = event;
+    this.storeService.setSelectedMap(checked, coin);
   }
 
 }

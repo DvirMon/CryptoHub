@@ -29,3 +29,13 @@ export const updateCoinCurrencyFailure = createAction(
   props<{ err: any }>()
 );
 
+export const addSelectedCoin = createAction(
+  '[Coin/API] Add Selected Coin',
+  props<{ coin: Coin }>()
+)
+
+export const deleteSelectedCoin = createAction(
+  '[Coin/API] Delete Selected Coin',
+  props<{ id: string }>()
+)
+

@@ -45,6 +45,21 @@ export class StoreService {
     this.store.dispatch(action);
   }
 
+  public setSelectedMap(checked: boolean, coin: Coin) {
+
+    if (checked) {
+      const action = CoinsActions.addSelectedCoin({ coin });
+      this.store.dispatch(action);
+    }
+
+    else {
+      const action = CoinsActions.deleteSelectedCoin({ id: coin.id });
+      this.store.dispatch(action);
+
+    }
+
+  }
+
 
 
 

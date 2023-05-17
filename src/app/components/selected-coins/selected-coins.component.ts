@@ -1,10 +1,11 @@
-import { Component, WritableSignal, signal } from '@angular/core';
+import { Component, WritableSignal, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { Coin } from 'src/app/models/coin.model';
+import { StoreService } from 'src/app/ngrx/store.service';
 
 @Component({
   selector: 'app-selected-coins',
@@ -15,8 +16,9 @@ import { Coin } from 'src/app/models/coin.model';
 })
 export class SelectedCoinsComponent {
 
-  private selectedCoins: Coin[] = []
-  public selectedList: Coin[] = []
+  private storeService: StoreService = inject(StoreService);
+
+  readonly selectedCoins: Coin[] = []
 
   selectedCoin: WritableSignal<string> = signal(this.setSelectedCoin())
 

@@ -10,8 +10,8 @@ import { TypographyComponent } from 'src/app/shared/components/typography/typogr
 
 export interface PanelChangedEvent {
   expended: boolean;
-  selected: boolean;
-  coinId: string
+  checked: boolean;
+  coin: Coin
 }
 
 @Component({
@@ -24,26 +24,25 @@ export interface PanelChangedEvent {
 export class CoinsPanelComponent {
 
   @Input() coin!: Coin
-  @Input() currency!: Currency | undefined
+  @Input() currency!: Currency
 
-
-  panelChangedEvent!: PanelChangedEvent;
+  private _panelChangedEvent!: PanelChangedEvent;
 
   @Output() expended: EventEmitter<PanelChangedEvent> = new EventEmitter()
   @Output() selected: EventEmitter<PanelChangedEvent> = new EventEmitter()
 
   ngOnInit() {
-    this.panelChangedEvent = {
+    this._panelChangedEvent = {
       expended: false,
-      selected: false,
-      coinId: this.coin?.id
+      checked: false,
+      coin: this.coin
     }
 
   }
 
-  public onExpandChanged(value: boolean) {
+  public onExpandChanged(value: boolean): void {
 
-    const event = this.onChangedEvent(value, 'expended')
+    const event = this._onChangedEvent(value, 'expended')
 
     if (value) {
       this.expended.emit(event)
@@ -52,15 +51,15 @@ export class CoinsPanelComponent {
   }
 
   public onToggleChanged(event: MatSlideToggleChange): void {
-    this.selected.emit(this.onChangedEvent(event.checked, 'selected'))
+    this.selected.emit(this._onChangedEvent(event.checked, 'checked'))
   }
 
-  private onChangedEvent(value: boolean, key: keyof PanelChangedEvent): PanelChangedEvent {
+  private _onChangedEvent(value: boolean, key: keyof PanelChangedEvent): PanelChangedEvent {
     const event = {
-      ...this.panelChangedEvent,
+      ...this._panelChangedEvent,
       [key]: value
     }
-    this.panelChangedEvent = { ...event }
+    this._panelChangedEvent = { ...event }
 
     return event
   }

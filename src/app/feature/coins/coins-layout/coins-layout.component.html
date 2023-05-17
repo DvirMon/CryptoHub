@@ -2,9 +2,10 @@
   <ng-container *ngFor="let coin of coins()">
     <div class="coins-item-wrapper">
       <app-coins-panel
-        (expended)="onExpandChanged($event)"
-        [coin]="coin"
-        [currency]="currencyMap()[coin.id]"
+      [coin]="coin"
+      [currency]="currencyMap()[coin.id]"
+      (expended)="onExpandChanged($event)"
+      (selected)="onSelectedChanged($event)"
       >
       </app-coins-panel>
     </div>
