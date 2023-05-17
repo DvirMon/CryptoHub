@@ -4,7 +4,7 @@
       <app-coins-panel
         (expended)="onExpandChanged($event)"
         [coin]="coin"
-        [currency]="currencyMap.get(coin.id)"
+        [currency]="currencyMap()[coin.id]"
       >
       </app-coins-panel>
     </div>

@@ -18,19 +18,18 @@ import { StoreService } from 'src/app/ngrx/store.service';
 export class CoinsLayoutComponent {
 
   coinsService: CoinsService = inject(CoinsService);
-  StoreService : StoreService = inject(StoreService);
+  StoreService: StoreService = inject(StoreService);
 
   coins$: Observable<Coin[]> = this.StoreService.getCoins$()
   coins: Signal<Coin[]> = toSignal(this.coins$, { initialValue: [] });
 
-  currencyMap: Map<string, Currency> = new Map<string, Currency>();
+  currencyMap$ = this.StoreService.getCurrencyMap()
+  currencyMap: Signal<{ [key: string]: Currency }> = toSignal(this.currencyMap$, { initialValue: {} });
 
   onExpandChanged(event: PanelChangedEvent) {
 
     const { panelId } = event
-    this.coinsService.getCoinCurrency(panelId).subscribe((data: Currency) => {
-      this.currencyMap.set(panelId, data)
-    });
+    this.StoreService.setSelectedCoin(panelId)
   }
 
 }
