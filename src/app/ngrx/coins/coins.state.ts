@@ -12,8 +12,7 @@ export interface CoinsState extends EntityState<Coin> {
   selectedMap: { [key: string]: Coin };
 }
 
-export const coinsAdapter: EntityAdapter<Coin> =
-  createEntityAdapter<Coin>();
+export const coinsAdapter: EntityAdapter<Coin> = createEntityAdapter<Coin>();
 
 const defaultCoinsState: CoinsState = {
   ids: [], entities: {}, loaded: false, currencyMap: {}, selectedMap: {}

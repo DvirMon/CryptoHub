@@ -1,7 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { coinsAdapter, initialCoinsState } from './coins.state';
 import { CoinsActions } from './coins.types';
-import { Coin } from 'src/app/models/coin.model';
 import { deleteFile } from './coins.helpers';
 
 export const coinsReducer = createReducer(

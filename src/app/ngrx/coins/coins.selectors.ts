@@ -27,6 +27,10 @@ export const selectCurrencyMap = createSelector(
   selectCoinsState,
   (state: fromCoins.CoinsState) => state.currencyMap
 );
+export const selectCoinsMap = createSelector(
+  selectCoinsState,
+  (state: fromCoins.CoinsState) => state.selectedMap
+);
 
 
 

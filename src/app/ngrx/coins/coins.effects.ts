@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { EMPTY, exhaustMap, map, catchError } from 'rxjs';
+
 import { CoinsService } from 'src/app/feature/coins/coins.service';
-import { CoinsActions, CoinsSelectors } from './coins.types';
+import { CoinsActions } from './coins.types';
 import { Coin } from 'src/app/models/coin.model';
-import { EMPTY, exhaustMap, map, catchError, of, Observable } from 'rxjs';
 import { Currency } from 'src/app/models/currency.model';
-import { Store } from '@ngrx/store';
 
 
 @Injectable()
@@ -16,9 +16,9 @@ export class CoinsEffects {
     (
       private coinsService: CoinsService,
       private actions$: Actions
-
     ) { }
 
+  // load coin from Http request
   loadCoins$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CoinsActions.loadCoins),

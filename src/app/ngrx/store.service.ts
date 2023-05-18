@@ -36,8 +36,9 @@ export class StoreService {
     return this.store.select(CoinsSelectors.selectCurrencyMap)
   }
 
-  public getSelectedCoin$(): Observable<string> {
-    return this.store.select(CoinsSelectors.selectCoinsId).pipe(distinctUntilChanged())
+
+  public getSelectedCoinMap$(): Observable<{ [key: string]: Coin }> {
+    return this.store.select(CoinsSelectors.selectCoinsMap)
   }
 
   public setCurrencyMap(id: string): void {

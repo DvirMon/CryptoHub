@@ -9,6 +9,7 @@ export const loadCoinsSuccess = createAction(
   '[Coin/API] Load Coin Success',
   props<{ coins: Coin[] }>()
 );
+
 export const loadCoinsFailure = createAction(
   '[Coin/API] Load Coin Failure',
   props<{ err: any }>()

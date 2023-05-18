@@ -1,7 +1,6 @@
-import { Component, Signal, inject, computed, effect, signal, WritableSignal } from '@angular/core';
+import { Component, Signal, inject,  signal, WritableSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop'
 import { CommonModule } from '@angular/common';
-import { CoinsService } from '../coins.service';
 import { CoinsPanelComponent, PanelChangedEvent } from '../coins-panel/coins-panel.component';
 import { Observable } from 'rxjs';
 import { Coin } from 'src/app/models/coin.model';
