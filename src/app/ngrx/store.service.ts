@@ -36,9 +36,13 @@ export class StoreService {
     return this.store.select(CoinsSelectors.selectCurrencyMap)
   }
 
-
   public getSelectedCoinMap$(): Observable<{ [key: string]: Coin }> {
     return this.store.select(CoinsSelectors.selectCoinsMap)
+  }
+
+  public getSelectedCoinMapLength(): Signal<number> {
+    const selectedCoinLength$ = this.store.select(CoinsSelectors.selectCoinsMapLength)
+    return toSignal(selectedCoinLength$, { initialValue: 0 })
   }
 
   public setCurrencyMap(id: string): void {

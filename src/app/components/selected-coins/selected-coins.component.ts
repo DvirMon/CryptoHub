@@ -20,9 +20,10 @@ export class SelectedCoinsComponent {
 
   private storeService: StoreService = inject(StoreService);
 
-  readonly selectedCoinsMap$: Observable<{ [key: string]: Coin }> = this.storeService.getSelectedCoinMap$()
-  readonly selectedCoinsMap: Signal<{ [key: string]: Coin }> = toSignal(this.selectedCoinsMap$, { initialValue: {} })
-  readonly selectedCoinLength: Signal<number> = computed(() => Object.keys(this.selectedCoinsMap()).length)
+  // readonly selectedCoinsMap$: Observable<{ [key: string]: Coin }> = this.storeService.getSelectedCoinMap$()
+  // readonly selectedCoinsMap: Signal<{ [key: string]: Coin }> = toSignal(this.selectedCoinsMap$, { initialValue: {} })
+
+  readonly selectedCoinLength: Signal<number> =this.storeService.getSelectedCoinMapLength()
   
   selectedCoinBudge: Signal<string> = computed(() => this.selectedCoinLength() > 0 ? String(this.selectedCoinLength()) : '')
 

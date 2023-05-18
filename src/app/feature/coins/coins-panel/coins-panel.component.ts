@@ -11,7 +11,8 @@ import { TypographyComponent } from 'src/app/shared/components/typography/typogr
 export interface PanelChangedEvent {
   expended: boolean;
   checked: boolean;
-  coin: Coin
+  coin: Coin,
+  toggleEvent?: MatSlideToggleChange
 }
 
 @Component({
@@ -25,11 +26,14 @@ export class CoinsPanelComponent {
 
   @Input() coin!: Coin
   @Input() currency!: Currency
+  @Input() toggleLimit!: boolean
+
 
   private _panelChangedEvent!: PanelChangedEvent;
 
   @Output() expended: EventEmitter<PanelChangedEvent> = new EventEmitter()
   @Output() selected: EventEmitter<PanelChangedEvent> = new EventEmitter()
+  @Output() limit: EventEmitter<void> = new EventEmitter()
 
   ngOnInit() {
     this._panelChangedEvent = {
@@ -51,13 +55,31 @@ export class CoinsPanelComponent {
   }
 
   public onToggleChanged(event: MatSlideToggleChange): void {
-    this.selected.emit(this._onChangedEvent(event.checked, 'checked'))
+
+
+    // emit event until limit
+    if (this.toggleLimit) {
+
+      this.selected.emit(this._onChangedEvent(event.checked, 'checked', event))
+    } else {
+
+      // when hit limit checked if toggle is checked
+
+      if (!event.checked) {
+        this.selected.emit(this._onChangedEvent(event.checked, 'checked', event))
+      } else {
+        event.source.checked = false
+        this.limit.emit();
+      }
+
+    }
   }
 
-  private _onChangedEvent(value: boolean, key: keyof PanelChangedEvent): PanelChangedEvent {
+  private _onChangedEvent(value: boolean, key: keyof PanelChangedEvent, toggleEvent?: MatSlideToggleChange): PanelChangedEvent {
     const event = {
       ...this._panelChangedEvent,
-      [key]: value
+      [key]: value,
+      toggleEvent
     }
     this._panelChangedEvent = { ...event }
 

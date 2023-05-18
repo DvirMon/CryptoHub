@@ -27,9 +27,15 @@ export const selectCurrencyMap = createSelector(
   selectCoinsState,
   (state: fromCoins.CoinsState) => state.currencyMap
 );
+
 export const selectCoinsMap = createSelector(
   selectCoinsState,
   (state: fromCoins.CoinsState) => state.selectedMap
+);
+
+export const selectCoinsMapLength = createSelector(
+  selectCoinsMap,
+  (state: { [key: string]: Coin }) => Object.keys(state).length
 );
 
 

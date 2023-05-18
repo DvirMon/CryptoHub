@@ -1,4 +1,4 @@
-import { Component, Signal, inject,  signal, WritableSignal } from '@angular/core';
+import { Component, Signal, inject, signal, WritableSignal, computed } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop'
 import { CommonModule } from '@angular/common';
 import { CoinsPanelComponent, PanelChangedEvent } from '../coins-panel/coins-panel.component';
@@ -24,7 +24,10 @@ export class CoinsLayoutComponent {
   private currencyMap$ = this.storeService.getCurrencyMap$()
   readonly currencyMap: Signal<{ [key: string]: Currency }> = toSignal(this.currencyMap$, { initialValue: {} });
 
-  readonly selectedId: WritableSignal<string | undefined> = signal(undefined)
+  readonly selectedId: WritableSignal<string | undefined> = signal(undefined);
+
+  readonly selectedCoinLength: Signal<number> = this.storeService.getSelectedCoinMapLength()
+  readonly toggleLimit = this.setToggleLimit(5, this.selectedCoinLength);
 
   constructor() {
 
@@ -42,7 +45,17 @@ export class CoinsLayoutComponent {
   onSelectedChanged(event: PanelChangedEvent): void {
 
     const { checked, coin } = event;
+
     this.storeService.setSelectedMap(checked, coin);
   }
+
+  onToggleLimit(): void {
+  }
+
+  private setToggleLimit(limit: number, length: Signal<number>): Signal<boolean> {
+    return computed(() => limit > length())
+  }
+
+
 
 }
