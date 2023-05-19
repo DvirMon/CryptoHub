@@ -12,17 +12,18 @@ import { coinsReducer } from './app/ngrx/coins/coins.reducer';
 import { coinsFeatureKey } from './app/ngrx/coins/coins.state';
 import { CoinsEffects } from './app/ngrx/coins/coins.effects';
 
-
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(BrowserModule),
+    importProvidersFrom(
+      BrowserModule,
+    ),
     provideRouter(appRoutes),
     provideClientHydration(),
     provideHttpClient(),
     provideAnimations(),
     provideStore({ [coinsFeatureKey]: coinsReducer }),
     provideEffects(CoinsEffects),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
-  ]
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+  ],
 })
   .catch(err => console.error(err));
