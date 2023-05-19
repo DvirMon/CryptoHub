@@ -1,35 +1,61 @@
-import { Component, Signal, inject } from '@angular/core';
+import { Component, Signal, inject, signal, WritableSignal, computed } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop'
 import { CommonModule } from '@angular/common';
-import { CoinsService } from '../coins.service';
 import { CoinsPanelComponent, PanelChangedEvent } from '../coins-panel/coins-panel.component';
 import { Observable } from 'rxjs';
-import { CoinModel } from 'src/app/models/coin.model';
-import { CoinsInfoComponent } from '../coins-info/coins-info.component';
-import { CurrencyModel } from 'src/app/models/currency.model';
+import { Coin } from 'src/app/models/coin.model';
+import { Currency } from 'src/app/models/currency.model';
+import { StoreService } from 'src/app/ngrx/store.service';
 
 @Component({
   selector: 'app-coins-layout',
   standalone: true,
-  imports: [CommonModule, CoinsPanelComponent, CoinsInfoComponent],
+  imports: [CommonModule, CoinsPanelComponent],
   templateUrl: './coins-layout.component.html',
   styleUrls: ['./coins-layout.component.scss']
 })
 export class CoinsLayoutComponent {
 
-  coinsService: CoinsService = inject(CoinsService)
+  private storeService: StoreService = inject(StoreService);
 
-  coins$: Observable<CoinModel[]> = this.coinsService.getCoins();
-  coins: Signal<CoinModel[]> = toSignal(this.coins$, { initialValue: [] });
+  private coins$: Observable<Coin[]> = this.storeService.getCoins$()
+  readonly coins: Signal<Coin[]> = toSignal(this.coins$, { initialValue: [] });
 
-  infoMap: Map<string, CurrencyModel> = new Map<string, CurrencyModel>();
+  private currencyMap$ = this.storeService.getCurrencyMap$()
+  readonly currencyMap: Signal<{ [key: string]: Currency }> = toSignal(this.currencyMap$, { initialValue: {} });
 
-  onExpandChanged(event: PanelChangedEvent) {
+  readonly selectedId: WritableSignal<string | undefined> = signal(undefined);
 
-    const { panelId } = event
-    this.coinsService.getCoinCurrency(panelId).subscribe((data: CurrencyModel) => {
-      this.infoMap.set(panelId, data)
-    });
+  readonly selectedCoinLength: Signal<number> = this.storeService.getSelectedCoinMapLength()
+  readonly toggleLimit = this.setToggleLimit(5, this.selectedCoinLength);
+
+  constructor() {
+
   }
+
+
+  onExpandChanged(event: PanelChangedEvent): void {
+
+    const { coin } = event
+    if (!this.currencyMap()[coin.id]) {
+      this.storeService.setCurrencyMap(coin.id)
+    }
+  }
+
+  onSelectedChanged(event: PanelChangedEvent): void {
+
+    const { checked, coin } = event;
+
+    this.storeService.setSelectedMap(checked, coin);
+  }
+
+  onToggleLimit(): void {
+  }
+
+  private setToggleLimit(limit: number, length: Signal<number>): Signal<boolean> {
+    return computed(() => limit > length())
+  }
+
+
 
 }

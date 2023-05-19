@@ -1,49 +1,52 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { CoinModel } from 'src/app/models/coin.model';
-import { CoinsInfoComponent } from '../coins-info/coins-info.component';
-import { CurrencyModel } from 'src/app/models/currency.model';
+import { Coin } from 'src/app/models/coin.model';
+import { Currency } from 'src/app/models/currency.model';
 import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
+import { TypographyComponent } from 'src/app/shared/components/typography/typography.component';
 
 
 export interface PanelChangedEvent {
   expended: boolean;
-  selected: boolean;
-  panelId: string
+  checked: boolean;
+  coin: Coin,
+  toggleEvent?: MatSlideToggleChange
 }
 
 @Component({
   selector: 'app-coins-panel',
   standalone: true,
-  imports: [CommonModule, MatExpansionModule, MatSlideToggleModule, MatIconModule, CoinsInfoComponent],
+  imports: [CommonModule, NgOptimizedImage, MatExpansionModule, MatSlideToggleModule, MatIconModule, TypographyComponent],
   templateUrl: './coins-panel.component.html',
   styleUrls: ['./coins-panel.component.scss']
 })
 export class CoinsPanelComponent {
 
-  @Input() coin!: CoinModel
-  @Input() info!: CurrencyModel | undefined
+  @Input() coin!: Coin
+  @Input() currency!: Currency
+  @Input() toggleLimit!: boolean
 
 
-  panelChangedEvent!: PanelChangedEvent;
+  private _panelChangedEvent!: PanelChangedEvent;
 
   @Output() expended: EventEmitter<PanelChangedEvent> = new EventEmitter()
   @Output() selected: EventEmitter<PanelChangedEvent> = new EventEmitter()
+  @Output() limit: EventEmitter<void> = new EventEmitter()
 
   ngOnInit() {
-    this.panelChangedEvent = {
+    this._panelChangedEvent = {
       expended: false,
-      selected: false,
-      panelId: this.coin?.id
+      checked: false,
+      coin: this.coin
     }
 
   }
 
-  public onExpandChanged(value: boolean) {
+  public onExpandChanged(value: boolean): void {
 
-    const event = this.onChangedEvent(value, 'expended')
+    const event = this._onChangedEvent(value, 'expended')
 
     if (value) {
       this.expended.emit(event)
@@ -52,15 +55,33 @@ export class CoinsPanelComponent {
   }
 
   public onToggleChanged(event: MatSlideToggleChange): void {
-    this.selected.emit(this.onChangedEvent(event.checked, 'selected'))
+
+
+    // emit event until limit
+    if (this.toggleLimit) {
+
+      this.selected.emit(this._onChangedEvent(event.checked, 'checked', event))
+    } else {
+
+      // when hit limit checked if toggle is checked
+
+      if (!event.checked) {
+        this.selected.emit(this._onChangedEvent(event.checked, 'checked', event))
+      } else {
+        event.source.checked = false
+        this.limit.emit();
+      }
+
+    }
   }
 
-  private onChangedEvent(value: boolean, key: keyof PanelChangedEvent): PanelChangedEvent {
+  private _onChangedEvent(value: boolean, key: keyof PanelChangedEvent, toggleEvent?: MatSlideToggleChange): PanelChangedEvent {
     const event = {
-      ...this.panelChangedEvent,
-      [key]: value
+      ...this._panelChangedEvent,
+      [key]: value,
+      toggleEvent
     }
-    this.panelChangedEvent = { ...event }
+    this._panelChangedEvent = { ...event }
 
     return event
   }

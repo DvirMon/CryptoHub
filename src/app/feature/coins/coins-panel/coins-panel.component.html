@@ -15,8 +15,20 @@
         </mat-slide-toggle>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <ng-container *ngIf="info">
-      <app-coins-info [info]="info"></app-coins-info>
-    </ng-container>
+
+    <div class="coin-currency-wrapper">
+      <ng-container>
+        <section class="coin-currency">
+          <ng-container *ngFor="let item of currency | keyvalue">
+            <app-typography>
+              {{ item.key | uppercase }} : {{ item.value }}</app-typography
+            >
+          </ng-container>
+        </section>
+      </ng-container>
+      <section>
+        <img [ngSrc]="coin.image" alt="" width="100" height="100" />
+      </section>
+    </div>
   </mat-expansion-panel>
 </mat-accordion>

@@ -1,10 +1,13 @@
-import { Component, WritableSignal, signal } from '@angular/core';
+import { Component, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop'
 import { CommonModule } from '@angular/common';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { CoinModel } from 'src/app/models/coin.model';
+import { Coin } from 'src/app/models/coin.model';
+import { StoreService } from 'src/app/ngrx/store.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-selected-coins',
@@ -15,13 +18,16 @@ import { CoinModel } from 'src/app/models/coin.model';
 })
 export class SelectedCoinsComponent {
 
-  private selectedCoins: CoinModel[] = []
-  public selectedList: CoinModel[] = []
+  private storeService: StoreService = inject(StoreService);
 
-  selectedCoin: WritableSignal<string> = signal(this.setSelectedCoin())
+  // readonly selectedCoinsMap$: Observable<{ [key: string]: Coin }> = this.storeService.getSelectedCoinMap$()
+  // readonly selectedCoinsMap: Signal<{ [key: string]: Coin }> = toSignal(this.selectedCoinsMap$, { initialValue: {} })
 
-  private setSelectedCoin(): string {
-    return this.selectedCoins.length > 0 ? String(this.selectedCoins.length) : ''
-  }
+  readonly selectedCoinLength: Signal<number> =this.storeService.getSelectedCoinMapLength()
+  
+  selectedCoinBudge: Signal<string> = computed(() => this.selectedCoinLength() > 0 ? String(this.selectedCoinLength()) : '')
+
+  readonly selectedCoins: Coin[] = []
+
 
 }

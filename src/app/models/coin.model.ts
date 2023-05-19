@@ -1,9 +1,12 @@
-export interface CoinModel {
+import { Currency } from "./currency.model";
+
+export interface Coin {
 
   id: string,
   name: string,
   symbol: string,
-  url: string
+  image: string,
+  currency: Currency
 }
 
 
