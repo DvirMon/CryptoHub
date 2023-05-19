@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  server : "https://crypto-coins-server.herokuapp.com"
+  server : "https://web-production-03ab.up.railway.app"
 };
