@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/crypto-coins-client",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
