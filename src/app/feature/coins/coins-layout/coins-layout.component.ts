@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Coin } from 'src/app/models/coin.model';
 import { Currency } from 'src/app/models/currency.model';
 import { StoreService } from 'src/app/ngrx/store.service';
+import { CoinsDialogComponent } from '../coins-dialog/coins-dialog.component';
 
 @Component({
   selector: 'app-coins-layout',
@@ -27,7 +28,7 @@ export class CoinsLayoutComponent {
   readonly selectedId: WritableSignal<string | undefined> = signal(undefined);
 
   readonly selectedCoinLength: Signal<number> = this.storeService.getSelectedCoinMapLength()
-  readonly toggleLimit = this.setToggleLimit(5, this.selectedCoinLength);
+  readonly toggleLimit = this.setToggleLimit(3, this.selectedCoinLength);
 
   constructor() {
 
@@ -50,6 +51,8 @@ export class CoinsLayoutComponent {
   }
 
   onToggleLimit(): void {
+
+    this.storeService.openDialog()
   }
 
   private setToggleLimit(limit: number, length: Signal<number>): Signal<boolean> {

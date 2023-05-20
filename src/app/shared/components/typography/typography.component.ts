@@ -14,7 +14,7 @@ export class TypographyComponent {
   public palette: Color = palette;
 
   @Input() color: Palette = 'text';
-  @Input() size!: number;
+  @Input() fontSize!: number;
   @Input() bold!: number;
   @Input() align!: 'center' | 'right' | 'left';
 
@@ -22,7 +22,7 @@ export class TypographyComponent {
 
   ngOnInit(): void {
     this.color = this.color || 'text';
-    this.size = this.size || 2;
+    this.fontSize = this.fontSize || 2;
     this.align = this.align || 'left'
   }
 }

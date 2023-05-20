@@ -1,3 +1,4 @@
+import { ComponentType } from '@angular/cdk/portal';
 import { createAction, props } from '@ngrx/store';
 import { Coin } from 'src/app/models/coin.model';
 import { Currency } from 'src/app/models/currency.model';
@@ -38,5 +39,10 @@ export const addSelectedCoin = createAction(
 export const deleteSelectedCoin = createAction(
   '[Coin/API] Delete Selected Coin',
   props<{ id: string }>()
+)
+
+export const openCoinsDialog = createAction(
+  '[Coin Dialog Page] Dialog Opened',
+  props<{ data: unknown }>()
 )
 

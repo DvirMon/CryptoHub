@@ -1,0 +1,25 @@
+<div>
+  <header mat-dialog-title>
+    <app-typography [fontSize]="5">
+      You can only choose up to 5 coins
+    </app-typography>
+  </header>
+  <mat-divider></mat-divider>
+  <!-- <h2 mat-dialog-title>
+    To add {{ payload.lastSelect.symbol | uppercase }} you must unselect one of
+    the following:
+  </h2> -->
+
+  <main mat-dialog-content>
+    <ng-container>
+      <app-typography>test</app-typography>
+      <mat-slide-toggle></mat-slide-toggle>
+    </ng-container>
+  </main>
+
+  <footer mat-dialog-actions>
+    <button (click)="onClose()" mat-button mat-dialog-close cdkFocusInitial>
+      Close
+    </button>
+  </footer>
+</div>

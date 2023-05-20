@@ -1,0 +1,12 @@
+@use "variables" as main;
+
+footer.mat-mdc-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 600px) {
+  .mat-display-2 {
+    font-size: 35px;
+  }
+}

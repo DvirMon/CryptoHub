@@ -5,6 +5,7 @@ import { Observable, combineLatestWith, distinctUntilChanged, map, switchMap } f
 import { CoinsActions, CoinsSelectors } from "./coins/coins.types"
 import { Coin } from "../models/coin.model"
 import { Currency } from "../models/currency.model"
+import { ComponentType } from "@angular/cdk/portal"
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +63,12 @@ export class StoreService {
       this.store.dispatch(action);
 
     }
+
+  }
+
+  public openDialog() {
+    const action = CoinsActions.openCoinsDialog({ data: {} });
+    this.store.dispatch(action);
 
   }
 
