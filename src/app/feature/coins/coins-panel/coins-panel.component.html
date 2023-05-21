@@ -8,8 +8,9 @@
       <mat-panel-description
         >{{ coin.name | titlecase }}
         <mat-slide-toggle
-          (change)="onToggleChanged($event)"
           color="primary"
+          [name]="coin.id"
+          (change)="onToggleChanged($event)"
           (click)="$event.stopPropagation()"
         >
         </mat-slide-toggle>

@@ -3,16 +3,18 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Coin } from 'src/app/models/coin.model';
 import { Currency } from 'src/app/models/currency.model';
-import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSlideToggle, MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { TypographyComponent } from 'src/app/shared/components/typography/typography.component';
 
 
-export interface PanelChangedEvent {
-  expended: boolean;
+export interface CheckedChangedEvent {
   checked: boolean;
-  coin: Coin,
-  toggleEvent?: MatSlideToggleChange
+  coinId: string
+}
+export interface ExpandChangedEvent {
+  expended: boolean;
+  coinId: string,
 }
 
 @Component({
@@ -29,61 +31,86 @@ export class CoinsPanelComponent {
   @Input() toggleLimit!: boolean
 
 
-  private _panelChangedEvent!: PanelChangedEvent;
+  private _checkedChangedEvent!: CheckedChangedEvent;
+  private _expandedChangedEvent!: ExpandChangedEvent;
 
-  @Output() expended: EventEmitter<PanelChangedEvent> = new EventEmitter()
-  @Output() selected: EventEmitter<PanelChangedEvent> = new EventEmitter()
+  @Output() selected: EventEmitter<CheckedChangedEvent> = new EventEmitter()
+  @Output() expended: EventEmitter<ExpandChangedEvent> = new EventEmitter()
+
   @Output() limit: EventEmitter<void> = new EventEmitter()
 
   ngOnInit() {
-    this._panelChangedEvent = {
-      expended: false,
+    this._checkedChangedEvent = {
       checked: false,
-      coin: this.coin
+      coinId: this.coin.id
+    }
+
+    this._expandedChangedEvent = {
+      expended: false,
+      coinId: this.coin.id
     }
 
   }
 
   public onExpandChanged(value: boolean): void {
 
-    const event = this._onChangedEvent(value, 'expended')
+    this._onChangedEvent('expanded', value)
 
     if (value) {
-      this.expended.emit(event)
+      this.expended.emit(this._expandedChangedEvent)
     }
 
   }
 
   public onToggleChanged(event: MatSlideToggleChange): void {
 
+    const { checked, source } = event
 
-    // emit event until limit
-    if (this.toggleLimit) {
+    this._onChangedEvent('checked', event)
 
-      this.selected.emit(this._onChangedEvent(event.checked, 'checked', event))
+    if (this.toggleLimit || !checked) {
+      this.selected.emit(this._checkedChangedEvent)
+
     } else {
-
-      // when hit limit checked if toggle is checked
-
-      if (!event.checked) {
-        this.selected.emit(this._onChangedEvent(event.checked, 'checked', event))
-      } else {
-        event.source.checked = false
-        this.limit.emit();
-      }
-
+      source.checked = false
+      this.limit.emit();
     }
   }
 
-  private _onChangedEvent(value: boolean, key: keyof PanelChangedEvent, toggleEvent?: MatSlideToggleChange): PanelChangedEvent {
-    const event = {
-      ...this._panelChangedEvent,
-      [key]: value,
-      toggleEvent
-    }
-    this._panelChangedEvent = { ...event }
+  private _onChangedEvent(panelEvent: 'expanded' | 'checked', data: unknown): void {
 
-    return event
+    switch (panelEvent) {
+
+      case 'checked':
+
+        const event = data as MatSlideToggleChange
+
+        this._checkedChangedEvent = {
+          coinId: event.source.name as string,
+          checked: event.checked
+        }
+
+        break
+
+      case 'expanded':
+
+        this._expandedChangedEvent = {
+          ...this._expandedChangedEvent,
+          expended: data as boolean
+        }
+        break
+
+
+    }
+
+    // const event = {
+    //   ...this._panelChangedEvent,
+    //   [key]: value,
+    //   source
+    // }
+    // this._panelChangedEvent = { ...event }
+
+    // return event
   }
 
 

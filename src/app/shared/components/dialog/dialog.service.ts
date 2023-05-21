@@ -4,12 +4,12 @@ import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS, M
 import { BehaviorSubject, Observable } from 'rxjs';
 
 
-export interface DialogData {
-  type: string
-  payload: any
-  spinner$: Observable<boolean>
-  msg$: Observable<string>
-}
+// export interface DialogData {
+//   type: string
+//   payload: any
+//   spinner$: Observable<boolean>
+//   msg$: Observable<string>
+// }
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,7 @@ export class DialogService {
 
   constructor(
     private dialog: MatDialog,
-    @Inject(MAT_DIALOG_DATA) private data: DialogData,
+    @Inject(MAT_DIALOG_DATA) private data: any,
     @Inject(MAT_DIALOG_DEFAULT_OPTIONS) private dialogConfig: MatDialogConfig
   ) { }
 

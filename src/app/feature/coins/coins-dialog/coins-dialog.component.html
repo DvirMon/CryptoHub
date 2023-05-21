@@ -5,20 +5,36 @@
     </app-typography>
   </header>
   <mat-divider></mat-divider>
-  <!-- <h2 mat-dialog-title>
-    To add {{ payload.lastSelect.symbol | uppercase }} you must unselect one of
-    the following:
-  </h2> -->
 
   <main mat-dialog-content>
-    <ng-container>
-      <app-typography>test</app-typography>
-      <mat-slide-toggle></mat-slide-toggle>
-    </ng-container>
+    <!-- <app-typography [fontSize]="3">
+      To add {{ lastSelect() | uppercase }} you must unselect one of the
+      following:
+    </app-typography> -->
+
+    <div class="coin-content-wrapper">
+      <ng-container *ngFor="let item of selectedCoinsMap() | keyvalue">
+        <div class="coin-toggle-wrapper">
+          <app-typography [fontSize]="2">{{
+            item.key | uppercase
+          }}</app-typography>
+          <mat-slide-toggle
+            [checked]="item.value"
+            (change)="onToggleChanged($event)"
+            [name]="item.key"
+          ></mat-slide-toggle>
+        </div>
+      </ng-container>
+    </div>
   </main>
 
   <footer mat-dialog-actions>
-    <button (click)="onClose()" mat-button mat-dialog-close cdkFocusInitial>
+    <button
+      (click)="onCloseDialog()"
+      mat-button
+      mat-dialog-close
+      cdkFocusInitial
+    >
       Close
     </button>
   </footer>

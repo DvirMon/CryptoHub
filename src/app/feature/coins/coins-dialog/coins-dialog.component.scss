@@ -1,7 +1,26 @@
 @use "variables" as main;
 
-header {
-  padding-top: main.spacing(1);
+header.mat-mdc-dialog-title {
+  padding: main.spacing(2);
+  text-align: center;
+}
+
+main.mat-mdc-dialog-content {
+  padding-top: main.spacing(3);
+  text-align: center;
+
+  div.coin-content-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: main.spacing(2);
+
+    div.coin-toggle-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: main.spacing(2);
+    }
+  }
 }
 
 footer.mat-mdc-dialog-actions {

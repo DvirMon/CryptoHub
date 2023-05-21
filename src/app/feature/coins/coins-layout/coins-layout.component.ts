@@ -1,7 +1,7 @@
 import { Component, Signal, inject, signal, WritableSignal, computed } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop'
 import { CommonModule } from '@angular/common';
-import { CoinsPanelComponent, PanelChangedEvent } from '../coins-panel/coins-panel.component';
+import { CheckedChangedEvent, CoinsPanelComponent, ExpandChangedEvent } from '../coins-panel/coins-panel.component';
 import { Observable } from 'rxjs';
 import { Coin } from 'src/app/models/coin.model';
 import { Currency } from 'src/app/models/currency.model';
@@ -30,29 +30,27 @@ export class CoinsLayoutComponent {
   readonly selectedCoinLength: Signal<number> = this.storeService.getSelectedCoinMapLength()
   readonly toggleLimit = this.setToggleLimit(3, this.selectedCoinLength);
 
-  constructor() {
-    this.storeService.openDialog()
-
-  }
+  readonly selectedCoinsArray = this.storeService.getSelectedCoinArray()
 
 
-  onExpandChanged(event: PanelChangedEvent): void {
+  onExpandChanged(event: ExpandChangedEvent): void {
 
-    const { coin } = event
-    if (!this.currencyMap()[coin.id]) {
-      this.storeService.setCurrencyMap(coin.id)
+    const { coinId } = event
+    if (!this.currencyMap()[coinId]) {
+      this.storeService.setCurrencyMap(coinId)
     }
   }
 
-  onSelectedChanged(event: PanelChangedEvent): void {
+  onSelectedChanged(event: CheckedChangedEvent): void {
 
-    const { checked, coin } = event;
+    const { checked, coinId } = event;
 
-    this.storeService.setSelectedMap(checked, coin);
+    this.storeService.setSelectedMap(checked, coinId);
   }
 
   onToggleLimit(): void {
 
+    this.storeService.openDialog(() => CoinsDialogComponent, this.selectedCoinsArray)
   }
 
   private setToggleLimit(limit: number, length: Signal<number>): Signal<boolean> {

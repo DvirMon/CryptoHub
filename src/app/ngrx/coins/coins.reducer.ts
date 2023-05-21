@@ -21,11 +21,11 @@ export const coinsReducer = createReducer(
     }
   })),
 
-  on(CoinsActions.addSelectedCoin, (state, { coin }) => ({
+  on(CoinsActions.addSelectedCoin, (state, { coinId, checked }) => ({
     ...state,
     selectedMap: {
       ...state.selectedMap,
-      [coin.id]: coin
+      [coinId]: checked
     }
   })),
 

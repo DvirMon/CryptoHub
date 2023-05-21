@@ -1,3 +1,4 @@
+import { MatSlideToggle } from "@angular/material/slide-toggle";
 import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
 import { Coin } from "src/app/models/coin.model";
 import { Currency } from "src/app/models/currency.model";
@@ -9,7 +10,7 @@ export interface CoinsState extends EntityState<Coin> {
   loaded: boolean; // has the Coins list been loaded
   error?: string | null; // last known error (if any)
   currencyMap: { [key: string]: Currency };
-  selectedMap: { [key: string]: Coin };
+  selectedMap: { [key: string]: boolean };
 }
 
 export const coinsAdapter: EntityAdapter<Coin> = createEntityAdapter<Coin>();

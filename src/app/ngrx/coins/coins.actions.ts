@@ -1,4 +1,5 @@
 import { ComponentType } from '@angular/cdk/portal';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { createAction, props } from '@ngrx/store';
 import { Coin } from 'src/app/models/coin.model';
 import { Currency } from 'src/app/models/currency.model';
@@ -33,7 +34,7 @@ export const updateCoinCurrencyFailure = createAction(
 
 export const addSelectedCoin = createAction(
   '[Coin/API] Add Selected Coin',
-  props<{ coin: Coin }>()
+  props<{ coinId: string, checked : boolean }>()
 )
 
 export const deleteSelectedCoin = createAction(
@@ -42,7 +43,12 @@ export const deleteSelectedCoin = createAction(
 )
 
 export const openCoinsDialog = createAction(
-  '[Coin Dialog Page] Dialog Opened',
+  '[Coin Dialog] Dialog Opened',
   props<{ component: () => ComponentType<unknown>, data: unknown }>()
+)
+
+export const closedCoinsDialog = createAction(
+  '[Coin Dialog] Dialog Closed',
+  props<{ data: unknown }>()
 )
 
