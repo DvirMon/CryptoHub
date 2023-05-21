@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Signal, computed, effect } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Coin } from 'src/app/models/coin.model';
 import { Currency } from 'src/app/models/currency.model';
-import { MatSlideToggle, MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { TypographyComponent } from 'src/app/shared/components/typography/typography.component';
 
@@ -29,15 +29,22 @@ export class CoinsPanelComponent {
   @Input() coin!: Coin
   @Input() currency!: Currency
   @Input() toggleLimit!: boolean
+  @Input() toggledMap!: Signal<{ [key: string]: boolean }>
 
+  @Output() checkedChanged: EventEmitter<CheckedChangedEvent> = new EventEmitter()
+  @Output() expendChanged: EventEmitter<ExpandChangedEvent> = new EventEmitter()
+  @Output() limit: EventEmitter<void> = new EventEmitter()
 
   private _checkedChangedEvent!: CheckedChangedEvent;
   private _expandedChangedEvent!: ExpandChangedEvent;
 
-  @Output() selected: EventEmitter<CheckedChangedEvent> = new EventEmitter()
-  @Output() expended: EventEmitter<ExpandChangedEvent> = new EventEmitter()
+  public checked: Signal<boolean> = computed(() => !!this.toggledMap()[this.coin.id])
 
-  @Output() limit: EventEmitter<void> = new EventEmitter()
+  constructor() {
+
+
+  }
+
 
   ngOnInit() {
     this._checkedChangedEvent = {
@@ -49,7 +56,6 @@ export class CoinsPanelComponent {
       expended: false,
       coinId: this.coin.id
     }
-
   }
 
   public onExpandChanged(value: boolean): void {
@@ -57,7 +63,7 @@ export class CoinsPanelComponent {
     this._onChangedEvent('expanded', value)
 
     if (value) {
-      this.expended.emit(this._expandedChangedEvent)
+      this.expendChanged.emit(this._expandedChangedEvent)
     }
 
   }
@@ -69,7 +75,7 @@ export class CoinsPanelComponent {
     this._onChangedEvent('checked', event)
 
     if (this.toggleLimit || !checked) {
-      this.selected.emit(this._checkedChangedEvent)
+      this.checkedChanged.emit(this._checkedChangedEvent)
 
     } else {
       source.checked = false

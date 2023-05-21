@@ -34,13 +34,16 @@ export const updateCoinCurrencyFailure = createAction(
 
 export const addSelectedCoin = createAction(
   '[Coin/API] Add Selected Coin',
-  props<{ coinId: string, checked : boolean }>()
+  props<{ coinId: string, checked: boolean }>()
 )
 
 export const deleteSelectedCoin = createAction(
   '[Coin/API] Delete Selected Coin',
   props<{ id: string }>()
 )
+
+export const updateSelectedCoins = createAction('Coin/API Update Selected Coins Map',
+  props<{ coinsMap: { [key: string]: boolean } }>())
 
 export const openCoinsDialog = createAction(
   '[Coin Dialog] Dialog Opened',
@@ -49,6 +52,11 @@ export const openCoinsDialog = createAction(
 
 export const closedCoinsDialog = createAction(
   '[Coin Dialog] Dialog Closed',
+  props<{ data: unknown }>()
+)
+
+export const savedCoinsDialog = createAction(
+  '[Coin Dialog] Dialog Saved',
   props<{ data: unknown }>()
 )
 

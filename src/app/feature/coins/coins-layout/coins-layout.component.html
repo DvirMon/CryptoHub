@@ -2,12 +2,13 @@
   <ng-container *ngFor="let coin of coins()">
     <div class="coins-item-wrapper">
       <app-coins-panel
-      [coin]="coin"
-      [currency]="currencyMap()[coin.id]"
-      [toggleLimit]="toggleLimit()"
-      (expended)="onExpandChanged($event)"
-      (selected)="onSelectedChanged($event)"
-      (limit)="onToggleLimit()"
+        [coin]="coin"
+        [currency]="currencyMap()[coin.id]"
+        [toggleLimit]="toggleLimit()"
+        [toggledMap]="toggledMap"
+        (expendChanged)="onExpandChanged($event)"
+        (checkedChanged)="onCheckedChanged($event)"
+        (limit)="onToggleLimit()"
       >
       </app-coins-panel>
     </div>

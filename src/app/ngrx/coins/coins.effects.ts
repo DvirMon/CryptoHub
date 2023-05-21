@@ -52,4 +52,9 @@ export class CoinsEffects {
       this.dialog.open(payload.component(), { data: { selectedCoins: payload.data } } as MatDialogConfig)
     })
   ), { dispatch: false })
+
+  dialogSaved$ = createEffect(() => this.actions$.pipe(
+    ofType(CoinsActions.savedCoinsDialog),
+    map(payload => CoinsActions.updateSelectedCoins({ coinsMap: payload.data as { [key: string]: boolean } })))
+  )
 }

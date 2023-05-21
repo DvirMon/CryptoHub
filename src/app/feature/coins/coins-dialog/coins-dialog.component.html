@@ -30,12 +30,14 @@
 
   <footer mat-dialog-actions>
     <button
-      (click)="onCloseDialog()"
+      (click)="onSaveDialog()"
       mat-button
       mat-dialog-close
       cdkFocusInitial
+      [disabled]="saveDisabled()"
     >
-      Close
+      Save Changes
     </button>
+    <button mat-button mat-dialog-close>Close</button>
   </footer>
 </div>

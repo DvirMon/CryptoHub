@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { coinsAdapter, initialCoinsState } from './coins.state';
 import { CoinsActions } from './coins.types';
-import { deleteFile } from './coins.helpers';
+import { deleteFiled } from './coins.helpers';
 
 export const coinsReducer = createReducer(
   initialCoinsState,
@@ -32,8 +32,18 @@ export const coinsReducer = createReducer(
   on(CoinsActions.deleteSelectedCoin, (state, { id }) => ({
     ...state,
     selectedMap: {
-      ...deleteFile(id, state.selectedMap)
+      ...deleteFiled(id, state.selectedMap)
     }
-  }))
+  })),
+
+  on(CoinsActions.updateSelectedCoins, (state, { coinsMap }) => ({
+    ...state,
+    selectedMap: {
+      ...coinsMap
+    },
+    toggledMap: {
+      ...coinsMap
+    }
+  })),
 
 );

@@ -30,8 +30,7 @@ export class CoinsLayoutComponent {
   readonly selectedCoinLength: Signal<number> = this.storeService.getSelectedCoinMapLength()
   readonly toggleLimit = this.setToggleLimit(3, this.selectedCoinLength);
 
-  readonly selectedCoinsArray = this.storeService.getSelectedCoinArray()
-
+  readonly toggledMap: Signal<{ [key: string]: boolean }> = this.storeService.getSelectedToggledMap()
 
   onExpandChanged(event: ExpandChangedEvent): void {
 
@@ -41,16 +40,18 @@ export class CoinsLayoutComponent {
     }
   }
 
-  onSelectedChanged(event: CheckedChangedEvent): void {
+  onCheckedChanged(event: CheckedChangedEvent): void {
 
     const { checked, coinId } = event;
 
     this.storeService.setSelectedMap(checked, coinId);
+
   }
 
   onToggleLimit(): void {
 
-    this.storeService.openDialog(() => CoinsDialogComponent, this.selectedCoinsArray)
+    this.storeService.openDialog(() => CoinsDialogComponent)
+    // this.storeService.openDialog(() => CoinsDialogComponent, this.selectedCoinsArray)
   }
 
   private setToggleLimit(limit: number, length: Signal<number>): Signal<boolean> {

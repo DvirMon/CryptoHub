@@ -50,9 +50,9 @@ export class StoreService {
     return toSignal(selectedCoinLength$, { initialValue: 0 })
   }
 
-  public getSelectedCoinArray(): Signal<Array<string>> {
-    const selectedCoinArray$ = this.store.select(CoinsSelectors.selectCoinsArray)
-    return toSignal(selectedCoinArray$, { initialValue: [] })
+  public getSelectedToggledMap(): Signal<{ [key: string]: boolean }> {
+    const selectToggledMap$ = this.store.select(CoinsSelectors.selectToggledMap)
+    return toSignal(selectToggledMap$, { initialValue: {} })
   }
 
   public setCurrencyMap(id: string): void {
@@ -77,13 +77,18 @@ export class StoreService {
 
   // DIALOG ACTIONS
 
-  public openDialog(component: () => ComponentType<unknown>, data: unknown): void {
+  public openDialog(component: () => ComponentType<unknown>, data?: unknown): void {
     const action = CoinsActions.openCoinsDialog({ component, data });
     this.store.dispatch(action);
   }
 
   public onDialogClosed(data: { [key: string]: boolean }) {
     const action = CoinsActions.closedCoinsDialog({ data });
+    this.store.dispatch(action);
+  }
+
+  public onDialogSaved(data: unknown): void {
+    const action = CoinsActions.savedCoinsDialog({ data });
     this.store.dispatch(action);
   }
 
