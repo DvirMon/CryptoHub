@@ -20,6 +20,10 @@ $grid-breakpoints: (
   @return map-get($colors, $color-name);
 }
 
+@function spacing($padding) {
+  @return $padding * 8px;
+}
+
 @function size($breakpoints) {
   @return map-get($grid-breakpoints, $breakpoints);
 }
@@ -39,9 +43,4 @@ $grid-breakpoints: (
 @mixin coin-panel($color, $alpha) {
   border-radius: 2px;
   background-color: rgba($color, $alpha);
-}
-
-.highLight {
-  color: color(text-primary);
-  font-weight: bolder;
 }

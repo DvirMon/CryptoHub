@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, exhaustMap, map, catchError, tap } from 'rxjs';
+import { EMPTY, exhaustMap, map, catchError, tap, concatMap } from 'rxjs';
 
 import { CoinsService } from 'src/app/feature/coins/coins.service';
 import { CoinsActions } from './coins.types';
@@ -27,7 +27,7 @@ export class CoinsEffects {
   loadCoins$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CoinsActions.loadCoins),
-      exhaustMap(() => this.coinsService.getCoins()
+      concatMap(() => this.coinsService.getCoins()
         .pipe(
           map((coins: Coin[]) => CoinsActions.loadCoinsSuccess({ coins })),
           catchError(() => EMPTY)
@@ -38,7 +38,7 @@ export class CoinsEffects {
   updateCoinCurrency$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CoinsActions.updateCoinCurrency),
-      exhaustMap((payload) => this.coinsService.getCoinCurrency(payload.id).pipe(
+      concatMap((payload) => this.coinsService.getCoinCurrency(payload.id).pipe(
         map((currency: Currency) => CoinsActions.updateCoinCurrencySuccess({ id: payload.id, currency }),
           catchError(() => EMPTY)
         )
@@ -50,7 +50,7 @@ export class CoinsEffects {
   dialogOpened$ = createEffect(() => this.actions$.pipe(
     ofType(CoinsActions.openCoinsDialog),
     tap(payload => {
-      this.dialog.open(CoinsDialogComponent)
+      this.dialog.open(payload.component())
     })
   ), { dispatch: false })
 }

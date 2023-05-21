@@ -43,6 +43,6 @@ export const deleteSelectedCoin = createAction(
 
 export const openCoinsDialog = createAction(
   '[Coin Dialog Page] Dialog Opened',
-  props<{ data: unknown }>()
+  props<{ component: () => ComponentType<unknown>, data: unknown }>()
 )
 

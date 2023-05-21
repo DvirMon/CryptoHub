@@ -1,5 +1,9 @@
 @use "variables" as main;
 
+header {
+  padding-top: main.spacing(1);
+}
+
 footer.mat-mdc-dialog-actions {
   display: flex;
   justify-content: flex-end;

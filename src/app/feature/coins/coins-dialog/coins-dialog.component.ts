@@ -24,6 +24,8 @@ export class CoinsDialogComponent implements OnInit {
   public development: boolean = environment.production
   public payload: unknown
 
+  readonly title: string = 'You can choose up to 5 coins'
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public dialogRef: MatDialogRef<CoinsDialogComponent>,

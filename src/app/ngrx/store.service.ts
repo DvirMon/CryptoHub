@@ -6,6 +6,7 @@ import { CoinsActions, CoinsSelectors } from "./coins/coins.types"
 import { Coin } from "../models/coin.model"
 import { Currency } from "../models/currency.model"
 import { ComponentType } from "@angular/cdk/portal"
+import { CoinsDialogComponent } from "../feature/coins/coins-dialog/coins-dialog.component"
 
 @Injectable({
   providedIn: 'root'
@@ -67,13 +68,9 @@ export class StoreService {
   }
 
   public openDialog() {
-    const action = CoinsActions.openCoinsDialog({ data: {} });
+    const action = CoinsActions.openCoinsDialog({ component: () => CoinsDialogComponent, data: {} });
     this.store.dispatch(action);
-
   }
-
-
-
 
 
 }

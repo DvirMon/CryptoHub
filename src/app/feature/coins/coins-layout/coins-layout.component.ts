@@ -31,6 +31,7 @@ export class CoinsLayoutComponent {
   readonly toggleLimit = this.setToggleLimit(3, this.selectedCoinLength);
 
   constructor() {
+    this.storeService.openDialog()
 
   }
 
@@ -52,7 +53,6 @@ export class CoinsLayoutComponent {
 
   onToggleLimit(): void {
 
-    this.storeService.openDialog()
   }
 
   private setToggleLimit(limit: number, length: Signal<number>): Signal<boolean> {
