@@ -34,12 +34,9 @@ import { MatMenuModule } from '@angular/material/menu';
 export class LayoutComponent {
 
   private layoutService: LayoutService = inject(LayoutService);
-  showToolbar: WritableSignal<boolean> = this.layoutService.getToolbarSignal()
 
-  private storeService: StoreService = inject(StoreService);
-
-  readonly selectedCoinsAmount: Signal<number> =this.storeService.getSelectedCoinsAmount()
-
-  public selectedCoinBudge: Signal<string> = computed(() => this.selectedCoinsAmount() > 0 ? String(this.selectedCoinsAmount()) : '')
+  readonly showToolbar: WritableSignal<boolean> = this.layoutService.getToolbarSignal()
+  readonly selectedCoinsAmount: Signal<number> = this.layoutService.getSelectedCoinsAmount()
+  readonly selectedCoinBudge: Signal<string> = computed(() => this.selectedCoinsAmount() > 0 ? String(this.selectedCoinsAmount()) : '')
 
 }

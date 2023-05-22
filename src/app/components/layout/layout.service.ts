@@ -1,4 +1,5 @@
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Injectable, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
+import { StoreService } from 'src/app/ngrx/store.service';
 
 @Injectable({
   providedIn: 'root'
@@ -6,14 +7,19 @@ import { Injectable, WritableSignal, signal } from '@angular/core';
 export class LayoutService {
 
   private showToolbarSignal: WritableSignal<boolean> = signal(true);
+  private storeService: StoreService = inject(StoreService);
 
   constructor() { }
 
-  getToolbarSignal() : WritableSignal<boolean>{
+  public getToolbarSignal(): WritableSignal<boolean> {
     return this.showToolbarSignal
   }
 
-  setToolbarSignal(value : boolean): void {
+  public  setToolbarSignal(value: boolean): void {
     this.showToolbarSignal.set(value)
+  }
+
+  public getSelectedCoinsAmount(): Signal<number> {
+    return this.storeService.getSelectedCoinsAmount()
   }
 }
