@@ -1,4 +1,4 @@
-import { Component, WritableSignal, inject } from '@angular/core';
+import { Component, Signal, WritableSignal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -11,6 +11,9 @@ import { map, shareReplay } from 'rxjs/operators';
 
 import { LayoutService } from './layout.service';
 import { SelectedCoinsComponent } from '../selected-coins/selected-coins.component';
+import { MatBadgeModule } from '@angular/material/badge';
+import { StoreService } from 'src/app/ngrx/store.service';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-layout',
@@ -19,19 +22,24 @@ import { SelectedCoinsComponent } from '../selected-coins/selected-coins.compone
   standalone: true,
   imports: [
     CommonModule,
-    SelectedCoinsComponent,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    MatBadgeModule,
+    MatMenuModule
   ]
 })
 export class LayoutComponent {
 
-  layoutService: LayoutService = inject(LayoutService);
+  private layoutService: LayoutService = inject(LayoutService);
   showToolbar: WritableSignal<boolean> = this.layoutService.getToolbarSignal()
 
+  private storeService: StoreService = inject(StoreService);
 
+  readonly selectedCoinsAmount: Signal<number> =this.storeService.getSelectedCoinsAmount()
+
+  public selectedCoinBudge: Signal<string> = computed(() => this.selectedCoinsAmount() > 0 ? String(this.selectedCoinsAmount()) : '')
 
 }

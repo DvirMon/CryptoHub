@@ -41,9 +41,6 @@ export const coinsReducer = createReducer(
     selectedMap: {
       ...coinsMap
     },
-    toggledMap: {
-      ...coinsMap
-    }
   })),
 
 );

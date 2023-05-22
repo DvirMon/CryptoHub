@@ -18,9 +18,9 @@ export class SelectedCoinsComponent {
 
   private storeService: StoreService = inject(StoreService);
 
-  readonly selectedCoinLength: Signal<number> =this.storeService.getSelectedCoinMapLength()
+  readonly selectedCoinsAmount: Signal<number> =this.storeService.getSelectedCoinsAmount()
 
-  public selectedCoinBudge: Signal<string> = computed(() => this.selectedCoinLength() > 0 ? String(this.selectedCoinLength()) : '')
+  public selectedCoinBudge: Signal<string> = computed(() => this.selectedCoinsAmount() > 0 ? String(this.selectedCoinsAmount()) : '')
 
 
 }

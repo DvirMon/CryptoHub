@@ -29,7 +29,7 @@ export class CoinsPanelComponent {
   @Input() coin!: Coin
   @Input() currency!: Currency
   @Input() toggleLimit!: boolean
-  @Input() toggledMap!: Signal<{ [key: string]: boolean }>
+  @Input() selectedMap!: Signal<{ [key: string]: boolean }>
 
   @Output() checkedChanged: EventEmitter<CheckedChangedEvent> = new EventEmitter()
   @Output() expendChanged: EventEmitter<ExpandChangedEvent> = new EventEmitter()
@@ -38,7 +38,7 @@ export class CoinsPanelComponent {
   private _checkedChangedEvent!: CheckedChangedEvent;
   private _expandedChangedEvent!: ExpandChangedEvent;
 
-  public checked: Signal<boolean> = computed(() => !!this.toggledMap()[this.coin.id])
+  public checked: Signal<boolean> = computed(() => !!this.selectedMap()[this.coin.id])
 
   constructor() {
 

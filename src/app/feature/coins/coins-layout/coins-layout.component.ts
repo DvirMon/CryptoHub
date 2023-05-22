@@ -27,10 +27,10 @@ export class CoinsLayoutComponent {
 
   readonly selectedId: WritableSignal<string | undefined> = signal(undefined);
 
-  readonly selectedCoinLength: Signal<number> = this.storeService.getSelectedCoinMapLength()
-  readonly toggleLimit = this.setToggleLimit(3, this.selectedCoinLength);
+  readonly selectedMap: Signal<{ [key: string]: boolean }> = this.storeService.getSelectedCoinMap()
+  readonly selectedCoinsAmount: Signal<number> = this.storeService.getSelectedCoinsAmount()
 
-  readonly toggledMap: Signal<{ [key: string]: boolean }> = this.storeService.getSelectedToggledMap()
+  readonly toggleLimit = this.setToggleLimit(3, this.selectedCoinsAmount);
 
   onExpandChanged(event: ExpandChangedEvent): void {
 

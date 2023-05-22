@@ -11,13 +11,12 @@ export interface CoinsState extends EntityState<Coin> {
   error?: string | null; // last known error (if any)
   currencyMap: { [key: string]: Currency };
   selectedMap: { [key: string]: boolean };
-  toggledMap: { [key: string]: boolean };
 }
 
 export const coinsAdapter: EntityAdapter<Coin> = createEntityAdapter<Coin>();
 
 const defaultCoinsState: CoinsState = {
-  ids: [], entities: {}, loaded: false, currencyMap: {}, selectedMap: {}, toggledMap: {}
+  ids: [], entities: {}, loaded: false, currencyMap: {}, selectedMap: {}
 }
 
 export const initialCoinsState: CoinsState = coinsAdapter.getInitialState(defaultCoinsState)

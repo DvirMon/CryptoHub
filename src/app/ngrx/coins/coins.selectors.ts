@@ -33,11 +33,7 @@ export const selectCoinsMap = createSelector(
   (state: fromCoins.CoinsState) => state.selectedMap
 );
 
-export const selectToggledMap = createSelector(
-  selectCoinsState,
-  (state: fromCoins.CoinsState) => state.toggledMap)
-
-export const selectCoinsMapLength = createSelector(
+export const selectCoinsAmount = createSelector(
   selectCoinsMap,
   (state) => Object.keys(state).length
 );

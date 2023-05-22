@@ -45,14 +45,9 @@ export class StoreService {
 
   }
 
-  public getSelectedCoinMapLength(): Signal<number> {
-    const selectedCoinLength$ = this.store.select(CoinsSelectors.selectCoinsMapLength)
-    return toSignal(selectedCoinLength$, { initialValue: 0 })
-  }
-
-  public getSelectedToggledMap(): Signal<{ [key: string]: boolean }> {
-    const selectToggledMap$ = this.store.select(CoinsSelectors.selectToggledMap)
-    return toSignal(selectToggledMap$, { initialValue: {} })
+  public getSelectedCoinsAmount(): Signal<number> {
+    const selectedCoinsAmount$ = this.store.select(CoinsSelectors.selectCoinsAmount)
+    return toSignal(selectedCoinsAmount$, { initialValue: 0 })
   }
 
   public setCurrencyMap(id: string): void {
