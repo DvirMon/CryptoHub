@@ -38,18 +38,14 @@ export class CoinsPanelComponent {
   private _checkedChangedEvent!: CheckedChangedEvent;
   private _expandedChangedEvent!: ExpandChangedEvent;
 
-  public checked: Signal<boolean> = computed(() => !!this.selectedMap()[this.coin.id])
+  public checked: Signal<boolean> = computed(() => !!this.selectedMap()[this.coin.symbol])
 
-  constructor() {
-
-
-  }
-
+  constructor() {}
 
   ngOnInit() {
     this._checkedChangedEvent = {
       checked: false,
-      coinId: this.coin.id
+      coinId: this.coin.symbol
     }
 
     this._expandedChangedEvent = {
@@ -109,14 +105,6 @@ export class CoinsPanelComponent {
 
     }
 
-    // const event = {
-    //   ...this._panelChangedEvent,
-    //   [key]: value,
-    //   source
-    // }
-    // this._panelChangedEvent = { ...event }
-
-    // return event
   }
 
 

@@ -9,7 +9,7 @@
         >{{ coin.name | titlecase }}
         <mat-slide-toggle
           color="primary"
-          [name]="coin.id"
+          [name]="coin.symbol"
           [checked]="checked()"
           (change)="onToggleChanged($event)"
           (click)="$event.stopPropagation()"
