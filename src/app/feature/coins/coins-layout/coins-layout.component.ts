@@ -1,4 +1,4 @@
-import { Component, Signal, inject, signal, WritableSignal, computed } from '@angular/core';
+import { Component, Signal, inject, signal, WritableSignal, computed, TemplateRef, ViewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop'
 import { CommonModule } from '@angular/common';
 import { CheckedChangedEvent, CoinsPanelComponent, ExpandChangedEvent } from '../coins-panel/coins-panel.component';
@@ -13,7 +13,7 @@ import { CoinsDialogComponent } from '../coins-dialog/coins-dialog.component';
   standalone: true,
   imports: [CommonModule, CoinsPanelComponent],
   templateUrl: './coins-layout.component.html',
-  styleUrls: ['./coins-layout.component.scss']
+  styleUrls: ['./coins-layout.component.scss'],
 })
 export class CoinsLayoutComponent {
 
@@ -31,6 +31,12 @@ export class CoinsLayoutComponent {
   readonly selectedCoinsAmount: Signal<number> = this.storeService.getSelectedCoinsAmount()
 
   readonly toggleLimit = this.setToggleLimit(3, this.selectedCoinsAmount);
+
+
+  constructor(
+  ) {
+
+  }
 
   onExpandChanged(event: ExpandChangedEvent): void {
 
@@ -51,7 +57,6 @@ export class CoinsLayoutComponent {
   onToggleLimit(): void {
 
     this.storeService.openDialog(() => CoinsDialogComponent)
-    // this.storeService.openDialog(() => CoinsDialogComponent, this.selectedCoinsArray)
   }
 
   private setToggleLimit(limit: number, length: Signal<number>): Signal<boolean> {

@@ -1,43 +1,37 @@
-<div>
-  <header mat-dialog-title>
-    <app-typography [fontSize]="5">
-      {{ title | titlecase }}
-    </app-typography>
-  </header>
-  <mat-divider></mat-divider>
+<header mat-dialog-title>
+  <app-typography [fontSize]="5">
+    {{ title | titlecase }}
+  </app-typography>
+</header>
 
-  <main mat-dialog-content>
-    <!-- <app-typography [fontSize]="3">
-      To add {{ lastSelect() | uppercase }} you must unselect one of the
-      following:
-    </app-typography> -->
+<mat-divider></mat-divider>
 
-    <div class="coin-content-wrapper">
-      <ng-container *ngFor="let item of selectedCoinsMap() | keyvalue">
-        <div class="coin-toggle-wrapper">
-          <app-typography [fontSize]="2">{{
-            item.key | uppercase
-          }}</app-typography>
-          <mat-slide-toggle
-            [checked]="item.value"
-            (change)="onToggleChanged($event)"
-            [name]="item.key"
-          ></mat-slide-toggle>
-        </div>
-      </ng-container>
-    </div>
-  </main>
+<main mat-dialog-content>
+  <div class="coin-content-wrapper">
+    <ng-container *ngFor="let item of selectedCoinsMap() | keyvalue">
+      <div class="coin-toggle-wrapper">
+        <app-typography [fontSize]="2">{{
+          item.key | uppercase
+        }}</app-typography>
+        <mat-slide-toggle
+          [checked]="item.value"
+          (change)="onToggleChanged($event)"
+          [name]="item.key"
+        ></mat-slide-toggle>
+      </div>
+    </ng-container>
+  </div>
+</main>
 
-  <footer mat-dialog-actions>
-    <button
-      (click)="onSaveDialog()"
-      mat-button
-      mat-dialog-close
-      cdkFocusInitial
-      [disabled]="saveDisabled()"
-    >
-      Save Changes
-    </button>
-    <button mat-button mat-dialog-close>Close</button>
-  </footer>
-</div>
+<footer mat-dialog-actions>
+  <button
+    (click)="onSaveDialog()"
+    mat-flat-button
+    mat-dialog-close
+    cdkFocusInitial
+    [disabled]="disabledSave()"
+  >
+    Save Changes
+  </button>
+  <button mat-flat-button mat-dialog-close>Close</button>
+</footer>

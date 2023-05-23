@@ -1,4 +1,4 @@
-import { Component, Inject, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
+import { Component, Inject, Signal, ViewChild, WritableSignal, computed, inject, signal } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,9 +15,9 @@ import { isEqual } from "lodash";
   templateUrl: './coins-dialog.component.html',
   styleUrls: ['./coins-dialog.component.scss'],
   standalone: true,
-  imports: [CommonModule, TypographyComponent, MatButtonModule, MatDividerModule, MatDialogModule, MatSlideToggleModule]
-
+  imports: [CommonModule, TypographyComponent, MatButtonModule, MatDividerModule, MatDialogModule, MatSlideToggleModule],
 })
+
 export class CoinsDialogComponent {
 
   private storeService: StoreService = inject(StoreService);
@@ -27,7 +27,7 @@ export class CoinsDialogComponent {
 
   private _unselectedCoins: WritableSignal<{ [key: string]: boolean }> = signal({ ...this.selectedCoinsMap() });
 
-  readonly saveDisabled: Signal<boolean> = computed(() => isEqual(this._unselectedCoins(), this.selectedCoinsMap()));
+  readonly disabledSave: Signal<boolean> = computed(() => isEqual(this._unselectedCoins(), this.selectedCoinsMap()));
 
 
   constructor(
@@ -58,8 +58,5 @@ export class CoinsDialogComponent {
   public onSaveDialog(): void {
     this.storeService.onDialogSaved(this._unselectedCoins());
   }
-
-
-
 
 }
