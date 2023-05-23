@@ -9,6 +9,7 @@ import { Currency } from 'src/app/models/currency.model';
 import { DialogService } from 'src/app/shared/components/dialog/dialog.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CoinsDialogComponent } from 'src/app/feature/coins/coins-dialog/coins-dialog.component';
+import { SelectedCoinsComponent } from 'src/app/components/selected-coins/selected-coins.component';
 
 
 @Injectable()
@@ -49,7 +50,7 @@ export class CoinsEffects {
   dialogOpened$ = createEffect(() => this.actions$.pipe(
     ofType(CoinsActions.openCoinsDialog),
     tap(payload => {
-      this.dialog.open(payload.component(), { data: { selectedCoins: payload.data } } as MatDialogConfig)
+      this.dialog.open(payload.component(), { data: payload.data } as MatDialogConfig)
     })
   ), { dispatch: false })
 
