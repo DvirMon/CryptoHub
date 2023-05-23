@@ -5,6 +5,9 @@ import { Observable, combineLatestWith, distinctUntilChanged, map, switchMap } f
 import { CoinsActions, CoinsSelectors } from "./coins/coins.types"
 import { Coin } from "../models/coin.model"
 import { Currency } from "../models/currency.model"
+import { ComponentType } from "@angular/cdk/portal"
+import { CoinsDialogComponent } from "../feature/coins/coins-dialog/coins-dialog.component"
+import { MatSlideToggle } from "@angular/material/slide-toggle"
 
 @Injectable({
   providedIn: 'root'
@@ -36,13 +39,15 @@ export class StoreService {
     return this.store.select(CoinsSelectors.selectCurrencyMap)
   }
 
-  public getSelectedCoinMap$(): Observable<{ [key: string]: Coin }> {
-    return this.store.select(CoinsSelectors.selectCoinsMap)
+  public getSelectedCoinMap(): Signal<{ [key: string]: boolean }> {
+    const selectedCoinsMap$ = this.store.select(CoinsSelectors.selectCoinsMap)
+    return toSignal(selectedCoinsMap$, { initialValue: {} })
+
   }
 
-  public getSelectedCoinMapLength(): Signal<number> {
-    const selectedCoinLength$ = this.store.select(CoinsSelectors.selectCoinsMapLength)
-    return toSignal(selectedCoinLength$, { initialValue: 0 })
+  public getSelectedCoinsAmount(): Signal<number> {
+    const selectedCoinsAmount$ = this.store.select(CoinsSelectors.selectCoinsAmount)
+    return toSignal(selectedCoinsAmount$, { initialValue: 0 })
   }
 
   public setCurrencyMap(id: string): void {
@@ -50,23 +55,37 @@ export class StoreService {
     this.store.dispatch(action);
   }
 
-  public setSelectedMap(checked: boolean, coin: Coin) {
+  public setSelectedMap(checked: boolean, coinId: string): void {
 
     if (checked) {
-      const action = CoinsActions.addSelectedCoin({ coin });
+      const action = CoinsActions.addSelectedCoin({ coinId, checked });
       this.store.dispatch(action);
     }
 
     else {
-      const action = CoinsActions.deleteSelectedCoin({ id: coin.id });
+      const action = CoinsActions.deleteSelectedCoin({ id: coinId });
       this.store.dispatch(action);
 
     }
 
   }
 
+  // DIALOG ACTIONS
 
+  public openDialog(component: () => ComponentType<unknown>, data?: unknown): void {
+    const action = CoinsActions.openCoinsDialog({ component, data });
+    this.store.dispatch(action);
+  }
 
+  public onDialogClosed(data: { [key: string]: boolean }) {
+    const action = CoinsActions.closedCoinsDialog({ data });
+    this.store.dispatch(action);
+  }
+
+  public onDialogSaved(data: unknown): void {
+    const action = CoinsActions.savedCoinsDialog({ data });
+    this.store.dispatch(action);
+  }
 
 
 }

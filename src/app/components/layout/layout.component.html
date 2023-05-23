@@ -7,37 +7,36 @@
     autosize
   >
   </mat-sidenav>
-  <!-- <mat-sidenav
-    #drawer
-    class="sidenav"
-    fixedInViewport
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false"
-  >
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
-    </mat-nav-list>
-  </mat-sidenav> -->
+
   <mat-sidenav-content>
     <ng-container *ngIf="showToolbar()">
       <mat-toolbar color="primary">
+
         <section>
           <button type="button" aria-label="Toggle sidenav" mat-icon-button>
-            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            <mat-icon aria-label="Side nav toggle icon" fontIcon="menu"></mat-icon>
           </button>
         </section>
 
         <section>
-          <app-selected-coins></app-selected-coins>
+          <button mat-icon-button type="button" [matMenuTriggerFor]="menu">
+            <mat-icon
+              [matBadge]="selectedCoinBudge()"
+              matBadgeColor="accent"
+              fontIcon="monetization_on"
+            >
+            </mat-icon>
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <ng-template matMenuContent> </ng-template>
+          </mat-menu>
 
           <button mat-icon-button type="button" (click)="drawer.toggle()">
             <mat-icon>search</mat-icon>
           </button>
         </section>
+
       </mat-toolbar>
     </ng-container>
 

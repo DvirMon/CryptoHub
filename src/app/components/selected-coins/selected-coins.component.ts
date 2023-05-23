@@ -5,9 +5,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { Coin } from 'src/app/models/coin.model';
 import { StoreService } from 'src/app/ngrx/store.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-selected-coins',
@@ -20,14 +18,9 @@ export class SelectedCoinsComponent {
 
   private storeService: StoreService = inject(StoreService);
 
-  // readonly selectedCoinsMap$: Observable<{ [key: string]: Coin }> = this.storeService.getSelectedCoinMap$()
-  // readonly selectedCoinsMap: Signal<{ [key: string]: Coin }> = toSignal(this.selectedCoinsMap$, { initialValue: {} })
+  readonly selectedCoinsAmount: Signal<number> =this.storeService.getSelectedCoinsAmount()
 
-  readonly selectedCoinLength: Signal<number> =this.storeService.getSelectedCoinMapLength()
-  
-  selectedCoinBudge: Signal<string> = computed(() => this.selectedCoinLength() > 0 ? String(this.selectedCoinLength()) : '')
-
-  readonly selectedCoins: Coin[] = []
+  public selectedCoinBudge: Signal<string> = computed(() => this.selectedCoinsAmount() > 0 ? String(this.selectedCoinsAmount()) : '')
 
 
 }
