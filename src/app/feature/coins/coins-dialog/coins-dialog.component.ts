@@ -9,13 +9,15 @@ import { MatDividerModule } from '@angular/material/divider';
 import { StoreService } from 'src/app/ngrx/store.service';
 
 import { isEqual } from "lodash";
+import { DialogHostDirective } from 'src/app/shared/directives/dialog-host.directive';
 
 @Component({
   selector: 'app-coins-dialog',
   templateUrl: './coins-dialog.component.html',
   styleUrls: ['./coins-dialog.component.scss'],
   standalone: true,
-  imports: [CommonModule, TypographyComponent, MatButtonModule, MatDividerModule, MatDialogModule, MatSlideToggleModule]
+  imports: [CommonModule, TypographyComponent, MatButtonModule, MatDividerModule, MatDialogModule, MatSlideToggleModule],
+  hostDirectives : [DialogHostDirective]
 
 })
 export class CoinsDialogComponent {
