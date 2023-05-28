@@ -1,7 +1,6 @@
 <mat-accordion>
   <mat-expansion-panel
-    (opened)="onExpandChanged(true)"
-    (closed)="onExpandChanged(false)"
+    (opened)="onExpandChanged(true, coin.id)"
   >
     <mat-expansion-panel-header>
       <mat-panel-title> {{ coin.symbol | uppercase }} </mat-panel-title>

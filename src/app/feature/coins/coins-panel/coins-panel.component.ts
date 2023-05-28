@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, Output, Signal, computed, effect } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Signal, computed } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { Coin } from 'src/app/models/coin.model';
 import { Currency } from 'src/app/models/currency.model';
-import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSlideToggle, MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { TypographyComponent } from 'src/app/shared/components/typography/typography.component';
 
@@ -12,8 +12,9 @@ export interface CheckedChangedEvent {
   checked: boolean;
   coinId: string
 }
+
 export interface ExpandChangedEvent {
-  expended: boolean;
+  expanded: boolean;
   coinId: string,
 }
 
@@ -35,76 +36,50 @@ export class CoinsPanelComponent {
   @Output() expendChanged: EventEmitter<ExpandChangedEvent> = new EventEmitter()
   @Output() limit: EventEmitter<void> = new EventEmitter()
 
-  private _checkedChangedEvent!: CheckedChangedEvent;
-  private _expandedChangedEvent!: ExpandChangedEvent;
 
   public checked: Signal<boolean> = computed(() => !!this.selectedMap()[this.coin.symbol])
 
-  constructor() {}
-
-  ngOnInit() {
-    this._checkedChangedEvent = {
-      checked: false,
-      coinId: this.coin.symbol
-    }
-
-    this._expandedChangedEvent = {
-      expended: false,
-      coinId: this.coin.id
-    }
+  public onExpandChanged(value: boolean, coinId: string): void {
+    const expandChangedEvent = this._handleExpandedEvent(value, coinId)
+    this._emitExpandChanged(expandChangedEvent)
   }
 
-  public onExpandChanged(value: boolean): void {
+  private _emitExpandChanged(event: ExpandChangedEvent): void {
+    this.expendChanged.emit(event)
+  }
 
-    this._onChangedEvent('expanded', value)
-
-    if (value) {
-      this.expendChanged.emit(this._expandedChangedEvent)
-    }
-
+  private _handleExpandedEvent(expanded: boolean, coinId: string): ExpandChangedEvent {
+    return {
+      coinId,
+      expanded
+    };
   }
 
   public onToggleChanged(event: MatSlideToggleChange): void {
 
     const { checked, source } = event
 
-    this._onChangedEvent('checked', event)
-
     if (this.toggleLimit || !checked) {
-      this.checkedChanged.emit(this._checkedChangedEvent)
+      const checkedChangedEvent = this._handleCheckedEvent(event);
+      this._emitCheckedChanged(checkedChangedEvent)
 
     } else {
-      source.checked = false
+      source.toggle()
+
       this.limit.emit();
     }
   }
 
-  private _onChangedEvent(panelEvent: 'expanded' | 'checked', data: unknown): void {
-
-    switch (panelEvent) {
-
-      case 'checked':
-
-        const event = data as MatSlideToggleChange
-
-        this._checkedChangedEvent = {
-          coinId: event.source.name as string,
-          checked: event.checked
-        }
-
-        break
-
-      case 'expanded':
-
-        this._expandedChangedEvent = {
-          ...this._expandedChangedEvent,
-          expended: data as boolean
-        }
-        break
+  private _emitCheckedChanged(event: CheckedChangedEvent): void {
+    this.checkedChanged.emit((event))
+  }
 
 
-    }
-
+  private _handleCheckedEvent(event: MatSlideToggleChange): CheckedChangedEvent {
+    return {
+      coinId: event.source.name as string,
+      checked: event.checked
+    };
   }
 
 

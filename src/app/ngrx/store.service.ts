@@ -1,13 +1,11 @@
 import { Injectable, Signal } from "@angular/core"
 import { toSignal } from '@angular/core/rxjs-interop'
 import { Store } from "@ngrx/store"
-import { Observable, combineLatestWith, distinctUntilChanged, map, switchMap } from "rxjs"
 import { CoinsActions, CoinsSelectors } from "./coins/coins.types"
 import { Coin } from "../models/coin.model"
 import { Currency } from "../models/currency.model"
 import { ComponentType } from "@angular/cdk/portal"
-import { CoinsDialogComponent } from "../feature/coins/coins-dialog/coins-dialog.component"
-import { MatSlideToggle } from "@angular/material/slide-toggle"
+import { Observable, switchMap } from "rxjs"
 
 @Injectable({
   providedIn: 'root'

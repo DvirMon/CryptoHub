@@ -19,7 +19,7 @@ export class CoinsLayoutComponent {
 
   private storeService: StoreService = inject(StoreService);
 
-  private coins$: Observable<Coin[]> = this.storeService.getCoins$()
+  private coins$: Observable<Coin[]> = this.storeService.getCoins$();
   readonly coins: Signal<Coin[]> = toSignal(this.coins$, { initialValue: [] });
 
   private currencyMap$ = this.storeService.getCurrencyMap$()
@@ -27,18 +27,13 @@ export class CoinsLayoutComponent {
 
   readonly selectedId: WritableSignal<string | undefined> = signal(undefined);
 
-  readonly selectedMap: Signal<{ [key: string]: boolean }> = this.storeService.getSelectedCoinMap()
-  readonly selectedCoinsAmount: Signal<number> = this.storeService.getSelectedCoinsAmount()
+  readonly selectedMap: Signal<{ [key: string]: boolean }> = this.storeService.getSelectedCoinMap();
+  readonly selectedCoinsAmount: Signal<number> = this.storeService.getSelectedCoinsAmount();
 
   readonly toggleLimit = this.setToggleLimit(3, this.selectedCoinsAmount);
 
 
-  constructor(
-  ) {
-
-  }
-
-  onExpandChanged(event: ExpandChangedEvent): void {
+   onExpandChanged(event: ExpandChangedEvent): void {
 
     const { coinId } = event
     if (!this.currencyMap()[coinId]) {
