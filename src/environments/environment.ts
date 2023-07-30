@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  server : "http://localhost:3000"
+  server : "https://web-production-03ab.up.railway.app"
 };
 
