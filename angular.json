@@ -20,7 +20,7 @@
             "stylePreprocessorOptions": {
               "includePaths": ["src", "src/styles"]
             },
-            "outputPath": "dist/crypto-coins-client",
+            "outputPath": "dist/client",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
