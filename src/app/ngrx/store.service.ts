@@ -2,10 +2,10 @@ import { Injectable, Signal } from "@angular/core"
 import { toSignal } from '@angular/core/rxjs-interop'
 import { Store } from "@ngrx/store"
 import { ComponentType } from "@angular/cdk/portal"
-import { Observable, switchMap } from "rxjs"
 import { CoinAPIActions, CoinDialogActions } from "./coins/coins.actions"
 import { CoinSelector } from "./coins/coins.selectors"
 import { Coin, Currency } from "./coins/coin.model"
+import { Observable, switchMap } from "rxjs"
 
 @Injectable({
   providedIn: 'root'
