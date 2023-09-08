@@ -1,5 +1,4 @@
 import { ComponentType } from '@angular/cdk/portal';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { createAction, props } from '@ngrx/store';
 import { Coin } from 'src/app/models/coin.model';
 import { Currency } from 'src/app/models/currency.model';

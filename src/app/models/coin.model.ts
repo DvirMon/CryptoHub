@@ -9,4 +9,11 @@ export interface Coin {
   currency: Currency
 }
 
+export interface CoinSearchResult {
+
+  id: string,
+  symbol: string,
+  name: string
+}
+
 
