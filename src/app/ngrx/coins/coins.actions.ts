@@ -14,6 +14,7 @@ export const CoinAPIActions = createActionGroup({
     'Add Selected Coin': props<{ coinId: string, checked: boolean }>(),
     'Delete Selected Coin': props<{ id: string }>(),
     'Update Selected Coins Map': props<{ coinsMap: { [key: string]: boolean } }>(),
+    "Search Coin" : props<{searchTerm : string}>()
   }
 });
 
