@@ -1,5 +1,3 @@
-import { Currency } from "./currency.model";
-
 export interface Coin {
 
   id: string,
@@ -14,6 +12,13 @@ export interface CoinSearchResult {
   id: string,
   symbol: string,
   name: string
+}
+
+export interface Currency {
+  usd: number,
+  eur: number,
+  ils: number,
+
 }
 
 

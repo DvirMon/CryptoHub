@@ -1,12 +1,11 @@
-import { Component, Signal, inject, signal, WritableSignal, computed, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Signal, inject, signal, WritableSignal, computed } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop'
 import { CommonModule } from '@angular/common';
 import { CheckedChangedEvent, CoinsPanelComponent, ExpandChangedEvent } from '../coins-panel/coins-panel.component';
 import { Observable } from 'rxjs';
-import { Coin } from 'src/app/models/coin.model';
-import { Currency } from 'src/app/models/currency.model';
 import { StoreService } from 'src/app/ngrx/store.service';
 import { CoinsDialogComponent } from '../coins-dialog/coins-dialog.component';
+import { Coin, Currency } from 'src/app/ngrx/coins/coin.model';
 
 @Component({
   selector: 'app-coins-layout',

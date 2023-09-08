@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { Coin, CoinSearchResult } from 'src/app/models/coin.model';
-import { Currency } from 'src/app/models/currency.model';
+import { Coin, Currency, CoinSearchResult } from 'src/app/ngrx/coins/coin.model';
 
 import { environment } from 'src/environments/environment';
 
