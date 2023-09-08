@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { EMPTY, exhaustMap, map, catchError, tap, concatMap } from 'rxjs';
 
 import { CoinsService } from 'src/app/feature/coins/coins.service';
-import { CoinsActions } from './coins.types';
-import { Coin } from 'src/app/models/coin.model';
-import { Currency } from 'src/app/models/currency.model';
-import { DialogService } from 'src/app/shared/components/dialog/dialog.service';
+import { CoinAPIActions, CoinDialogActions } from './coins.actions';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { CoinsDialogComponent } from 'src/app/feature/coins/coins-dialog/coins-dialog.component';
-import { SelectedCoinsComponent } from 'src/app/components/selected-coins/selected-coins.component';
+import { EMPTY, map, catchError, tap, concatMap } from 'rxjs';
+import { Coin, Currency } from './coin.model';
 
 
 @Injectable()
@@ -26,10 +22,10 @@ export class CoinsEffects {
   // load coin from Http request
   loadCoins$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(CoinsActions.loadCoins),
+      ofType(CoinAPIActions.loadCoins),
       concatMap(() => this.coinsService.getCoins()
         .pipe(
-          map((coins: Coin[]) => CoinsActions.loadCoinsSuccess({ coins })),
+          map((coins: Coin[]) => CoinAPIActions.loadCoinSuccess({ coins })),
           catchError(() => EMPTY)
         ))
     )
@@ -37,9 +33,9 @@ export class CoinsEffects {
 
   updateCoinCurrency$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(CoinsActions.updateCoinCurrency),
+      ofType(CoinAPIActions.updateCoinCurrency),
       concatMap((payload) => this.coinsService.getCoinCurrency(payload.id).pipe(
-        map((currency: Currency) => CoinsActions.updateCoinCurrencySuccess({ id: payload.id, currency }),
+        map((currency: Currency) => CoinAPIActions.updateCoinCurrencySuccess({ id: payload.id, currency }),
           catchError(() => EMPTY)
         )
       )
@@ -48,14 +44,14 @@ export class CoinsEffects {
   )
 
   dialogOpened$ = createEffect(() => this.actions$.pipe(
-    ofType(CoinsActions.openCoinsDialog),
+    ofType(CoinDialogActions.dialogOpened),
     tap(payload => {
       this.dialog.open(payload.component(), { data: payload.data } as MatDialogConfig)
     })
   ), { dispatch: false })
 
   dialogSaved$ = createEffect(() => this.actions$.pipe(
-    ofType(CoinsActions.savedCoinsDialog),
-    map(payload => CoinsActions.updateSelectedCoins({ coinsMap: payload.data as { [key: string]: boolean } })))
+    ofType(CoinDialogActions.dialogSaved),
+    map(payload => CoinAPIActions.updateSelectedCoinsMap({ coinsMap: payload.data as { [key: string]: boolean } })))
   )
 }

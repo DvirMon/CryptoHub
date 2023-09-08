@@ -1,4 +1,4 @@
-import { Injectable, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
+import { Injectable, Signal, WritableSignal, inject, signal } from '@angular/core';
 import { StoreService } from 'src/app/ngrx/store.service';
 
 @Injectable({
@@ -8,8 +8,6 @@ export class LayoutService {
 
   private showToolbarSignal: WritableSignal<boolean> = signal(true);
   private storeService: StoreService = inject(StoreService);
-
-  constructor() { }
 
   public getToolbarSignal(): WritableSignal<boolean> {
     return this.showToolbarSignal

@@ -1,19 +1,19 @@
 import { createReducer, on } from '@ngrx/store';
 import { coinsAdapter, initialCoinsState } from './coins.state';
-import { CoinsActions } from './coins.types';
+import { CoinAPIActions } from './coins.actions';
 import { deleteFiled } from './coins.helpers';
 
 export const coinsReducer = createReducer(
   initialCoinsState,
 
-  on(CoinsActions.loadCoins, (state) => ({
+  on(CoinAPIActions.loadCoins, (state) => ({
     ...state,
   })),
 
-  on(CoinsActions.loadCoinsSuccess, (state, { coins }) =>
+  on(CoinAPIActions.loadCoinSuccess, (state, { coins }) =>
     coinsAdapter.setAll(coins, { ...state, loaded: true })),
 
-  on(CoinsActions.updateCoinCurrencySuccess, (state, { id, currency }) => ({
+  on(CoinAPIActions.updateCoinCurrencySuccess, (state, { id, currency }) => ({
     ...state,
     currencyMap: {
       ...state.currencyMap,
@@ -21,7 +21,7 @@ export const coinsReducer = createReducer(
     }
   })),
 
-  on(CoinsActions.addSelectedCoin, (state, { coinId, checked }) => ({
+  on(CoinAPIActions.addSelectedCoin, (state, { coinId, checked }) => ({
     ...state,
     selectedMap: {
       ...state.selectedMap,
@@ -29,14 +29,14 @@ export const coinsReducer = createReducer(
     }
   })),
 
-  on(CoinsActions.deleteSelectedCoin, (state, { id }) => ({
+  on(CoinAPIActions.deleteSelectedCoin, (state, { id }) => ({
     ...state,
     selectedMap: {
       ...deleteFiled(id, state.selectedMap)
     }
   })),
 
-  on(CoinsActions.updateSelectedCoins, (state, { coinsMap }) => ({
+  on(CoinAPIActions.updateSelectedCoinsMap, (state, { coinsMap }) => ({
     ...state,
     selectedMap: {
       ...coinsMap

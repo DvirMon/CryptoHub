@@ -1,4 +1,4 @@
-import { DialogHostDirective } from './dialog-host.directive';
+import { DialogHostDirective } from "./dialog-host.directive";
 
 describe('DialogHostDirective', () => {
   it('should create an instance', () => {

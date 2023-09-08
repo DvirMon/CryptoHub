@@ -1,7 +1,5 @@
-import { MatSlideToggle } from "@angular/material/slide-toggle";
-import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
-import { Coin } from "src/app/models/coin.model";
-import { Currency } from "src/app/models/currency.model";
+import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
+import { Coin, Currency } from "./coin.model";
 
 export const coinsFeatureKey = 'coins';
 

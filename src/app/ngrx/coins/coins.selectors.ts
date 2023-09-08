@@ -1,42 +1,52 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromCoins from './coins.state'
-import { Coin } from 'src/app/models/coin.model';
+import { Coin } from './coin.model';
 
 
 
 
-export const selectCoinsState = createFeatureSelector<fromCoins.CoinsState>(fromCoins.coinsFeatureKey);
+const selectCoinsState = createFeatureSelector<fromCoins.CoinsState>(fromCoins.coinsFeatureKey);
 
-export const { selectAll, selectEntities } = fromCoins.coinsAdapter.getSelectors();
+const { selectAll } = fromCoins.coinsAdapter.getSelectors();
 
-export const selectCoinsLoaded = createSelector(
+const selectCoinsLoaded = createSelector(
   selectCoinsState,
   (state: fromCoins.CoinsState): boolean => state.loaded
 );
-export const selectCoinsId = createSelector(
+const selectCoinsId = createSelector(
   selectCoinsState,
   (state: fromCoins.CoinsState): string => state.selectedId as string
 );
 
-export const selectAllCoins = createSelector(
+const selectAllCoins = createSelector(
   selectCoinsState,
   (state: fromCoins.CoinsState): Coin[] => selectAll(state)
 );
 
-export const selectCurrencyMap = createSelector(
+const selectCurrencyMap = createSelector(
   selectCoinsState,
   (state: fromCoins.CoinsState) => state.currencyMap
 );
 
-export const selectCoinsMap = createSelector(
+const selectCoinsMap = createSelector(
   selectCoinsState,
   (state: fromCoins.CoinsState) => state.selectedMap
 );
 
-export const selectCoinsAmount = createSelector(
+const selectCoinsAmount = createSelector(
   selectCoinsMap,
   (state) => Object.keys(state).length
 );
+
+export const CoinSelector = {
+  selectCoinsState,
+  selectCoinsLoaded,
+  selectCoinsId,
+  selectAllCoins,
+  selectCurrencyMap,
+  selectCoinsMap,
+  selectCoinsAmount,
+}
 
 
 
