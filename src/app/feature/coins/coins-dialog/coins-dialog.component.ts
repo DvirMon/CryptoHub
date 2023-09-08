@@ -1,5 +1,5 @@
-import { Component, Inject, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { Component, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -28,11 +28,6 @@ export class CoinsDialogComponent {
   private _unselectedCoins: WritableSignal<{ [key: string]: boolean }> = signal({ ...this.selectedCoinsMap() });
 
   readonly disabledSave: Signal<boolean> = computed(() => isEqual(this._unselectedCoins(), this.selectedCoinsMap()));
-
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-  ) { }
 
 
   public onToggleChanged(event: MatSlideToggleChange): void {

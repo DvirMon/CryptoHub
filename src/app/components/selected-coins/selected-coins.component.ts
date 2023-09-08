@@ -1,5 +1,4 @@
-import { Component, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop'
+import { Component, Signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';

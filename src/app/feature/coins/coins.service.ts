@@ -29,9 +29,9 @@ export class CoinsService {
 
   // POST request - get coins pagination - http://localhost:3000/api/coins
 
-  private getCoinsPage(params: any): Observable<Coin[]> {
-    return this.http.get<Coin[]>(this.url);
-  }
+  // private getCoinsPage(params: unknown): Observable<Coin[]> {
+  //   return this.http.get<Coin[]>(this.url);
+  // }
 
   // GET - get currencies of coin by id - http://localhost:3000/api/coins/currency:id
 

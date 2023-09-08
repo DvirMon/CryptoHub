@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Color, palette, Palette } from 'src/styles/theme';
 
 @Component({
@@ -9,7 +9,7 @@ import { Color, palette, Palette } from 'src/styles/theme';
   standalone : true,
   imports : [CommonModule]
 })
-export class TypographyComponent {
+export class TypographyComponent implements OnInit {
 
   public palette: Color = palette;
 
@@ -17,8 +17,6 @@ export class TypographyComponent {
   @Input() fontSize!: number;
   @Input() bold!: number;
   @Input() align!: 'center' | 'right' | 'left';
-
-  constructor() {}
 
   ngOnInit(): void {
     this.color = this.color || 'text';

@@ -7,7 +7,7 @@ import { Coin } from './coin.model';
 
 const selectCoinsState = createFeatureSelector<fromCoins.CoinsState>(fromCoins.coinsFeatureKey);
 
-const { selectAll, selectEntities } = fromCoins.coinsAdapter.getSelectors();
+const { selectAll } = fromCoins.coinsAdapter.getSelectors();
 
 const selectCoinsLoaded = createSelector(
   selectCoinsState,

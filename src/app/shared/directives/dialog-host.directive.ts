@@ -1,7 +1,7 @@
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[dialogHost]',
+  selector: '[appDialogHost]',
   standalone: true
 })
 export class DialogHostDirective {
