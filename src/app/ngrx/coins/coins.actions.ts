@@ -13,7 +13,7 @@ export const CoinAPIActions = createActionGroup({
     'Update Coin Currency Failure': props<{ err: unknown }>(),
     'Add Selected Coin': props<{ coinId: string, checked: boolean }>(),
     'Delete Selected Coin': props<{ id: string }>(),
-    'Update Selected Coins Map': props<{ coinsMap: { [key: string]: boolean } }>(),
+    'Update Selected Coins Map': props<{ coinsMap: Record<string, boolean> }>(),
     "Search Coin" : props<{searchTerm : string}>()
   }
 });

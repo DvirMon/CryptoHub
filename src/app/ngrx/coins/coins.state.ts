@@ -7,8 +7,8 @@ export interface CoinsState extends EntityState<Coin> {
   selectedId?: string | number; // which Coins record has been selected
   loaded: boolean; // has the Coins list been loaded
   error?: string | null; // last known error (if any)
-  currencyMap: { [key: string]: Currency };
-  selectedMap: { [key: string]: boolean };
+  currencyMap: Record<string, Currency >;
+  selectedMap: Record<string, boolean>;
 }
 
 export const coinsAdapter: EntityAdapter<Coin> = createEntityAdapter<Coin>();

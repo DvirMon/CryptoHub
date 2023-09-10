@@ -29,7 +29,7 @@ export class CoinsPanelComponent {
   @Input() coin!: Coin
   @Input() currency!: Currency
   @Input() toggleLimit!: boolean
-  @Input() selectedMap!: Signal<{ [key: string]: boolean }>
+  @Input() selectedMap!: Signal<Record<string, boolean>>
 
   @Output() checkedChanged: EventEmitter<CheckedChangedEvent> = new EventEmitter()
   @Output() expendChanged: EventEmitter<ExpandChangedEvent> = new EventEmitter()

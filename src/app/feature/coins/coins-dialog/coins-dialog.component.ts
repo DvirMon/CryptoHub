@@ -23,9 +23,9 @@ export class CoinsDialogComponent {
   private storeService: StoreService = inject(StoreService);
 
   readonly title: string = 'you can choose up to 5 coins';
-  readonly selectedCoinsMap: Signal<{ [key: string]: boolean }> = this.storeService.getSelectedCoinMap();
+  readonly selectedCoinsMap: Signal<Record<string, boolean>> = this.storeService.getSelectedCoinMap();
 
-  private _unselectedCoins: WritableSignal<{ [key: string]: boolean }> = signal({ ...this.selectedCoinsMap() });
+  private _unselectedCoins: WritableSignal<Record<string, boolean>> = signal({ ...this.selectedCoinsMap() });
 
   readonly disabledSave: Signal<boolean> = computed(() => isEqual(this._unselectedCoins(), this.selectedCoinsMap()));
 

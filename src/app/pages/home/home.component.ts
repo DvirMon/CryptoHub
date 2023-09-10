@@ -1,33 +1,29 @@
-import { Component, Signal, inject, signal, WritableSignal, computed } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop'
+import { Component, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CheckedChangedEvent, CoinsPanelComponent, ExpandChangedEvent } from '../coins-panel/coins-panel.component';
-import { StoreService } from 'src/app/ngrx/store.service';
-import { CoinsDialogComponent } from '../coins-dialog/coins-dialog.component';
+
+import { CheckedChangedEvent, CoinsPanelComponent, ExpandChangedEvent } from 'src/app/feature/coins/coins-panel/coins-panel.component';
+import { CoinsDialogComponent } from 'src/app/feature/coins/coins-dialog/coins-dialog.component';
 import { Coin, Currency } from 'src/app/ngrx/coins/coin.model';
-import { Observable } from 'rxjs';
+import { StoreService } from 'src/app/ngrx/store.service';
 
 
 @Component({
-  selector: 'app-coins-layout',
+  selector: 'app-home',
   standalone: true,
   imports: [CommonModule, CoinsPanelComponent],
-  templateUrl: './coins-layout.component.html',
-  styleUrls: ['./coins-layout.component.scss'],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class CoinsLayoutComponent {
+export class HomeComponent {
 
   private storeService: StoreService = inject(StoreService);
 
-  private coins$: Observable<Coin[]> = this.storeService.getCoins$();
-  readonly coins: Signal<Coin[]> = toSignal(this.coins$, { initialValue: [] });
-
-  private currencyMap$ = this.storeService.getCurrencyMap$()
-  readonly currencyMap: Signal<{ [key: string]: Currency }> = toSignal(this.currencyMap$, { initialValue: {} });
+  readonly coins: Signal<Coin[]> = this.storeService.getCoins()
+  readonly currencyMap: Signal<Record<string, Currency>> = this.storeService.getCurrencyMap()
 
   readonly selectedId: WritableSignal<string | undefined> = signal(undefined);
 
-  readonly selectedMap: Signal<{ [key: string]: boolean }> = this.storeService.getSelectedCoinMap();
+  readonly selectedMap: Signal<Record<string, boolean>> = this.storeService.getSelectedCoinMap();
   readonly selectedCoinsAmount: Signal<number> = this.storeService.getSelectedCoinsAmount();
 
   readonly toggleLimit = this.setToggleLimit(3, this.selectedCoinsAmount);
@@ -57,7 +53,5 @@ export class CoinsLayoutComponent {
   private setToggleLimit(limit: number, length: Signal<number>): Signal<boolean> {
     return computed(() => limit > length())
   }
-
-
 
 }

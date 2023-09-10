@@ -1,12 +1,12 @@
 import { Routes } from "@angular/router";
-import { HomeComponent } from "./components/home/home.component";
-import { PnfComponent } from "./components/pnf/pnf.component";
+import { LandingComponent } from "./pages/landing/landing.component";
+import { PnfComponent } from "./pages/pnf/pnf.component";
 
 export const appRoutes: Routes = [
-  { path: "", component: HomeComponent },
+  { path: "", component: LandingComponent },
   {
     path: "coins",
-    loadComponent: () => import('./feature/coins/coins-layout/coins-layout.component').then(m => m.CoinsLayoutComponent)
+    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
   },
   { path: "", redirectTo: "/", pathMatch: "full" },
   { path: "**", component: PnfComponent }
