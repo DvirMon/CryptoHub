@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { CheckedChangedEvent, CoinsPanelComponent, ExpandChangedEvent } from 'src/app/feature/coins/coins-panel/coins-panel.component';
 import { CoinsDialogComponent } from 'src/app/feature/coins/coins-dialog/coins-dialog.component';
-import { Coin, Currency } from 'src/app/ngrx/coins/coin.model';
-import { StoreService } from 'src/app/ngrx/store.service';
+import { Coin, Currency } from 'src/app/feature/coins/store/coin.model';
+import { CoinStore } from 'src/app/feature/coins/store/coins.store.';
 
 
 @Component({
@@ -16,15 +16,15 @@ import { StoreService } from 'src/app/ngrx/store.service';
 })
 export class HomeComponent {
 
-  private storeService: StoreService = inject(StoreService);
+  private coinStore: CoinStore = inject(CoinStore);
 
-  readonly coins: Signal<Coin[]> = this.storeService.getCoins()
-  readonly currencyMap: Signal<Record<string, Currency>> = this.storeService.getCurrencyMap()
+  readonly coins: Signal<Coin[]> = this.coinStore.getCoins()
+  readonly currencyMap: Signal<Record<string, Currency>> = this.coinStore.getCurrencyMap()
 
   readonly selectedId: WritableSignal<string | undefined> = signal(undefined);
 
-  readonly selectedMap: Signal<Record<string, boolean>> = this.storeService.getSelectedCoinMap();
-  readonly selectedCoinsAmount: Signal<number> = this.storeService.getSelectedCoinsAmount();
+  readonly selectedMap: Signal<Record<string, boolean>> = this.coinStore.getSelectedCoinMap();
+  readonly selectedCoinsAmount: Signal<number> = this.coinStore.getSelectedCoinsAmount();
 
   readonly toggleLimit = this.setToggleLimit(3, this.selectedCoinsAmount);
 
@@ -33,7 +33,7 @@ export class HomeComponent {
 
     const { coinId } = event
     if (!this.currencyMap()[coinId]) {
-      this.storeService.setCurrencyMap(coinId)
+      this.coinStore.setCurrencyMap(coinId)
     }
   }
 
@@ -41,13 +41,13 @@ export class HomeComponent {
 
     const { checked, coinId } = event;
 
-    this.storeService.setSelectedMap(checked, coinId);
+    this.coinStore.setSelectedMap(checked, coinId);
 
   }
 
   onToggleLimit(): void {
 
-    this.storeService.openDialog(() => CoinsDialogComponent)
+    this.coinStore.openDialog(() => CoinsDialogComponent)
   }
 
   private setToggleLimit(limit: number, length: Signal<number>): Signal<boolean> {

@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Coin, Currency, CoinSearchResult } from 'src/app/ngrx/coins/coin.model';
 
+import { Coin, Currency, CoinSearchResult } from './store/coin.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 

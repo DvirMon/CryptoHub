@@ -1,14 +1,14 @@
 import { Injectable, Signal } from "@angular/core"
 import { Store } from "@ngrx/store"
 import { ComponentType } from "@angular/cdk/portal"
-import { CoinAPIActions, CoinDialogActions } from "./coins/coins.actions"
-import { CoinSelector } from "./coins/coins.selectors"
-import { Coin, Currency } from "./coins/coin.model"
+import { Coin, Currency } from "./coin.model";
+import { CoinAPIActions, CoinDialogActions } from "./coins.actions";
+import { CoinSelector } from "./coins.selectors";
 
 @Injectable({
   providedIn: 'root'
 })
-export class StoreService {
+export class CoinStore {
 
   constructor(
     private store: Store

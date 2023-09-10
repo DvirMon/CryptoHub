@@ -4,7 +4,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import {  MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { TypographyComponent } from 'src/app/shared/components/typography/typography.component';
-import { Coin, Currency } from 'src/app/ngrx/coins/coin.model';
+import { Coin, Currency } from '../store/coin.model';
 
 
 export interface CheckedChangedEvent {

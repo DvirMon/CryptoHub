@@ -12,9 +12,9 @@ import { MatDialogModule, MAT_DIALOG_DATA, MAT_DIALOG_DEFAULT_OPTIONS, MatDialog
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
-import { CoinsEffects } from './ngrx/coins/coins.effects';
-import { coinsReducer } from './ngrx/coins/coins.reducer';
-import { coinsFeatureKey } from './ngrx/coins/coins.state';
+import { CoinsEffects } from './feature/coins/store/coins.effects';
+import { coinsReducer } from './feature/coins/store/coins.reducer';
+import { coinsFeatureKey } from './feature/coins/store/coins.state';
 
 export const appConfig: ApplicationConfig = {
   providers: [
