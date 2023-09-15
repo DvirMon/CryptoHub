@@ -1,0 +1,4 @@
+<mat-form-field>
+  <input matInput type="text" [formControl]="searchControl" />
+  <span *ngIf="searchResultsData.totalResults !== 0" matSuffix>{{ searchResultsData.totalResults }} results </span>
+</mat-form-field>
