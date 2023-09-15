@@ -1,16 +1,16 @@
 import { Component, Signal, WritableSignal, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CheckedChangedEvent, CoinsPanelComponent, ExpandChangedEvent } from 'src/app/feature/coins/coins-panel/coins-panel.component';
 import { CoinsDialogComponent } from 'src/app/feature/coins/coins-dialog/coins-dialog.component';
 import { Coin, Currency } from 'src/app/feature/coins/store/coin.model';
 import { CoinStore } from 'src/app/feature/coins/store/coins.store.';
+import { CoinsItemComponent, ExpandChangedEvent, CheckedChangedEvent } from 'src/app/feature/coins/coins-item/coins-item.component';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CoinsPanelComponent],
+  imports: [CommonModule, CoinsItemComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

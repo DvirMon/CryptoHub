@@ -18,13 +18,13 @@ export interface ExpandChangedEvent {
 }
 
 @Component({
-  selector: 'app-coins-panel',
+  selector: 'app-coins-item',
   standalone: true,
   imports: [CommonModule, NgOptimizedImage, MatExpansionModule, MatSlideToggleModule, MatIconModule, TypographyComponent],
-  templateUrl: './coins-panel.component.html',
-  styleUrls: ['./coins-panel.component.scss']
+  templateUrl: './coins-item.component.html',
+  styleUrls: ['./coins-item.component.scss']
 })
-export class CoinsPanelComponent {
+export class CoinsItemComponent {
 
   @Input() coin!: Coin
   @Input() currency!: Currency
