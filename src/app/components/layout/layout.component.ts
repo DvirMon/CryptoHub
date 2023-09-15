@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { LayoutService } from './layout.service';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatMenuModule } from '@angular/material/menu';
+import { SearchSidenavComponent } from '../search-sidenav/search-sidenav.component';
 
 @Component({
   selector: 'app-layout',
@@ -23,7 +24,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatListModule,
     MatIconModule,
     MatBadgeModule,
-    MatMenuModule
+    MatMenuModule,
+    SearchSidenavComponent
   ]
 })
 export class LayoutComponent {
