@@ -1,7 +1,7 @@
 import { Injectable, Signal } from "@angular/core"
 import { Store } from "@ngrx/store"
 import { ComponentType } from "@angular/cdk/portal"
-import { Coin, Currency } from "./coin.model";
+import { Coin, CoinSearchResult, Currency } from "./coin.model";
 import { CoinAPIActions, CoinDialogActions } from "./coins.actions";
 import { CoinSelector } from "./coins.selectors";
 
@@ -58,6 +58,17 @@ export class CoinStore {
     }
 
   }
+
+
+  public loadCoinSearchResults(searchTerm: string): void {
+    const action = CoinAPIActions.loadSearchCoin({ searchTerm });
+    this.store.dispatch(action);
+  }
+
+  public getCoinSearchResults(): Signal<CoinSearchResult[]> {
+    return this.store.selectSignal(CoinSelector.selectSearchResults);
+  }
+
 
   // DIALOG ACTIONS
 

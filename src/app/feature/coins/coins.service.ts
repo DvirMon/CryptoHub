@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 
@@ -27,22 +27,14 @@ export class CoinsService {
     return this.http.get<Coin[]>(this.url);
   }
 
-  // POST request - get coins pagination - http://localhost:3000/api/coins
-
-  // private getCoinsPage(params: unknown): Observable<Coin[]> {
-  //   return this.http.get<Coin[]>(this.url);
-  // }
-
-  // GET - get currencies of coin by id - http://localhost:3000/api/coins/currency:id
-
   public getCoinCurrency(id: string): Observable<Currency> {
     return this.http.get<Currency>(this.url + "/currency/" + id, { reportProgress: true });
-
   }
 
-  public coinSearch() : Observable<CoinSearchResult[]> {
-    return this.http.get<CoinSearchResult[]>(this.url + "/search");
-  }
+  public getCoinSearchResults(value: string): Observable<CoinSearchResult[]> {
+    const params = new HttpParams().set('searchTerm', value);
+    return this.http.get<CoinSearchResult[]>(this.url + "/search", { params });
+}
 
 
 

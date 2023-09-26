@@ -43,4 +43,9 @@ export const coinsReducer = createReducer(
     },
   })),
 
+  on(CoinAPIActions.loadSearchCoinSuccess, (state, { results }) => ({
+    ...state,
+    searchResults: [...results]
+  }))
+
 );

@@ -20,7 +20,7 @@ export interface SearchResultsData {
 export class SearchInputComponent implements OnInit {
 
   @Input() initialValue!: string;
-  @Input() searchResultsData!: SearchResultsData
+  @Input() totalResults: number = 0;
 
   public searchControl: FormControl<string> = new FormControl();
 
