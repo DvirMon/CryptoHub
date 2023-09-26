@@ -9,6 +9,7 @@ import { MatDividerModule } from '@angular/material/divider';
 
 import { isEqual } from "lodash";
 import { CoinStore } from '../store/coins.store.';
+import { COINS_SELECT_LIMIT } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-coins-dialog',
@@ -22,7 +23,7 @@ export class CoinsDialogComponent {
 
   private coinStore: CoinStore = inject(CoinStore);
 
-  readonly title: string = 'you can choose up to 5 coins';
+  readonly title: string = `you can choose up to ${COINS_SELECT_LIMIT} coins`;
   readonly selectedCoinsMap: Signal<Record<string, boolean>> = this.coinStore.getSelectedCoinMap();
 
   private _unselectedCoins: WritableSignal<Record<string, boolean>> = signal({ ...this.selectedCoinsMap() });

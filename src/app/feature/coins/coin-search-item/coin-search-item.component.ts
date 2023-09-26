@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output, Signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output, Signal } from '@angular/core';
 import { CoinSearchResult } from '../store/coin.model';
 import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CheckedChangedEvent } from '../coins-item/coins-item.component';
@@ -19,24 +19,22 @@ export class CoinSearchItemComponent {
   @Input() selectedMap!: Signal<Record<string, boolean>>;
 
   @Output() checkedChanged: EventEmitter<CheckedChangedEvent> = new EventEmitter();
-  @Output() limit: EventEmitter<void> = new EventEmitter();
+  @Output() limitChanged: EventEmitter<void> = new EventEmitter();
 
 
-  public checked: Signal<boolean> = computed(() => !!this.selectedMap()[this.coin.symbol]);
+  // public checked: Signal<boolean> = computed(() => !!this.selectedMap()[this.coin.symbol]);
 
   public onToggleChanged(event: MatSlideToggleChange): void {
 
-    console.log(event)
-
     const { checked, source } = event
 
-    if (checked) {
+    if (this.toggleLimit || !checked) {
       const checkedChangedEvent = this._handleCheckedEvent(event);
       this._emitCheckedChanged(checkedChangedEvent)
 
     } else {
       source.toggle();
-      this.limit.emit();
+      this.limitChanged.emit();
     }
   }
 

@@ -33,7 +33,7 @@ export class CoinsItemComponent {
 
   @Output() checkedChanged: EventEmitter<CheckedChangedEvent> = new EventEmitter()
   @Output() expendChanged: EventEmitter<ExpandChangedEvent> = new EventEmitter()
-  @Output() limit: EventEmitter<void> = new EventEmitter()
+  @Output() limitChanged: EventEmitter<void> = new EventEmitter()
 
 
   public checked: Signal<boolean> = computed(() => !!this.selectedMap()[this.coin.symbol])
@@ -65,7 +65,7 @@ export class CoinsItemComponent {
     } else {
       source.toggle()
 
-      this.limit.emit();
+      this.limitChanged.emit();
     }
   }
 
