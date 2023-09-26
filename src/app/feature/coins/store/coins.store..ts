@@ -1,51 +1,42 @@
 import { Injectable, Signal } from "@angular/core"
-import { toSignal } from '@angular/core/rxjs-interop'
 import { Store } from "@ngrx/store"
 import { ComponentType } from "@angular/cdk/portal"
-import { CoinAPIActions, CoinDialogActions } from "./coins/coins.actions"
-import { CoinSelector } from "./coins/coins.selectors"
-import { Coin, Currency } from "./coins/coin.model"
-import { Observable, switchMap } from "rxjs"
+import { Coin, CoinSearchResult, Currency } from "./coin.model";
+import { CoinAPIActions, CoinDialogActions } from "./coins.actions";
+import { CoinSelector } from "./coins.selectors";
 
 @Injectable({
   providedIn: 'root'
 })
-export class StoreService {
+export class CoinStore {
 
   constructor(
     private store: Store
   ) { }
 
-  public getCoins$(): Observable<Coin[]> {
 
-    const loaded$ = this.store.select(CoinSelector.selectCoinsLoaded)
+  public getCoins(): Signal<Coin[]> {
 
-    const loadCoins$ = loaded$.pipe(
-      switchMap((loaded) => {
-        if (!loaded) {
-          this.store.dispatch(CoinAPIActions.loadCoins())
-        }
-        return this.store.select(CoinSelector.selectAllCoins)
-      })
-    )
+    const loaded = this.store.selectSignal(CoinSelector.selectCoinsLoaded);
 
-    return loadCoins$
 
+    if (!loaded()) {
+      this.store.dispatch(CoinAPIActions.loadCoins())
+    }
+
+    return this.store.selectSignal(CoinSelector.selectAllCoins);
   }
 
-  public getCurrencyMap$(): Observable<{ [key: string]: Currency }> {
-    return this.store.select(CoinSelector.selectCurrencyMap)
+  public getCurrencyMap(): Signal<Record<string, Currency>> {
+    return this.store.selectSignal(CoinSelector.selectCurrencyMap)
   }
 
-  public getSelectedCoinMap(): Signal<{ [key: string]: boolean }> {
-    const selectedCoinsMap$ = this.store.select(CoinSelector.selectCoinsMap)
-    return toSignal(selectedCoinsMap$, { initialValue: {} })
-
+  public getSelectedCoinMap(): Signal<Record<string, boolean>> {
+    return this.store.selectSignal(CoinSelector.selectCoinsMap)
   }
 
   public getSelectedCoinsAmount(): Signal<number> {
-    const selectedCoinsAmount$ = this.store.select(CoinSelector.selectCoinsAmount)
-    return toSignal(selectedCoinsAmount$, { initialValue: 0 })
+    return this.store.selectSignal(CoinSelector.selectCoinsAmount)
   }
 
   public setCurrencyMap(id: string): void {
@@ -68,6 +59,17 @@ export class StoreService {
 
   }
 
+
+  public loadCoinSearchResults(searchTerm: string): void {
+    const action = CoinAPIActions.loadSearchCoin({ searchTerm });
+    this.store.dispatch(action);
+  }
+
+  public getCoinSearchResults(): Signal<CoinSearchResult[]> {
+    return this.store.selectSignal(CoinSelector.selectSearchResults);
+  }
+
+
   // DIALOG ACTIONS
 
   public openDialog(component: () => ComponentType<unknown>, data?: unknown): void {
@@ -75,7 +77,7 @@ export class StoreService {
     this.store.dispatch(action);
   }
 
-  public onDialogClosed(data: { [key: string]: boolean }) {
+  public onDialogClosed(data: Record<string, boolean>) {
     const action = CoinDialogActions.dialogClosed({ data });
     this.store.dispatch(action);
   }

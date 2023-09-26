@@ -1,0 +1,11 @@
+<header>
+  <app-search-input [initialValue]="'bnb'" (termChanged)="onTermChanged($event)"></app-search-input>
+</header>
+<main>
+  <ng-container *ngFor="let coin of results()">
+    <app-coin-search-item
+      [coin]="coin"
+      (checkedChanged)="onCheckedChanged($event)"
+    ></app-coin-search-item>
+  </ng-container>
+</main>

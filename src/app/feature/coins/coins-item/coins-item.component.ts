@@ -4,7 +4,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import {  MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { TypographyComponent } from 'src/app/shared/components/typography/typography.component';
-import { Coin, Currency } from 'src/app/ngrx/coins/coin.model';
+import { Coin, Currency } from '../store/coin.model';
 
 
 export interface CheckedChangedEvent {
@@ -18,18 +18,18 @@ export interface ExpandChangedEvent {
 }
 
 @Component({
-  selector: 'app-coins-panel',
+  selector: 'app-coins-item',
   standalone: true,
   imports: [CommonModule, NgOptimizedImage, MatExpansionModule, MatSlideToggleModule, MatIconModule, TypographyComponent],
-  templateUrl: './coins-panel.component.html',
-  styleUrls: ['./coins-panel.component.scss']
+  templateUrl: './coins-item.component.html',
+  styleUrls: ['./coins-item.component.scss']
 })
-export class CoinsPanelComponent {
+export class CoinsItemComponent {
 
   @Input() coin!: Coin
   @Input() currency!: Currency
   @Input() toggleLimit!: boolean
-  @Input() selectedMap!: Signal<{ [key: string]: boolean }>
+  @Input() selectedMap!: Signal<Record<string, boolean>>
 
   @Output() checkedChanged: EventEmitter<CheckedChangedEvent> = new EventEmitter()
   @Output() expendChanged: EventEmitter<ExpandChangedEvent> = new EventEmitter()

@@ -6,9 +6,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { TypographyComponent } from 'src/app/shared/components/typography/typography.component';
 import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
-import { StoreService } from 'src/app/ngrx/store.service';
 
 import { isEqual } from "lodash";
+import { CoinStore } from '../store/coins.store.';
 
 @Component({
   selector: 'app-coins-dialog',
@@ -20,12 +20,12 @@ import { isEqual } from "lodash";
 
 export class CoinsDialogComponent {
 
-  private storeService: StoreService = inject(StoreService);
+  private coinStore: CoinStore = inject(CoinStore);
 
   readonly title: string = 'you can choose up to 5 coins';
-  readonly selectedCoinsMap: Signal<{ [key: string]: boolean }> = this.storeService.getSelectedCoinMap();
+  readonly selectedCoinsMap: Signal<Record<string, boolean>> = this.coinStore.getSelectedCoinMap();
 
-  private _unselectedCoins: WritableSignal<{ [key: string]: boolean }> = signal({ ...this.selectedCoinsMap() });
+  private _unselectedCoins: WritableSignal<Record<string, boolean>> = signal({ ...this.selectedCoinsMap() });
 
   readonly disabledSave: Signal<boolean> = computed(() => isEqual(this._unselectedCoins(), this.selectedCoinsMap()));
 
@@ -51,7 +51,7 @@ export class CoinsDialogComponent {
   }
 
   public onSaveDialog(): void {
-    this.storeService.onDialogSaved(this._unselectedCoins());
+    this.coinStore.onDialogSaved(this._unselectedCoins());
   }
 
 }

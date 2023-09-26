@@ -5,7 +5,7 @@ import { CoinsService } from 'src/app/feature/coins/coins.service';
 import { CoinAPIActions, CoinDialogActions } from './coins.actions';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EMPTY, map, catchError, tap, concatMap } from 'rxjs';
-import { Coin, Currency } from './coin.model';
+import { Coin, CoinSearchResult, Currency } from './coin.model';
 
 
 @Injectable()
@@ -43,6 +43,18 @@ export class CoinsEffects {
     )
   )
 
+  search$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CoinAPIActions.loadSearchCoin),
+      concatMap(({ searchTerm}) => this.coinsService.getCoinSearchResults(searchTerm)
+        .pipe(
+          map((results: CoinSearchResult[]) => CoinAPIActions.loadSearchCoinSuccess({ results })),
+          catchError(() => EMPTY)
+        )
+      )
+    )
+  )
+
   dialogOpened$ = createEffect(() => this.actions$.pipe(
     ofType(CoinDialogActions.dialogOpened),
     tap(payload => {
@@ -52,6 +64,6 @@ export class CoinsEffects {
 
   dialogSaved$ = createEffect(() => this.actions$.pipe(
     ofType(CoinDialogActions.dialogSaved),
-    map(payload => CoinAPIActions.updateSelectedCoinsMap({ coinsMap: payload.data as { [key: string]: boolean } })))
+    map(payload => CoinAPIActions.updateSelectedCoinsMap({ coinsMap: payload.data as Record<string, boolean> })))
   )
 }

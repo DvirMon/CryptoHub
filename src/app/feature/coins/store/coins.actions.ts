@@ -1,6 +1,6 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { Coin, Currency } from './coin.model';
+import { Coin, CoinSearchResult, Currency } from './coin.model';
 
 export const CoinAPIActions = createActionGroup({
   source: 'Coin/API',
@@ -13,7 +13,9 @@ export const CoinAPIActions = createActionGroup({
     'Update Coin Currency Failure': props<{ err: unknown }>(),
     'Add Selected Coin': props<{ coinId: string, checked: boolean }>(),
     'Delete Selected Coin': props<{ id: string }>(),
-    'Update Selected Coins Map': props<{ coinsMap: { [key: string]: boolean } }>(),
+    'Update Selected Coins Map': props<{ coinsMap: Record<string, boolean> }>(),
+    "Load Search Coin": props<{ searchTerm: string }>(),
+    "Load Search Coin Success": props<{ results: CoinSearchResult[] }>()
   }
 });
 

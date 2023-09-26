@@ -1,7 +1,7 @@
 <div class="coins-layout-wrapper">
   <ng-container *ngFor="let coin of coins()">
     <div class="coins-item-wrapper">
-      <app-coins-panel
+      <app-coins-item
         [coin]="coin"
         [currency]="currencyMap()[coin.id]"
         [toggleLimit]="toggleLimit()"
@@ -10,7 +10,7 @@
         (checkedChanged)="onCheckedChanged($event)"
         (limit)="onToggleLimit()"
       >
-      </app-coins-panel>
+      </app-coins-item>
     </div>
   </ng-container>
 </div>

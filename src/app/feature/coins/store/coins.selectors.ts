@@ -38,6 +38,11 @@ const selectCoinsAmount = createSelector(
   (state) => Object.keys(state).length
 );
 
+const selectSearchResults = createSelector(
+  selectCoinsState,
+  (state) => state.searchResults
+)
+
 export const CoinSelector = {
   selectCoinsState,
   selectCoinsLoaded,
@@ -46,6 +51,7 @@ export const CoinSelector = {
   selectCurrencyMap,
   selectCoinsMap,
   selectCoinsAmount,
+  selectSearchResults
 }
 
 
