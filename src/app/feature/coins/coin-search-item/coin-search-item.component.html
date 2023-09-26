@@ -1,9 +1,15 @@
 <div class="coin-search-result-wrapper">
-  <section >
+  <section>
     <span> {{ coin.symbol | uppercase }} </span>
     <span>{{ coin.name | titlecase | truncate }}</span>
   </section>
-  <mat-slide-toggle color="primary" [name]="coin.symbol" (change)="onToggleChanged($event)"> </mat-slide-toggle>
+  <mat-slide-toggle
+    color="primary"
+    [name]="coin.symbol"
+    (change)="onToggleChanged($event)"
+    (click)="$event.stopPropagation()"
+  >
+  </mat-slide-toggle>
 </div>
 
 <!-- (change)="onToggleChanged($event)"

@@ -6,3 +6,5 @@ export const FIREBASE_CONFIG = {
   messagingSenderId: "524112368876",
   appId: "1:524112368876:web:11544e7663138d7ef381c9"
 };
+
+export const COINS_SELECT_LIMIT = 5

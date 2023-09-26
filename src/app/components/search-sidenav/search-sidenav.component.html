@@ -1,11 +1,14 @@
 <header>
-  <app-search-input [initialValue]="'bnb'" (termChanged)="onTermChanged($event)"></app-search-input>
+  <app-search-input  (termChanged)="onTermChanged($event)"></app-search-input>
 </header>
 <main>
   <ng-container *ngFor="let coin of results()">
     <app-coin-search-item
       [coin]="coin"
+      [selectedMap]="selectedMap"
+      [toggleLimit]="toggleLimit()"
       (checkedChanged)="onCheckedChanged($event)"
+      (limitChanged)="onToggleLimit()"
     ></app-coin-search-item>
   </ng-container>
 </main>

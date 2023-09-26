@@ -5,6 +5,7 @@ import { CoinsDialogComponent } from 'src/app/feature/coins/coins-dialog/coins-d
 import { Coin, Currency } from 'src/app/feature/coins/store/coin.model';
 import { CoinStore } from 'src/app/feature/coins/store/coins.store.';
 import { CoinsItemComponent, ExpandChangedEvent, CheckedChangedEvent } from 'src/app/feature/coins/coins-item/coins-item.component';
+import { COINS_SELECT_LIMIT } from 'src/app/shared/constants';
 
 
 @Component({
@@ -18,15 +19,15 @@ export class HomeComponent {
 
   private coinStore: CoinStore = inject(CoinStore);
 
-  readonly coins: Signal<Coin[]> = this.coinStore.getCoins()
-  readonly currencyMap: Signal<Record<string, Currency>> = this.coinStore.getCurrencyMap()
+  public readonly coins: Signal<Coin[]> = this.coinStore.getCoins()
+  public readonly currencyMap: Signal<Record<string, Currency>> = this.coinStore.getCurrencyMap()
 
-  readonly selectedId: WritableSignal<string | undefined> = signal(undefined);
+  public readonly selectedId: WritableSignal<string | undefined> = signal(undefined);
 
-  readonly selectedMap: Signal<Record<string, boolean>> = this.coinStore.getSelectedCoinMap();
-  readonly selectedCoinsAmount: Signal<number> = this.coinStore.getSelectedCoinsAmount();
+  public readonly selectedMap: Signal<Record<string, boolean>> = this.coinStore.getSelectedCoinMap();
+  public readonly selectedCoinsAmount: Signal<number> = this.coinStore.getSelectedCoinsAmount();
 
-  readonly toggleLimit = this.setToggleLimit(3, this.selectedCoinsAmount);
+  public readonly toggleLimit = this.setToggleLimit(COINS_SELECT_LIMIT, this.selectedCoinsAmount);
 
 
    onExpandChanged(event: ExpandChangedEvent): void {
@@ -38,15 +39,12 @@ export class HomeComponent {
   }
 
   onCheckedChanged(event: CheckedChangedEvent): void {
-
     const { checked, coinId } = event;
-
     this.coinStore.setSelectedMap(checked, coinId);
 
   }
 
   onToggleLimit(): void {
-
     this.coinStore.openDialog(() => CoinsDialogComponent)
   }
 
