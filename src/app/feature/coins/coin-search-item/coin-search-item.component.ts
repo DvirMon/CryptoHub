@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { CoinSearchResult } from '../store/coin.model';
 import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CheckedChangedEvent } from '../coins-item/coins-item.component';
+import { TruncatePipe } from 'src/app/shared/pipes/truncate.pipe';
 
 @Component({
   selector: 'app-coin-search-item',
   standalone: true,
-  imports: [CommonModule, MatSlideToggleModule],
+  imports: [CommonModule, MatSlideToggleModule, TruncatePipe],
   templateUrl: './coin-search-item.component.html',
   styleUrls: ['./coin-search-item.component.scss']
 })

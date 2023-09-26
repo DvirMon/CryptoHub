@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { debounceTime, distinctUntilChanged, startWith } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, startWith } from 'rxjs';
 
 export interface SearchResultsData {
   totalResults: number
@@ -21,6 +21,7 @@ export class SearchInputComponent implements OnInit {
 
   @Input() initialValue!: string;
   @Input() totalResults: number = 0;
+  @Input() minLength: number = 0;
 
   public searchControl: FormControl<string> = new FormControl();
 
@@ -31,15 +32,22 @@ export class SearchInputComponent implements OnInit {
     this.searchControl.valueChanges
       .pipe(
         startWith(this.initialValue),
+        filter((value: string ) => value !== undefined),
         // wait 300ms after each keystroke before considering the term
         debounceTime(300),
 
         // ignore new term if same as previous term
         distinctUntilChanged(),
 
-        takeUntilDestroyed()
+        takeUntilDestroyed(),
+
+        filter((value: string) => value.length >= this.minLength),
+
       )
       .subscribe((value: string) => {
+
+        console.log(value)
+
         this.termChanged.emit(value);
       });
   }
@@ -49,6 +57,7 @@ export class SearchInputComponent implements OnInit {
     if (this.initialValue) {
       this.searchControl.setValue(this.initialValue);
     }
+
 
   }
 }
