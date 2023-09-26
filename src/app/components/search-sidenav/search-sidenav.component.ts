@@ -5,6 +5,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { CoinStore } from 'src/app/feature/coins/store/coins.store.';
 import { CoinSearchResult } from 'src/app/feature/coins/store/coin.model';
 import { CoinSearchItemComponent } from 'src/app/feature/coins/coin-search-item/coin-search-item.component';
+import { CheckedChangedEvent } from 'src/app/feature/coins/coins-item/coins-item.component';
 
 @Component({
   selector: 'app-search-sidenav',
@@ -31,4 +32,14 @@ export class SearchSidenavComponent {
 
 
   }
+
+  onCheckedChanged(event: CheckedChangedEvent): void {
+
+    console.log(event);
+    const { checked, coinId } = event;
+
+    this.coinStore.setSelectedMap(checked, coinId);
+
+  }
+
 }

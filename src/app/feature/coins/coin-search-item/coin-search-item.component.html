@@ -3,7 +3,7 @@
     <span> {{ coin.symbol | uppercase }} </span>
     <span>{{ coin.name | titlecase | truncate }}</span>
   </section>
-  <mat-slide-toggle color="primary" [name]="coin.symbol"> </mat-slide-toggle>
+  <mat-slide-toggle color="primary" [name]="coin.symbol" (change)="onToggleChanged($event)"> </mat-slide-toggle>
 </div>
 
 <!-- (change)="onToggleChanged($event)"

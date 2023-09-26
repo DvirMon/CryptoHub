@@ -45,9 +45,6 @@ export class SearchInputComponent implements OnInit {
 
       )
       .subscribe((value: string) => {
-
-        console.log(value)
-
         this.termChanged.emit(value);
       });
   }

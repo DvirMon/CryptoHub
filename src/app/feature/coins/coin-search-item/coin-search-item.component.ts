@@ -26,15 +26,16 @@ export class CoinSearchItemComponent {
 
   public onToggleChanged(event: MatSlideToggleChange): void {
 
+    console.log(event)
+
     const { checked, source } = event
 
-    if (this.toggleLimit || !checked) {
+    if (checked) {
       const checkedChangedEvent = this._handleCheckedEvent(event);
       this._emitCheckedChanged(checkedChangedEvent)
 
     } else {
       source.toggle();
-
       this.limit.emit();
     }
   }
