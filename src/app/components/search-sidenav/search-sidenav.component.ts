@@ -1,5 +1,5 @@
-import { Component, Signal, computed, inject } from '@angular/core';
 import { NgForOf } from '@angular/common';
+import { Component, Signal, computed, inject } from '@angular/core';
 import { SearchInputComponent } from '../search-input/search-input.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CoinStore } from 'src/app/feature/coins/store/coins.store.';

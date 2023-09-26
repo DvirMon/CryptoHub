@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output, Signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output, Signal } from '@angular/core';
 import { CoinSearchResult } from '../store/coin.model';
 import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CheckedChangedEvent } from '../coins-item/coins-item.component';

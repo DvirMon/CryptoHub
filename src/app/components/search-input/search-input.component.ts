@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -20,8 +20,8 @@ export interface SearchResultsData {
 export class SearchInputComponent implements OnInit {
 
   @Input() initialValue!: string;
-  @Input() totalResults: number = 0;
-  @Input() minLength: number = 0;
+  @Input() totalResults = 0;
+  @Input() minLength = 0;
 
   public searchControl: FormControl<string> = new FormControl();
 
