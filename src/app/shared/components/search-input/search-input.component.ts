@@ -50,6 +50,7 @@ export class SearchInputComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("new")
     // Set initial value if provided
     if (this.initialValue) {
       this.searchControl.setValue(this.initialValue);

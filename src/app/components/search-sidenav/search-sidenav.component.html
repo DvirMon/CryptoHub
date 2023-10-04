@@ -1,5 +1,7 @@
 <header>
-  <app-search-input  (termChanged)="onTermChanged($event)"></app-search-input>
+  <ng-container *ngIf="opened">
+    <app-search-input (termChanged)="onTermChanged($event)"></app-search-input>
+  </ng-container>
 </header>
 <main>
   <ng-container *ngFor="let coin of results()">
