@@ -1,6 +1,5 @@
 import { NgForOf } from '@angular/common';
 import { Component, Signal, computed, inject } from '@angular/core';
-import { SearchInputComponent } from '../search-input/search-input.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CoinStore } from 'src/app/feature/coins/store/coins.store.';
 import { CoinSearchResult } from 'src/app/feature/coins/store/coin.model';
@@ -8,6 +7,7 @@ import { CoinSearchItemComponent } from 'src/app/feature/coins/coin-search-item/
 import { CheckedChangedEvent } from 'src/app/feature/coins/coins-item/coins-item.component';
 import { CoinsDialogComponent } from 'src/app/feature/coins/coins-dialog/coins-dialog.component';
 import { COINS_SELECT_LIMIT } from 'src/app/shared/constants';
+import { SearchInputComponent } from 'src/app/shared/components/search-input/search-input.component';
 
 @Component({
   selector: 'app-search-sidenav',
@@ -35,7 +35,6 @@ export class SearchSidenavComponent {
     if (value) {
       this.coinStore.loadCoinSearchResults(value);
     }
-
   }
 
   onCheckedChanged(event: CheckedChangedEvent): void {
