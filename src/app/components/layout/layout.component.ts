@@ -2,7 +2,7 @@ import { Component, Signal, WritableSignal, computed, inject } from '@angular/co
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -32,8 +32,16 @@ export class LayoutComponent {
 
   private layoutService: LayoutService = inject(LayoutService);
 
-  readonly showToolbar: WritableSignal<boolean> = this.layoutService.getToolbarSignal()
-  readonly selectedCoinsAmount: Signal<number> = this.layoutService.getSelectedCoinsAmount()
-  readonly selectedCoinBudge: Signal<string> = computed(() => this.selectedCoinsAmount() > 0 ? String(this.selectedCoinsAmount()) : '')
+  readonly showToolbar: WritableSignal<boolean> = this.layoutService.getToolbarSignal();
+  readonly selectedCoinsAmount: Signal<number> = this.layoutService.getSelectedCoinsAmount();
+  readonly selectedCoinBudge: Signal<string> = computed(() => this.selectedCoinsAmount() > 0 ? String(this.selectedCoinsAmount()) : '');
+
+  onSearchClose(drawer: MatSidenav): void {
+    drawer.toggle();
+
+    if (!drawer.opened) {
+      this.layoutService.clearSearchCoins()
+    }
+  }
 
 }

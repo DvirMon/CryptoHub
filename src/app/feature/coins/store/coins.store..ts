@@ -69,6 +69,11 @@ export class CoinStore {
     return this.store.selectSignal(CoinSelector.selectSearchResults);
   }
 
+  public clearCoinSearchResults(): void {
+    const action = CoinAPIActions.clearSearchCoins();
+    this.store.dispatch(action);
+  }
+
 
   // DIALOG ACTIONS
 

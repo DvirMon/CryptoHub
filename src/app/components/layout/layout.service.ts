@@ -13,11 +13,15 @@ export class LayoutService {
     return this.showToolbarSignal
   }
 
-  public  setToolbarSignal(value: boolean): void {
+  public setToolbarSignal(value: boolean): void {
     this.showToolbarSignal.set(value)
   }
 
   public getSelectedCoinsAmount(): Signal<number> {
     return this.coinStore.getSelectedCoinsAmount()
+  }
+
+  public clearSearchCoins(): void {
+    this.coinStore.clearCoinSearchResults()
   }
 }

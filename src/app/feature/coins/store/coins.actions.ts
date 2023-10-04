@@ -15,7 +15,8 @@ export const CoinAPIActions = createActionGroup({
     'Delete Selected Coin': props<{ id: string }>(),
     'Update Selected Coins Map': props<{ coinsMap: Record<string, boolean> }>(),
     "Load Search Coin": props<{ searchTerm: string }>(),
-    "Load Search Coin Success": props<{ results: CoinSearchResult[] }>()
+    "Load Search Coin Success": props<{ results: CoinSearchResult[] }>(),
+    'Clear Search Coins': emptyProps(),
   }
 });
 
