@@ -2,22 +2,26 @@ import { Component, Signal, WritableSignal, computed, inject, signal } from '@an
 import { CommonModule } from '@angular/common';
 
 import { CoinsDialogComponent } from 'src/app/feature/coins/coins-dialog/coins-dialog.component';
+import { CoinsSkeletonComponent } from 'src/app/feature/coins/coins-skeleton/coins-skeleton.component';
+import { CoinsItemComponent, ExpandChangedEvent, CheckedChangedEvent } from 'src/app/feature/coins/coins-item/coins-item.component';
 import { Coin, Currency } from 'src/app/feature/coins/store/coin.model';
 import { CoinStore } from 'src/app/feature/coins/store/coins.store.';
-import { CoinsItemComponent, ExpandChangedEvent, CheckedChangedEvent } from 'src/app/feature/coins/coins-item/coins-item.component';
 import { COINS_SELECT_LIMIT } from 'src/app/shared/constants';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, CoinsItemComponent],
+  imports: [CommonModule, CoinsSkeletonComponent, CoinsItemComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
 
   private coinStore: CoinStore = inject(CoinStore);
+
+  readonly coinsSkeleton: Array<Coin> = new Array(32);
+  readonly loaded: Signal<boolean> = this.coinStore.selectLoaded();
 
   public readonly coins: Signal<Coin[]> = this.coinStore.getCoins()
   public readonly currencyMap: Signal<Record<string, Currency>> = this.coinStore.getCurrencyMap()

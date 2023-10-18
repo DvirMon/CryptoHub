@@ -1,0 +1,27 @@
+div.skeleton {
+  width: 100px;
+  height: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+  animation: skeleton-loading 1s linear infinite alternate;
+
+  &-text {
+    width: 50px;
+  }
+  &-span {
+    width: 80px;
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(210, 2%, 67%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+
+.skeleton-text__body {
+  width: 75%;
+}

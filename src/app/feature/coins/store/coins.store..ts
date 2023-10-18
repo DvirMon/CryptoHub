@@ -14,6 +14,10 @@ export class CoinStore {
     private store: Store
   ) { }
 
+  public selectLoaded(): Signal<boolean> {
+    return this.store.selectSignal(CoinSelector.selectCoinsLoaded);
+  }
+
 
   public getCoins(): Signal<Coin[]> {
 
