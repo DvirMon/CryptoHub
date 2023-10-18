@@ -1,17 +1,18 @@
-div.coins-layout-wrapper {
+div.coins-dashboard-wrapper {
   display: flex;
   flex-direction: row;
   height: 100%;
   flex-wrap: wrap;
 }
 
-div.coins-item-wrapper {
+div.coins-card-wrapper {
   color: white;
   display: flex;
   width: 25%;
   justify-content: center;
 
-  app-coins-item {
+  app-coins-item,
+  app-coins-skeleton {
     width: 90%;
     margin: 5%;
   }

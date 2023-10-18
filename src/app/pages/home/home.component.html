@@ -1,17 +1,26 @@
-<div class="coins-layout-wrapper">
-  <ng-container *ngFor="let coin of coins()">
-    <div class="coins-item-wrapper">
-      <app-coins-item
-        [coin]="coin"
-        [currency]="currencyMap()[coin.id]"
-        [toggleLimit]="toggleLimit()"
-        [selectedMap]="selectedMap"
-        (expendChanged)="onExpandChanged($event)"
-        (checkedChanged)="onCheckedChanged($event)"
-        (limitChanged)="onToggleLimit()"
-      >
-      </app-coins-item>
-    </div>
+<div class="coins-dashboard-wrapper">
+  <ng-container *ngIf="loaded(); else skeletonTemplate">
+    <ng-container *ngFor="let coin of coins()">
+      <div class="coins-card-wrapper">
+        <app-coins-item
+          [coin]="coin"
+          [currency]="currencyMap()[coin.id]"
+          [toggleLimit]="toggleLimit()"
+          [selectedMap]="selectedMap"
+          (expendChanged)="onExpandChanged($event)"
+          (checkedChanged)="onCheckedChanged($event)"
+          (limitChanged)="onToggleLimit()"
+        >
+        </app-coins-item>
+      </div>
+    </ng-container>
   </ng-container>
 </div>
 
+<ng-template #skeletonTemplate>
+  <ng-container *ngFor="let coin of coinsSkeleton">
+    <div class="coins-card-wrapper">
+      <app-coins-skeleton></app-coins-skeleton>
+    </div>
+  </ng-container>
+</ng-template>
