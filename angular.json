@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "crypto-coins-client:build:production"
+              "buildTarget": "crypto-coins-client:build:production"
             },
             "development": {
-              "browserTarget": "crypto-coins-client:build:development"
+              "buildTarget": "crypto-coins-client:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "crypto-coins-client:build"
+            "buildTarget": "crypto-coins-client:build"
           }
         },
         "test": {

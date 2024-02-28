@@ -28,7 +28,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideStore({ [coinsFeatureKey]: coinsReducer }),
     provideEffects(CoinsEffects),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() , connectInZone: true}),
 
     { provide: MAT_DIALOG_DATA, useValue: DIALOG_DATA },
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: MatDialogConfig },
